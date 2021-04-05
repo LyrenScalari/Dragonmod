@@ -1,0 +1,10 @@
+{
+  "${ModID}:BronzeOrb": {
+    "NAME": "Bronze Orb",
+    "DESCRIPTION": [
+      "#yPassive:",
+      "",
+      "#yEvoke:"
+    ]
+  }
+}

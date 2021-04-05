@@ -1,0 +1,12 @@
+{
+  "${ModID}:ApologyDragon": {
+    "MOVES": [
+      "Glitch Swipe",
+      "Code Breath"
+    ],
+    "NAME": "Apology Dragon",
+    "DIALOG" : [
+      "Hey, sorry about the mess, might be my fault. but please inform the mod author that you found me, you shouldn't be here."
+    ]
+  }
+}
