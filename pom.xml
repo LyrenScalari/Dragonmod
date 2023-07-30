@@ -2,10 +2,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-        <modID>BasicMod</modID>
-        <author>Me! (Or well, you. If you want to use \"quotes\" make sure you have slashes in front of them like this.)</author>
+        <groupId>dragonkinmod</groupId>
+        <artifactId>DragonkinMod</artifactId>
+        <name>Dragon Mod</name>
+        <version>3.0.2.2</version>
+        <description>A Mod featuring a pair of new Characters, the Justicar, and Warden. with full relic, potion and card sets of their own, and a shared set of 'Dragon' relics. 150+ cards between the two characters and ~25 relics.</description>
 
-        <!-- Change the path for your system to match your Steam installation. -->
         <steam.windows>C:/Program Files (x86)/steam/steamapps</steam.windows>
         <steam.mac>${user.home}/Library/Application Support/Steam/steamapps</steam.mac>
 
