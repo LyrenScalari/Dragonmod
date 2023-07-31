@@ -13,7 +13,7 @@ import com.github.tommyettinger.colorful.Shaders;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.random.Random;
-import theDragonkin.cards.AbstractDefaultCard;
+import dragonmod.cards.BaseCard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class CardArtRoller {
     public static HashMap<String, ReskinInfo> infos = new HashMap<String, ReskinInfo>();
     private static ShaderProgram shade = new ShaderProgram(Shaders.vertexShaderHSLC, Shaders.fragmentShaderHSLC);
 
-    public static void computeCard(AbstractDefaultCard c) {
+    public static void computeCard(BaseCard c) {
             c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
                 ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
                     Random rng = new Random((long) c.cardID.hashCode());
@@ -54,7 +54,7 @@ public class CardArtRoller {
     public static Texture getPortraitTexture(AbstractCard c) {
         ReskinInfo r = infos.get(c.cardID);
         Color HSLC = new Color(r.H, r.S, r.L, r.C);
-        TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + CardLibrary.getCard(r.origCardID).assetUrl + ".png"), 0, 0, 500, 380);
+        TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TextureLoader.getTexture("images/1024Portraits/" + CardLibrary.getCard(r.origCardID).assetUrl + ".png"), 0, 0, 500, 380);
         t.flip(false, true);
         FrameBuffer fb = ImageHelper.createBuffer(500, 380);
         OrthographicCamera og = new OrthographicCamera(500, 380);

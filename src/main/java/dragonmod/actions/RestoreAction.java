@@ -3,8 +3,9 @@ package dragonmod.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import theDragonkin.patches.TemporalStressField;
-import theDragonkin.util.Wiz;
+import dragonmod.patches.TemporalStressField;
+import dragonmod.util.Wiz;
+
 
 public class RestoreAction extends AbstractGameAction {
     int amt;

@@ -4,53 +4,54 @@ import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.interfaces.*;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
-import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.CardHelper;
-import com.megacrit.cardcrawl.helpers.FontHelper;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
-import dragonmod.characters.TheJusticar;
-import dragonmod.characters.TheRimedancer;
-import dragonmod.potions.Dragonkin.DraughtofFervor;
-import dragonmod.potions.Dragonkin.GatlokBrew;
-import dragonmod.potions.Dragonkin.NaruuinsGlow;
-import dragonmod.util.*;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.Patcher;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
+import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardHelper;
+import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import dragonmod.characters.TheJusticar;
+import dragonmod.characters.TheRimedancer;
+import dragonmod.patches.TemporalStressField;
+import dragonmod.patches.TemporalStressUI;
+import dragonmod.potions.Dragonkin.DraughtofFervor;
+import dragonmod.potions.Dragonkin.GatlokBrew;
+import dragonmod.potions.Dragonkin.NaruuinsGlow;
+import dragonmod.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.scannotation.AnnotationDB;
-import dragonmod.patches.TemporalStressField;
-import dragonmod.patches.TemporalStressField.*;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
 import static dragonmod.characters.TheJusticar.Enums.Justicar_Red_COLOR;
 import static dragonmod.characters.TheJusticar.Enums.THE_JUSTICAR;
+import static dragonmod.characters.TheRimedancer.Enums.Rimedancer_Cyan_COLOR;
 import static dragonmod.characters.TheRimedancer.Enums.THE_RIMEDANCER;
 import static dragonmod.characters.TheWarden.Enums.THE_WARDEN;
 import static dragonmod.characters.TheWarden.Enums.Warden_Bronze_COLOR;
-import static dragonmod.characters.TheRimedancer.Enums.Rimedancer_Cyan_COLOR;
 @SpireInitializer
 public class DragonMod implements
         EditCardsSubscriber,
@@ -77,14 +78,14 @@ public class DragonMod implements
     public static String makeID(String id) {
         return modID + ":" + id;
     }
-    //Generic char select
+    //Generic assets
     public static final Color JUSTICAR_RED = CardHelper.getColor(209.0f, 53.0f, 18.0f);
     public static final Color WARDEN_BRONZE = CardHelper.getColor(209.0f, 180.0f, 18.0f);
     public static final Color RIMEDANCER_CYAN = CardHelper.getColor(18.0f, 180.0f, 209.0f);
     private static final String MODNAME = "Dragon Mod";
     private static final String AUTHOR = "Silver";
     private static final String DESCRIPTION = "4 new Spire slaying hero's rise from origins far beyond the spire. each with varied tools and skills for climbing the tower and escaping to return to their lives";
-
+    public static final String LIGHTNINGBOLT = resourcePath("VFX/lightningspear.png");
     //Justicar assets
     private static final String JUSTICAR_RED_BUTTON = characterPath("Justicar/select/Dragonbutton.png");
     private static final String JUSTICAR_RED_PORTRAIT = characterPath("Justicar/select/dragonbg.png");

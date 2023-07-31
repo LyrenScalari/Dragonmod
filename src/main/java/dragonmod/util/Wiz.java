@@ -17,10 +17,10 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import theDragonkin.actions.TimedVFXAction;
-import theDragonkin.powers.LosePowerPower;
-import theDragonkin.powers.LosePowerPowerStart;
-import theDragonkin.powers.NextTurnPowerPower;
+import dragonmod.actions.TimedVFXAction;
+import dragonmod.powers.LosePowerPower;
+import dragonmod.powers.LosePowerPowerStart;
+import dragonmod.powers.NextTurnPowerPower;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;

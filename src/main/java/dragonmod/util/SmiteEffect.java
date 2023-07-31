@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import theDragonkin.actions.SmiteAction;
+import dragonmod.actions.SmiteAction;
 
 public class SmiteEffect extends AbstractGameEffect {
     private float x;

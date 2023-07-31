@@ -5,9 +5,9 @@ import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import theDragonkin.powers.Dragonkin.DivineConvictionpower;
-import theDragonkin.powers.Dragonkin.onExaltPower;
-import theDragonkin.util.TypeEnergyHelper;
+import dragonmod.powers.Dragonkin.DivineConvictionpower;
+import dragonmod.util.TypeEnergyHelper;
+import dragonmod.util.onExaltPower;
 
 import java.util.EnumMap;
 import java.util.function.Supplier;

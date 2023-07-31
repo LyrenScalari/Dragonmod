@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
-import theDragonkin.util.Wiz;
+import dragonmod.util.Wiz;
 
 public class RewindAction extends AbstractGameAction {
     private AbstractCard targetCard;

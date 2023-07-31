@@ -9,7 +9,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
-import theDragonkin.util.TypeEnergyHelper;
+import dragonmod.util.TypeEnergyHelper;
 
 import java.util.Map;
 

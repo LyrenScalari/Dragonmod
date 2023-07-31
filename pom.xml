@@ -10,7 +10,9 @@
 
         <steam.windows>C:/Program Files (x86)/steam/steamapps</steam.windows>
         <steam.mac>${user.home}/Library/Application Support/Steam/steamapps</steam.mac>
-
+        <steamFolder>C:/Program Files (x86)/Steam/</steamFolder>
+        <workshopFolder>${steamFolder}steamapps/workshop/content/646570/</workshopFolder>
+        <stsPath>${steamFolder}steamapps/common/SlayTheSpire/</stsPath>
         <!-- These don't have to be up to date, it's just nice if they are. -->
         <SlayTheSpire.version>12-18-2022</SlayTheSpire.version>
         <ModTheSpire.version>3.30.0</ModTheSpire.version>
@@ -66,6 +68,18 @@
             <version>2.4.0</version>
             <scope>system</scope>
             <systemPath>${steam.path}/workshop/content/646570/1609158507/StSLib.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tommyettinger</groupId>
+            <artifactId>colorful</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cardaugments</groupId>
+            <artifactId>CardAugments</artifactId>
+            <version>0.0.6</version>
+            <scope>system</scope>
+            <systemPath>${stsPath}/mods/CardAugments.jar</systemPath>
         </dependency>
     </dependencies>
 

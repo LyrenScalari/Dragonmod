@@ -18,8 +18,8 @@ import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.TutorialStrings;
 import com.megacrit.cardcrawl.ui.FtueTip;
 import com.megacrit.cardcrawl.vfx.combat.BattleStartEffect;
-import theDragonkin.DragonkinMod;
-import theDragonkin.characters.TheDrifter;
+import dragonmod.DragonMod;
+import dragonmod.characters.TheWarden;
 
 import java.io.IOException;
 
@@ -137,10 +137,10 @@ public class TemporalStressTutorial extends FtueTip {
     )
     public static class ShowTemperatureTutorialPatch {
         public static void Postfix(AbstractPlayer __instance) {
-            if (__instance instanceof TheDrifter && DragonkinMod.justicarConfig.getBool("Temporal Stress Tutorial Seen")) {
+            if (__instance instanceof TheWarden && DragonMod.justicarConfig.getBool("Temporal Stress Tutorial Seen")) {
                 if (AbstractDungeon.screen != AbstractDungeon.CurrentScreen.FTUE) {
-                    DragonkinMod.justicarConfig.setBool("Temporal Stress Tutorial Seen", false);
-                    try { DragonkinMod.justicarConfig.save(); } catch (IOException e) { e.printStackTrace(); }
+                    DragonMod.justicarConfig.setBool("Temporal Stress Tutorial Seen", false);
+                    try { DragonMod.justicarConfig.save(); } catch (IOException e) { e.printStackTrace(); }
                     AbstractDungeon.ftue = new TemporalStressTutorial();
                 }
             }

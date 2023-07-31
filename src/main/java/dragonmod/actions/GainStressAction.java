@@ -5,6 +5,9 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
+
+import static dragonmod.patches.TemporalStressField.*;
+
 public class GainStressAction extends AbstractGameAction {
     AbstractCard src;
     public static boolean bonusdraw = false;

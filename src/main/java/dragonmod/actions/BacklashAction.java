@@ -3,9 +3,9 @@ package dragonmod.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import theDragonkin.patches.TemporalStressField;
-import theDragonkin.util.TypeEnergyHelper;
-import theDragonkin.util.Wiz;
+import dragonmod.patches.TemporalStressField;
+import dragonmod.util.TypeEnergyHelper;
+import dragonmod.util.Wiz;
 
 import java.util.EnumMap;
 import java.util.function.Supplier;

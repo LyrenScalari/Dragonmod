@@ -4,7 +4,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import theDragonkin.CustomTags;
 
 import java.util.function.Supplier;
 
@@ -25,7 +24,7 @@ public class InfernoWardAction extends AbstractGameAction {
         AbstractCard ca = null;
         System.out.println(amt);
         for (AbstractCard c : AbstractDungeon.player.hand.group) {
-            if (c.type == AbstractCard.CardType.STATUS || c.hasTag(CustomTags.Rune)) {
+            if (c.type == AbstractCard.CardType.STATUS) {
                 ca = c;
                 break;
             }

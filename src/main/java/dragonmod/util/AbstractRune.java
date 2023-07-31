@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.MathHelper;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.vfx.BobEffect;
-import theDragonkin.DragonkinMod;
+import dragonmod.DragonMod;
 
 public class AbstractRune extends AbstractNotOrb {
     public String RuneText;
@@ -56,7 +56,7 @@ public class AbstractRune extends AbstractNotOrb {
     }
     public void update() {
         this.hb.update();
-        angle = (360f/DragonkinMod.Seals.size()) * DragonkinMod.Seals.indexOf(this);
+        angle = (360f/ DragonMod.Seals.size()) * DragonMod.Seals.indexOf(this);
         cX = (AbstractDungeon.player.hb.cX-50f) + (float)(dy2*Math.cos((Math.toRadians(angle))));
         cY = (AbstractDungeon.player.hb.cY+50f) + (float)(dy2*Math.sin(Math.toRadians(angle)));
         hb.move(cX, cY); //I think this is correct, but might not be. Might need some offset calculations

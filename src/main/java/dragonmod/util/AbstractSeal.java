@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.MiracleEffect;
 import dragonmod.DragonMod;
 import dragonmod.actions.SmiteAction;
+import dragonmod.powers.Dragonkin.WingsofLight;
 
 public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModifyDamageEffect {
     public static boolean DevotionEffects = false;
