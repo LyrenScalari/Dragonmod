@@ -13,7 +13,7 @@ import dragonmod.util.TypeEnergyHelper;
 
 import java.util.Map;
 
-import static theDragonkin.DragonkinMod.TypeEnergyAtlas;
+import static dragonmod.DragonMod.TypeEnergyAtlas;
 
 @SpirePatch2(clz = AbstractPlayer.class, method = "render")
 

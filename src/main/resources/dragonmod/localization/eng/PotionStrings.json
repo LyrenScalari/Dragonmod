@@ -1,12 +1,18 @@
 {
-  "${modID}:PotionID": {
-    "NAME": "Some Kind of Potion",
-    "DESCRIPTIONS": [
-      "Little",
-      " pieces ",
-      "that get put together",
-      " into a description.",
-      " Exactly how depends on the potion, and you can set it up however you want."
-    ]
+  "${modID}:PlaceholderPotion": {
+    "NAME": "Placeholder Potion",
+    "DESCRIPTIONS": ["Gain ", " At the end of your turn, lose ", " Strength."]
+  },
+  "${modID}:GatlokBrew": {
+    "NAME": "Gatlok Brew",
+    "DESCRIPTIONS": ["Apply #b"," #yScorch to ALL enemies"]
+  },
+  "${modID}:NaruuinsGlow": {
+    "NAME": "Naruuin's Glow",
+    "DESCRIPTIONS": ["Gain #b"," [thedragonkin:LightIcon] Block"]
+  },
+  "${modID}:DraughtofFervor": {
+    "NAME": "Draught of Fervor",
+    "DESCRIPTIONS": ["Increase your [#94bdff]Holy[] card damage and block gain by #b",""]
   }
 }

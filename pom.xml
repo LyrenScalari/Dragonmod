@@ -1,19 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!-- This information will be displayed in ModTheSpire, the modded launcher. -->
+    <name>Dragon Mod</name>
+    <version>3.0.2.2</version>
+    <description>A Mod featuring a pair of new Characters, the Justicar, and Warden. with full relic, potion and card sets of their own, and a shared set of 'Dragon' relics. 150+ cards between the two characters and ~25 relics.</description>
+    <groupId>${modID}</groupId>
+    <artifactId>${modID}</artifactId>
 
     <properties>
-        <groupId>dragonkinmod</groupId>
-        <artifactId>DragonkinMod</artifactId>
-        <name>Dragon Mod</name>
-        <version>3.0.2.2</version>
-        <description>A Mod featuring a pair of new Characters, the Justicar, and Warden. with full relic, potion and card sets of their own, and a shared set of 'Dragon' relics. 150+ cards between the two characters and ~25 relics.</description>
+        <modID>Dragonmod</modID>
+        <author>Silver</author>
 
         <steam.windows>C:/Program Files (x86)/steam/steamapps</steam.windows>
         <steam.mac>${user.home}/Library/Application Support/Steam/steamapps</steam.mac>
         <steamFolder>C:/Program Files (x86)/Steam/</steamFolder>
         <workshopFolder>${steamFolder}steamapps/workshop/content/646570/</workshopFolder>
         <stsPath>${steamFolder}steamapps/common/SlayTheSpire/</stsPath>
-        <!-- These don't have to be up to date, it's just nice if they are. -->
         <SlayTheSpire.version>12-18-2022</SlayTheSpire.version>
         <ModTheSpire.version>3.30.0</ModTheSpire.version>
 
@@ -21,22 +23,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <!-- This information will be displayed in ModTheSpire, the modded launcher. -->
-    <name>Basic Mod</name>
-    <version>0.0.0</version>
-    <!-- Avoid using \ in this description, as they can cause the description to fail to load. -->
-    <!-- If you really want to use them, you'll need to "escape" them by putting another one in front, like \\ -->
-    <description>This is a description!\n"This" is a second line of description.
-    This "\\" is a slash. If you add another line like this:
-    All the spaces on the left of this will be gone. If you want spacing on a new line, do it:\n    like this.</description>
-
-    <!--You shouldn't need to change anything below this point, but feel free to look at it.-->
-    <!--You'll get a warning regarding these when you package your mod, but don't worry, it's just set up like this for convenience.-->
-    <!--Technically these should be changed individually, but this allows you to just set it in one place.-->
-    <!--Absolutely a no-go for larger projects, but for a personal mod it's fine.-->
-    <groupId>${modID}</groupId>
-    <artifactId>${modID}</artifactId>
 
     <dependencies>
         <dependency>

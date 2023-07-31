@@ -22,11 +22,17 @@ public abstract class BaseCard extends CustomCard {
     protected boolean upgradeDamage;
     protected boolean upgradeBlock;
     protected boolean upgradeMagic;
+    protected boolean upgradeMagic2;
+    protected boolean upgradeDamage2;
+    protected boolean upgradeDamage3;
 
     protected int costUpgrade;
     protected int damageUpgrade;
     protected int blockUpgrade;
     protected int magicUpgrade;
+    protected int magic2Upgrade;
+    protected int damage2Upgrade;
+    protected int damage3Upgrade;
 
     protected boolean baseExhaust = false;
     protected boolean upgExhaust = false;
@@ -36,6 +42,21 @@ public abstract class BaseCard extends CustomCard {
     protected boolean upgInnate = false;
     protected boolean baseRetain = false;
     protected boolean upgRetain = false;
+
+    public int SecondMagicNumber;        // Just like magic number, or any number for that matter, we want our regular, modifiable stat
+    public int BaseSecondMagicNumber;    // And our base stat - the number in it's base state. It will reset to that by default.
+    public boolean upgradedSecondMagicNumber; // A boolean to check whether the number has been upgraded or not.
+    public boolean isSecondMagicNumberModified; // A boolean to check whether the number has been modified or not, for coloring purposes. (red/green)
+
+    public int secondDamage;
+    public int baseSecondDamage;
+    public boolean upgradedSecondDamage;
+    public boolean isSecondDamageModified;
+
+    public int ThirdDamage;
+    public int baseThirdDamage;
+    public boolean upgradedThirdDamage;
+    public boolean isThirdDamageModified;
 
     public BaseCard(CardInfo cardInfo) {
         this(cardInfo.baseId, cardInfo.baseCost, cardInfo.cardType, cardInfo.cardTarget, cardInfo.cardRarity, cardInfo.cardColor);
@@ -56,13 +77,19 @@ public abstract class BaseCard extends CustomCard {
         this.upgradesDescription = cardStrings.UPGRADE_DESCRIPTION != null;
         this.upgradeCost = false;
         this.upgradeDamage = false;
+        this.upgradeDamage2 = false;
+        this.upgradeDamage3 = false;
         this.upgradeBlock = false;
         this.upgradeMagic = false;
+        this.upgradeMagic2 = false;
 
         this.costUpgrade = cost;
         this.damageUpgrade = 0;
+        this.damage2Upgrade = 0;
+        this.damage3Upgrade = 0;
         this.blockUpgrade = 0;
         this.magicUpgrade = 0;
+        this.magic2Upgrade = 0;
 
         initializeTitle();
         initializeDescription();
@@ -79,14 +106,19 @@ public abstract class BaseCard extends CustomCard {
         this.upgradesDescription = upgradesDescription;
         this.upgradeCost = false;
         this.upgradeDamage = false;
+        this.upgradeDamage2 = false;
+        this.upgradeDamage3 = false;
         this.upgradeBlock = false;
         this.upgradeMagic = false;
+        this.upgradeMagic2 = false;
 
         this.costUpgrade = cost;
         this.damageUpgrade = 0;
+        this.damage2Upgrade = 0;
+        this.damage3Upgrade = 0;
         this.blockUpgrade = 0;
         this.magicUpgrade = 0;
-
+        this.magic2Upgrade = 0;
         initializeTitle();
         initializeDescription();
     }
@@ -104,6 +136,10 @@ public abstract class BaseCard extends CustomCard {
     {
         this.setDamage(damage, 0);
     }
+    protected final void setDamage2(int damage)
+    {
+        this.setDamage2(damage, 0);
+    }
     protected final void setBlock(int block)
     {
         this.setBlock(block, 0);
@@ -111,6 +147,10 @@ public abstract class BaseCard extends CustomCard {
     protected final void setMagic(int magic)
     {
         this.setMagic(magic, 0);
+    }
+    protected final void setMagic2(int magic)
+    {
+        this.setMagic2(magic, 0);
     }
     protected final void setCostUpgrade(int costUpgrade)
     {
@@ -131,6 +171,16 @@ public abstract class BaseCard extends CustomCard {
             this.damageUpgrade = damageUpgrade;
         }
     }
+
+    protected final void setDamage2(int damage, int damageUpgrade)
+    {
+        this.baseSecondDamage = this.secondDamage = damage;
+        if (damageUpgrade != 0)
+        {
+            this.upgradeDamage2 = true;
+            this.damage2Upgrade = damageUpgrade;
+        }
+    }
     protected final void setBlock(int block, int blockUpgrade)
     {
         this.baseBlock = this.block = block;
@@ -147,6 +197,15 @@ public abstract class BaseCard extends CustomCard {
         {
             this.upgradeMagic = true;
             this.magicUpgrade = magicUpgrade;
+        }
+    }
+    protected final void setMagic2(int magic, int magicUpgrade)
+    {
+        this.BaseSecondMagicNumber = this.SecondMagicNumber = magic;
+        if (magicUpgrade != 0)
+        {
+            this.upgradeMagic2 = true;
+            this.magic2Upgrade = magicUpgrade;
         }
     }
     protected final void setExhaust(boolean baseExhaust, boolean upgExhaust)
@@ -188,8 +247,10 @@ public abstract class BaseCard extends CustomCard {
 
             ((BaseCard) card).upgradeCost = this.upgradeCost;
             ((BaseCard) card).upgradeDamage = this.upgradeDamage;
+            ((BaseCard) card).upgradeDamage2 = this.upgradeDamage2;
             ((BaseCard) card).upgradeBlock = this.upgradeBlock;
             ((BaseCard) card).upgradeMagic = this.upgradeMagic;
+            ((BaseCard) card).upgradeMagic2 = this.upgradeMagic2;
 
             ((BaseCard) card).costUpgrade = this.costUpgrade;
             ((BaseCard) card).damageUpgrade = this.damageUpgrade;
@@ -244,11 +305,17 @@ public abstract class BaseCard extends CustomCard {
             if (upgradeDamage)
                 this.upgradeDamage(damageUpgrade);
 
+            if (upgradeDamage2)
+                this.upgradeDamage2(damage2Upgrade);
+
             if (upgradeBlock)
                 this.upgradeBlock(blockUpgrade);
 
             if (upgradeMagic)
                 this.upgradeMagicNumber(magicUpgrade);
+
+            if (upgradeMagic2)
+                this.upgradeMagicNumber2(magic2Upgrade);
 
             if (baseExhaust ^ upgExhaust)
                 this.exhaust = upgExhaust;
@@ -265,5 +332,15 @@ public abstract class BaseCard extends CustomCard {
 
             this.initializeDescription();
         }
+    }
+    protected void upgradeDamage2(int amount) {
+        baseSecondDamage += amount;
+        secondDamage = baseSecondDamage;
+        upgradedSecondDamage = true;
+    }
+    public void upgradeMagicNumber2(int amount) { // If we're upgrading (read: changing) the number. Note "upgrade" and NOT "upgraded" - 2 different things. One is a boolean, and then this one is what you will usually use - change the integer by how much you want to upgrade.
+        BaseSecondMagicNumber += amount; // Upgrade the number by the amount you provide in your card.
+        SecondMagicNumber = BaseSecondMagicNumber; // Set the number to be equal to the base value.
+        upgradedSecondMagicNumber = true; // Upgraded = true - which does what the above method does.
     }
 }

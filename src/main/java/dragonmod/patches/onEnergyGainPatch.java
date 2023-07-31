@@ -5,6 +5,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import dragonmod.powers.Drifter.BorrowedTimeEnergy;
 
 @SpirePatch2(clz = AbstractPlayer.class, method = "gainEnergy")
 public class onEnergyGainPatch {

@@ -29,7 +29,7 @@ public class RenderActiveSealsPatch {
         for (AbstractOrb orb : __instance.orbs){
             if (orb != null && !(orb instanceof EmptyOrbSlot)) {
                 if (CustomOrbSlotManager.SlotFields.Crystal.get(orb)) {
-                    Texture Crystal = TextureLoader.getTexture(makeOrbPath("empty2.png"));
+                    Texture Crystal = TextureLoader.getTexture(DragonMod.orbPath("empty2.png"));
                     sb.setColor(Settings.CREAM_COLOR.cpy());
                     BobEffect bobEffect = new BobEffect(3.0F * Settings.scale, 3.0F);
                     angle += Gdx.graphics.getDeltaTime() * 10.0F;

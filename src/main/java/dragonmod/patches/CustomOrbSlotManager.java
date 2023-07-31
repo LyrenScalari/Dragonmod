@@ -6,9 +6,9 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.FocusPower;
+import dragonmod.orbs.CrystalOrbSlot;
+import dragonmod.util.Wiz;
 import javassist.CtBehavior;
-import theDragonkin.orbs.CrystalOrbSlot;
-import theDragonkin.util.Wiz;
 
 import java.util.Collections;
 

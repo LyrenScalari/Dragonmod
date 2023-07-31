@@ -1,16 +1,172 @@
 {
-  "${modID}:Example": {
+  "${modID}:UIText": {
     "TEXT": [
-      "This is",
-      "an array of Strings."
-    ],
-    "EXTRA_TEXT": [
-      "This is another",
-      "array of Strings."
-    ],
-    "TEXT_DICT": {
-      "This": "Contains pairs of Strings, used to get values based on keys.",
-      "This is a key": "This is a value."
-    }
+      "View subtype tutorial during the next combat you enter as the Justicar.",
+      "Enable Chimera Crossover Modifers.",
+      "View Temporal Stress tutorial the next combat you enter as the Drifter."
+    ]
+  },
+  "${modID}:MultiIntentStrings": {
+    "TEXT": [
+      "This enemy intends to NL #yAttack ",
+      " for #b",
+      " damage.",
+      " damage #b",
+      " times.",
+      "This enemy intends to inflict a #yNegative #yEffect on ",
+      "."
+    ]
+  },
+  "${modID}:CardmodStrings": {
+    "TEXT": [
+      " NL Exhaust",
+      "Ethereal NL ",
+      "Exhaust",
+      "Retain NL "
+    ]
+  },
+  "${modID}:HolyTooltip": {
+    "TEXT": [
+      "[#94bdff]Holy[]",
+      "Energy spent on [#94bdff]Holy[] cards produces twice as much #ySacrifice, granting [#94bdff]Holy[] [#94bdff]Power[] which increases the damage and block gain of [#94bdff]Holy[] cards for the rest of combat."
+    ]
+  },
+  "${modID}:DivineBlockTooltip": {
+    "TEXT": [
+      "[theDragonkin:LightIcon] Divine Block",
+      "[theDragonkin:LightIcon] #yBlock is Used before other block types and is not lost at the start of your turn."
+    ]
+  },
+  "${modID}:FlameBarrierTooltip": {
+    "TEXT": [
+      "[theDragonkin:FireIcon] Flame Barrier",
+      "[theDragonkin:FireIcon] blocks and reflects equal damage. [theDragonkin:FireIcon] falls to the total scorch among enemies at the start of turn."
+    ]
+  },
+  "${modID}:PrimalTooltip": {
+    "TEXT": [
+      "[#fe513a]Primal[]",
+      "Energy spent on [#fe513a]Primal[] cards applies #yScorch to random enemies."
+    ]
+  },
+  "${modID}:FireDamageTooltip": {
+    "TEXT": [
+      "[theDragonkin:FireIcon] Fire",
+      "[theDragonkin:FireIcon] damage applies #yScorch equal to half of unblocked damage dealt."
+    ]
+  },
+  "${modID}:StabilityTooltip": {
+    "TEXT": [
+      "[thedragonkin:TemporalIcon] Stagger",
+      "[thedragonkin:TemporalIcon] is gained whenever you take unblocked damage and is used to determine how much damage you can prevent in the past. NL Stagger is reduced each turn and sufficient Stagger grants an additional card draw each turn."
+    ]
+  },
+  "${modID}:StressUITooltips": {
+    "TEXT": [
+      "Stagger",
+      "Stagger is gained whenever you take unblocked damage, draw an additional card at the start of your turn if you have #b",
+      " or more Stagger. Stagger is spent to Mitigate negative effects of Anomalies, and to recover lost HP."
+    ]
+  },
+  "${modID}:TemporalTooltip": {
+    "TEXT": [
+      "Anomaly",
+      "#yAnomaly cards will spend #yStagger to disable their #rBacklash."
+    ]
+  },
+  "${modID}:Field": {
+    "TEXT": [
+      "Field",
+      "#yField cards attach to their target when played. NL If this field had #ytime #ycounters it detaches when it has none and recovers all time counters."
+    ]
+  },
+  "${modID}:PurgeAction": {
+    "TEXT": [
+      "Select a Card to Purge",
+      ""
+    ]
+  },
+  "${modID}:ChiPannel": {
+    "TEXT": [
+      "Chi",
+      ""
+    ]
+  },
+  "${modID}:DragonAffinity": {
+    "TEXT": [
+      "Dragon Affinity",
+      "This relic only appears for slayers of Draconic Ancestry."
+    ]
+  },
+  "${modID}:Harmonic": {
+    "TEXT": [
+      "Harmonic",
+      "#yStance When entered Draw a card. NL Apply 1 additional debuff whenever you apply one. NL Exit this stance at the end of your turn."
+    ]
+  },
+  "${modID}:Dissonant": {
+    "TEXT": [
+      "Dissonant",
+      "#yStance When entered Discard the top card of your draw pile. NL Deal #b4 Additional damage to enemies with Debuffs."
+    ]
+  },
+  "${modID}:Blue": {
+    "TEXT": [
+      "Blue",
+      ""
+    ]
+  },
+  "theDragonkin:Black": {
+    "TEXT": [
+      "Black",
+      ""
+    ]
+  },
+  "${modID}:Red": {
+    "TEXT": [
+      "Red",
+      ""
+    ]
+  },
+  "${modID}:IceArmor": {
+    "TEXT": [
+      "[theDragonkin:FrostIcon] Ice Armor",
+      "[theDragonkin:FrostIcon] blocks damage, and applies equal #yChill back to attackers."
+    ]
+  },
+  "${modID}:SinnersMod": {
+    "TEXT": [
+      "Sinner's ",
+      "",
+      " NL Apply %d thedragonkin:Penance to EVERYONE."
+    ]
+  },
+  "${modID}:ConvectionMod": {
+    "TEXT": [
+      "Convection ",
+      "",
+      " NL thedragonkin:Cycle %d card."
+    ]
+  },
+  "${modID}:AgheelsMod": {
+    "TEXT": [
+      "Agheel's ",
+      "",
+      " NL Apply %d thedragonkin:Scorch to to all enemies."
+    ]
+  },
+  "${modID}:FlagellantsMod": {
+    "TEXT": [
+      "Flagellant's ",
+      "",
+      " NL thedragonkin:Tribute 5 : Deal %d damage to a random enemy."
+    ]
+  },
+  "${modID}:PyroMod": {
+    "TEXT": [
+      "Pyro ",
+      "",
+      " NL When drawn add a *Burn to your hand. NL thedragonkin:Sealed : Reduce this cards cost by 1 this combat, Increase this cards damage by %d this combat."
+    ]
   }
 }

@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.FireBurstParticleEffect;
 import com.megacrit.cardcrawl.vfx.combat.ExplosionSmallEffect;
 import dragonmod.DragonMod;
+import dragonmod.powers.Dragonkin.Scorchpower;
 
 public class GatlokBrew extends AbstractPotion {
 

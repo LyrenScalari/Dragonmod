@@ -9,9 +9,9 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import theDragonkin.DragonkinMod;
-import theDragonkin.powers.Rimedancer.Chillpower;
-import theDragonkin.util.Wiz;
+import dragonmod.DragonMod;
+import dragonmod.powers.Rimedancer.Chillpower;
+import dragonmod.util.Wiz;
 
 import java.util.ArrayList;
 
@@ -56,7 +56,7 @@ public class IceArmor extends AbstractBlockModifier {
     }
 
     public Texture customBlockImage() {
-        return DragonkinMod.ICE_ARMOR_ICON;
+        return DragonMod.ICE_ARMOR_ICON;
     }
 
     public Color blockTextColor() {

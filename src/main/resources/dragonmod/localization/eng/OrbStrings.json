@@ -1,12 +1,100 @@
 {
-  "${modID}:OrbID": {
-    "NAME": "Orb Name",
+  "${modID}:DefaultOrb": {
+    "NAME": "Default Orb",
     "DESCRIPTION": [
       "#yPassive: At the start of your turn, draw #b",
       " card.",
       " cards.",
       " NL #yEvoke: Deal #b",
       " damage to all enemies."
+    ]
+  },
+  "${modID}:Wrath": {
+    "NAME": "Wrath",
+    "DESCRIPTION": [
+      "#yBreaks after taking #b",
+      " damage during your turn", " NL #yBreak : Deal #b",
+      " damage to a random enemy"
+    ]
+  },
+  "${modID}:Wisdom": {
+    "NAME": "Wisdom",
+    "DESCRIPTION": [
+      "#yBreaks after taking #b",
+      " damage during your turn", " NL #yBreak :", " Draw #b",
+      " card","s"," Next turn",",","."
+    ]
+  },
+  "${modID}:Might": {
+    "NAME": "Might",
+    "DESCRIPTION": [
+      "#yBreaks after taking #b",
+      " damage during your turn", " NL #yBreak : Gain #b",
+      " #yStrength."
+    ]
+  },
+  "${modID}:Fortitude": {
+    "NAME": "Fortitude",
+    "DESCRIPTION": [
+      "#yBreaks after taking #b",
+      " damage during your turn", " NL #yBreak : Gain #b", " #yBlock"
+    ]
+  },
+  "${modID}:Lightspeed": {
+    "NAME": "Lightspeed",
+    "DESCRIPTION": [
+      "#yBreaks after taking #b",
+      " damage during your turn", " NL #yBreak : #yExalt #b"," Draw a card, draw #b1 less card next turn."
+    ]
+  },
+  "${modID}:Sanctuary": {
+    "NAME": "Sanctuary",
+    "DESCRIPTION": [
+      "#yBreaks after taking #b",
+      " damage during your turn", " NL #yBreak : Increase the #yBlock gain of the card that created this by #b"," this combat"
+    ]
+  },
+  "${modID}:Infusion": {
+    "NAME": "Infusion",
+    "DESCRIPTION": [
+      "#yBreaks after taking #b",
+      " damage during your turn", " NL #yBreak : Increase the damage of the card that created this by #b"," this combat"
+    ]
+  },
+  "${modID}:Spark": {
+    "NAME": "Spark",
+    "DESCRIPTION": [
+      "#yBreaks after taking #b",
+      " damage during your turn", " NL #yBreak : Apply #b",
+      " #yScorch to a random enemy"
+    ]
+  },
+  "${modID}:Consecration": {
+    "NAME": "Consecration",
+    "DESCRIPTION": [
+      "#yBreaks after taking #b",
+      " damage during your turn", " NL #yBreak : Deal #b",
+      " damage to ALL enemies"
+    ]
+  },
+  "${modID}:Flame": {
+    "NAME": "Sealed : Incendiary Flow",
+    "DESCRIPTION": [
+      "",
+      "", "After you discard a Status or Primal if Incendiary Flow is in your hand, Cycle it, otherwise deal #b", " Damage to a random enemy.","Yolos"
+    ]
+  },
+  "${modID}:CrystalSlot": {
+    "NAME": "Crystal Orb Slot",
+    "DESCRIPTION": [
+      "An orb can be channeled into this slot. when an Orb is Evoked from this slot this slot is removed."
+    ]
+  },
+  "${modID}:Icicle": {
+    "NAME": "Icicle",
+    "DESCRIPTION": [
+      "#yPassive : at the end of your turn deal #b"," damage to ","the last enemy you attacked.",
+      " NL #yEvoke : deal #b"," damage to ","the last enemy you attacked "," and evoke your next orb if its an icicle."
     ]
   }
 }

@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
+import dragonmod.orbs.CrystalOrbSlot;
 import dragonmod.util.Wiz;
 
 public class GainCrystalOrbSlotAction extends AbstractGameAction {

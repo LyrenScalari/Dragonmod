@@ -6,8 +6,9 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import dragonmod.DragonMod;
 import javassist.CtBehavior;
-import theDragonkin.DragonkinMod;
+
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class RenderHealthBar {
 
     private static void renderTempHPIconAndValue(AbstractCreature creature, SpriteBatch sb, float x, float y) {
         sb.setColor(Settings.LIGHT_YELLOW_COLOR);
-        sb.draw(DragonkinMod.DIVINE_ARMOR_ICON, x + (Float)getPrivate(AbstractCreature.class, "BLOCK_ICON_X", Float.class) - 60.0F,
+        sb.draw(DragonMod.DIVINE_ARMOR_ICON, x + (Float)getPrivate(AbstractCreature.class, "BLOCK_ICON_X", Float.class) - 60.0F,
                 y + (Float)getPrivate(AbstractCreature.class, "BLOCK_ICON_Y", Float.class) - 30.0F, 32.0F, 32.0F, 64.0F, 64.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 64, 64, false, false);
         FontHelper.renderFontCentered(sb, FontHelper.blockInfoFont, Integer.toString((Integer)DivineArmorField.DivineArmor.get(creature)),
                 x + (Float)getPrivate(AbstractCreature.class, "BLOCK_ICON_X", Float.class) - 28.0F, y - 14.0F * Settings.scale, Settings.CREAM_COLOR, 1.0F);

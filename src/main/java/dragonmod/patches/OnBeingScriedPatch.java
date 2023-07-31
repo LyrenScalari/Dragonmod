@@ -11,6 +11,8 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import dragonmod.actions.OnBeingScriedInterface;
 import dragonmod.actions.ScryCallbackAction;
+import dragonmod.powers.Drifter.onScriedPower;
+import dragonmod.relics.onScryRelic;
 import dragonmod.util.CardSeenScriedInterface;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;

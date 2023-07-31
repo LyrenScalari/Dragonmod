@@ -3,6 +3,7 @@ package dragonmod.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import dragonmod.cards.Warden.AbstractWardenCard;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
@@ -14,7 +15,7 @@ public class GainStressAction extends AbstractGameAction {
     public GainStressAction(AbstractCard card) {
         this.setValues(target, source, amount);
         this.actionType = ActionType.ENERGY;
-        this.amount = ((AbstractDrifterCard)card).energyCosts.get(TypeEnergyHelper.Mana.Temporal);
+        this.amount = ((AbstractWardenCard)card).energyCosts.get(TypeEnergyHelper.Mana.Temporal);
         src = card;
     }
     public GainStressAction(int amount) {

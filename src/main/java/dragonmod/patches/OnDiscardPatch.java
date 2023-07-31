@@ -5,7 +5,8 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import theDragonkin.util.TriggerOnCycleEffect;
+import dragonmod.util.TriggerOnCycleEffect;
+
 
 @SpirePatch2(clz = AbstractPlayer.class, method = "updateCardsOnDiscard")
 public class OnDiscardPatch {

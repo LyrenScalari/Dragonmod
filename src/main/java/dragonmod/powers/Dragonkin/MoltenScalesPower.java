@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import dragonmod.DragonMod;
+import dragonmod.cards.Justicar.MagmaScales;
 import dragonmod.powers.BasePower;
 import dragonmod.util.TextureLoader;
 import dragonmod.util.Wiz;

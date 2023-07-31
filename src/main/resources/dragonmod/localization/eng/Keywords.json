@@ -1,23 +1,320 @@
 [
   {
-    "PROPER_NAME": "This is displayed in the tooltip.",
+    "PROPER_NAME": "Primal",
     "NAMES": [
-      "these",
-      "are",
-      "detected",
-      "in",
-      "the",
-      "text"
+      "Primal",
+      "primal"
     ],
-    "DESCRIPTION": "This is displayed in the tooltip. Note, spaces are not allowed in NAMES. Also, they should be entirely lowercase. For multi-word keywords, see the next one."
+    "DESCRIPTION": "Energy spent on [#fe513a]Primal[] cards applies #yScorch to random enemies."
   },
   {
-    "PROPER_NAME": "Multiword Keyword",
+    "PROPER_NAME": "Scorch",
     "NAMES": [
-      "Multiword Keyword",
-      "multiword_keyword",
-      "multiword_keywords"
+      "Scorch",
+      "scorch",
+      "scorched"
     ],
-    "DESCRIPTION": "Make sure the first element in the NAMES is the same as your PROPER_NAME. The rest should use _ to replace spaces and be entirely lowercase. In card text, you'll use the underscore versions."
+    "DESCRIPTION": "Scorched creatures take damage equal to their scorch and lose #b1 scorch when #yAttacked"
+  },
+  {
+    "PROPER_NAME": "Sealed",
+    "NAMES": [
+      "Sealed",
+      "sealed"
+    ],
+    "DESCRIPTION": "#ySealed effects activate whenever you discard a #yStatus or [#fe513a]Primal[] card."
+  },
+  {
+    "PROPER_NAME": "Cycle",
+    "NAMES": [
+      "Cycle",
+      "cycle",
+      "cycled",
+      "Cycled"
+    ],
+    "DESCRIPTION": "Discard a card and draw a new card to replace it."
+  },
+
+  {
+    "PROPER_NAME": "Holy",
+    "NAMES": [
+      "Holy",
+      "holy"
+    ],
+    "DESCRIPTION": "Energy spent on [#94bdff]Holy[] cards is accumulated to produce [#94bdff]Holy[] [#94bdff]Power[] which increases the damage and block gain of [#94bdff]Holy[] cards for the rest of combat.",
+    "COLOR": "[#94bdff]"
+  },
+
+  {
+    "PROPER_NAME": "Penance",
+    "NAMES": [
+      "Penance",
+      "penance",
+      "Repentant",
+      "repentant"
+    ],
+    "DESCRIPTION": "When a creature obtains #b8 Penance, it loses #b20 HP and HP loss from this effect is increased by #b10 this combat"
+  },
+
+  {
+    "PROPER_NAME": "Holy Power",
+    "NAMES": [
+      "Holy Power",
+      "Holy_Power",
+      "holy power",
+      "holy_power"
+    ],
+    "DESCRIPTION": "Increases damage and #yBlock gain of [#94bdff]Holy[] cards."
+  },
+
+  {
+    "PROPER_NAME": "Exalt",
+    "NAMES": [
+      "Exalt",
+      "exalt",
+      "exalted",
+      "Exalted"
+    ],
+    "DESCRIPTION": "Spend X [#94bdff]Holy[] [#94bdff]Power[] for an effect"
+  },
+
+  {
+    "PROPER_NAME": "Tribute",
+    "NAMES": [
+      "Tribute",
+      "tribute"
+    ],
+    "DESCRIPTION": "Perform the following effect every X damage taken or HP lost. NL At the end of your turn, if you took no damage or HP loss this turn take X damage and remove this effect."
+  },
+
+  {
+    "PROPER_NAME": "Sanctify",
+    "NAMES": [
+      "Sanctify",
+      "sanctify"
+    ],
+    "DESCRIPTION": "Discard X cards, Gain the following effect if you Discard a [#94bdff]Holy[] card. NL [#fe513a]Primal[], #yStatus and #yCurse cards discarded become Divine Embers"
+  },
+
+  {
+    "PROPER_NAME": "Divine",
+    "NAMES": [
+      "Divine",
+      "divine"
+    ],
+    "DESCRIPTION": "[theDragonkin:LightIcon] #yBlock is Used before other block types and is not lost at the start of your turn."
+  },
+  {
+    "PROPER_NAME": "Flame Barrier",
+    "NAMES": [
+      "Flame Barrier",
+      "Flame_Barrier",
+      "flame barrier",
+      "flame_barrier"
+    ],
+    "DESCRIPTION": "[theDragonkin:FireIcon] blocks and reflects equal damage. [theDragonkin:FireIcon] falls to the total scorch among enemies at the start of turn."
+  },
+  {
+    "PROPER_NAME": "Sacrifice",
+    "NAMES": [
+      "Sacrifice",
+      "sacrifice"],
+    "DESCRIPTION": "When you obtain #b5 Sacrifice spend it and gain #b1 [#94bdff]Holy[] [#94bdff]Power[]."
+  },
+
+  {
+    "PROPER_NAME": "Dragon Affinity",
+    "NAMES": [
+      "Dragon Affinity",
+      "Dragon_Affinity",
+      "dragon affinity",
+      "dragon_affinity"
+    ],
+    "DESCRIPTION": "This relic only appears for slayers of Draconic Ancestry."
+  },
+
+  {
+    "PROPER_NAME": "Field",
+    "NAMES": [
+      "Field",
+      "field",
+      "Fields",
+      "fields",
+      "Field.",
+      "field."
+    ],
+    "DESCRIPTION": "#yField cards attach to the target when played. NL If this field had #ytime #ycounters it detaches when it has none and recovers all time counters."
+  },
+  {
+    "PROPER_NAME": "Fading",
+    "NAMES": [
+      "Fading",
+      "fading"
+    ],
+    "DESCRIPTION": "This #yField loses a Time counter each time it #yTicks."
+  },
+  {
+    "PROPER_NAME": "Tick",
+    "NAMES": [
+      "Tick",
+      "tick"
+    ],
+    "DESCRIPTION": "Trigger an effect if attached to a creature. NL Ticks automatically at the start of your turn."
+  },
+  {
+    "PROPER_NAME": "Stagger",
+    "NAMES": [
+      "Stagger",
+      "stagger"
+    ],
+    "DESCRIPTION": "Stagger is gained whenever you take unblocked damage and is used to determine how much damage you can prevent in the past. NL Stagger is reduced each turn."
+  },
+  {
+    "PROPER_NAME": "Leap",
+    "NAMES": [
+      "Leap",
+      "leap"
+    ],
+    "DESCRIPTION": "Spend [theDragonkin:TemporalIcon] #yStagger for an effect, You will be Healed for the amount of #yStagger spent."
+  },
+  {
+    "PROPER_NAME": "Borrow",
+    "NAMES": [
+      "Borrow",
+      "borrow"
+    ],
+    "DESCRIPTION": "Take the following resources from your next turn. NL Borrowed resources not accounted for by the end of next turn will be payed for in #yStagger."
+  },
+  {
+    "PROPER_NAME": "Rewind",
+    "NAMES": [
+      "Rewind",
+      "rewind"
+    ],
+    "DESCRIPTION": "#yRewinding a card puts it on the top of your draw pile, and draws you a card next turn."
+  },
+  {
+    "PROPER_NAME": "Riposte",
+    "NAMES": [
+      "Riposte",
+      "riposte"
+    ],
+    "DESCRIPTION": "The next time an enemy breaks your block, retaliate with the following effect."
+  },
+  {
+    "PROPER_NAME": "Panic",
+    "NAMES": [
+      "Panic",
+      "panic"
+    ],
+    "DESCRIPTION": "#yPanicking creatures deal up to #b50% less damage and will additionally hit random a enemy when attacking. NL #yPanic is reduced each turn increased by the number of extra attacks made."
+  },
+  {
+    "PROPER_NAME": "Foresee",
+    "NAMES": [
+      "Foresee",
+      "foresee"
+    ],
+    "DESCRIPTION": "When #yScried, add this to your hand and trigger the following effect."
+  },
+  {
+    "PROPER_NAME": "Foreseen",
+    "NAMES": [
+      "Foreseen",
+      "foreseen"
+    ],
+    "DESCRIPTION": "Has a Bonus effect from being #yScried. NL When #yScried, add this to your hand."
+  },
+  {
+    "PROPER_NAME": "Harmony",
+    "NAMES": [
+      "Harmony",
+      "harmony",
+      "Harmonize",
+      "harmonize"
+    ],
+    "DESCRIPTION": "Reveal the top card of your draw pile, if it matches the listed card type draw it and do the following effect otherwise discard it."
+  },
+  {
+    "PROPER_NAME": "Stanza",
+    "NAMES": [
+      "Stanza",
+      "stanza"
+    ],
+    "DESCRIPTION": "This #yField gains a Time counter each time it #yTicks and performs an effect based on the number of Time counters it has, #yDetaching after the last effect is used."
+  },
+  {
+    "PROPER_NAME": "Sight",
+    "NAMES": [
+      "Sight",
+      "sight"
+    ],
+    "DESCRIPTION": "#ySight reveals cards from the top of your deck at all times."
+  },
+  {
+    "PROPER_NAME": "Resonate",
+    "NAMES": [
+      "Resonate",
+      "resonate"
+    ],
+    "DESCRIPTION": "The effect that follows targets the X closest left adjacent cards. wrapping to the right side of the hand as needed."
+  },
+  {
+    "PROPER_NAME": "Sharpen",
+    "NAMES": [
+      "Sharpen",
+      "sharpen"
+    ],
+    "DESCRIPTION": "Sharpen applied to cards increases the damage they deal this combat."
+  },
+  {
+    "PROPER_NAME": "Shine",
+    "NAMES": [
+      "Shine",
+      "shine"
+    ],
+    "DESCRIPTION": "Shine applied to cards increases the Block they apply this combat."
+  },
+  {
+    "PROPER_NAME": "Chill",
+    "NAMES": [
+      "Chill",
+      "chill"
+    ],
+    "DESCRIPTION": "#yChilled creatures give #yBlock equal to their chill and lose #b1 chill when they take unblocked attack damage or are damaged by an #yIcicle"
+  },
+  {
+    "PROPER_NAME": "Icicle",
+    "NAMES": [
+      "Icicle",
+      "icicle",
+      "Icicles",
+      "icicles"
+    ],
+    "DESCRIPTION": "#yOrb : Deals damage to the last enemy you attacked. After being #yEvoked, if your next orb is an #yIcicle #yEvoke it."
+  },
+  {
+    "PROPER_NAME": "Sleet",
+    "NAMES": [
+      "Sleet",
+      "sleet"
+    ],
+    "DESCRIPTION": "#yOrb : Applies #Chill to random enemies each turn. When #Evoked applies #yChill to ALL enemies."
+  },
+  {
+    "PROPER_NAME": "Crystal",
+    "NAMES": [
+      "Crystal",
+      "crystal"
+    ],
+    "DESCRIPTION": "When an Orb is #yEvoked from a crystal orb slot, gain #b1 Temporary Focus and lose that orb slot."
+  },
+  {
+    "PROPER_NAME": "Gambit",
+    "NAMES": [
+      "Gambit",
+      "gambit"
+    ],
+    "DESCRIPTION": "A Bonus effect if the last card played matches the listed type."
   }
 ]

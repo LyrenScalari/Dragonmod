@@ -6,6 +6,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import dragonmod.cards.Justicar.AbstractPrimalCard;
 import dragonmod.util.TriggerOnCycleEffect;
 import dragonmod.util.TriggerOnCycleMod;
 

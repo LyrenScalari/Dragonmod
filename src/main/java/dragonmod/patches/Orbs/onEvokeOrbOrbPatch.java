@@ -3,8 +3,9 @@ package dragonmod.patches.Orbs;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import dragonmod.util.onEvokeOrbOrb;
 import javassist.CtBehavior;
-import theDragonkin.orbs.onEvokeOrbOrb;
+
 
 @SpirePatches({@SpirePatch(
         cls = "com.megacrit.cardcrawl.characters.AbstractPlayer",

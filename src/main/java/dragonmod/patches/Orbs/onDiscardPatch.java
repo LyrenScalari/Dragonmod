@@ -4,10 +4,11 @@ import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
+import dragonmod.DragonMod;
+import dragonmod.util.AbstractNotOrb;
+import dragonmod.util.AbstractRune;
 import javassist.CtBehavior;
-import theDragonkin.DragonkinMod;
-import theDragonkin.util.AbstractNotOrb;
-import theDragonkin.util.AbstractRune;
+
 
 @SpirePatch(clz = DiscardAction.class, method = "update")
 public class onDiscardPatch {
@@ -17,7 +18,7 @@ public class onDiscardPatch {
     public static void onDiscardPatch(DiscardAction __instance) {
         boolean endturn = ReflectionHacks.getPrivate(__instance,DiscardAction.class,"endTurn");
         if (!endturn) {
-            for (AbstractNotOrb o : DragonkinMod.Seals) {
+            for (AbstractNotOrb o : DragonMod.Seals) {
                 if (o instanceof AbstractRune) {
                     ((AbstractRune) o).onManualDiscard();
                 }

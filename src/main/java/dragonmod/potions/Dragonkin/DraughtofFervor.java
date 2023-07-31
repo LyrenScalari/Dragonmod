@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import dragonmod.DragonMod;
+import dragonmod.powers.Dragonkin.DivineConvictionpower;
 
 public class DraughtofFervor extends AbstractPotion {
 

@@ -3,7 +3,7 @@ package dragonmod.patches.DivineArmorPatches;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import theDragonkin.DragonkinMod;
+import dragonmod.DragonMod;
 
 @SpirePatch(
         clz = AbstractRoom.class,
@@ -14,6 +14,6 @@ public class BattleEnd {
     }
 
     public static void Prefix(AbstractRoom __instance) {DivineArmorField.DivineArmor.set(AbstractDungeon.player, 0);
-        DragonkinMod.Seals.clear();
+        DragonMod.Seals.clear();
     }
 }

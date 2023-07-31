@@ -8,9 +8,9 @@ import com.evacipated.cardcrawl.mod.stslib.blockmods.AbstractBlockModifier;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import theDragonkin.DragonkinMod;
-
 import java.util.ArrayList;
+
+import static dragonmod.DragonMod.DIVINE_ARMOR_ICON;
 
 public class DivineBlock extends AbstractBlockModifier {
     boolean inherent;
@@ -55,7 +55,7 @@ public class DivineBlock extends AbstractBlockModifier {
     }
 
     public Texture customBlockImage() {
-        return DragonkinMod.DIVINE_ARMOR_ICON;
+        return DIVINE_ARMOR_ICON;
     }
 
     public int amountLostAtStartOfTurn() {

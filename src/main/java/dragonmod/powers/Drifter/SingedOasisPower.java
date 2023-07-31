@@ -9,15 +9,15 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import theDragonkin.CardMods.PlusDamageBlockCardMod;
-import theDragonkin.DragonkinMod;
+import dragonmod.CardMods.PlusDamageBlockCardMod;
+import dragonmod.DragonMod;
 
 import java.util.ArrayList;
 
 public class SingedOasisPower extends AbstractPower implements onScriedPower, CloneablePowerInterface {
     public AbstractCreature source;
 
-    public static final String POWER_ID = DragonkinMod.makeID("SingedOasis");
+    public static final String POWER_ID = DragonMod.makeID("SingedOasis");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

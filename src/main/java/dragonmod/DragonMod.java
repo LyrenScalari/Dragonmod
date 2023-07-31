@@ -1,8 +1,10 @@
 package dragonmod;
 
+import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
+import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -10,8 +12,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.evacipated.cardcrawl.mod.stslib.icons.CustomIconHelper;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.Patcher;
@@ -30,6 +34,11 @@ import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import dragonmod.DamageModifiers.Icons.*;
+import dragonmod.actions.GainStressAction;
+import dragonmod.cards.AbstractDragonCard;
+import dragonmod.cards.Justicar.AbstractPrimalCard;
 import dragonmod.characters.TheJusticar;
 import dragonmod.characters.TheRimedancer;
 import dragonmod.patches.TemporalStressField;
@@ -37,7 +46,14 @@ import dragonmod.patches.TemporalStressUI;
 import dragonmod.potions.Dragonkin.DraughtofFervor;
 import dragonmod.potions.Dragonkin.GatlokBrew;
 import dragonmod.potions.Dragonkin.NaruuinsGlow;
+import dragonmod.powers.Dragonkin.PenancePower;
+import dragonmod.relics.Dragonkin.*;
+import dragonmod.relics.Drifter.BronzePocketWatch;
+import dragonmod.relics.Drifter.DraconicTimeCrystal;
+import dragonmod.relics.Rimedancer.CryoniteShard;
 import dragonmod.util.*;
+import dragonmod.variables.DefaultSecondMagicNumber;
+import dragonmod.variables.SecondDamage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.scannotation.AnnotationDB;
@@ -87,36 +103,36 @@ public class DragonMod implements
     private static final String DESCRIPTION = "4 new Spire slaying hero's rise from origins far beyond the spire. each with varied tools and skills for climbing the tower and escaping to return to their lives";
     public static final String LIGHTNINGBOLT = resourcePath("VFX/lightningspear.png");
     //Justicar assets
-    private static final String JUSTICAR_RED_BUTTON = characterPath("Justicar/select/Dragonbutton.png");
-    private static final String JUSTICAR_RED_PORTRAIT = characterPath("Justicar/select/dragonbg.png");
-    private static final String JUSTICAR_RED_ATTACK = characterPath("Justicar/cardback/attack.png");
-    private static final String JUSTICAR_RED_ATTACK_P = characterPath("Justicar/cardback/attack_p.png");
-    private static final String JUSTICAR_RED_SKILL = characterPath("Justicar/cardback/skill.png");
-    private static final String JUSTICAR_RED_SKILL_P = characterPath("Justicar/cardback/skill_p.png");
-    private static final String JUSTICAR_RED_POWER = characterPath("Justicar/cardback/power.png");
-    private static final String JUSTICAR_RED_POWER_P = characterPath("Justicar/cardback/power_p.png");
-    private static final String JUSTICAR_RED_ENERGY_ORB = characterPath("Justicar/cardback/energy_orb.png");
-    private static final String JUSTICAR_RED_ENERGY_ORB_P = characterPath("Justicar/cardback/energy_orb_p.png");
-    private static final String JUSTICAR_RED_SMALL_ORB = characterPath("Justicar/cardback/small_orb.png");
-    private static final String HOLY_ORB = characterPath("Justicar/cardback/energy_orb.png");
-    private static final String HOLY_ORB_P = characterPath("Justicar/cardback/energy_orb_p.png");
-    private static final String PRIMAL_ORB = characterPath("Justicar/cardback/energy_orb.png");
-    private static final String PRIMAL_ORB_P = characterPath("Justicar/cardback/energy_orb_p.png");
+    public static final String JUSTICAR_RED_BUTTON = characterPath("Justicar/select/Dragonbutton.png");
+    public static final String JUSTICAR_RED_PORTRAIT = characterPath("Justicar/select/dragonbg.png");
+    public static final String JUSTICAR_RED_ATTACK = characterPath("Justicar/cardback/attack.png");
+    public static final String JUSTICAR_RED_ATTACK_P = characterPath("Justicar/cardback/attack_p.png");
+    public static final String JUSTICAR_RED_SKILL = characterPath("Justicar/cardback/skill.png");
+    public static final String JUSTICAR_RED_SKILL_P = characterPath("Justicar/cardback/skill_p.png");
+    public static final String JUSTICAR_RED_POWER = characterPath("Justicar/cardback/power.png");
+    public static final String JUSTICAR_RED_POWER_P = characterPath("Justicar/cardback/power_p.png");
+    public static final String JUSTICAR_RED_ENERGY_ORB = characterPath("Justicar/cardback/energy_orb.png");
+    public static final String JUSTICAR_RED_ENERGY_ORB_P = characterPath("Justicar/cardback/energy_orb_p.png");
+    public static final String JUSTICAR_RED_SMALL_ORB = characterPath("Justicar/cardback/small_orb.png");
+    public static final String HOLY_ORB = characterPath("Justicar/cardback/energy_orb.png");
+    public static final String HOLY_ORB_P = characterPath("Justicar/cardback/energy_orb_p.png");
+    public static final String PRIMAL_ORB = characterPath("Justicar/cardback/energy_orb.png");
+    public static final String PRIMAL_ORB_P = characterPath("Justicar/cardback/energy_orb_p.png");
     public static final String JUSTICAR_SHOULDER_1 = characterPath("Justicar/animation/Dragonkinshoulder.png");
     public static final String JUSTICAR_SHOULDER_2 = characterPath("Justicar/animation/Dragonkinshoulder2.png");
     public static final String JUSTICAR_CORPSE = characterPath("Justicar/animation/DragonkinCorpse.png");
     public static final String JUSTICAR_SKELETON_ATLAS = characterPath("Justicar/animation/TheDragonkin.atlas");
     public static final String JUSTICAR_SKELETON_JSON = characterPath("Justicar/animation/TheDragonkin.json");
     //Warden card assets
-    private static final String WARDEN_BRONZE_ATTACK = characterPath("Warden/cardback/attack.png");
-    private static final String WARDEN_BRONZE_ATTACK_P =  characterPath("Warden/cardback/attack_p.png");
-    private static final String WARDEN_BRONZE_SKILL = characterPath("Warden/cardback/bg_skill.png");
-    private static final String WARDEN_BRONZE_SKILL_P = characterPath("Warden/cardback/skill_p.png");
-    private static final String WARDEN_BRONZE_POWER = characterPath("Warden/cardback/power.png");
-    private static final String WARDEN_BRONZE_POWER_P = characterPath("Warden/cardback/power_p.png");
-    private static final String WARDEN_BRONZE_ENERGY_ORB = characterPath("Warden/cardback/energy_orb.png");
-    private static final String WARDEN_BRONZE_ENERGY_ORB_P= characterPath("Warden/cardback/energy_orb_p.png");
-    private static final String WARDEN_BRONZE_SMALL_ORB = characterPath("Warden/cardback/small_orb.png");
+    public static final String WARDEN_BRONZE_ATTACK = characterPath("Warden/cardback/attack.png");
+    public static final String WARDEN_BRONZE_ATTACK_P =  characterPath("Warden/cardback/attack_p.png");
+    public static final String WARDEN_BRONZE_SKILL = characterPath("Warden/cardback/bg_skill.png");
+    public static final String WARDEN_BRONZE_SKILL_P = characterPath("Warden/cardback/skill_p.png");
+    public static final String WARDEN_BRONZE_POWER = characterPath("Warden/cardback/power.png");
+    public static final String WARDEN_BRONZE_POWER_P = characterPath("Warden/cardback/power_p.png");
+    public static final String WARDEN_BRONZE_ENERGY_ORB = characterPath("Warden/cardback/energy_orb.png");
+    public static final String WARDEN_BRONZE_ENERGY_ORB_P= characterPath("Warden/cardback/energy_orb_p.png");
+    public static final String WARDEN_BRONZE_SMALL_ORB = characterPath("Warden/cardback/small_orb.png");
     //Rimedancer card assets
     private static final String RIMEDANCER_CYAN_ATTACK = characterPath("Rimedancer/cardback/attack.png");
     private static final String RIMEDANCER_CYAN_ATTACK_P =  characterPath("Rimedancer/cardback/attack_p.png");
@@ -144,6 +160,7 @@ public class DragonMod implements
     public static SpireConfig justicarConfig;
     public static UIStrings uiStrings;
     public static boolean DecayStagger = false;
+    public static TextureAtlas TypeEnergyAtlas = new TextureAtlas();
     public static final String DOVAH_FONT = resourcePath("Font/DovahkiinItalic-2BDv.ttf");
     public static BitmapFont DovahFont;
     //This will be called by ModTheSpire because of the @SpireInitializer annotation at the top of the class.
@@ -190,8 +207,19 @@ public class DragonMod implements
         logger.info("Adding mod settings");
         logger.info("Done adding mod settings");
     }
-
-    @Override
+    public static boolean isPlayerDragon() {
+        if (AbstractDungeon.player.chosenClass == THE_JUSTICAR) {
+            return true;
+        }
+        if (AbstractDungeon.player.chosenClass == THE_WARDEN) {
+            return true;
+        }
+        if (AbstractDungeon.player.chosenClass == THE_RIMEDANCER) {
+            return true;
+        }
+        return false;
+    }
+        @Override
     public void receivePostInitialize() {
         //This loads the image used as an icon in the in-game mods menu.
         logger.info("Loading badge image and mod options");
@@ -379,26 +407,13 @@ public class DragonMod implements
     private void registerKeyword(KeywordInfo info) {
         BaseMod.addKeyword(modID.toLowerCase(), info.PROPER_NAME, info.NAMES, info.DESCRIPTION);
     }
-
-    //These methods are used to generate the correct filepaths to various parts of the resources folder.
-    public static String localizationPath(String lang, String file) {
-        return resourcesFolder + "/localization/" + lang + "/" + file;
-    }
-
-    public static String resourcePath(String file) {
-        return resourcesFolder + "/" + file;
-    }
-    public static String uiPath(String file) {
-        return resourcesFolder + "/UI/" + file;
-    }
+    public static String localizationPath(String lang, String file) { return resourcesFolder + "/localization/" + lang + "/" + file; }
+    public static String resourcePath(String file) { return resourcesFolder + "/" + file; }
+    public static String uiPath(String file) { return resourcesFolder + "/UI/" + file; }
     public static String characterPath(String file) { return resourcesFolder + "/character/" + file;}
-    public static String powerPath(String file) {
-        return resourcesFolder + "/powers/" + file;
-    }
-    public static String relicPath(String file) {
-        return resourcesFolder + "/relics/" + file;
-    }
-
+    public static String powerPath(String file) { return resourcesFolder + "/powers/" + file; }
+    public static String relicPath(String file) { return resourcesFolder + "/relics/" + file; }
+    public static String orbPath(String file) { return resourcesFolder + "/orbs/" + file; }
     //This determines the mod's ID based on information stored by ModTheSpire.
     private static void loadModInfo() {
         Optional<ModInfo> infos = Arrays.stream(Loader.MODINFOS).filter((modInfo)->{
@@ -419,7 +434,16 @@ public class DragonMod implements
 
     @Override
     public void receiveEditCards() {
-
+        CustomIconHelper.addCustomIcon(FireIcon.get());
+        CustomIconHelper.addCustomIcon(LightIcon.get());
+        CustomIconHelper.addCustomIcon(ExaltIcon.get());
+        CustomIconHelper.addCustomIcon(TemporalIcon.get());
+        CustomIconHelper.addCustomIcon(FrostIcon.get());
+        logger.info("Add variables");
+        BaseMod.addDynamicVariable(new DefaultSecondMagicNumber());
+        BaseMod.addDynamicVariable(new SecondDamage());
+        logger.info("Adding cards");
+        new AutoAdd(modID).packageFilter(AbstractDragonCard.class).setDefaultSeen(true).cards();
     }
 
     @Override
@@ -447,28 +471,118 @@ public class DragonMod implements
     @Override
     public void receiveEditRelics() {
 
+        // Justicar Relics.
+        BaseMod.addRelicToCustomPool(new GarnetScale(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new ObsidianScale(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new CitrineScales(), Justicar_Red_COLOR);
+        //To Do : Make new common relic for Justicar
+        BaseMod.addRelicToCustomPool(new EmberCore(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new MukySludge(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new BookOfHymns(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new Sulfurian(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new TilerasShield(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new SunblessedCharm(), Justicar_Red_COLOR);
+        UnlockTracker.markRelicAsSeen(GarnetScale.ID);
+        UnlockTracker.markRelicAsSeen(ObsidianScale.ID);
+        UnlockTracker.markRelicAsSeen(CitrineScales.ID);
+        UnlockTracker.markRelicAsSeen(EmberCore.ID);
+        UnlockTracker.markRelicAsSeen(MukySludge.ID);
+        UnlockTracker.markRelicAsSeen(BookOfHymns.ID);
+        UnlockTracker.markRelicAsSeen(Sulfurian.ID);
+        UnlockTracker.markRelicAsSeen(TilerasShield.ID);
+        UnlockTracker.markRelicAsSeen(SunblessedCharm.ID);
+
+        //Drifter Relics
+        BaseMod.addRelicToCustomPool(new BronzePocketWatch(), Warden_Bronze_COLOR);
+        BaseMod.addRelicToCustomPool(new DraconicTimeCrystal(), Warden_Bronze_COLOR);
+        UnlockTracker.markRelicAsSeen(BronzePocketWatch.ID);
+        UnlockTracker.markRelicAsSeen(DraconicTimeCrystal.ID);
+
+        //Rimedancer Relics
+        BaseMod.addRelicToCustomPool(new CryoniteShard(), Rimedancer_Cyan_COLOR);
+        UnlockTracker.markRelicAsSeen(CryoniteShard.ID);
+
+        //Dragon Relics
+        BaseMod.addRelic(new RoyalSignet(), RelicType.SHARED);
+        UnlockTracker.markRelicAsSeen(RoyalSignet.ID);
     }
 
     @Override
     public void receiveOnPlayerTurnStart() {
-
+        damagetaken = false;
+        DecayStagger = false;
+        AbstractSeal.DevotionEffects = false;
+        for (AbstractNotOrb seal : Seals){
+            seal.onStartOfTurn();
+        }
     }
 
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
-
+        StatusesCycledThisCombat = 0;
+        CardsCycledThisCombat = 0;
+        BurnsCycledThisCombat = 0;
+        PenancePower.Power = 20;
+        TemporalStressField.Stress.set(AbstractDungeon.player,0);
+        Seals.clear();
     }
 
     @Override
     public boolean receivePreMonsterTurn(AbstractMonster abstractMonster) {
-        return false;
+        StatusesCycledThisTurn = 0;
+        CardsCycledThisTurn = 0;
+        BurnsCycledThisTurn = 0;
+        if (TemporalStressField.Stress.get(AbstractDungeon.player) > 0 && !DecayStagger) {
+            Wiz.att(new GainStressAction(-1*(TemporalStressField.Stress.get(AbstractDungeon.player)/2)));
+        }
+        DecayStagger = true;
+        for (AbstractNotOrb seal : Seals){
+            seal.onEndOfTurn();
+        }
+        return true;
     }
 
     @Override
     public void receiveRelicGet(AbstractRelic abstractRelic) {
-
+        AbstractRelic tilerasShield = AbstractDungeon.player.getRelic(TilerasShield.ID);
+        if (tilerasShield != null && !CardCrawlGame.loadingSave) {
+            AbstractDungeon.player.increaseMaxHp(3, true);
+            tilerasShield.counter += 3;
+        }
     }
-
+    public static void TriggerOnCycle(AbstractCard ca){
+        for (AbstractCard c : AbstractDungeon.player.discardPile.group){
+            if (c instanceof TriggerOnCycleEffect){
+                if (c.type == AbstractCard.CardType.STATUS || c instanceof AbstractPrimalCard){
+                    ((TriggerOnCycleEffect) c).TriggerOnCycle(c);
+                }
+            }
+        }
+        for (AbstractCard c : AbstractDungeon.player.drawPile.group){
+            if (c instanceof TriggerOnCycleEffect){
+                if (c.type == AbstractCard.CardType.STATUS || c instanceof AbstractPrimalCard){
+                    ((TriggerOnCycleEffect) c).TriggerOnCycle(c);
+                }
+            }
+        }
+        for (AbstractCard c : AbstractDungeon.player.exhaustPile.group){
+            if (c instanceof TriggerOnCycleEffect){
+                if (c.type == AbstractCard.CardType.STATUS || c instanceof AbstractPrimalCard){
+                    ((TriggerOnCycleEffect) c).TriggerOnCycle(c);
+                }
+            }
+        }
+        for (AbstractCard c : AbstractDungeon.player.hand.group){
+            if (c instanceof TriggerOnCycleEffect){
+                ((TriggerOnCycleEffect) c).TriggerOnCycle(ca);
+            }
+        }
+        for (AbstractRelic r : AbstractDungeon.player.relics){
+            if (r instanceof TriggerOnCycleEffect){
+                ((TriggerOnCycleEffect) r).TriggerOnCycle(ca);
+            }
+        }
+    }
     @Override
     public void receiveStartGame() {
 

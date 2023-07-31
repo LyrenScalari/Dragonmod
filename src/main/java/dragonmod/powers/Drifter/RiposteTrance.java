@@ -18,7 +18,7 @@ import dragonmod.DragonMod;
 import dragonmod.patches.FieldsManager;
 import dragonmod.powers.BasePower;
 import dragonmod.util.Wiz;
-
+import dragonmod.cards.Warden.Trance;
 public class RiposteTrance extends BasePower implements CloneablePowerInterface, OnMyBlockBrokenPower {
     public AbstractCreature source;
 

@@ -21,6 +21,8 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import dragonmod.DragonMod;
+import dragonmod.cards.Justicar.*;
+import dragonmod.relics.Dragonkin.GarnetScale;
 import dragonmod.ui.EnergyOrbJusticar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

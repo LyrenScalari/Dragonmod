@@ -9,12 +9,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import dragonmod.DragonMod;
 import dragonmod.actions.CycleAction;
+import dragonmod.cards.Justicar.MoltenEmber;
 import dragonmod.powers.BasePower;
 import dragonmod.util.TextureLoader;
 
-import static dragonmod.DragonMod.*;
+import static dragonmod.DragonMod.makeID;
+import static dragonmod.DragonMod.powerPath;
 
 public class AshenArmorpower extends BasePower implements CloneablePowerInterface {
     public AbstractCreature source;
