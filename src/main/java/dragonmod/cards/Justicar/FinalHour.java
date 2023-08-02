@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVExaltCardmod;
-import dragonmod.DragonMod;
 import dragonmod.actions.ExaltAction;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.powers.Dragonkin.DivineRetributionPower;
@@ -20,7 +19,7 @@ import dragonmod.util.Wiz;
 
 public class FinalHour extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(FinalHour.class.getSimpleName());
+    public static final String ID = FinalHour.class.getSimpleName();
     public FinalHour() {
         super(ID, 1,CardType.SKILL,CardRarity.SPECIAL,CardTarget.ALL_ENEMY);
         setMagic(5,-1);

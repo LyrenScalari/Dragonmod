@@ -7,12 +7,11 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
-import dragonmod.DragonMod;
 import dragonmod.actions.SmiteAction;
 
 public class HolyWrath extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(HolyWrath.class.getSimpleName());
+    public static final String ID = HolyWrath.class.getSimpleName();
 
     public HolyWrath() {
         super(ID,2,CardType.ATTACK,CardRarity.RARE,CardTarget.ALL_ENEMY);

@@ -27,8 +27,8 @@ public class MeloncholicRiff extends AbstractWardenCard implements FieldCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(MeloncholicRiff.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
+    public static final String ID = MeloncholicRiff.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Field");
 
     // /TEXT DECLARATION/
 

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class IceArmor extends AbstractBlockModifier {
     public int lastblock;
     boolean inherent;
-    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:IceArmor");
+    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:IceArmor");
     public IceArmor(boolean inherent) {
         this.inherent = inherent;
     }

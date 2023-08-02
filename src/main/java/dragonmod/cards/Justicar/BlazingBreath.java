@@ -7,11 +7,10 @@ import com.megacrit.cardcrawl.actions.common.DiscardAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.Scorchpower;
 
 public class BlazingBreath extends AbstractPrimalCard {
-    public static final String ID = DragonMod.makeID(BlazingBreath.class.getSimpleName());
+    public static final String ID = BlazingBreath.class.getSimpleName();
     public BlazingBreath() {
         super(ID, 1, CardType.ATTACK, CardRarity.BASIC, CardTarget.ENEMY);
         setDamage(7,3);

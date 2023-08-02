@@ -1,11 +1,12 @@
 package dragonmod.relics.Dragonkin;
 
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import dragonmod.DragonMod;
 import dragonmod.relics.BaseRelic;
 
+import static dragonmod.DragonMod.makeID;
+
 public class MukySludge extends BaseRelic {
-    public static final String ID = DragonMod.makeID("MukySludge");
+    public static final String ID = makeID(MukySludge.class.getSimpleName());
     public static final String NAME = "PaperJragon";
     public MukySludge() {
         super(ID, NAME, RelicTier.UNCOMMON, LandingSound.MAGICAL);

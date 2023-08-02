@@ -4,12 +4,9 @@ import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsCenteredAct
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -19,7 +16,7 @@ import static dragonmod.characters.TheJusticar.Enums.Justicar_Red_COLOR;
 
 public class AncestralSeance extends AbstractPrimalCard {
 
-    public static final String ID = DragonMod.makeID(AncestralSeance.class.getSimpleName());
+    public static final String ID = AncestralSeance.class.getSimpleName();
     public static CardGroup NonHoly = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     static {
         NonHoly.group = (ArrayList<AbstractCard>) CardLibrary.getAllCards()
@@ -32,11 +29,11 @@ public class AncestralSeance extends AbstractPrimalCard {
     }
 
     public CardGroup FilteredGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     public AncestralSeance() {
         super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
         setCostUpgrade(0);
+        setMagic(3,1);
         setExhaust(true);
         tags.add(AbstractCard.CardTags.HEALING);
         NonHoly.group = (ArrayList<AbstractCard>) CardLibrary.getAllCards()
@@ -52,7 +49,7 @@ public class AncestralSeance extends AbstractPrimalCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (NonHoly.size() >= 1) {
             ArrayList<AbstractCard> cards = new ArrayList<>(NonHoly.group);
-            int amt = Math.min(cards.size(), 3);
+            int amt = Math.min(cards.size(), magicNumber);
             while (FilteredGroup.size() < amt) {
                 FilteredGroup.addToTop(cards.remove(AbstractDungeon.miscRng.random(0, cards.size() - 1)));
             }

@@ -7,14 +7,13 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.actions.SmiteAction;
 import dragonmod.util.CustomTags;
 
 
 public class ChemicalStar extends AbstractPrimalCard {
 
-    public static final String ID = DragonMod.makeID(ChemicalStar.class.getSimpleName());
+    public static final String ID = ChemicalStar.class.getSimpleName();
     public ChemicalStar() {
         super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.SELF_AND_ENEMY);
         setDamage(15,3);

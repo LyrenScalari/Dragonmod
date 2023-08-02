@@ -90,6 +90,13 @@
       "An orb can be channeled into this slot. when an Orb is Evoked from this slot this slot is removed."
     ]
   },
+  "${modID}:Sleet": {
+    "NAME": "Sleet",
+    "DESCRIPTION": [
+      "#yPassive : at the end of your turn apply #b"," Chill to a random enemy",
+      " NL #yEvoke : apply #b"," Chill to ALL enemies."
+    ]
+  },
   "${modID}:Icicle": {
     "NAME": "Icicle",
     "DESCRIPTION": [

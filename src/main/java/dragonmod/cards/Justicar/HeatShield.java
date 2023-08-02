@@ -7,14 +7,13 @@ import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.actions.CycleAction;
 import dragonmod.powers.Dragonkin.Scorchpower;
 
 
 public class HeatShield extends AbstractPrimalCard {
 
-    public static final String ID = DragonMod.makeID(HeatShield.class.getSimpleName());
+    public static final String ID = HeatShield.class.getSimpleName();
     public HeatShield() {
         super(ID,1,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.ENEMY);
         setBlock(7,3);

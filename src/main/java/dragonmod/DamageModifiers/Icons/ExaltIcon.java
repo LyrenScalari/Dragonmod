@@ -9,7 +9,7 @@ public class ExaltIcon extends AbstractCustomIcon {
     private static ExaltIcon singleton;
 
     public ExaltIcon() {
-        super(ID, TextureLoader.getTexture(DragonMod.characterPath("Justicar/cardback/ExaltIcon")));
+        super(ID, TextureLoader.getTexture(DragonMod.characterPath("Justicar/cardback/ExaltIcon.png")));
     }
 
     public static ExaltIcon get()

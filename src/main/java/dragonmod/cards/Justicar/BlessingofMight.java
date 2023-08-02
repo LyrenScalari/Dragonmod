@@ -17,7 +17,7 @@ import dragonmod.util.Wiz;
 
 public class BlessingofMight extends AbstractHolyCard{
 
-    public static final String ID = DragonMod.makeID(BlessingofMight.class.getSimpleName());
+    public static final String ID = BlessingofMight.class.getSimpleName();
     public BlessingofMight() {
         super(ID, 1, CardType.SKILL, CardRarity.RARE, CardTarget.SELF);
         setMagic(3,1);

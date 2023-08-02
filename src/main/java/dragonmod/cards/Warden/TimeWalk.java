@@ -5,11 +5,8 @@ import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.DiscardToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.actions.OnBeingScriedInterface;
 import dragonmod.patches.FieldsField;
 import dragonmod.util.FieldCard;
@@ -21,14 +18,13 @@ public class TimeWalk extends AbstractWardenCard implements OnBeingScriedInterfa
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(TimeWalk.class.getSimpleName());
+    public static final String ID = TimeWalk.class.getSimpleName();
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;
     private static final int COST = 2;
     private static final int BLOCK = 13;
     private static final int UPGRADE_PLUS_BLOCK = 3;
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     // /STAT DECLARATION/
     public TimeWalk() {

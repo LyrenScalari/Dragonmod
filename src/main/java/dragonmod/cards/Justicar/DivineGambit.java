@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.actions.CycleAction;
 
 
@@ -19,7 +18,7 @@ public class DivineGambit extends AbstractPrimalCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(DivineGambit.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = DivineGambit.class.getSimpleName();
     public DivineGambit(){
         super(ID,1,CardType.ATTACK,CardRarity.UNCOMMON,CardTarget.ALL);
         setDamage(4,2);

@@ -11,12 +11,11 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
-import dragonmod.DragonMod;
 
 public class TailSlam extends AbstractPrimalCard {
 
 
-    public static final String ID = DragonMod.makeID(TailSlam.class.getSimpleName());
+    public static final String ID = TailSlam.class.getSimpleName();
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ALL;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;

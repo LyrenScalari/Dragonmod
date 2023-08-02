@@ -20,8 +20,8 @@ import java.util.List;
 
 
 public class StrokeofMidnight extends AbstractWardenCard implements FieldCard {
-    public static final String ID = DragonMod.makeID(StrokeofMidnight.class.getSimpleName());
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
+    public static final String ID = StrokeofMidnight.class.getSimpleName();
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Field");
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.RARE; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;  //   since they don't change much.
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;       //

@@ -7,13 +7,12 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.Scorchpower;
 
 
 public class EmberSwipe extends AbstractPrimalCard {
 
-    public static final String ID = DragonMod.makeID(EmberSwipe.class.getSimpleName());
+    public static final String ID = EmberSwipe.class.getSimpleName();
     public EmberSwipe() {
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
         setDamage(5,2);

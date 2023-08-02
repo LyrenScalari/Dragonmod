@@ -7,11 +7,10 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import dragonmod.DragonMod;
 
 public class Pandemic extends AbstractJusticarCard {
 
-    public static final String ID = DragonMod.makeID(Pandemic.class.getSimpleName());
+    public static final String ID = Pandemic.class.getSimpleName();
 
 
 

@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVExaltCardmod;
-import dragonmod.DragonMod;
 import dragonmod.actions.ExaltAction;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.powers.Dragonkin.ReflectiveScales;
@@ -18,10 +17,12 @@ import dragonmod.util.TypeEnergyHelper;
 
 public class FleetingFaith extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(FleetingFaith.class.getSimpleName());
+    public static final String ID = FleetingFaith.class.getSimpleName();
     public FleetingFaith() {
         super(ID,1,CardType.SKILL,CardRarity.COMMON,CardTarget.SELF);
-
+        setBlock(12,2);
+        setMagic(3,1);
+        setMagic2(2);
         energyCosts.put(TypeEnergyHelper.Mana.Exalt,SecondMagicNumber);
         CardModifierManager.addModifier(this,new SCVExaltCardmod());
     }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import dragonmod.DragonMod;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -59,13 +60,9 @@ public class TextureLoader {
         {
             switch (cardType) {
                 case ATTACK:
-                    textureString = resourcePath("cards/attack/default.png");
-                    break;
                 case POWER:
-                    textureString = resourcePath("cards/power/default.png");
-                    break;
                 default:
-                    textureString = resourcePath("cards/skill/default.png");
+                    textureString = DragonMod.resourcePath("ui/missing.png");
                     break;
             }
         }

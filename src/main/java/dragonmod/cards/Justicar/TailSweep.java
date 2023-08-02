@@ -10,11 +10,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
-import dragonmod.DragonMod;
 
 public class TailSweep extends AbstractPrimalCard {
 
-    public static final String ID = DragonMod.makeID(TailSweep.class.getSimpleName());
+    public static final String ID = TailSweep.class.getSimpleName();
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.COMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ALL;

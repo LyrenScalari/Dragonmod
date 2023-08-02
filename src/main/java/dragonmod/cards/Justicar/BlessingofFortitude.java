@@ -12,7 +12,7 @@ import dragonmod.orbs.FortitudeSeal;
 
 public class BlessingofFortitude extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(BlessingofFortitude.class.getSimpleName());
+    public static final String ID = BlessingofFortitude.class.getSimpleName();
     public BlessingofFortitude() {
         super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
         setBlock(8,2);

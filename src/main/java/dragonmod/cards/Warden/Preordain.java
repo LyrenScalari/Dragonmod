@@ -4,7 +4,6 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
-import dragonmod.DragonMod;
 import dragonmod.actions.ScryCallbackAction;
 import dragonmod.util.Wiz;
 
@@ -14,7 +13,7 @@ public class Preordain extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(Preordain.class.getSimpleName());
+    public static final String ID = Preordain.class.getSimpleName();
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.COMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;

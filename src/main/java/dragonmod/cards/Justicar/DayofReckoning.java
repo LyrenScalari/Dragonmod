@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVExaltCardmod;
-import dragonmod.DragonMod;
 import dragonmod.actions.ExaltAction;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.util.TypeEnergyHelper;
@@ -17,7 +16,7 @@ import dragonmod.util.TypeEnergyHelper;
 
 public class DayofReckoning extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(DayofReckoning.class.getSimpleName());
+    public static final String ID = DayofReckoning.class.getSimpleName();
 
     public DayofReckoning() {
         super(ID, 1,CardType.SKILL,CardRarity.SPECIAL,CardTarget.SELF,true);

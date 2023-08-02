@@ -7,12 +7,9 @@ import com.megacrit.cardcrawl.actions.utility.DiscardToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
-import dragonmod.DragonMod;
 import dragonmod.actions.OnBeingScriedInterface;
 import dragonmod.actions.RewindAction;
 import dragonmod.util.Wiz;
@@ -23,14 +20,13 @@ public class BlastfromthePast extends AbstractWardenCard implements OnBeingScrie
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(BlastfromthePast.class.getSimpleName());
+    public static final String ID = BlastfromthePast.class.getSimpleName();
    private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;
     private static final int COST = 1;
     private static final int BLOCK = 9;
     private static final int UPGRADE_PLUS_BLOCK = 3;
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     // /STAT DECLARATION/
 

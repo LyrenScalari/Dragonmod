@@ -11,11 +11,10 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.DamageModifiers.Icons.LightIcon;
-import dragonmod.DragonMod;
 
 public class HolyBarrier extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(HolyBarrier.class.getSimpleName());
+    public static final String ID = HolyBarrier.class.getSimpleName();
 
     public static int repeats = 0;
     public HolyBarrier() {

@@ -4,7 +4,6 @@ import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.util.Wiz;
 
 
@@ -13,7 +12,7 @@ public class Flare extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(Flare.class.getSimpleName());
+    public static final String ID = (Flare.class.getSimpleName());
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.SPECIAL;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;

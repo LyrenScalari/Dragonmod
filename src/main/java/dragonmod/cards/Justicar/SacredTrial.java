@@ -10,10 +10,8 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
-import dragonmod.DragonMod;
 import dragonmod.actions.SmiteAction;
 
 public class SacredTrial extends AbstractHolyCard {
@@ -21,11 +19,10 @@ public class SacredTrial extends AbstractHolyCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(SacredTrial.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = SacredTrial.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;  //   since they don't change much.
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;       //
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final int COST = 1;
     private static final int UPGRADED_COST = 1;
 

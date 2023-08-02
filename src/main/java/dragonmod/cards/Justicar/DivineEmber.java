@@ -14,14 +14,13 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVExaltCardmod;
-import dragonmod.DragonMod;
 import dragonmod.actions.ExaltAction;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.util.TypeEnergyHelper;
 
 public class DivineEmber extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(DivineEmber.class.getSimpleName());
+    public static final String ID = DivineEmber.class.getSimpleName();
     public AbstractCard BurnedCard;
     public DivineEmber(AbstractCard burnedCard) {
         super(ID, 1,CardType.STATUS,CardRarity.SPECIAL,CardTarget.SELF,true);

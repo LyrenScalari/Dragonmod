@@ -6,29 +6,17 @@ import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DragonMod;
 import dragonmod.actions.CycleAction;
-import dragonmod.characters.TheJusticar;
 import dragonmod.orbs.FlameGlyph;
 import dragonmod.util.TriggerOnCycleEffect;
 
 public class IncendiaryFlow extends AbstractPrimalCard implements TriggerOnCycleEffect, StartupCard {
 
-    /*
-     * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
-     *
-     * WindWalkerDefend Gain 5 (8) block.
-     */
 
-
-    // TEXT DECLARATION
-
-    public static final String ID = DragonMod.makeID(IncendiaryFlow.class.getSimpleName());
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
+    public static final String ID = IncendiaryFlow.class.getSimpleName();
     // /TEXT DECLARATION/
 
 
@@ -37,8 +25,6 @@ public class IncendiaryFlow extends AbstractPrimalCard implements TriggerOnCycle
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;
-    public static final AbstractCard.CardColor COLOR = TheJusticar.Enums.Justicar_Red_COLOR;
-
     private static final int COST = -2;
     private static final int BLOCK = 2;
     private static final int UPGRADE_PLUS_BLOCK = 4;

@@ -7,11 +7,8 @@ import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsCenteredAct
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.actions.RewindAction;
 import dragonmod.util.Wiz;
 
@@ -22,10 +19,7 @@ public class Bside extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(Bside.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    // This does mean that you will need to have an image with the same NAME as the card in your image folder for it to run correctly.
-
+    public static final String ID = Bside.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
 
     // /TEXT DECLARATION/
 

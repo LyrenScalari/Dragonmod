@@ -2,15 +2,10 @@ package dragonmod.cards.Warden;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 
 public class ReverberantVerse extends AbstractWardenCard {
-    public static final String ID = DragonMod.makeID(ReverberantVerse.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    private static final UIStrings HarmonicTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Harmonic");
-    private static final UIStrings DissonantTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Dissonant");
+    public static final String ID = ReverberantVerse.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
 
     // /TEXT DECLARATION/
 

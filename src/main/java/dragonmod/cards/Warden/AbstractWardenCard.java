@@ -6,8 +6,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import dragonmod.cards.AbstractDragonCard;
 import dragonmod.characters.TheWarden;
 
-import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
-
 
 abstract public class AbstractWardenCard extends AbstractDragonCard {
     // "How come BlazingBreath extends CustomCard and not DynamicCard like all the rest?"
@@ -25,7 +23,7 @@ abstract public class AbstractWardenCard extends AbstractDragonCard {
                               final AbstractCard.CardRarity rarity,
                               final AbstractCard.CardTarget target) {
 
-        super(id, languagePack.getCardStrings(id).NAME, cost, languagePack.getCardStrings(id).DESCRIPTION, type, TheWarden.Enums.Warden_Bronze_COLOR, rarity, target);
+        super(id, cost, type, TheWarden.Enums.Warden_Bronze_COLOR, rarity, target);
 
     }
     public AbstractWardenCard(final String id,
@@ -34,7 +32,7 @@ abstract public class AbstractWardenCard extends AbstractDragonCard {
                               final AbstractCard.CardRarity rarity,
                               final AbstractCard.CardTarget target, boolean colorless) {
 
-        super(id, languagePack.getCardStrings(id).NAME, cost, languagePack.getCardStrings(id).DESCRIPTION, type, AbstractCard.CardColor.COLORLESS, rarity, target);
+        super(id, cost, type, AbstractCard.CardColor.COLORLESS, rarity, target);
 
     }
     public boolean Foreseen = false;

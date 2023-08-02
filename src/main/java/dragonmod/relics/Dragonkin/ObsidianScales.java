@@ -9,19 +9,21 @@ import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.AbstractPrimalCard;
 import dragonmod.relics.BaseRelic;
 
-public class ObsidianScale extends BaseRelic {
-    public static final String ID = DragonMod.makeID("ObsidianScale");
+import static dragonmod.DragonMod.makeID;
+
+public class ObsidianScales extends BaseRelic {
+    public static final String ID = makeID(ObsidianScales.class.getSimpleName());
     public static final String NAME = "ObsidianScales";
-    public ObsidianScale() {
-        super(ID, NAME, RelicTier.UNCOMMON, LandingSound.HEAVY);
+    public ObsidianScales() {
+        super(ID, NAME, RelicTier.BOSS, LandingSound.HEAVY);
         counter = 4;
     }
     @Override
-    public boolean canSpawn() {return AbstractDungeon.player.hasRelic(GarnetScale.ID) && !AbstractDungeon.player.hasRelic(CitrineScales.ID);}
+    public boolean canSpawn() {return AbstractDungeon.player.hasRelic(GarnetScales.ID) && !AbstractDungeon.player.hasRelic(CitrineScales.ID);}
     @Override
     public String getUpdatedDescription() {
         // Colorize the starter relic's name
-        String name = new GarnetScale().name;
+        String name = new GarnetScales().name;
         StringBuilder sb = new StringBuilder();
         for (String word : name.split(" ")) {
             sb.append("[#").append(DragonMod.JUSTICAR_RED.cpy().toString()).append("]").append(word).append("[] ");
@@ -40,9 +42,9 @@ public class ObsidianScale extends BaseRelic {
     }
     @Override
     public void obtain() {
-        if (AbstractDungeon.player.hasRelic(GarnetScale.ID)) {
+        if (AbstractDungeon.player.hasRelic(GarnetScales.ID)) {
             for (int i=0; i<AbstractDungeon.player.relics.size(); ++i) {
-                if (AbstractDungeon.player.relics.get(i).relicId.equals(GarnetScale.ID)) {
+                if (AbstractDungeon.player.relics.get(i).relicId.equals(GarnetScales.ID)) {
                     instantObtain(AbstractDungeon.player, i, true);
                     break;
                 }

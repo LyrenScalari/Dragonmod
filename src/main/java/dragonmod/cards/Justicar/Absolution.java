@@ -14,7 +14,6 @@ import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.CardMods.SCVExaltCardmod;
 import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.DamageModifiers.Icons.LightIcon;
-import dragonmod.DragonMod;
 import dragonmod.actions.ExaltAction;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.powers.Dragonkin.PenancePower;
@@ -23,7 +22,7 @@ import dragonmod.util.TypeEnergyHelper;
 
 public class Absolution extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(Absolution.class.getSimpleName());
+    public static final String ID = Absolution.class.getSimpleName();
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.RARE;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;

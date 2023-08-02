@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
-import dragonmod.DragonMod;
 import dragonmod.util.Wiz;
 
 
@@ -18,7 +17,7 @@ public class ShimmerShield extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(ShimmerShield.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = ShimmerShield.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.COMMON; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;  //   since they don't change much.
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;       //

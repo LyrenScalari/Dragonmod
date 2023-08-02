@@ -7,38 +7,28 @@ import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandActio
 import com.evacipated.cardcrawl.mod.stslib.blockmods.BlockModifierManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
 import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.DamageModifiers.Icons.LightIcon;
-import dragonmod.DragonMod;
 import dragonmod.actions.CycleAction;
 import dragonmod.util.Wiz;
 
 
 public class LatentBlessing extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(LatentBlessing.class.getSimpleName());
+    public static final String ID = LatentBlessing.class.getSimpleName();
 
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.COMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    private static final int COST = 0;
-    private static final int UPGRADED_COST = 1;
 
-    private static final int POTENCY= 7;
-    private static final int UPGRADE_PLUS_DMG = 3;
-    private static final int MAGIC = 8;
-    private static final int UPGRADE_MAGIC = 2;
 
     public LatentBlessing() {
-        super(ID,COST, TYPE, RARITY, TARGET);
+        super(ID,0, TYPE, RARITY, TARGET);
         block = baseBlock = 8;
         SecondMagicNumber =BaseSecondMagicNumber = 2;
         BlockModifierManager.addModifier(this,new DivineBlock(true));

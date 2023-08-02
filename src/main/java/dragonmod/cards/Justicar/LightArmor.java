@@ -10,12 +10,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.DamageModifiers.Icons.LightIcon;
-import dragonmod.DragonMod;
 
 
 public class LightArmor extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(LightArmor.class.getSimpleName());
+    public static final String ID = LightArmor.class.getSimpleName();
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;

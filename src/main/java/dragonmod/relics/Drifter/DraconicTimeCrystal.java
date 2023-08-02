@@ -6,12 +6,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import dragonmod.DragonMod;
 import dragonmod.patches.TemporalStressField;
 import dragonmod.relics.BaseRelic;
 
+import static dragonmod.DragonMod.makeID;
+
 public class DraconicTimeCrystal  extends BaseRelic {
-    public static final String ID = DragonMod.makeID("DraconicTimeCrystal");
+    public static final String ID = makeID(DraconicTimeCrystal.class.getSimpleName());
     public static final String NAME = "DraconicTimeCrystal";
     private static RelicStrings relicStrings = CardCrawlGame.languagePack.getRelicStrings(ID);
     public DraconicTimeCrystal () {

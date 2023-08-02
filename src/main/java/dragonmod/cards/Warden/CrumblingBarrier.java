@@ -6,12 +6,9 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
-import dragonmod.DragonMod;
 import dragonmod.actions.BacklashAction;
 import dragonmod.patches.TemporalStressField;
 import dragonmod.util.TypeEnergyHelper;
@@ -23,8 +20,7 @@ public class CrumblingBarrier extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(CrumblingBarrier.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
+    public static final String ID = (CrumblingBarrier.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
     // /TEXT DECLARATION/
 
 

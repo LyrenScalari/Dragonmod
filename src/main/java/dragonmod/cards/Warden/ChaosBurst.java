@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
@@ -31,17 +30,16 @@ public class ChaosBurst extends AbstractWardenCard implements FieldCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(ChaosBurst.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = ChaosBurst.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;  //   since they don't change much.
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;       //
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Field");
     private static final int COST = 2;  // COST = 1
     private static final int UPGRADED_COST = 1; // UPGRADED_COST = 1
 
     private static final int DAMAGE = 7;    // DAMAGE = 6
     private static final int UPGRADE_PLUS_DMG = 3;  // UPGRADE_PLUS_DMG = 4
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     // /STAT DECLARATION/
     public ChaosBurst(){
         super(ID, COST, TYPE, RARITY, TARGET);

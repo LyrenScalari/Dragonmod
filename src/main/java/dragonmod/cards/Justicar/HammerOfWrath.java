@@ -9,13 +9,12 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.PlusDamageBlockCardMod;
-import dragonmod.DragonMod;
 import dragonmod.util.CustomTags;
 
 
 public class HammerOfWrath extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(HammerOfWrath.class.getSimpleName());
+    public static final String ID = HammerOfWrath.class.getSimpleName();
 
     public HammerOfWrath() {
         super(ID,2,CardType.ATTACK,CardRarity.UNCOMMON,CardTarget.ENEMY);

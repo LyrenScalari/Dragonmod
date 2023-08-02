@@ -8,12 +8,11 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import dragonmod.DragonMod;
 
 public class Sunbeam extends AbstractHolyCard {
 
 
-    public static final String ID = DragonMod.makeID(Sunbeam.class.getSimpleName());
+    public static final String ID = Sunbeam.class.getSimpleName();
 
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.COMMON;

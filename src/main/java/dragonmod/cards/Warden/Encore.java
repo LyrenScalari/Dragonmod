@@ -9,10 +9,8 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.patches.FieldsField;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
@@ -24,9 +22,8 @@ public class Encore extends AbstractWardenCard implements BranchingUpgradesCard 
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(Encore.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = (Encore.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
     private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;  //   since they don't change much.
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;       //

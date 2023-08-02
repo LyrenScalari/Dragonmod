@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -16,7 +15,7 @@ import static dragonmod.characters.TheJusticar.Enums.Justicar_Red_COLOR;
 
 public class DivinePrayer extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(DivinePrayer.class.getSimpleName());
+    public static final String ID = DivinePrayer.class.getSimpleName();
     public static CardGroup Holy = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     static {
         Holy.group = (ArrayList<AbstractCard>) CardLibrary.getAllCards()
@@ -33,6 +32,7 @@ public class DivinePrayer extends AbstractHolyCard {
         super(ID,1,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.SELF);
         tags.add(AbstractCard.CardTags.HEALING);
         setCostUpgrade(0);
+        setMagic(3,1);
         setExhaust(true);
         Holy.group = (ArrayList<AbstractCard>) CardLibrary.getAllCards()
                 .stream()
@@ -47,7 +47,7 @@ public class DivinePrayer extends AbstractHolyCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (Holy.size() >= 1) {
             ArrayList<AbstractCard> cards = new ArrayList<>(Holy.group);
-            int amt = Math.min(cards.size(), 3);
+            int amt = Math.min(cards.size(), magicNumber);
             while (FilteredGroup.size() < amt) {
                 FilteredGroup.addToTop(cards.remove(AbstractDungeon.miscRng.random(0, cards.size() - 1)));
             }

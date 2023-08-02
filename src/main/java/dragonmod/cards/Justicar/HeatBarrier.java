@@ -18,7 +18,7 @@ import dragonmod.util.TriggerOnCycleEffect;
 
 public class HeatBarrier extends AbstractPrimalCard implements TriggerOnCycleEffect {
     private static int realBlock = 8;
-    public static final String ID = DragonMod.makeID(HeatBarrier.class.getSimpleName());
+    public static final String ID = HeatBarrier.class.getSimpleName();
     public HeatBarrier() {
         super(ID, 1,CardType.SKILL,CardRarity.COMMON,CardTarget.SELF);
         setBlock(8,2);

@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.patches.FieldsField;
 import dragonmod.util.Wiz;
 
@@ -17,7 +16,7 @@ public class StageDive extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(StageDive.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = StageDive.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;  //   since they don't change much.
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;       //

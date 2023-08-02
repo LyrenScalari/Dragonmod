@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
-import dragonmod.DragonMod;
 import dragonmod.util.Wiz;
 
 
@@ -21,7 +20,7 @@ public class DissonantHarmony  extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(DissonantHarmony.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = (DissonantHarmony.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.COMMON; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;  //   since they don't change much.
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;       //
@@ -30,7 +29,7 @@ public class DissonantHarmony  extends AbstractWardenCard {
 
     private static final int DAMAGE = 8;    // DAMAGE = 6
     private static final int UPGRADE_PLUS_DMG = 4;  // UPGRADE_PLUS_DMG = 4
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:TemporalTooltip");
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:TemporalTooltip");
     // /STAT DECLARATION/
     public DissonantHarmony(){
         super(ID, COST, TYPE, RARITY, TARGET);

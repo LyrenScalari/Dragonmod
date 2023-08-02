@@ -8,11 +8,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import com.megacrit.cardcrawl.vfx.stance.DivinityParticleEffect;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.DivineRetributionPower;
 
 public class DivineRetribution extends AbstractHolyCard {
-    public static final String ID = DragonMod.makeID(DivineRetribution.class.getSimpleName());
+    public static final String ID = DivineRetribution.class.getSimpleName();
 
     public DivineRetribution() {
         super(ID, 2,CardType.POWER,CardRarity.RARE,CardTarget.SELF);

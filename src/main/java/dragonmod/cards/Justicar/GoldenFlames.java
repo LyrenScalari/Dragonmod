@@ -14,13 +14,12 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.DamageModifiers.Icons.LightIcon;
-import dragonmod.DragonMod;
 import dragonmod.util.TriggerOnCycleEffect;
 
 
 public class GoldenFlames extends AbstractJusticarCard implements TriggerOnCycleEffect {
 
-    public static final String ID = DragonMod.makeID(GoldenFlames.class.getSimpleName());
+    public static final String ID = GoldenFlames.class.getSimpleName();
 
     public GoldenFlames() {
         super(ID,2,CardType.ATTACK,CardRarity.UNCOMMON,CardTarget.ENEMY);

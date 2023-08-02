@@ -4,12 +4,11 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.AshenArmorpower;
 
 
 public class AshenArmor extends AbstractPrimalCard {
-    public static final String ID = DragonMod.makeID(AshenArmor.class.getSimpleName());
+    public static final String ID = AshenArmor.class.getSimpleName();
     public AshenArmor() {
         super(ID, 2, CardType.POWER, CardRarity.RARE, CardTarget.SELF);
         setCostUpgrade(1);

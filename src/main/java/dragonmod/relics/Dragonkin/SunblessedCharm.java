@@ -5,14 +5,15 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.relics.BaseRelic;
 import dragonmod.util.onExaltPower;
 
+import static dragonmod.DragonMod.makeID;
+
 public class SunblessedCharm extends BaseRelic implements onExaltPower {
-    public static final String ID = DragonMod.makeID("SunblessedCharm");
-    public static final String NAME = "SunblessedCharm";
+    public static final String ID = makeID(SunblessedCharm.class.getSimpleName());
+    public static final String NAME = "Sunblessedcharm";
     public SunblessedCharm() {
         super(ID, NAME, RelicTier.UNCOMMON, LandingSound.HEAVY);
         tips.clear();

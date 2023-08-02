@@ -7,13 +7,12 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import dragonmod.DragonMod;
 import dragonmod.actions.GainCrystalOrbSlotAction;
 import dragonmod.util.Wiz;
 
 
 public class FrostyCaltrops extends AbstractRimedancerCard {
-    public static final String ID = DragonMod.makeID(FrostyCaltrops.class.getSimpleName());
+    public static final String ID = FrostyCaltrops.class.getSimpleName();
     public void triggerOnGlowCheck() {
         if (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && ((AbstractCard)AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.ATTACK) {
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
@@ -23,6 +22,7 @@ public class FrostyCaltrops extends AbstractRimedancerCard {
     }
     public FrostyCaltrops(){
         super(ID,1,CardType.ATTACK,CardRarity.BASIC,CardTarget.ENEMY);
+        setMagic(2);
         setDamage(8,4);
     }
     @Override
@@ -32,16 +32,6 @@ public class FrostyCaltrops extends AbstractRimedancerCard {
             Wiz.atb(new GainCrystalOrbSlotAction(1));
         } else {
             Wiz.applyToEnemy(m,new WeakPower(m,magicNumber,false));
-        }
-    }
-
-
-    // Upgraded stats.
-    @Override
-    public void upgrade() {
-        if (!this.upgraded) {
-            upgradeName();
-            upgradeDamage(4);
         }
     }
 }

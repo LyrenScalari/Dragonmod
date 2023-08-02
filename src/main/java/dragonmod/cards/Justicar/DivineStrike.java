@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
-import dragonmod.DragonMod;
 import dragonmod.util.CustomTags;
 
 public class DivineStrike extends AbstractHolyCard {
@@ -19,7 +18,7 @@ public class DivineStrike extends AbstractHolyCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(DivineStrike.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = DivineStrike.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
 
     public DivineStrike(){
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);

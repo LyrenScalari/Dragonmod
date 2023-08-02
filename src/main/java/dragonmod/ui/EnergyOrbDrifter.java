@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.megacrit.cardcrawl.core.Settings;
+import dragonmod.DragonMod;
 
 public class EnergyOrbDrifter extends CustomEnergyOrb
 {
@@ -26,14 +27,14 @@ public class EnergyOrbDrifter extends CustomEnergyOrb
     {
         super(null, null, null);
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, false);
-        orbVfx = AssetLoader.loadImage("theDragonkinResources/images/char/TheWarden/orb/vfx.png");
-        border =  AssetLoader.loadImage("theDragonkinResources/images/char/TheWarden/orb/border.png");
-        mask = AssetLoader.loadImage("theDragonkinResources/images/char/TheWarden/orb/mask.png");
+        orbVfx = AssetLoader.loadImage(DragonMod.characterPath("Warden/animation/orb/vfx.png"));
+        border =  AssetLoader.loadImage(DragonMod.characterPath("Warden/animation/orb/border.png"));
+        mask = AssetLoader.loadImage(DragonMod.characterPath("Warden/animation/orb/mask.png"));
         for (int i=0; i<LAYER_COUNT; ++i) {
-            layers[i] = AssetLoader.loadImage("theDragonkinResources/images/char/TheWarden/orb/" + (i) + ".png");
+            layers[i] = AssetLoader.loadImage(DragonMod.characterPath("Warden/animation/orb/" + (i) + ".png"));
         }
         for (int i=0; i<LAYER_COUNT; ++i) {
-            layers_d[i] = AssetLoader.loadImage("theDragonkinResources/images/char/TheWarden/orb/" + (i) + "d.png");
+            layers_d[i] = AssetLoader.loadImage(DragonMod.characterPath("Warden/animation/orb/" + (i) + "d.png"));
         }
     }
 

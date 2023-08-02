@@ -11,11 +11,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.DamageModifiers.BlockModifiers.FireBlock;
 import dragonmod.DamageModifiers.Icons.FireIcon;
-import dragonmod.DragonMod;
 
 
 public class FlameWard extends AbstractPrimalCard {
-        public static final String ID = DragonMod.makeID(FlameWard.class.getSimpleName());
+        public static final String ID = FlameWard.class.getSimpleName();
 
         public FlameWard() {
                 super(ID, 1, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF);

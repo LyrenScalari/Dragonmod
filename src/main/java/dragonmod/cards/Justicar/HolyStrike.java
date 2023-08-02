@@ -7,11 +7,10 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 
 public class HolyStrike extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(HolyStrike.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = HolyStrike.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
     public HolyStrike(){
         super(ID,1,CardType.ATTACK,CardRarity.BASIC,CardTarget.ENEMY);
         setDamage(5,2);

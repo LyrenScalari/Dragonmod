@@ -1,11 +1,16 @@
 package dragonmod.cards;
 
 import basemod.abstracts.CustomCard;
-import dragonmod.DragonMod;
-import dragonmod.util.CardInfo;
+import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import dragonmod.DragonMod;
+import dragonmod.util.CardArtRoller;
+import dragonmod.util.CardInfo;
+
+import java.util.ArrayList;
 
 import static dragonmod.DragonMod.makeID;
 import static dragonmod.util.TextureLoader.getCardTextureString;
@@ -13,7 +18,10 @@ import static dragonmod.util.TextureLoader.getCardTextureString;
 
 public abstract class BaseCard extends CustomCard {
     protected CardStrings cardStrings;
-
+    private boolean needsArtRefresh = false;
+    private float rotationTimer = 0;
+    private int previewIndex;
+    protected ArrayList<AbstractCard> cardToPreview = new ArrayList<>();
     protected boolean upgradesDescription;
 
     protected int baseCost;
@@ -90,7 +98,12 @@ public abstract class BaseCard extends CustomCard {
         this.blockUpgrade = 0;
         this.magicUpgrade = 0;
         this.magic2Upgrade = 0;
-
+        if (textureImg.contains("ui/missing.png")) {
+            if (!CardLibrary.cards.isEmpty()) {
+                CardArtRoller.computeCard(this);
+            } else
+                needsArtRefresh = true;
+        }
         initializeTitle();
         initializeDescription();
     }
@@ -332,6 +345,30 @@ public abstract class BaseCard extends CustomCard {
 
             this.initializeDescription();
         }
+    }
+    public void update() {
+        super.update();
+        if (needsArtRefresh) {
+            CardArtRoller.computeCard(this);
+        }
+        if (!cardToPreview.isEmpty()) {
+            if (hb.hovered) {
+                if (rotationTimer <= 0F) {
+                    rotationTimer = getRotationTimeNeeded();
+                    cardsToPreview = cardToPreview.get(previewIndex);
+                    if (previewIndex == cardToPreview.size() - 1) {
+                        previewIndex = 0;
+                    } else {
+                        previewIndex++;
+                    }
+                } else {
+                    rotationTimer -= Gdx.graphics.getDeltaTime();
+                }
+            }
+        }
+    }
+    protected float getRotationTimeNeeded() {
+        return 1f;
     }
     protected void upgradeDamage2(int amount) {
         baseSecondDamage += amount;

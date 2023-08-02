@@ -2,6 +2,7 @@ package dragonmod.variables;
 
 import basemod.abstracts.DynamicVariable;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import dragonmod.DragonMod;
 import dragonmod.cards.BaseCard;
 
 
@@ -11,7 +12,7 @@ public class DefaultSecondMagicNumber extends DynamicVariable {
 
 @Override
 public String key() {
-        return "thedragonkin:M2";
+        return DragonMod.modID+":M2";
         // This is what you put between "!!" in your card strings to actually display the number.
         // You can name this anything (no spaces), but please pre-phase it with your mod name as otherwise mod conflicts can occur.
         // Remember, we're using makeID so it automatically puts "theDefault:" (or, your id) before the name.

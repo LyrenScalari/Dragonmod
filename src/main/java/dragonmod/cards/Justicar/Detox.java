@@ -8,11 +8,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import dragonmod.DragonMod;
 
 public class Detox extends AbstractJusticarCard {
 
-    public static final String ID = DragonMod.makeID(Detox.class.getSimpleName());
+    public static final String ID =Detox.class.getSimpleName();
 
     public Detox() {
         super(ID, 2,CardType.SKILL,CardRarity.RARE,CardTarget.ENEMY);

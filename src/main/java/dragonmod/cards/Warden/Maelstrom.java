@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
-import dragonmod.DragonMod;
 import dragonmod.util.Wiz;
 
 
@@ -22,7 +21,7 @@ public class Maelstrom extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(Maelstrom.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = Maelstrom.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;  //   since they don't change much.
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;       //

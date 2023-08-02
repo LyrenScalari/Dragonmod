@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
@@ -32,9 +31,8 @@ public class NightTerror extends AbstractWardenCard implements onAttackedField, 
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(NightTerror.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
+    public static final String ID = NightTerror.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Field");
     // /TEXT DECLARATION/
 
 

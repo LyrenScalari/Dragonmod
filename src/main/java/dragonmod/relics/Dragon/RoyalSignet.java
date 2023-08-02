@@ -1,4 +1,4 @@
-package dragonmod.relics.Dragonkin;
+package dragonmod.relics.Dragon;
 
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -8,17 +8,17 @@ import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.potions.PotionSlot;
 import com.megacrit.cardcrawl.relics.Sozu;
 import com.megacrit.cardcrawl.vfx.ObtainPotionEffect;
-import dragonmod.DragonMod;
 import dragonmod.relics.BaseRelic;
 
 import static dragonmod.DragonMod.isPlayerDragon;
+import static dragonmod.DragonMod.makeID;
 
 public class RoyalSignet extends BaseRelic {
-    public static final String ID = DragonMod.makeID("RoyalSignet");
+    public static final String ID = makeID(RoyalSignet.class.getSimpleName());
     public static final String NAME = "RoyalSignet";
-    private static final UIStrings DragonAffinity = CardCrawlGame.languagePack.getUIString("theDragonkin:DragonAffinity");
+    private static final UIStrings DragonAffinity = CardCrawlGame.languagePack.getUIString("dragonmod:DragonAffinity");
     public RoyalSignet() {
-        super(ID, NAME, RelicTier.UNCOMMON, LandingSound.HEAVY);
+        super(ID, NAME, RelicTier.COMMON, LandingSound.HEAVY);
         tips.clear();
         tips.add(new PowerTip(name, description));
         tips.add(new PowerTip(DragonAffinity.TEXT[0],DragonAffinity.TEXT[1]));

@@ -8,7 +8,7 @@ import dragonmod.orbs.ConscecrationSeal;
 
 public class Condemnation extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(Condemnation.class.getSimpleName());
+    public static final String ID = Condemnation.class.getSimpleName();
     public Condemnation() {
         super(ID, 2,CardType.ATTACK,CardRarity.RARE,CardTarget.SELF);
         setDamage(40,10);

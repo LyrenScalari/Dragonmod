@@ -9,7 +9,7 @@ import dragonmod.orbs.WrathSeal;
 
 public class BlessingofWrath extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(BlessingofWrath.class.getSimpleName());
+    public static final String ID = BlessingofWrath.class.getSimpleName();
 
     public BlessingofWrath() {
         super(ID, 1, CardType.SKILL, CardRarity.COMMON, CardTarget.ALL_ENEMY);

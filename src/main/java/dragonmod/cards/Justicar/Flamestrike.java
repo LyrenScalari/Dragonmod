@@ -11,13 +11,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 import com.megacrit.cardcrawl.vfx.combat.SearingBlowEffect;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.Scorchpower;
 import dragonmod.util.TriggerOnCycleEffect;
 
 
 public class Flamestrike extends AbstractPrimalCard implements TriggerOnCycleEffect {
-    public static final String ID = DragonMod.makeID(Flamestrike.class.getSimpleName());
+    public static final String ID = Flamestrike.class.getSimpleName();
     public int Intensity = 0;
 
     public Flamestrike() {

@@ -8,10 +8,8 @@ import com.evacipated.cardcrawl.mod.stslib.blockmods.AbstractBlockModifier;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DragonMod;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 public class FireBlock extends AbstractBlockModifier {
     public int lastblock;
     boolean inherent;
-    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:FlameBarrierTooltip");
+    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:FlameBarrier");
     public FireBlock(boolean inherent) {
         this.inherent = inherent;
     }

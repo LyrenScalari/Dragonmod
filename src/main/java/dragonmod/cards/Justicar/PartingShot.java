@@ -16,7 +16,7 @@ import dragonmod.util.CustomTags;
 
 public class PartingShot extends AbstractPrimalCard {
 
-    public static final String ID = DragonMod.makeID(PartingShot.class.getSimpleName());
+    public static final String ID = PartingShot.class.getSimpleName();
 
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON;

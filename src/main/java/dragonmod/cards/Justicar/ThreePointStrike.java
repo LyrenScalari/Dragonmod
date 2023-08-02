@@ -8,7 +8,6 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.actions.SmiteAction;
 import dragonmod.util.CustomTags;
 import dragonmod.util.TriggerOnCycleEffect;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 public class ThreePointStrike extends AbstractHolyCard implements TriggerOnCycleEffect {
 
 
-    public static final String ID = DragonMod.makeID(ThreePointStrike.class.getSimpleName());
+    public static final String ID = ThreePointStrike.class.getSimpleName();
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.RARE;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;

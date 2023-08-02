@@ -28,8 +28,8 @@ public class MetallicScreech extends AbstractWardenCard implements FieldCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(MetallicScreech.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-   private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
+    public static final String ID = MetallicScreech.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
+   private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Field");
 
     // /TEXT DECLARATION/
 

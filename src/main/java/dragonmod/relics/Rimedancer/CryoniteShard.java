@@ -5,15 +5,16 @@ import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import dragonmod.DragonMod;
 import dragonmod.orbs.Icicle;
 import dragonmod.relics.BaseRelic;
 
+import static dragonmod.DragonMod.makeID;
+
 public class CryoniteShard extends BaseRelic {
-    public static final String ID = DragonMod.makeID("CryoniteShard");
+    public static final String ID = makeID(CryoniteShard.class.getSimpleName());
 
     public CryoniteShard() {
-        super(ID, "CryoniteShard", RelicTier.STARTER, LandingSound.HEAVY);
+        super(ID, "placeholder_relic", RelicTier.STARTER, LandingSound.HEAVY);
         tips.clear();
         tips.add(new PowerTip(name, description));
     }

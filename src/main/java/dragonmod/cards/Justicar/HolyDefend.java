@@ -5,14 +5,13 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 
 public class HolyDefend extends AbstractHolyCard {
 
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(HolyDefend.class.getSimpleName());
+    public static final String ID = HolyDefend.class.getSimpleName();
 
     public HolyDefend() {
         super(ID, 1,CardType.SKILL,CardRarity.BASIC,CardTarget.SELF);

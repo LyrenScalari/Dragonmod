@@ -16,7 +16,7 @@ import dragonmod.util.TriggerOnCycleEffect;
 
 public class MoltenEmber extends AbstractJusticarCard implements TriggerOnCycleEffect {
 
-    public static final String ID = DragonMod.makeID(MoltenEmber.class.getSimpleName());
+    public static final String ID = MoltenEmber.class.getSimpleName();
 
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.SPECIAL;

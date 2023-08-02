@@ -6,13 +6,12 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
 import com.megacrit.cardcrawl.powers.watcher.VigorPower;
-import dragonmod.DragonMod;
 import dragonmod.util.Wiz;
 
 
 public class EduranceStrike extends AbstractJusticarCard {
 
-    public static final String ID = DragonMod.makeID(EduranceStrike.class.getSimpleName());
+    public static final String ID = EduranceStrike.class.getSimpleName();
 
     public EduranceStrike() {
         super(ID,1,CardType.SKILL,CardRarity.COMMON,CardTarget.SELF);

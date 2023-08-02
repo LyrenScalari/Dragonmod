@@ -11,10 +11,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.DamageModifiers.BlockModifiers.IceArmor;
 import dragonmod.DamageModifiers.Icons.FrostIcon;
-import dragonmod.DragonMod;
 import dragonmod.util.Wiz;
 public class RayofFrost extends AbstractRimedancerCard {
-    public static final String ID = DragonMod.makeID(RayofFrost.class.getSimpleName());
+    public static final String ID = RayofFrost.class.getSimpleName();
     public void triggerOnGlowCheck() {
         if (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && ((AbstractCard)AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.SKILL) {
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();

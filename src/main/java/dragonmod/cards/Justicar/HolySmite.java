@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import dragonmod.CardMods.SCVExaltCardmod;
-import dragonmod.DragonMod;
 import dragonmod.actions.ExaltAction;
 import dragonmod.actions.SmiteAction;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
@@ -22,7 +21,7 @@ import dragonmod.util.TypeEnergyHelper;
 
 public class HolySmite extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(HolySmite.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = HolySmite.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
     public HolySmite() {
         super(ID,2,CardType.ATTACK,CardRarity.BASIC,CardTarget.ENEMY);
         setDamage(6,2);

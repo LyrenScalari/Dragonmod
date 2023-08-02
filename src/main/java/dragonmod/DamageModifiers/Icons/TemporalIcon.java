@@ -13,7 +13,7 @@ import java.util.List;
 public class TemporalIcon extends AbstractCustomIcon {
     public static final String ID = DragonMod.makeID("Temporal");
     private static TemporalIcon singleton;
-    private static final UIStrings StabilityTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:StabilityTooltip");
+    private static final UIStrings StabilityTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:StabilityTooltip");
     public TemporalIcon() {
         super(ID, TextureLoader.getTexture(DragonMod.uiPath("Stagger.png")));
     }

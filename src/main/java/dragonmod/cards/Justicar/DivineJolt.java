@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVExaltCardmod;
-import dragonmod.DragonMod;
 import dragonmod.actions.ExaltAction;
 import dragonmod.actions.SmiteAction;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
@@ -21,7 +20,7 @@ import dragonmod.util.TypeEnergyHelper;
 
 public class DivineJolt extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(DivineJolt.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    public static final String ID = DivineJolt.class.getSimpleName();
     public DivineJolt(){
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ALL_ENEMY);
     setDamage(5,2);

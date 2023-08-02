@@ -7,12 +7,11 @@ import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 
 
 public class FlameClaw extends AbstractPrimalCard {
 
-    public static final String ID = DragonMod.makeID(FlameClaw.class.getSimpleName());
+    public static final String ID = FlameClaw.class.getSimpleName();
     public FlameClaw() {
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
         setDamage(12,5);

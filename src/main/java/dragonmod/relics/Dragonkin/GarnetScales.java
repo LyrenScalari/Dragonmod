@@ -1,22 +1,23 @@
 package dragonmod.relics.Dragonkin;
 
-import basemod.abstracts.CustomRelic;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.GainCustomBlockAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.HolyWordBarrier;
+import dragonmod.relics.BaseRelic;
 
-public class GarnetScale extends CustomRelic {
-    public static final String ID = DragonMod.makeID("GarnetScales");
+import static dragonmod.DragonMod.makeID;
+
+public class GarnetScales extends BaseRelic {
+    public static final String ID = makeID(GarnetScales.class.getSimpleName());
     public static final String NAME = "GarnetScales";
     private static RelicStrings relicStrings = CardCrawlGame.languagePack.getRelicStrings(ID);
 
-    public GarnetScale() {
-        super(ID, NAME, RelicTier.UNCOMMON, LandingSound.CLINK);
+    public GarnetScales() {
+        super(ID, NAME, RelicTier.STARTER, LandingSound.CLINK);
         description = relicStrings.DESCRIPTIONS[0];
         tips.clear();
         tips.add(new PowerTip(name, description));

@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.ExceptionHandler;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DamageModifiers.Icons.ExaltIcon;
@@ -28,14 +27,6 @@ import java.util.EnumMap;
 import static dragonmod.DragonMod.makeID;
 
 public abstract class AbstractDragonCard extends BaseCard {
-
-    // Custom Abstract Cards can be a bit confusing. While this is a simple base for simply adding a second magic number,
-    // if you're new to modding I suggest you skip this file until you know what unique things that aren't provided
-    // by default, that you need in your own cards.
-
-    // In this example, we use a custom Abstract Card in order to define a new magic number. From here on out, we can
-    // simply use that in our cards, so long as we put "extends AbstractJusticarCard" instead of "extends CustomCard" at the start.
-    // In simple terms, it's for things that we don't want to define again and again in every single card we make.
     public static final CardStrings Manipstrings = CardCrawlGame.languagePack.getCardStrings(makeID("ManipStrings"));
     public static CardStrings tooltip = CardCrawlGame.languagePack.getCardStrings("theDragonkin:AbstractJusticarCard");
     public int basefading;
@@ -51,21 +42,13 @@ public abstract class AbstractDragonCard extends BaseCard {
     public Color renderColor = Color.WHITE.cpy();
     public boolean freeManaOnce = false;
     public AbstractDragonCard(final String cardID,
-                              final String name,
                               final int cost,
-                              final String rawDescription,
                               final CardType type,
                               final CardColor color,
                               final CardRarity rarity,
                               final CardTarget target) {
 
         super(new CardInfo(cardID,cost,type,target,rarity,color));
-        if (textureImg.contains("ui/missing.png")) {
-            if (!CardLibrary.cards.isEmpty()) {
-                CardArtRoller.computeCard(this);
-            } else
-                needsArtRefresh = true;
-        }
         CommonKeywordIconsField.useIcons.set(this,true);
     }
     public void renderInLibrary(SpriteBatch sb) {
@@ -75,25 +58,6 @@ public abstract class AbstractDragonCard extends BaseCard {
         if (energyCosts.get(TypeEnergyHelper.Mana.Temporal) != null){
             ExtraIcons.icon(TemporalIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Temporal))).render(this);
         }
-/*        if (energyCosts.get(TypeEnergyHelper.Mana.Colorless) != null) {
-            Color textColor = Color.WHITE.cpy();
-            ExtraIcons.icon(GreyIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Colorless))).textColor(textColor).render(this);
-        }
-        if (energyCosts.get(TypeEnergyHelper.Mana.Blue) != null){
-            ExtraIcons.icon(BlueIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Blue))).render(this);
-        }
-        if (energyCosts.get(TypeEnergyHelper.Mana.Black) != null) {
-            Color textColor = Color.WHITE.cpy();
-            ExtraIcons.icon(BlackIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Black))).textColor(textColor).render(this);
-        }
-        if (energyCosts.get(TypeEnergyHelper.Mana.Red) != null) {
-            Color textColor = Color.WHITE.cpy();
-            ExtraIcons.icon(RedIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Red))).textColor(textColor).render(this);
-        }
-        if (energyCosts.get(TypeEnergyHelper.Mana.Rakados) != null) {
-            Color textColor = Color.WHITE.cpy();
-            ExtraIcons.icon(RakadosIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Rakados))).textColor(textColor).render(this);
-        }*/
         super.renderInLibrary(sb);
     }
     public void render(SpriteBatch sb) {
@@ -107,29 +71,6 @@ public abstract class AbstractDragonCard extends BaseCard {
                 }
                 ExtraIcons.icon(ExaltIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Exalt))).textColor(textColor).render(this);
             }
-/*            if (energyCosts.get(TypeEnergyHelper.Mana.Temporal) != null) {
-                Color textColor = Color.WHITE.cpy();
-                ExtraIcons.icon(TemporalIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Temporal))).textColor(textColor).render(this);
-            }
-            if (energyCosts.get(TypeEnergyHelper.Mana.Colorless) != null) {
-                Color textColor = Color.WHITE.cpy();
-                ExtraIcons.icon(GreyIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Colorless))).textColor(textColor).render(this);
-            }
-            if (energyCosts.get(TypeEnergyHelper.Mana.Blue) != null){
-                ExtraIcons.icon(BlueIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Blue))).render(this);
-            }
-            if (energyCosts.get(TypeEnergyHelper.Mana.Black) != null) {
-                Color textColor = Color.WHITE.cpy();
-                ExtraIcons.icon(BlackIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Black))).textColor(textColor).render(this);
-            }
-            if (energyCosts.get(TypeEnergyHelper.Mana.Red) != null) {
-                Color textColor = Color.WHITE.cpy();
-                ExtraIcons.icon(RedIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Red))).textColor(textColor).render(this);
-            }
-            if (energyCosts.get(TypeEnergyHelper.Mana.Rakados) != null) {
-                Color textColor = Color.WHITE.cpy();
-                ExtraIcons.icon(RakadosIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Rakados))).textColor(textColor).render(this);
-            }*/
             super.render(sb);
         }
     }

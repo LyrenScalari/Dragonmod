@@ -8,7 +8,7 @@
     <artifactId>${modID}</artifactId>
 
     <properties>
-        <modID>Dragonmod</modID>
+        <modID>dragonmod</modID>
         <author>Silver</author>
 
         <steam.windows>C:/Program Files (x86)/steam/steamapps</steam.windows>

@@ -3,11 +3,10 @@ package dragonmod.cards.Justicar;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.util.Wiz;
 
 public class Defend extends AbstractJusticarCard {
-    public static final String ID = DragonMod.makeID(Defend.class.getSimpleName());
+    public static final String ID = Defend.class.getSimpleName();
     public Defend() {
         super(ID, 1,CardType.SKILL,CardRarity.BASIC,CardTarget.SELF);
         setBlock(5,3);

@@ -4,12 +4,11 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.util.Wiz;
 
 
 public class RimedancerStrike extends AbstractRimedancerCard {
-    public static final String ID = DragonMod.makeID(RimedancerStrike.class.getSimpleName());
+    public static final String ID = RimedancerStrike.class.getSimpleName();
     public RimedancerStrike(){
         super(ID,1,CardType.ATTACK,CardRarity.BASIC,CardTarget.ENEMY);
         setDamage(6,3);

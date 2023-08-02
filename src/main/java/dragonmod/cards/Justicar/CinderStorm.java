@@ -10,12 +10,11 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 
 
 public class CinderStorm extends AbstractPrimalCard {
 
-    public static final String ID = DragonMod.makeID(CinderStorm.class.getSimpleName());
+    public static final String ID =CinderStorm.class.getSimpleName();
 
     public CinderStorm() {
         super(ID, 1, CardType.ATTACK, CardRarity.RARE, CardTarget.ALL_ENEMY);

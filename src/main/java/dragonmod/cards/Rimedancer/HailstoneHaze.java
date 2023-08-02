@@ -6,12 +6,11 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.orbs.Icicle;
 import dragonmod.util.Wiz;
 
 public class HailstoneHaze extends AbstractRimedancerCard {
-    public static final String ID = DragonMod.makeID(HailstoneHaze.class.getSimpleName());
+    public static final String ID = HailstoneHaze.class.getSimpleName();
     public void triggerOnGlowCheck() {
         if (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && ((AbstractCard)AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.SKILL) {
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();

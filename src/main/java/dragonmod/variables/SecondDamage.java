@@ -2,9 +2,8 @@ package dragonmod.variables;
 
 import basemod.abstracts.DynamicVariable;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import dragonmod.DragonMod;
 import dragonmod.cards.BaseCard;
-
-import static dragonmod.DragonMod.makeID;
 
 
 public class SecondDamage extends DynamicVariable {
@@ -13,7 +12,7 @@ public class SecondDamage extends DynamicVariable {
 
     @Override
     public String key() {
-        return makeID("D2");
+        return DragonMod.modID+"D2";
     }
 
     @Override

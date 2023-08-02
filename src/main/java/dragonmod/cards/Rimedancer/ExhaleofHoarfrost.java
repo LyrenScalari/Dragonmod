@@ -8,13 +8,12 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.BlizzardEffect;
-import dragonmod.DragonMod;
 import dragonmod.powers.Rimedancer.Chillpower;
 import dragonmod.util.Wiz;
 
 
 public class ExhaleofHoarfrost extends AbstractRimedancerCard {
-    public static final String ID = DragonMod.makeID(ExhaleofHoarfrost.class.getSimpleName());
+    public static final String ID = ExhaleofHoarfrost.class.getSimpleName();
     public ExhaleofHoarfrost(){
         super(ID,2,CardType.ATTACK,CardRarity.BASIC,CardTarget.ALL_ENEMY);
         setDamage(6,3);

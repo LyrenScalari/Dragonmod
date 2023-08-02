@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
@@ -27,8 +26,8 @@ import java.util.List;
 
 public class Trance extends AbstractWardenCard implements FieldCard {
 
-    public static final String ID = DragonMod.makeID(Trance.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
+    public static final String ID = Trance.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Field");
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.SPECIAL; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;  //   since they don't change much.
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.STATUS;       //
@@ -38,7 +37,6 @@ public class Trance extends AbstractWardenCard implements FieldCard {
 
     private static final int DAMAGE = 6;    // DAMAGE = 6
     private static final int UPGRADE_PLUS_DMG = 3;  // UPGRADE_PLUS_DMG = 4
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     // /STAT DECLARATION/
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];

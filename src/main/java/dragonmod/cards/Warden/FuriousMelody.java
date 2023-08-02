@@ -19,13 +19,8 @@ public class FuriousMelody extends AbstractWardenCard implements FieldCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(FuriousMelody.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
-
-    // /TEXT DECLARATION/
-
-
-    // STAT DECLARATION
+    public static final String ID = (FuriousMelody.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Field");
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;  //   since they don't change much.

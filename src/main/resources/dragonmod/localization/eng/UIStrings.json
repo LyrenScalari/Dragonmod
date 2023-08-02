@@ -31,16 +31,16 @@
       "Energy spent on [#94bdff]Holy[] cards produces twice as much #ySacrifice, granting [#94bdff]Holy[] [#94bdff]Power[] which increases the damage and block gain of [#94bdff]Holy[] cards for the rest of combat."
     ]
   },
-  "${modID}:DivineBlockTooltip": {
+  "${modID}:DivineBlock": {
     "TEXT": [
-      "[theDragonkin:LightIcon] Divine Block",
-      "[theDragonkin:LightIcon] #yBlock is Used before other block types and is not lost at the start of your turn."
+      "[dragonmod:LightIcon] Divine Block",
+      "[dragonmod:LightIcon] #yBlock is Used before other block types and is not lost at the start of your turn."
     ]
   },
-  "${modID}:FlameBarrierTooltip": {
+  "${modID}:FlameBarrier": {
     "TEXT": [
-      "[theDragonkin:FireIcon] Flame Barrier",
-      "[theDragonkin:FireIcon] blocks and reflects equal damage. [theDragonkin:FireIcon] falls to the total scorch among enemies at the start of turn."
+      "[dragonmod:FireIcon] Flame Barrier",
+      "[dragonmod:FireIcon] blocks and reflects equal damage. [theDragonkin:FireIcon] falls to the total scorch among enemies at the start of turn."
     ]
   },
   "${modID}:PrimalTooltip": {
@@ -49,16 +49,10 @@
       "Energy spent on [#fe513a]Primal[] cards applies #yScorch to random enemies."
     ]
   },
-  "${modID}:FireDamageTooltip": {
-    "TEXT": [
-      "[theDragonkin:FireIcon] Fire",
-      "[theDragonkin:FireIcon] damage applies #yScorch equal to half of unblocked damage dealt."
-    ]
-  },
   "${modID}:StabilityTooltip": {
     "TEXT": [
-      "[thedragonkin:TemporalIcon] Stagger",
-      "[thedragonkin:TemporalIcon] is gained whenever you take unblocked damage and is used to determine how much damage you can prevent in the past. NL Stagger is reduced each turn and sufficient Stagger grants an additional card draw each turn."
+      "[dragonmod:TemporalIcon] Stagger",
+      "[dragonmod:TemporalIcon] is gained whenever you take unblocked damage and is used to determine how much damage you can prevent in the past. NL Stagger is reduced each turn and sufficient Stagger grants an additional card draw each turn."
     ]
   },
   "${modID}:StressUITooltips": {
@@ -130,8 +124,8 @@
   },
   "${modID}:IceArmor": {
     "TEXT": [
-      "[theDragonkin:FrostIcon] Ice Armor",
-      "[theDragonkin:FrostIcon] blocks damage, and applies equal #yChill back to attackers."
+      "[dragonmod:FrostIcon] Ice Armor",
+      "[dragonmod:FrostIcon] blocks damage, and applies equal #yChill back to attackers."
     ]
   },
   "${modID}:SinnersMod": {

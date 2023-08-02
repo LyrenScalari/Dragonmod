@@ -8,12 +8,11 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.Scorchpower;
 
 public class DivineFire extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(DivineFire.class.getSimpleName());
+    public static final String ID = DivineFire.class.getSimpleName();
     public DivineFire() {
         super(ID, 1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
         setDamage(8,2);

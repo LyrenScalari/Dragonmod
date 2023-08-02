@@ -7,19 +7,15 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVExaltCardmod;
-import dragonmod.DragonMod;
 import dragonmod.actions.ExaltAction;
 import dragonmod.util.TypeEnergyHelper;
 
 
 public class LightSpeedBlessing extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(LightSpeedBlessing.class.getSimpleName());
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
+    public static final String ID = LightSpeedBlessing.class.getSimpleName();
     private CardGroup ShadowVisons = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.RARE;

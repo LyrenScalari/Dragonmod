@@ -47,6 +47,7 @@ import dragonmod.potions.Dragonkin.DraughtofFervor;
 import dragonmod.potions.Dragonkin.GatlokBrew;
 import dragonmod.potions.Dragonkin.NaruuinsGlow;
 import dragonmod.powers.Dragonkin.PenancePower;
+import dragonmod.relics.Dragon.RoyalSignet;
 import dragonmod.relics.Dragonkin.*;
 import dragonmod.relics.Drifter.BronzePocketWatch;
 import dragonmod.relics.Drifter.DraconicTimeCrystal;
@@ -126,7 +127,7 @@ public class DragonMod implements
     //Warden card assets
     public static final String WARDEN_BRONZE_ATTACK = characterPath("Warden/cardback/attack.png");
     public static final String WARDEN_BRONZE_ATTACK_P =  characterPath("Warden/cardback/attack_p.png");
-    public static final String WARDEN_BRONZE_SKILL = characterPath("Warden/cardback/bg_skill.png");
+    public static final String WARDEN_BRONZE_SKILL = characterPath("Warden/cardback/skill.png");
     public static final String WARDEN_BRONZE_SKILL_P = characterPath("Warden/cardback/skill_p.png");
     public static final String WARDEN_BRONZE_POWER = characterPath("Warden/cardback/power.png");
     public static final String WARDEN_BRONZE_POWER_P = characterPath("Warden/cardback/power_p.png");
@@ -136,7 +137,7 @@ public class DragonMod implements
     //Rimedancer card assets
     private static final String RIMEDANCER_CYAN_ATTACK = characterPath("Rimedancer/cardback/attack.png");
     private static final String RIMEDANCER_CYAN_ATTACK_P =  characterPath("Rimedancer/cardback/attack_p.png");
-    private static final String RIMEDANCER_CYAN_SKILL = characterPath("Rimedancer/cardback/bg_skill.png");
+    private static final String RIMEDANCER_CYAN_SKILL = characterPath("Rimedancer/cardback/skill.png");
     private static final String RIMEDANCER_CYAN_SKILL_P = characterPath("Rimedancer/cardback/skill_p.png");
     private static final String RIMEDANCER_CYAN_POWER = characterPath("Rimedancer/cardback/power.png");
     private static final String RIMEDANCER_CYAN_POWER_P = characterPath("Rimedancer/cardback/power_p.png");
@@ -223,9 +224,9 @@ public class DragonMod implements
     public void receivePostInitialize() {
         //This loads the image used as an icon in the in-game mods menu.
         logger.info("Loading badge image and mod options");
-        DIVINE_ARMOR_ICON = ImageMaster.loadImage("theDragonkinResources/images/ui/DivineArmor.png");
-        FLAME_BARRIER_ICON = ImageMaster.loadImage("theDragonkinResources/images/ui/FlameBarrier.png");
-        ICE_ARMOR_ICON = ImageMaster.loadImage("theDragonkinResources/images/ui/IceArmor.png");
+        DIVINE_ARMOR_ICON = ImageMaster.loadImage(uiPath("DivineArmor.png"));
+        FLAME_BARRIER_ICON = ImageMaster.loadImage(uiPath("FlameBarrier.png"));
+        ICE_ARMOR_ICON = ImageMaster.loadImage(uiPath("IceArmor.png"));
         DovahFont = prepFont(new FreeTypeFontGenerator(Gdx.files.internal(DOVAH_FONT)), 46f, false);
         Texture badgeTexture = TextureLoader.getTexture(resourcePath("badge.png"));
         ModPanel settingsPanel = new ModPanel();
@@ -409,7 +410,7 @@ public class DragonMod implements
     }
     public static String localizationPath(String lang, String file) { return resourcesFolder + "/localization/" + lang + "/" + file; }
     public static String resourcePath(String file) { return resourcesFolder + "/" + file; }
-    public static String uiPath(String file) { return resourcesFolder + "/UI/" + file; }
+    public static String uiPath(String file) { return resourcesFolder + "/ui/" + file; }
     public static String characterPath(String file) { return resourcesFolder + "/character/" + file;}
     public static String powerPath(String file) { return resourcesFolder + "/powers/" + file; }
     public static String relicPath(String file) { return resourcesFolder + "/relics/" + file; }
@@ -472,8 +473,8 @@ public class DragonMod implements
     public void receiveEditRelics() {
 
         // Justicar Relics.
-        BaseMod.addRelicToCustomPool(new GarnetScale(), Justicar_Red_COLOR);
-        BaseMod.addRelicToCustomPool(new ObsidianScale(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new GarnetScales(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new ObsidianScales(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new CitrineScales(), Justicar_Red_COLOR);
         //To Do : Make new common relic for Justicar
         BaseMod.addRelicToCustomPool(new EmberCore(), Justicar_Red_COLOR);
@@ -482,8 +483,8 @@ public class DragonMod implements
         BaseMod.addRelicToCustomPool(new Sulfurian(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new TilerasShield(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new SunblessedCharm(), Justicar_Red_COLOR);
-        UnlockTracker.markRelicAsSeen(GarnetScale.ID);
-        UnlockTracker.markRelicAsSeen(ObsidianScale.ID);
+        UnlockTracker.markRelicAsSeen(GarnetScales.ID);
+        UnlockTracker.markRelicAsSeen(ObsidianScales.ID);
         UnlockTracker.markRelicAsSeen(CitrineScales.ID);
         UnlockTracker.markRelicAsSeen(EmberCore.ID);
         UnlockTracker.markRelicAsSeen(MukySludge.ID);

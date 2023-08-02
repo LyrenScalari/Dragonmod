@@ -22,7 +22,7 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.*;
-import dragonmod.relics.Dragonkin.GarnetScale;
+import dragonmod.relics.Dragonkin.GarnetScales;
 import dragonmod.ui.EnergyOrbJusticar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -161,7 +161,7 @@ public class TheJusticar extends CustomPlayer {
     // Starting Relics
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(GarnetScale.ID);
+        retVal.add(GarnetScales.ID);
         return retVal;
     }
 

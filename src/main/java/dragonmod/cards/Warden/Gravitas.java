@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
@@ -28,16 +27,8 @@ import java.util.List;
 
 public class Gravitas extends AbstractWardenCard implements onAttackedField, BranchingUpgradesCard {
 
-
-    // TEXT DECLARATION
-
-    public static final String ID = DragonMod.makeID(Gravitas.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    // /TEXT DECLARATION/
-
-
-    // STAT DECLARATION
+    public static final String ID = Gravitas.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Field");
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.BASIC; //  Up to you, I like auto-complete on these
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;  //   since they don't change much.

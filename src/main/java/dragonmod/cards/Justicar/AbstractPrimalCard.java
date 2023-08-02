@@ -27,11 +27,11 @@ public abstract class AbstractPrimalCard extends AbstractJusticarCard {
     @Override
     public List<String> getCardDescriptors() {
         List<String> tags = new ArrayList<>();
-        tags.add(BaseMod.getKeywordTitle("thedragonkin:Primal"));
+        tags.add(BaseMod.getKeywordTitle("dragonmod:Primal"));
         tags.addAll(super.getCardDescriptors());
         return tags;
     }
-    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:PrimalTooltip");
+    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:PrimalTooltip");
     @Override
     public List<TooltipInfo> getCustomTooltips() {
         List<TooltipInfo> retVal = new ArrayList<>();

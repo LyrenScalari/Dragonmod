@@ -12,14 +12,13 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.DamageModifiers.BlockModifiers.FireBlock;
 import dragonmod.DamageModifiers.Icons.FireIcon;
-import dragonmod.DragonMod;
 import dragonmod.actions.CycleAction;
 
 
 public class Sunburst extends AbstractHolyCard {
 
 
-    public static final String ID = DragonMod.makeID(Sunburst.class.getSimpleName());
+    public static final String ID = Sunburst.class.getSimpleName();
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.COMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;

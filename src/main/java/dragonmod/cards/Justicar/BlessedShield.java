@@ -13,7 +13,7 @@ import dragonmod.orbs.SanctuarySeal;
 
 public class BlessedShield extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(BlessedShield.class.getSimpleName());
+    public static final String ID = BlessedShield.class.getSimpleName();
     public BlessedShield() {
         super(ID, 1,CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
         setMagic(3);

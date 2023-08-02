@@ -18,8 +18,8 @@ public class RiversintheDesert extends AbstractWardenCard implements FieldCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(RiversintheDesert.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:Field");
+    public static final String ID =RiversintheDesert.class.getSimpleName(); // USE THIS ONE FOR THE TEMPLATE;
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Field");
 
     // /TEXT DECLARATION/
 

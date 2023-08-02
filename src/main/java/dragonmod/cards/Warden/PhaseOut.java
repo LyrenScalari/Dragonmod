@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
-import dragonmod.DragonMod;
 import dragonmod.actions.GainStressAction;
 import dragonmod.util.TypeEnergyHelper;
 
@@ -22,9 +21,9 @@ public class PhaseOut extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(PhaseOut.class.getSimpleName());
-    private static final UIStrings StabilityTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:StabilityTooltip");
-    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:TemporalTooltip");
+    public static final String ID = PhaseOut.class.getSimpleName();
+    private static final UIStrings StabilityTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:StabilityTooltip");
+    private static final UIStrings VentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:TemporalTooltip");
     // /TEXT DECLARATION/
 
 

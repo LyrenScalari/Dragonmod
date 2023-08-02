@@ -3,7 +3,6 @@ package dragonmod.cards.Warden;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.actions.ScryCallbackAction;
 import dragonmod.patches.TemporalStressField;
 import dragonmod.util.Wiz;
@@ -13,7 +12,7 @@ public class TimeTurner extends AbstractWardenCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = DragonMod.makeID(TimeTurner.class.getSimpleName());
+    public static final String ID = TimeTurner.class.getSimpleName();
 
     // /TEXT DECLARATION/
 

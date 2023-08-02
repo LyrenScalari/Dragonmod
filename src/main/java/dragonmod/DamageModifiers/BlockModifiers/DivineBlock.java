@@ -14,7 +14,7 @@ import static dragonmod.DragonMod.DIVINE_ARMOR_ICON;
 
 public class DivineBlock extends AbstractBlockModifier {
     boolean inherent;
-    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:DivineBlockTooltip");
+    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:DivineBlock");
     public DivineBlock(boolean inherent) {
         this.inherent = inherent;
     }

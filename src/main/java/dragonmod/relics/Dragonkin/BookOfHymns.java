@@ -4,13 +4,14 @@ import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnMyBlockBrokenPowe
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.relics.BaseRelic;
 
+import static dragonmod.DragonMod.makeID;
+
 public class BookOfHymns extends BaseRelic implements OnMyBlockBrokenPower {
-    public static final String ID = DragonMod.makeID("BookOfHymns");
-    public static final String NAME = "BookOfHymns";
+    public static final String ID = makeID(BookOfHymns.class.getSimpleName());
+    public static final String NAME = "BookofHymns";
     public BookOfHymns() {
         super(ID, NAME, RelicTier.UNCOMMON, LandingSound.HEAVY);
         tips.clear();

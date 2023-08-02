@@ -9,16 +9,20 @@ import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.vfx.combat.BlizzardEffect;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
+import com.megacrit.cardcrawl.vfx.combat.IceShatterEffect;
 import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 import dragonmod.DragonMod;
+import dragonmod.powers.Rimedancer.Chillpower;
 import dragonmod.util.TextureLoader;
 import dragonmod.util.Wiz;
 
 
 public class Sleet extends CustomOrb {
-    public static final String ORB_ID = DragonMod.makeID("Icicle");
+    public static final String ORB_ID = DragonMod.makeID("Sleet");
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(ORB_ID);
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
     private static final int PASSIVE_AMOUNT = 2;
@@ -31,24 +35,27 @@ public class Sleet extends CustomOrb {
     private static final float PI_4 = 12.566371f;
     private boolean hFlip1 = MathUtils.randomBoolean();
     public Sleet() {
-        super(ORB_ID, orbString.NAME, PASSIVE_AMOUNT, EVOKE_AMOUNT, DESCRIPTIONS[1], DESCRIPTIONS[3], DragonMod.orbPath("Icicle.png"));
-        img = TextureLoader.getTexture(DragonMod.orbPath("Icicle.png"));
+        super(ORB_ID, orbString.NAME, PASSIVE_AMOUNT, EVOKE_AMOUNT, DESCRIPTIONS[1], DESCRIPTIONS[3], DragonMod.orbPath("Sleet.png"));
+        img = TextureLoader.getTexture(DragonMod.orbPath("Sleet.png"));
         updateDescription();
         angle = MathUtils.random(360.0f); // More Animation-related Numbers
         channelAnimTimer = 0.5f;
     }
     @Override
     public void onEvoke(){
-        Wiz.att(new VFXAction(new OrbFlareEffect(this, OrbFlareEffect.OrbFlareColor.FROST), 0.1f));
-        Wiz.att(new VFXAction(new OrbFlareEffect(this, OrbFlareEffect.OrbFlareColor.FROST), 0.1f));
+        Wiz.atb(new VFXAction(new IceShatterEffect(hb.cX,hb.cY)));
+        Wiz.atb(new VFXAction(new OrbFlareEffect(this, OrbFlareEffect.OrbFlareColor.FROST), 0.1f));
+        Wiz.atb(new VFXAction(new BlizzardEffect(evokeAmount,false)));
         CardCrawlGame.sound.play("ORB_FROST_EVOKE", 0.1F);
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters){
+            Wiz.applyToEnemy(m,new Chillpower(m,AbstractDungeon.player,evokeAmount));
+        }
     }
 
     @Override
     public void updateDescription() { // Set the on-hover description of the orb
         applyFocus(); // Apply Focus (Look at the next method)
-        description = DESCRIPTIONS[0] + passiveAmount + DESCRIPTIONS[1] + DESCRIPTIONS[2] + DESCRIPTIONS[3] + evokeAmount + DESCRIPTIONS[4] + DESCRIPTIONS[5] + DESCRIPTIONS[6];
-
+        description = DESCRIPTIONS[0] + passiveAmount + DESCRIPTIONS[1] + DESCRIPTIONS[2] + evokeAmount + DESCRIPTIONS[3];
     }
     @Override
     public AbstractOrb makeCopy() {
@@ -57,10 +64,10 @@ public class Sleet extends CustomOrb {
 
     @Override
     public void onEndOfTurn() {
-            AbstractDungeon.actionManager.addToBottom(
-                    new VFXAction(new OrbFlareEffect(this, OrbFlareEffect.OrbFlareColor.FROST), 0.1f));
-            CardCrawlGame.sound.play("ORB_FROST_EVOKE", 0.1F);
-
+        Wiz.atb(new VFXAction(new IceShatterEffect(hb.cX,hb.cY)));
+        AbstractMonster m = AbstractDungeon.getRandomMonster();
+        Wiz.atb(new VFXAction(new IceShatterEffect(m.hb.cX,m.hb.cY)));
+        Wiz.applyToEnemy(m,new Chillpower(m,AbstractDungeon.player,passiveAmount));
     }
     @Override
     public void playChannelSFX() {

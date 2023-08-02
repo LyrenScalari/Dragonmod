@@ -8,13 +8,12 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import dragonmod.DragonMod;
 import dragonmod.actions.SmiteAction;
 import dragonmod.powers.Dragonkin.SacrificePower;
 
 public class DivineStorm extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(DivineStorm.class.getSimpleName());
+    public static final String ID = DivineStorm.class.getSimpleName();
     public static int repeats = 0;
     // /STAT DECLARATION/
 

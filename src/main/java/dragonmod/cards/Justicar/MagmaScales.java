@@ -5,21 +5,15 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DamageModifiers.BlockModifiers.FireBlock;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.MoltenScalesPower;
 
 public class MagmaScales extends AbstractPrimalCard {
 
 
-    public static final String ID = DragonMod.makeID(MagmaScales.class.getSimpleName());
-
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+    public static final String ID = MagmaScales.class.getSimpleName();
 
     // /TEXT DECLARATION/
 

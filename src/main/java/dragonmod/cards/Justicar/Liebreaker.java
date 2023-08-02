@@ -6,8 +6,6 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DragonMod;
 import dragonmod.actions.CycleAction;
@@ -15,12 +13,11 @@ import dragonmod.orbs.WrathSeal;
 
 public class Liebreaker extends AbstractHolyCard {
 
-    public static final String ID = DragonMod.makeID(Liebreaker.class.getSimpleName());
+    public static final String ID = Liebreaker.class.getSimpleName();
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.UNCOMMON;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ALL_ENEMY;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final int COST = 1;
     private static final int UPGRADED_COST = 1;
 

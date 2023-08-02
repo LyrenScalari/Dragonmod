@@ -5,13 +5,12 @@ import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.characters.TheJusticar;
 
 public class InfernoWard extends AbstractPrimalCard {
 
 
-    public static final String ID = DragonMod.makeID(InfernoWard.class.getSimpleName());
+    public static final String ID = InfernoWard.class.getSimpleName();
 
     private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.RARE;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;

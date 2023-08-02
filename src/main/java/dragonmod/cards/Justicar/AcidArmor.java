@@ -5,13 +5,12 @@ import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DragonMod;
 import dragonmod.powers.Dragonkin.AcidArmorpower;
 
 
 public class AcidArmor extends AbstractPrimalCard {
 
-    public static final String ID = DragonMod.makeID(AcidArmor.class.getSimpleName());
+    public static final String ID = AcidArmor.class.getSimpleName();
 
     public AcidArmor() {
         super(ID, 1, CardType.POWER, CardRarity.UNCOMMON, CardTarget.SELF);

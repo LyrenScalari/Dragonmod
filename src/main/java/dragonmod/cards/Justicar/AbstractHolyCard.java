@@ -40,7 +40,7 @@ public abstract class AbstractHolyCard extends AbstractJusticarCard {
         }
     }
 
-    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("theDragonkin:HolyTooltip");
+    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:HolyTooltip");
     @Override
     public List<TooltipInfo> getCustomTooltips() {
         List<TooltipInfo> retVal = new ArrayList<>();
@@ -50,7 +50,7 @@ public abstract class AbstractHolyCard extends AbstractJusticarCard {
     @Override
     public List<String> getCardDescriptors() {
         List<String> tags = new ArrayList<>();
-        tags.add(BaseMod.getKeywordTitle("thedragonkin:Holy"));
+        tags.add(BaseMod.getKeywordTitle("dragonmod:Holy"));
         tags.addAll(super.getCardDescriptors());
         return tags;
     }

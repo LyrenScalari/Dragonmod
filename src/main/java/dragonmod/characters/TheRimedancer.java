@@ -141,16 +141,16 @@ public class TheRimedancer extends CustomPlayer {
         ArrayList<String> retVal = new ArrayList<>();
 
         logger.info("Begin loading starter Deck Strings");
-        retVal.add(RimedancerStrike.ID);
-        retVal.add(RimedancerStrike.ID);
-        retVal.add(RimedancerStrike.ID);
-        retVal.add(RimedancerStrike.ID);
-        retVal.add(ExhaleofHoarfrost.ID);
-        retVal.add(RimedancerDefend.ID);
-        retVal.add(RimedancerDefend.ID);
-        retVal.add(RimedancerDefend.ID);
-        retVal.add(HailstoneHaze.ID);
-        retVal.add(FrostyCaltrops.ID);
+        retVal.add(DragonMod.makeID(RimedancerStrike.ID));
+        retVal.add(DragonMod.makeID(RimedancerStrike.ID));
+        retVal.add(DragonMod.makeID(RimedancerStrike.ID));
+        retVal.add(DragonMod.makeID(RimedancerStrike.ID));
+        retVal.add(DragonMod.makeID(ExhaleofHoarfrost.ID));
+        retVal.add(DragonMod.makeID(RimedancerDefend.ID));
+        retVal.add(DragonMod.makeID(RimedancerDefend.ID));
+        retVal.add(DragonMod.makeID(RimedancerDefend.ID));
+        retVal.add(DragonMod.makeID(HailstoneHaze.ID));
+        retVal.add(DragonMod.makeID(FrostyCaltrops.ID));
         return retVal;
     }
 

@@ -1,5 +1,5 @@
 {
-  "${modID}:GarnetScale": {
+  "${modID}:GarnetScales": {
     "NAME": "Garnet Scales",
     "FLAVOR": "They Pulse with the Warmth of a Dragon's Fury.",
     "DESCRIPTIONS": [
@@ -48,7 +48,7 @@
       "Gain [E] at the start of your turn. \n Shuffle #b1 Burn into your Discard pile after taking unblocked damage."
     ]
   },
-  "${modID}:ObsidianScale": {
+  "${modID}:ObsidianScales": {
     "NAME": "Obsidian Scales",
     "FLAVOR": "Obsidian power, mastery of the flame that ruled the primordial world",
     "DESCRIPTIONS": [

@@ -12,10 +12,12 @@ import dragonmod.DragonMod;
 import dragonmod.relics.BaseRelic;
 import dragonmod.util.TextureLoader;
 
+import static dragonmod.DragonMod.makeID;
+
 public class Sulfurian extends BaseRelic {
 
     // ID, images, text.
-    public static final String ID = DragonMod.makeID("Sulfurian");
+    public static final String ID = makeID(Sulfurian.class.getSimpleName());
 
     private static final Texture IMG = TextureLoader.getTexture(DragonMod.relicPath("Sulfurian.png"));
     private static final Texture OUTLINE = TextureLoader.getTexture(DragonMod.relicPath("Sulfurian.png"));

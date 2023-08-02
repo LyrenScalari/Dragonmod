@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import dragonmod.CardMods.SCVExaltCardmod;
-import dragonmod.DragonMod;
 import dragonmod.actions.ExaltAction;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.powers.Dragonkin.PenancePower;
@@ -22,7 +21,7 @@ import dragonmod.util.TypeEnergyHelper;
 public class ChainsOfTruth extends AbstractHolyCard {
 
 
-    public static final String ID = DragonMod.makeID(ChainsOfTruth.class.getSimpleName());
+    public static final String ID = ChainsOfTruth.class.getSimpleName();
     public ChainsOfTruth() {
         super(ID, 2, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ALL_ENEMY);
         setDamage(6,2);
