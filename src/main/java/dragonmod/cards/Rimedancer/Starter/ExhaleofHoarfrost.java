@@ -1,4 +1,4 @@
-package dragonmod.cards.Rimedancer;
+package dragonmod.cards.Rimedancer.Starter;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.BlizzardEffect;
+import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.powers.Rimedancer.Chillpower;
 import dragonmod.util.Wiz;
 

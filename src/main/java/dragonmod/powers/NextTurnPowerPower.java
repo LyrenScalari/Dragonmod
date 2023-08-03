@@ -21,32 +21,6 @@ public class NextTurnPowerPower extends AbstractEasyPower {
         this.img = powerToGrant.img;
         this.region48 = powerToGrant.region48;
         this.region128 = powerToGrant.region128;
-        /*
-        this.region48 = bufferHashMap48.computeIfAbsent(powerToGrant.ID, (x) -> {
-            SpriteBatch sb = new SpriteBatch();
-            FrameBuffer fb = FBHelper.createBuffer(48, 48);
-            FBHelper.beginBuffer(fb);
-            sb.begin();
-            sb.draw(powerToGrant.region48, 0, 0);
-            sb.draw(arrow48, 0, 0);
-            sb.end();
-            fb.end();
-            Texture t = FBHelper.getBufferTexture(fb).getTexture();
-            return new TextureAtlas.AtlasRegion(t, 0, 0, t.getWidth(), t.getHeight());
-        });
-        this.region128 = bufferHashMap128.computeIfAbsent(powerToGrant.ID, (x) -> {
-            SpriteBatch sb = new SpriteBatch();
-            FrameBuffer fb = FBHelper.createBuffer(128, 128);
-            FBHelper.beginBuffer(fb);
-            sb.begin();
-            sb.draw(powerToGrant.region128, 0, 0);
-            sb.draw(arrow128, 0, 0);
-            sb.end();
-            fb.end();
-            Texture t = FBHelper.getBufferTexture(fb).getTexture();
-            return new TextureAtlas.AtlasRegion(t, 0, 0, t.getWidth(), t.getHeight());
-        });
-        */
         this.powerToGain = powerToGrant;
         updateDescription();
     }

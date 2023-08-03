@@ -22,7 +22,7 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.HolySmite;
-import dragonmod.cards.Rimedancer.*;
+import dragonmod.cards.Rimedancer.Starter.*;
 import dragonmod.relics.Rimedancer.CryoniteShard;
 import dragonmod.ui.EnergyOrbDrifter;
 import org.apache.logging.log4j.LogManager;

@@ -316,5 +316,25 @@
       "gambit"
     ],
     "DESCRIPTION": "A Bonus effect if the last card played matches the listed type."
+  },
+  {
+    "PROPER_NAME": "Fence",
+    "NAMES": [
+      "Fence",
+      "fence",
+      "Fenced",
+      "fenced"
+    ],
+    "DESCRIPTION": "The following effect only activates the first time each combat a card with this name is played."
+  },
+  {
+    "PROPER_NAME": "Ice Spikes",
+    "NAMES": [
+      "Ice Spikes",
+      "Ice_Spikes",
+      "ice spikes",
+      "ice_spikes"
+    ],
+    "DESCRIPTION": "When blocking Attack damage, deals damage back and lose #yIce #ySpikes equal to the damage blocked. Lose half as much against #yChilled attackers."
   }
 ]

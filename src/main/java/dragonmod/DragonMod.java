@@ -41,6 +41,7 @@ import dragonmod.cards.AbstractDragonCard;
 import dragonmod.cards.Justicar.AbstractPrimalCard;
 import dragonmod.characters.TheJusticar;
 import dragonmod.characters.TheRimedancer;
+import dragonmod.orbs.Icicle;
 import dragonmod.patches.TemporalStressField;
 import dragonmod.patches.TemporalStressUI;
 import dragonmod.potions.Dragonkin.DraughtofFervor;
@@ -526,6 +527,7 @@ public class DragonMod implements
         PenancePower.Power = 20;
         TemporalStressField.Stress.set(AbstractDungeon.player,0);
         Seals.clear();
+        Icicle.target = null;
     }
 
     @Override

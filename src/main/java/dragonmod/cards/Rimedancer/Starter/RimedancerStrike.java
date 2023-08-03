@@ -1,9 +1,10 @@
-package dragonmod.cards.Rimedancer;
+package dragonmod.cards.Rimedancer.Starter;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.util.Wiz;
 
 

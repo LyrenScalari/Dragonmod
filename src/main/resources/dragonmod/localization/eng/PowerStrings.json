@@ -157,5 +157,23 @@
     "DESCRIPTIONS": ["After taking unblocked attack damage or damage from an Icicle, gain #b",
       " block,", " and reduce this by #b1"
     ]
+  },
+  "${modID}:Intensity": {
+    "NAME": "Intensity",
+    "DESCRIPTIONS": ["At the start of your next turn, gain #b",
+      " Temporary Focus"
+    ]
+  },
+  "${modID}:IceSpikes": {
+    "NAME": "Ice Spikes",
+    "DESCRIPTIONS": ["When you block attack damage deal up to #b",
+      " damage back and reduce this that much."
+    ]
+  },
+  "${modID}:Cryolattice": {
+    "NAME": "Cryo-lattice",
+    "DESCRIPTIONS": ["Once per turn after you Evoke an Icicle, gain #b",
+      " Crystal Orb Slot"
+    ]
   }
 }

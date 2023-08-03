@@ -19,9 +19,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
-import com.megacrit.cardcrawl.vfx.combat.ThrowDaggerEffect;
 import dragonmod.DragonMod;
 import dragonmod.powers.Rimedancer.Chillpower;
+import dragonmod.ui.ThrowIceDaggerEffect;
 import dragonmod.util.OnUseCardOrb;
 import dragonmod.util.TextureLoader;
 import dragonmod.util.Wiz;
@@ -60,17 +60,19 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
                 Wiz.atb(new AbstractGameAction() {
                     @Override
                     public void update() {
-                        if (target.currentBlock < evokeAmount) {
-                            Icicle.target.getPower(Chillpower.POWER_ID).flash();
-                            Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
-                            Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
-                            isDone = true;
+                        if (Icicle.target.hasPower(Chillpower.POWER_ID)) {
+                            if (Icicle.target.currentBlock - evokeAmount > 0) {
+                                Icicle.target.getPower(Chillpower.POWER_ID).flash();
+                                Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
+                                Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
+                                isDone = true;
+                            }
                         }
                     }
                 });
             }
             Wiz.dmgtop(target,info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-            Wiz.att(new VFXAction(new ThrowDaggerEffect(target.hb.cX, target.hb.cY)));
+            Wiz.att(new VFXAction(new ThrowIceDaggerEffect(target.hb.cX, target.hb.cY,-5)));
             if (!chaining){
                 Wiz.atb(new AbstractGameAction() {
                     @Override
@@ -107,21 +109,23 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
             CardCrawlGame.sound.play("ORB_FROST_EVOKE", 0.1F);
             DamageInfo info = new DamageInfo(AbstractDungeon.player, this.passiveAmount, DamageInfo.DamageType.THORNS);
             info.output = AbstractOrb.applyLockOn(target, info.base);
-            Wiz.atb(new VFXAction(new ThrowDaggerEffect(target.hb.cX, target.hb.cY)));
+            Wiz.atb(new VFXAction(new ThrowIceDaggerEffect(target.hb.cX, target.hb.cY,-5)));
             Wiz.dmg(target,info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+            if (target.hasPower(Chillpower.POWER_ID)) {
                 Wiz.atb(new AbstractGameAction() {
                     @Override
                     public void update() {
-                            if (Icicle.target.hasPower(Chillpower.POWER_ID)) {
-                                if (Icicle.target.currentBlock < passiveAmount) {
-                                    Icicle.target.getPower(Chillpower.POWER_ID).flash();
-                                    Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
-                                    Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
-                                }
+                        if (Icicle.target.hasPower(Chillpower.POWER_ID)) {
+                            if (Icicle.target.currentBlock - passiveAmount < 0) {
+                                Icicle.target.getPower(Chillpower.POWER_ID).flash();
+                                Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
+                                Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
                             }
-                            isDone = true;
+                        }
+                        isDone = true;
                     }
                 });
+            }
         }
     }
     @Override
@@ -152,6 +156,10 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
         if (card.type == AbstractCard.CardType.ATTACK && action.target instanceof AbstractMonster){
             target = (AbstractMonster)action.target;
             updateDescription();
+        } else {
+            if (target.isDeadOrEscaped()){
+                target = null;
+            }
         }
     }
 }

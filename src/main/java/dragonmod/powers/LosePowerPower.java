@@ -2,6 +2,7 @@ package dragonmod.powers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.stslib.patches.NeutralPowertypePatch;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -9,7 +10,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class LosePowerPower extends AbstractEasyPower {
     private AbstractPower powerToLose;
-    //private static Texture chain = TexLoader.getTexture("todomodResources/images/ui/chain.png");
 
     public LosePowerPower(AbstractCreature owner, AbstractPower powerToLose, int amount) {
         super("Lose " + powerToLose.name, PowerType.DEBUFF, false, owner, amount);
@@ -36,7 +36,7 @@ public class LosePowerPower extends AbstractEasyPower {
     public void updateDescription() {
         if (powerToLose == null) {
             description = "???";
-        } else {
+        } else if (powerToLose.type == PowerType.BUFF || powerToLose.type == NeutralPowertypePatch.NEUTRAL) {
             description = "At the end of your turn, lose #b" + amount + " " + powerToLose.name + ".";
         }
     }
