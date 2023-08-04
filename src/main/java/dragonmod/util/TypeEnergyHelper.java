@@ -95,6 +95,7 @@ public class TypeEnergyHelper {
         Rakados,
         Bolas,
         Exalt,
-        Temporal
+        Temporal,
+        IceCounters
     }
 }

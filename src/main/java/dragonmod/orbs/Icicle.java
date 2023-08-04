@@ -157,7 +157,7 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
             target = (AbstractMonster)action.target;
             updateDescription();
         } else {
-            if (target.isDeadOrEscaped()){
+            if (target != null && target.isDeadOrEscaped()){
                 target = null;
             }
         }

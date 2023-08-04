@@ -696,12 +696,43 @@
     "NAME": "Frozen Rose",
     "DESCRIPTION": "Gain !B! block. NL Gain !M! ${modID}:Ice_Spikes."
   },
+  "${modID}:Frostslash": {
+    "NAME": "Frost Slash",
+    "DESCRIPTION": "Deal !D! damage twice. NL ${modID}:Freeze a random card in your hand.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage twice. NL ${modID}:Freeze a card in your hand."
+  },
+  "${modID}:LeadAstray": {
+    "NAME": "Lead Astray",
+    "DESCRIPTION": "Apply !M! Weak. NL Gain !B! Block. NL [#94ff52]Skill[] ${modID}:Gambit: Gain !M! ${modID}:Blur"
+  },
+  "${modID}:IcicleSpear": {
+    "NAME": "Icicle Spear",
+    "DESCRIPTION": "Deal !D! damage to a random enemy for each Channeled ${modID}:Icicle."
+  },
+  "${modID}:WisteriaCutter": {
+    "NAME": "Wisteria Slash",
+    "DESCRIPTION": "Deal !D! damage. NL Channel !M! ${modID}:Icicles. NL [#fa3232]Attack[] ${modID}:Gambit: Channel !${modID}:M2! ${modID}:Icicles Instead."
+  },
+  "${modID}:SilverShadow": {
+    "NAME": "Silver Shadow",
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! ${modID}:Blur. NL [#fa3232]Attack[] ${modID}:Gambit:  Gain !B! Block next turn"
+  },
+  "${modID}:ShroudedSky": {
+    "NAME": "Shrouded Sky",
+    "DESCRIPTION": "Gain !M! Temporary Focus. NL Gain !${modID}:M2! Vigor"
+  },
 
   "${modID}:Cryolattice": {
     "NAME": "Cryolattice",
     "DESCRIPTION": "Once per turn after you Evoke an ${modID}:Icicle, gain a ${modID}:Crystal Orb Slot.",
-    "UPGRADE_DESCRIPTION": "Innate. NL Once per turn after you Evoke an ${modID}:Icicle, gain !M! ${modID}:Crystal Orb Slots."
+    "UPGRADE_DESCRIPTION": "Once per turn after you Evoke an ${modID}:Icicle, gain !M! ${modID}:Crystal Orb Slots."
   },
+  "${modID}:Rimeshank": {
+    "NAME": "Rimeshank",
+    "DESCRIPTION": "After you Evoke an ${modID}:Icicle add a ${modID}:Frozen *Shiv to your hand.",
+    "UPGRADE_DESCRIPTION": "Innate. NL After you Evoke an ${modID}:Icicle add a ${modID}:Frozen *Shiv to your hand."
+  },
+
   "${modID}:DeathlyDispute": {
     "NAME": "Deathly Dispute",
     "DESCRIPTION": "Deal !D! damage. NL If the target doesn't intend to Attack, shuffle a *Pilfered *Crystal into your draw pile.",

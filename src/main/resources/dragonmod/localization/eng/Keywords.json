@@ -336,5 +336,23 @@
       "ice_spikes"
     ],
     "DESCRIPTION": "When blocking Attack damage, deals damage back and lose #yIce #ySpikes equal to the damage blocked. Lose half as much against #yChilled attackers."
+  },
+  {
+    "PROPER_NAME": "Freeze",
+    "NAMES": [
+      "Freeze",
+      "freeze",
+      "Frozen",
+      "frozen"
+    ],
+    "DESCRIPTION": "#yFreezing a card causing it to #yRetain until retained or played 3 times. NL #yFrozen cards will be discarded instead of #yExhausting."
+  },
+  {
+    "PROPER_NAME": "Blur",
+    "NAMES": [
+      "Blur",
+      "blur"
+    ],
+    "DESCRIPTION": "#yBlock is not lost at the start of your turn while you have #yBlur."
   }
 ]

@@ -11,7 +11,6 @@ public class Cryolattice extends AbstractRimedancerCard {
     public Cryolattice(){
         super(ID,1,CardType.POWER,CardRarity.UNCOMMON,CardTarget.SELF);
         setMagic(1,1);
-        setInnate(false,true);
 }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

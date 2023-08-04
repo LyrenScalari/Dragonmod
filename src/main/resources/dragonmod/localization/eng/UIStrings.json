@@ -122,6 +122,17 @@
       ""
     ]
   },
+  "${modID}:Frozen": {
+    "TEXT": [
+      "Frozen",
+      "Retains until its been played or Retained 3 times and Discards instead of being Exhausted."
+    ]
+  },
+  "${modID}:FrozenMod": {
+    "TEXT": [
+      "*Frozen. NL "
+    ]
+  },
   "${modID}:IceArmor": {
     "TEXT": [
       "[dragonmod:FrostIcon] Ice Armor",

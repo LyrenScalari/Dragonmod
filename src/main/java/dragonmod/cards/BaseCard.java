@@ -32,7 +32,6 @@ public abstract class BaseCard extends CustomCard {
     protected boolean upgradeMagic;
     protected boolean upgradeMagic2;
     protected boolean upgradeDamage2;
-    protected boolean upgradeDamage3;
 
     protected int costUpgrade;
     protected int damageUpgrade;
@@ -40,7 +39,6 @@ public abstract class BaseCard extends CustomCard {
     protected int magicUpgrade;
     protected int magic2Upgrade;
     protected int damage2Upgrade;
-    protected int damage3Upgrade;
 
     protected boolean baseExhaust = false;
     protected boolean upgExhaust = false;
@@ -86,7 +84,6 @@ public abstract class BaseCard extends CustomCard {
         this.upgradeCost = false;
         this.upgradeDamage = false;
         this.upgradeDamage2 = false;
-        this.upgradeDamage3 = false;
         this.upgradeBlock = false;
         this.upgradeMagic = false;
         this.upgradeMagic2 = false;
@@ -94,7 +91,6 @@ public abstract class BaseCard extends CustomCard {
         this.costUpgrade = cost;
         this.damageUpgrade = 0;
         this.damage2Upgrade = 0;
-        this.damage3Upgrade = 0;
         this.blockUpgrade = 0;
         this.magicUpgrade = 0;
         this.magic2Upgrade = 0;
@@ -120,7 +116,6 @@ public abstract class BaseCard extends CustomCard {
         this.upgradeCost = false;
         this.upgradeDamage = false;
         this.upgradeDamage2 = false;
-        this.upgradeDamage3 = false;
         this.upgradeBlock = false;
         this.upgradeMagic = false;
         this.upgradeMagic2 = false;
@@ -128,7 +123,6 @@ public abstract class BaseCard extends CustomCard {
         this.costUpgrade = cost;
         this.damageUpgrade = 0;
         this.damage2Upgrade = 0;
-        this.damage3Upgrade = 0;
         this.blockUpgrade = 0;
         this.magicUpgrade = 0;
         this.magic2Upgrade = 0;
