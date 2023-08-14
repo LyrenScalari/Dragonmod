@@ -3,6 +3,8 @@ package dragonmod.relics;
 import basemod.abstracts.CustomRelic;
 import basemod.helpers.RelicType;
 import dragonmod.util.TextureLoader;
+import dragonmod.util.GeneralUtils;
+import dragonmod.util.TextureLoader;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 
@@ -23,6 +25,9 @@ public abstract class BaseRelic extends CustomRelic {
         loadOutline();
     }
 
+    public BaseRelic(String id, RelicTier tier, LandingSound sfx) {
+        this(id, GeneralUtils.removePrefix(id), tier, sfx);
+    }
     public BaseRelic(String id, String imageName, RelicTier tier, LandingSound sfx) {
         super(id, TextureLoader.getTexture(relicPath(imageName + ".png")), tier, sfx);
 
