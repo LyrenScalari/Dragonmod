@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.watcher.MantraPower;
 import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.AbstractHolyCard;
 import dragonmod.powers.BasePower;
@@ -21,6 +22,10 @@ public class DivineConvictionpower extends BasePower implements CloneablePowerIn
     public DivineConvictionpower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,PowerType.BUFF,false,owner,source, amount);
         this.loadRegion("mantra");
+        powerToLose = new MantraPower(owner,amount);
+        this.img = powerToLose.img;
+        this.region48 = powerToLose.region48;
+        this.region128 = powerToLose.region128;
         updateDescription();
     }
     @Override
@@ -54,5 +59,12 @@ public class DivineConvictionpower extends BasePower implements CloneablePowerIn
     @Override
     public AbstractPower makeCopy() {
         return new DivineConvictionpower(owner, source, amount);
+    }
+    public float[] _lightsOutGetXYRI() {
+        return new float[] {owner.hb.cX, owner.hb.cY,(float) (owner.hb.width+(0.35*amount)), 0.45f * amount};
+    }
+
+    public Color[] _lightsOutGetColor() {
+        return new Color[] {Color.GOLD.cpy()};
     }
 }

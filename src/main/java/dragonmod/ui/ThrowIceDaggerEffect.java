@@ -104,7 +104,13 @@ public class ThrowIceDaggerEffect extends AbstractGameEffect {
         }
 
     }
+    public float[] _lightsOutGetXYRI() {
+        return new float[] {x, y, 75f, 0.75f};
+    }
 
+    public Color[] _lightsOutGetColor() {
+        return new Color[] {Color.SKY.cpy()};
+    }
     public void dispose() {
     }
 }

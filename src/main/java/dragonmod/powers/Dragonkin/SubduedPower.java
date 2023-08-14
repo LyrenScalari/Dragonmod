@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.GainStrengthPower;
 import dragonmod.DragonMod;
 import dragonmod.powers.BasePower;
 
@@ -15,7 +16,10 @@ public class SubduedPower extends BasePower implements CloneablePowerInterface {
     public SubduedPower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,PowerType.DEBUFF,false,owner,source, amount);
         this.loadRegion("shackle");
-
+        powerToLose = new GainStrengthPower(owner,amount);
+        this.img = powerToLose.img;
+        this.region48 = powerToLose.region48;
+        this.region128 = powerToLose.region128;
         updateDescription();
     }
     @Override

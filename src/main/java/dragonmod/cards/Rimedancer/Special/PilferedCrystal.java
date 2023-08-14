@@ -22,7 +22,7 @@ public class PilferedCrystal extends AbstractRimedancerCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        Wiz.dmg(m, new DamageInfo(p, baseDamage, DamageInfo.DamageType.NORMAL));
+        Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
         boolean Fenced = false;
         for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisCombat) {
             if (c instanceof PilferedCrystal) {

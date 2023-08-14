@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.SadisticPower;
 import dragonmod.DragonMod;
 import dragonmod.powers.BaseTwoAmountPower;
 
@@ -19,6 +20,10 @@ public class SacrificePower extends BaseTwoAmountPower implements CloneablePower
     public SacrificePower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,NeutralPowertypePatch.NEUTRAL,false,owner,source, amount);
         this.loadRegion("sadistic");
+        powerToLose = new SadisticPower(owner,amount);
+        this.img = powerToLose.img;
+        this.region48 = powerToLose.region48;
+        this.region128 = powerToLose.region128;
         updateDescription();
     }
     @Override

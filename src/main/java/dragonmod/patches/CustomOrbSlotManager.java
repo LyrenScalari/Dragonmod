@@ -5,8 +5,11 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FocusPower;
 import dragonmod.orbs.CrystalOrbSlot;
+import dragonmod.powers.Rimedancer.onRemoveOrbPower;
 import dragonmod.util.Wiz;
 import javassist.CtBehavior;
 
@@ -82,21 +85,32 @@ public class CustomOrbSlotManager {
             }
         }
     }
-    @SpirePatch2(clz = AbstractPlayer.class, method = "evokeWithoutLosingOrb")
+    @SpirePatch2(clz = AbstractPlayer.class, method = "removeNextOrb")
     public static class EvokePatch2{
-        @SpirePostfixPatch
+        @SpirePrefixPatch
         public static SpireReturn<Void> onEvokeOrb(AbstractPlayer __instance) {
-            if (SlotFields.Crystal.get(__instance.orbs.get(__instance.orbs.size() - 1))) {
-                __instance.maxOrbs--;
-                __instance.orbs.remove(__instance.orbs.get(__instance.orbs.size() - 1));
-                int i;
-                for(i = 1; i < __instance.orbs.size(); ++i) {
-                    Collections.swap(__instance.orbs, i, i - 1);
+            if (!__instance.orbs.isEmpty() && !(__instance.orbs.get(0) instanceof EmptyOrbSlot)) {
+                for (AbstractPower p : __instance.powers){
+                    if (p instanceof onRemoveOrbPower){
+                        ((onRemoveOrbPower) p).onRemoveOrb(__instance.orbs.get(0));
+                    }
                 }
-                for(i = 0; i < __instance.orbs.size(); ++i) {
-                    ((AbstractOrb)__instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
-                }
-                return SpireReturn.Return();
+                if (SlotFields.Crystal.get(__instance.orbs.get(0))) {
+                    AbstractOrb orbSlot = new CrystalOrbSlot(((AbstractOrb) __instance.orbs.get(0)).cX, ((AbstractOrb) __instance.orbs.get(0)).cY);
+
+                    int i;
+                    for (i = 1; i < __instance.orbs.size(); ++i) {
+                        Collections.swap(__instance.orbs, i, i - 1);
+                    }
+
+                    __instance.orbs.set(__instance.orbs.size() - 1, orbSlot);
+
+                    for (i = 0; i < __instance.orbs.size(); ++i) {
+                        ((AbstractOrb) __instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
+                    }
+                    return SpireReturn.Return();
+                } else
+                    return SpireReturn.Continue();
             }
             return SpireReturn.Continue();
         }

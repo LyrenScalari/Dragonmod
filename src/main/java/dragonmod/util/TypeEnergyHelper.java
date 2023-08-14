@@ -96,6 +96,6 @@ public class TypeEnergyHelper {
         Bolas,
         Exalt,
         Temporal,
-        IceCounters
+        Shatter
     }
 }

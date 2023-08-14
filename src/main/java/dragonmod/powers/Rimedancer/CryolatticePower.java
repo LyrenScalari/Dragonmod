@@ -6,36 +6,34 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.EchoPower;
 import dragonmod.DragonMod;
 import dragonmod.actions.GainCrystalOrbSlotAction;
 import dragonmod.orbs.Icicle;
 import dragonmod.powers.BasePower;
 import dragonmod.util.Wiz;
 
-public class CryolatticePower extends BasePower implements CloneablePowerInterface {
+public class CryolatticePower extends BasePower implements CloneablePowerInterface, onRemoveOrbPower {
     public AbstractCreature source;
-    public boolean used = true;
+    public boolean used = false;
 
-    public static final String POWER_ID = DragonMod.makeID("CryolatticePower");
+    public static final String POWER_ID = DragonMod.makeID("Cryolattice");
     public CryolatticePower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,PowerType.BUFF,false,owner,source, amount);
         priority = 70;
-        this.loadRegion("");
+        powerToLose = new EchoPower(owner,amount);
+        this.img = powerToLose.img;
+        this.region48 = powerToLose.region48;
+        this.region128 = powerToLose.region128;
+        this.loadRegion("echo");
         updateDescription();
     }
     @Override
     public void renderIcons(SpriteBatch sb, float x, float y, Color c) {
         super.renderIcons(sb, x, y, Color.CYAN.cpy());
     }
-    public void onEvokeOrb(AbstractOrb orb) {
-        if (orb instanceof Icicle && !used){
-            flash();
-            Wiz.atb(new GainCrystalOrbSlotAction(amount));
-            used = false;
-        }
-    }
     public void atStartOfTurnPostDraw() {
-        used = true;
+        used = false;
     }
     @Override
     public void updateDescription() {
@@ -43,6 +41,15 @@ public class CryolatticePower extends BasePower implements CloneablePowerInterfa
     }
     @Override
     public AbstractPower makeCopy() {
-        return new Chillpower(owner, source, amount);
+        return new CryolatticePower(owner, source, amount);
+    }
+
+    @Override
+    public void onRemoveOrb(AbstractOrb orb) {
+        if (orb instanceof Icicle && !used){
+            flash();
+            Wiz.atb(new GainCrystalOrbSlotAction(amount));
+            used = true;
+        }
     }
 }

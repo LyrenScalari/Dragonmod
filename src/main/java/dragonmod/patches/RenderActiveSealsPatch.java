@@ -4,8 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
@@ -18,13 +19,16 @@ import dragonmod.util.TextureLoader;
 @SpirePatch2(clz = AbstractPlayer.class, method = "render")
 public class RenderActiveSealsPatch {
     public static float angle = MathUtils.random(360.0F);
-    @SpirePostfixPatch
+    @SpirePrefixPatch
     public static void patch(AbstractPlayer __instance, SpriteBatch sb) {
         for (AbstractNotOrb seal : DragonMod.Seals){
             seal.update();
             seal.updateAnimation();
             seal.updateDescription();
             seal.renderText(sb);
+            if (Loader.isModLoaded("LightsOut")){
+                LightsOut.patches.CustomLightPatches.processCustomLights(seal);
+            }
         }
         for (AbstractOrb orb : __instance.orbs){
             if (orb != null && !(orb instanceof EmptyOrbSlot)) {

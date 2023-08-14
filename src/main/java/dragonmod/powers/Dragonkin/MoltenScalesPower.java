@@ -1,6 +1,7 @@
 package dragonmod.powers.Dragonkin;
 
 import basemod.interfaces.CloneablePowerInterface;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.GainCustomBlockAction;
@@ -66,5 +67,12 @@ public class MoltenScalesPower extends BasePower implements CloneablePowerInterf
             Wiz.applyToEnemy(m, new Scorchpower(m, owner, amount));
             addToBot(new GainCustomBlockAction(new MagmaScales(), owner, 2));
         }
+    }
+    public float[] _lightsOutGetXYRI() {
+        return new float[] {owner.hb.cX, owner.hb.cY, owner.hb.width+5,0.75f};
+    }
+
+    public Color[] _lightsOutGetColor() {
+        return new Color[] {Color.SCARLET.cpy()};
     }
 }

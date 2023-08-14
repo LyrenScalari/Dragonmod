@@ -112,5 +112,15 @@
     "DESCRIPTIONS": [
       "At the start of combat, channel an #yIcicle and add a #yShiv to your hand."
     ]
+  },
+  "${modID}:BottledVoice": {
+    "NAME": "Bottled Voice",
+    "FLAVOR": "Just about any technique can be simplified into the traditional 3 step Mantra of a Dragons's Roar.",
+    "DESCRIPTIONS": [
+      "Choose an #rAttack or #gSkill card, it gains #yPersist #b3.",
+      "Each combat, ",
+      " has #yPersist #b3.",
+      "Select a card to bottle for "
+    ]
   }
 }

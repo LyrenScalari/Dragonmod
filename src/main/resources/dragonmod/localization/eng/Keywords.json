@@ -354,5 +354,21 @@
       "blur"
     ],
     "DESCRIPTION": "#yBlock is not lost at the start of your turn while you have #yBlur."
+  },
+  {
+    "PROPER_NAME": "Bleed",
+    "NAMES": [
+      "Bleed",
+      "bleed"
+    ],
+    "DESCRIPTION": "#yBleeding creatures lose HP at the start of your turn and lose all Bleed. NL #yBleeding creatures can't act if their bleed will kill them."
+  },
+  {
+    "PROPER_NAME": "Rimeburst",
+    "NAMES": [
+      "Rimeburst",
+      "rimeburst"
+    ],
+    "DESCRIPTION": "#yRimeburst effects activate if a card in your hand has #yIce #yCounters on it."
   }
 ]

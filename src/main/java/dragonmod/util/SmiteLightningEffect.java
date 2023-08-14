@@ -68,4 +68,12 @@ public class SmiteLightningEffect extends AbstractGameEffect {
 
     public void dispose() {
     }
+
+    public float[] _lightsOutGetXYRI() {
+        return new float[] {sX, sY, 50f, 5f,dX,dY,700f,1.5f};
+    }
+
+    public Color[] _lightsOutGetColor() {
+        return new Color[] {Color.GOLD.cpy(),Color.GOLDENROD};
+    }
 }

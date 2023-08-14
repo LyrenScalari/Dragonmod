@@ -78,7 +78,7 @@ public class PlayerDamage {
             }
             for (AbstractNotOrb c : DragonMod.Seals) {
                 if (c instanceof AbstractSeal && (info.owner == AbstractDungeon.player || AbstractDungeon.actionManager.turnHasEnded) ) {
-                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount[0]);
+                    damageAmount[0] = ((ReciveModifyDamageEffect) c).onReciveDamage(damageAmount[0],info);
                 }
             }
         }

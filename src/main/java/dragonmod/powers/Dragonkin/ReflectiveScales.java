@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.SharpHidePower;
 import dragonmod.DragonMod;
 import dragonmod.powers.BasePower;
 
@@ -17,7 +18,10 @@ public class ReflectiveScales extends BasePower implements CloneablePowerInterfa
     public ReflectiveScales(final AbstractCreature owner, final AbstractCreature source, int amount) {
         super(POWER_ID,PowerType.BUFF,false,owner,source, amount);
         this.loadRegion("sharpHide");
-
+        powerToLose = new SharpHidePower(owner,amount);
+        this.img = powerToLose.img;
+        this.region48 = powerToLose.region48;
+        this.region128 = powerToLose.region128;
         updateDescription();
     }
     @Override

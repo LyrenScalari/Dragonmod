@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.FadingPower;
 import dragonmod.DragonMod;
 import dragonmod.powers.BasePower;
 import dragonmod.util.Wiz;
@@ -20,6 +21,10 @@ public class Chillpower extends BasePower implements CloneablePowerInterface {
         super(POWER_ID,PowerType.DEBUFF,false,owner,source, amount);
         priority = 70;
         this.loadRegion("fading");
+        powerToLose = new FadingPower(owner,amount);
+        this.img = powerToLose.img;
+        this.region48 = powerToLose.region48;
+        this.region128 = powerToLose.region128;
         updateDescription();
     }
     @Override
@@ -46,5 +51,12 @@ public class Chillpower extends BasePower implements CloneablePowerInterface {
     @Override
     public AbstractPower makeCopy() {
         return new Chillpower(owner, source, amount);
+    }
+    public float[] _lightsOutGetXYRI() {
+        return new float[] {owner.hb.cX, owner.hb.cY, (float) (owner.hb.width+(0.10*amount)), 0.15f * amount};
+    }
+
+    public Color[] _lightsOutGetColor() {
+        return new Color[] {Color.CYAN.cpy()};
     }
 }

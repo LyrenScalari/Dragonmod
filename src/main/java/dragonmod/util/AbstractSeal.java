@@ -134,5 +134,11 @@ public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModif
         }
         this.fontScale = MathHelper.scaleLerpSnap(this.fontScale, 0.7F);
     }
+    public float[] _lightsOutGetXYRI() {
+        return new float[] {hb.cX, hb.cY, 150f, 5f};
+    }
 
+    public Color[] _lightsOutGetColor() {
+        return new Color[] {Color.PURPLE.cpy()};
+    }
 }

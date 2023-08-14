@@ -677,8 +677,8 @@
   },
   "${modID}:Snowblind": {
     "NAME": "Snowblind",
-    "DESCRIPTION": "Apply !M! Weak. NL Channel ${modID}:Sleet.",
-    "UPGRADE_DESCRIPTION": "Apply !M! Weak. NL Channel !${modID}:M2! ${modID}:Sleet."
+    "DESCRIPTION": "Apply !M! Weak. NL Apply !M! ${modID}:Chill.",
+    "UPGRADE_DESCRIPTION": "Apply !M! Weak. NL Apply !M! ${modID}:Chill."
   },
   "${modID}:ChillOut": {
     "NAME": "Chill Out",
@@ -686,11 +686,11 @@
   },
   "${modID}:MarkAssessment": {
     "NAME": "Mark Assessment",
-    "DESCRIPTION": "Apply !M! Vulnerable and Lock-on."
+    "DESCRIPTION": "Apply !M! Vulnerable and Lock-On."
   },
   "${modID}:Misdirect": {
     "NAME": "Misdirect",
-    "DESCRIPTION": "Deal !D! damage. NL Evoke an ${modID}:Icicle."
+    "DESCRIPTION": "Deal !D! damage. NL Activate the passive effect of an ${modID}:Icicle."
   },
   "${modID}:FrozenRose": {
     "NAME": "Frozen Rose",
@@ -701,9 +701,13 @@
     "DESCRIPTION": "Deal !D! damage twice. NL ${modID}:Freeze a random card in your hand.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage twice. NL ${modID}:Freeze a card in your hand."
   },
+  "${modID}:CryoShrapnel": {
+    "NAME": "Cryo Shrapnel",
+    "DESCRIPTION": "Add a *Shiv to your hand. NL Add an *Icicle *Shiv to your hand."
+  },
   "${modID}:LeadAstray": {
     "NAME": "Lead Astray",
-    "DESCRIPTION": "Apply !M! Weak. NL Gain !B! Block. NL [#94ff52]Skill[] ${modID}:Gambit: Gain !M! ${modID}:Blur"
+    "DESCRIPTION": "Apply !M! Weak. NL Gain !B! Block. NL [#94ff52]Skill[] ${modID}:Gambit: Apply !M! ${modID}:Chill"
   },
   "${modID}:IcicleSpear": {
     "NAME": "Icicle Spear",
@@ -711,26 +715,54 @@
   },
   "${modID}:WisteriaCutter": {
     "NAME": "Wisteria Slash",
-    "DESCRIPTION": "Deal !D! damage. NL Channel !M! ${modID}:Icicles. NL [#fa3232]Attack[] ${modID}:Gambit: Channel !${modID}:M2! ${modID}:Icicles Instead."
+    "DESCRIPTION": "Deal !D! damage. NL Channel !M! ${modID}:Icicles. NL [#fa3232]Attack[] ${modID}:Gambit: Gain [E] [E]."
+  },
+  "${modID}:Feint": {
+    "NAME": "Feint",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! Lock-On. NL [#94ff52]Skill[] ${modID}:Gambit: Channel an ${modID}:Icicle."
   },
   "${modID}:SilverShadow": {
     "NAME": "Silver Shadow",
-    "DESCRIPTION": "Gain !B! Block. NL Gain !M! ${modID}:Blur. NL [#fa3232]Attack[] ${modID}:Gambit:  Gain !B! Block next turn"
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! ${modID}:Blur. NL [#fa3232]Attack[] ${modID}:Gambit: Gain !B! Block next turn"
   },
   "${modID}:ShroudedSky": {
     "NAME": "Shrouded Sky",
     "DESCRIPTION": "Gain !M! Temporary Focus. NL Gain !${modID}:M2! Vigor"
   },
+  "${modID}:RazorShiv": {
+    "NAME": "Razor Shiv",
+    "DESCRIPTION": "Deal !D! damage. NL Apply ${modID}:Bleed equal to the target Lock-On."
+  },
+  "${modID}:CrystalBarbs": {
+    "NAME": "Crystal Barbs",
+    "DESCRIPTION": "Deal !D! damage. NL Channel an ${modID}:Icicle. NL [#94ff52]Skill[] ${modID}:Gambit: Gain !M! ${modID}:Ice_Spikes."
+  },
+  "${modID}:MarkingShiv": {
+    "NAME": "Marking Shot",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! Lock-On"
+  },
+  "${modID}:LinkBreak": {
+    "NAME": "Link Break",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! Vulnerable. NL [#fa3232]Attack[] ${modID}:Gambit: Apply !${modID}:M2! ${modID}:Bleed."
+  },
+  "${modID}:FreezeOver": {
+    "NAME": "Freeze Over",
+    "DESCRIPTION": "Draw !M! cards and ${modID}:Freeze them. NL You cannot play them this turn."
+  },
+  "${modID}:Crackle": {
+    "NAME": "Crackle",
+    "DESCRIPTION": "Add a *Icicle *Shiv to your hand. NL ${modID}:Rimeburst: Gain !B! Block."
+  },
 
   "${modID}:Cryolattice": {
     "NAME": "Cryolattice",
-    "DESCRIPTION": "Once per turn after you Evoke an ${modID}:Icicle, gain a ${modID}:Crystal Orb Slot.",
-    "UPGRADE_DESCRIPTION": "Once per turn after you Evoke an ${modID}:Icicle, gain !M! ${modID}:Crystal Orb Slots."
+    "DESCRIPTION": "Once per turn after you Remove an ${modID}:Icicle, gain a ${modID}:Crystal Orb Slot.",
+    "UPGRADE_DESCRIPTION": "Once per turn after you Remove an ${modID}:Icicle, gain !M! ${modID}:Crystal Orb Slots."
   },
   "${modID}:Rimeshank": {
     "NAME": "Rimeshank",
-    "DESCRIPTION": "After you Evoke an ${modID}:Icicle add a ${modID}:Frozen *Shiv to your hand.",
-    "UPGRADE_DESCRIPTION": "Innate. NL After you Evoke an ${modID}:Icicle add a ${modID}:Frozen *Shiv to your hand."
+    "DESCRIPTION": "*Shiv cards deal !M! additional Damage. NL *Shiv cards also apply !${modID}:M2! ${modID}:Bleed.",
+    "UPGRADE_DESCRIPTION": "Innate. NL *Shiv cards deal !M! additional Damage. NL *Shiv cards also apply !${modID}:M2! ${modID}:Bleed."
   },
 
   "${modID}:DeathlyDispute": {
@@ -738,10 +770,27 @@
     "DESCRIPTION": "Deal !D! damage. NL If the target doesn't intend to Attack, shuffle a *Pilfered *Crystal into your draw pile.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage. NL If the target doesn't intend to Attack, shuffle a *Pilfered *Crystal+ into your draw pile."
   },
+  "${modID}:SparklingShiv": {
+    "NAME": "Sparkling Shiv",
+    "DESCRIPTION": "Deal !D! damage. NL Next turn, Channel an ${modID}:Icicle with damage equal to the targets Vulnerable."
+  },
+  "${modID}:FrostyFlash": {
+    "NAME": "Frosty Flash",
+    "DESCRIPTION": "Deal !D! damage and apply !M! Lock-On to ALL enemies."
+  },
+  "${modID}:ConeofCold": {
+    "NAME": "Cone of Cold",
+    "DESCRIPTION": "Deal !D! damage to all enemies Twice. NL Return a random card from your discard pile to your hand and ${modID}:Freeze it.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage to all enemies Twice. NL Return !M! random cards from your discard pile to your hand and ${modID}:Freeze them."
+  },
 
   "${modID}:PilferedCrystal": {
     "NAME": "Pilfered Crystal",
     "DESCRIPTION": "Deal !D! damage. NL ${modID}:Fence: gain !M! Gold. NL If this has already been ${modID}:Fenced, Channel !${modID}:M2! ${modID}:Icicles. NL Exhaust."
+  },
+  "${modID}:FrozenShiv": {
+    "NAME": "Icicle Shiv",
+    "DESCRIPTION": "Deal !D! damage. NL Activate the passive effect of your next Orb. NL Exhaust."
   },
   "${modID}:AbstractJusticarCard": {
     "NAME": "AbstractDragonkinCard",

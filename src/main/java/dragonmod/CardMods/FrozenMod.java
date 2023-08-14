@@ -15,7 +15,8 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import dragonmod.DamageModifiers.Icons.IceCounter;
 import dragonmod.util.Wiz;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FrozenMod extends AbstractCardModifier {
     public int duration;
@@ -67,6 +68,9 @@ public class FrozenMod extends AbstractCardModifier {
             });
         }
     }
+    public String identifier(AbstractCard card) {
+        return "FrozenMod";
+    }
     public List<TooltipInfo> additionalTooltips(AbstractCard card) {
         ArrayList<TooltipInfo> retval = new ArrayList<TooltipInfo>();
         retval.add(new TooltipInfo(keyword.TEXT[0],keyword.TEXT[1]));
@@ -85,6 +89,12 @@ public class FrozenMod extends AbstractCardModifier {
                 }
             }
         });
+    }
+    public boolean shouldApply(AbstractCard card) {
+        if (CardModifierManager.hasModifier(card,"FrozenMod")){
+            return false;
+        }
+        return true;
     }
     @Override
     public AbstractCardModifier makeCopy() {

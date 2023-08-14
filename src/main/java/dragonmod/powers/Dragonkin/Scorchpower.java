@@ -28,6 +28,7 @@ public class Scorchpower extends BasePower implements CloneablePowerInterface, H
 
     public Scorchpower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,PowerType.DEBUFF,false,owner,source, amount);
+        img = tex84;
         this.region128 = new TextureAtlas.AtlasRegion(tex84, 0, 0, 84, 84);
         this.region48 = new TextureAtlas.AtlasRegion(tex32, 0, 0, 32, 32);
         updateDescription();
@@ -89,5 +90,12 @@ public class Scorchpower extends BasePower implements CloneablePowerInterface, H
     @Override
     public Color getColor() {
         return CardHelper.getColor(209,107,4);
+    }
+    public float[] _lightsOutGetXYRI() {
+        return new float[] {owner.hb.cX, owner.hb.cY, owner.hb.width+5, 0.75f};
+    }
+
+    public Color[] _lightsOutGetColor() {
+        return new Color[] {Color.SCARLET.cpy()};
     }
 }

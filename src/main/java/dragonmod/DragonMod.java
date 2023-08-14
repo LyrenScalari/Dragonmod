@@ -1,5 +1,6 @@
 package dragonmod;
 
+import actlikeit.RazIntent.CustomIntent;
 import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
@@ -48,11 +49,14 @@ import dragonmod.potions.Dragonkin.DraughtofFervor;
 import dragonmod.potions.Dragonkin.GatlokBrew;
 import dragonmod.potions.Dragonkin.NaruuinsGlow;
 import dragonmod.powers.Dragonkin.PenancePower;
+import dragonmod.powers.Rimedancer.BleedPower;
+import dragonmod.relics.Dragon.BottledVoice;
 import dragonmod.relics.Dragon.RoyalSignet;
 import dragonmod.relics.Dragonkin.*;
 import dragonmod.relics.Drifter.BronzePocketWatch;
 import dragonmod.relics.Drifter.DraconicTimeCrystal;
 import dragonmod.relics.Rimedancer.CryoniteShard;
+import dragonmod.ui.BleedingOutIntent;
 import dragonmod.util.*;
 import dragonmod.variables.DefaultSecondMagicNumber;
 import dragonmod.variables.SecondDamage;
@@ -171,6 +175,9 @@ public class DragonMod implements
     }
     @SpireEnum
     public static AbstractCard.CardTags Field;
+    @SpireEnum
+    public static AbstractMonster.Intent BLEEDING_OUT;
+
     public DragonMod() {
         BaseMod.subscribe(this); //This will make BaseMod trigger all the subscribers at their appropriate times.
         logger.info(modID + " subscribed to BaseMod.");
@@ -273,6 +280,7 @@ public class DragonMod implements
         //Set up the mod information displayed in the in-game mods menu.
         //The information used is taken from your pom.xml file.
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, null);
+        CustomIntent.add(new BleedingOutIntent());
     }
     private static BitmapFont prepFont(FreeTypeFontGenerator g, float size, boolean isLinearFiltering) {
         FreeTypeFontGenerator.FreeTypeFontParameter p = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -507,6 +515,8 @@ public class DragonMod implements
         //Dragon Relics
         BaseMod.addRelic(new RoyalSignet(), RelicType.SHARED);
         UnlockTracker.markRelicAsSeen(RoyalSignet.ID);
+        BaseMod.addRelic(new BottledVoice(), RelicType.SHARED);
+        UnlockTracker.markRelicAsSeen(BottledVoice.ID);
     }
 
     @Override
@@ -541,6 +551,9 @@ public class DragonMod implements
         DecayStagger = true;
         for (AbstractNotOrb seal : Seals){
             seal.onEndOfTurn();
+        }
+        if (abstractMonster.hasPower(BleedPower.POWER_ID) && abstractMonster.currentHealth <= abstractMonster.getPower(BleedPower.POWER_ID).amount){
+            return false;
         }
         return true;
     }

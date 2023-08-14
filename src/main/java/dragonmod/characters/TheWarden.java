@@ -140,16 +140,16 @@ public class TheWarden extends CustomPlayer {
         ArrayList<String> retVal = new ArrayList<>();
 
         logger.info("Begin loading starter Deck Strings");
-        retVal.add(DrifterStrike.ID);
-        retVal.add(DrifterStrike.ID);
-        retVal.add(DrifterStrike.ID);
-        retVal.add(DrifterStrike.ID);
-        retVal.add(LeadingLick.ID);
-        retVal.add(DrifterDefend.ID);
-        retVal.add(DrifterDefend.ID);
-        retVal.add(DrifterDefend.ID);
-        retVal.add(CrumblingBarrier.ID);
-        retVal.add(Gravitas.ID);
+        retVal.add(DragonMod.makeID(DrifterStrike.ID));
+        retVal.add(DragonMod.makeID(DrifterStrike.ID));
+        retVal.add(DragonMod.makeID(DrifterStrike.ID));
+        retVal.add(DragonMod.makeID(DrifterStrike.ID));
+        retVal.add(DragonMod.makeID(LeadingLick.ID));
+        retVal.add(DragonMod.makeID(DrifterDefend.ID));
+        retVal.add(DragonMod.makeID(DrifterDefend.ID));
+        retVal.add(DragonMod.makeID(DrifterDefend.ID));
+        retVal.add(DragonMod.makeID(CrumblingBarrier.ID));
+        retVal.add(DragonMod.makeID(Gravitas.ID));
         return retVal;
     }
 

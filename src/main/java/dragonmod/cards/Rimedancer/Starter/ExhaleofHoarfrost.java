@@ -23,7 +23,7 @@ public class ExhaleofHoarfrost extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.atb(new VFXAction(new BlizzardEffect(damage,false)));
-        Wiz.atb(new DamageAllEnemiesAction(p,baseDamage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+        Wiz.atb(new DamageAllEnemiesAction(p,damage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.BLUNT_LIGHT));
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
             if (!mo.isDeadOrEscaped()) {
                 Wiz.applyToEnemy(mo,new Chillpower(mo,p,magicNumber));

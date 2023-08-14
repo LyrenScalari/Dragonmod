@@ -144,16 +144,16 @@ public class TheJusticar extends CustomPlayer {
 
         logger.info("Begin loading starter Deck Strings");
 
-        retVal.add(Strike.ID);
-        retVal.add(Strike.ID);
-        retVal.add(HolyStrike.ID);
-        retVal.add(HolyDefend.ID);
-        retVal.add(HolySmite.ID);
-        retVal.add(Defend.ID);
-        retVal.add(Defend.ID);
-        retVal.add(PrimalStrike.ID);
-        retVal.add(PrimalDefend.ID);
-        retVal.add(BlazingBreath.ID);
+        retVal.add(DragonMod.makeID(Strike.ID));
+        retVal.add(DragonMod.makeID(Strike.ID));
+        retVal.add(DragonMod.makeID(HolyStrike.ID));
+        retVal.add(DragonMod.makeID(HolyDefend.ID));
+        retVal.add(DragonMod.makeID(HolySmite.ID));
+        retVal.add(DragonMod.makeID(Defend.ID));
+        retVal.add(DragonMod.makeID(Defend.ID));
+        retVal.add(DragonMod.makeID(PrimalStrike.ID));
+        retVal.add(DragonMod.makeID(PrimalDefend.ID));
+        retVal.add(DragonMod.makeID(BlazingBreath.ID));
 
         return retVal;
     }

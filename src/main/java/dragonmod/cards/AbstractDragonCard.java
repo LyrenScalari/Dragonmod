@@ -13,13 +13,17 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import dragonmod.DamageModifiers.Icons.ExaltIcon;
+import dragonmod.DamageModifiers.Icons.ShatterIcon;
 import dragonmod.DamageModifiers.Icons.TemporalIcon;
 import dragonmod.DragonMod;
+import dragonmod.orbs.Icicle;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.util.CardArtRoller;
 import dragonmod.util.CardInfo;
 import dragonmod.util.TypeEnergyHelper;
+import dragonmod.util.Wiz;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -58,6 +62,9 @@ public abstract class AbstractDragonCard extends BaseCard {
         if (energyCosts.get(TypeEnergyHelper.Mana.Temporal) != null){
             ExtraIcons.icon(TemporalIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Temporal))).render(this);
         }
+        if (energyCosts.get(TypeEnergyHelper.Mana.Shatter) != null){
+            ExtraIcons.icon(ShatterIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Shatter))).render(this);
+        }
         super.renderInLibrary(sb);
     }
     public void render(SpriteBatch sb) {
@@ -70,6 +77,21 @@ public abstract class AbstractDragonCard extends BaseCard {
                     }
                 }
                 ExtraIcons.icon(ExaltIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Exalt))).textColor(textColor).render(this);
+            }
+            if (energyCosts.get(TypeEnergyHelper.Mana.Shatter) != null) {
+                Color textColor = Color.WHITE.cpy();
+                if (AbstractDungeon.player != null) {
+                    int icicles = 0;
+                    for (AbstractOrb o : Wiz.adp().orbs) {
+                        if (o instanceof Icicle) {
+                            icicles++;
+                        }
+                    }
+                    if (icicles < energyCosts.get(TypeEnergyHelper.Mana.Shatter)) {
+                        textColor = Color.RED.cpy();
+                    }
+                }
+                ExtraIcons.icon(ShatterIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Shatter))).textColor(textColor).render(this);
             }
             super.render(sb);
         }

@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.InvinciblePower;
 import dragonmod.DragonMod;
 import dragonmod.actions.SmiteAction;
 import dragonmod.powers.BaseTwoAmountPower;
@@ -21,6 +22,10 @@ public class PenancePower extends BaseTwoAmountPower implements CloneablePowerIn
     public PenancePower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,PowerType.DEBUFF,false,owner,source, amount);
         this.loadRegion("heartDef");
+        powerToLose = new InvinciblePower(owner,amount);
+        this.img = powerToLose.img;
+        this.region48 = powerToLose.region48;
+        this.region128 = powerToLose.region128;
         updateDescription();
     }
     @Override

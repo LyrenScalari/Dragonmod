@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.TimeWarpPower;
 import dragonmod.powers.BasePower;
 
 import static dragonmod.DragonMod.makeID;
@@ -23,6 +24,10 @@ public class BorrowedTimePower extends BasePower implements CloneablePowerInterf
     public BorrowedTimePower(AbstractCreature owner, int amount) {
         super(POWER_ID,PowerType.DEBUFF,true,owner,owner, amount);
         this.loadRegion("time");
+        powerToLose = new TimeWarpPower(owner);
+        this.img = powerToLose.img;
+        this.region48 = powerToLose.region48;
+        this.region128 = powerToLose.region128;
         updateDescription();
     }
 

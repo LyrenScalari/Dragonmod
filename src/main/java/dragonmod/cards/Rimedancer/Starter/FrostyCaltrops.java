@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
+import com.megacrit.cardcrawl.vfx.combat.FlickCoinEffect;
 import dragonmod.actions.GainCrystalOrbSlotAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.util.Wiz;
@@ -28,6 +29,7 @@ public class FrostyCaltrops extends AbstractRimedancerCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.vfx(new FlickCoinEffect(p.hb.cX, p.hb.cY, m.hb.cX, m.hb.cY));
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_VERTICAL);
         if (AbstractDungeon.actionManager.cardsPlayedThisCombat.size() >= 2 && ((AbstractCard)AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 2)).type == AbstractCard.CardType.ATTACK) {
             Wiz.atb(new GainCrystalOrbSlotAction(1));

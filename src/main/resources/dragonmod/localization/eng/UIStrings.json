@@ -22,7 +22,9 @@
       " NL Exhaust",
       "Ethereal NL ",
       "Exhaust",
-      "Retain NL "
+      "Retain NL ",
+      "stslib:Persist ",
+      "Unplayable "
     ]
   },
   "${modID}:HolyTooltip": {
@@ -133,10 +135,22 @@
       "*Frozen. NL "
     ]
   },
+  "${modID}:BleedDeath": {
+    "TEXT": [
+      "Bleeding Out",
+      "This creature is unable to act and will die at the start of your turn."
+    ]
+  },
   "${modID}:IceArmor": {
     "TEXT": [
       "[dragonmod:FrostIcon] Ice Armor",
       "[dragonmod:FrostIcon] blocks damage, and applies equal #yChill back to attackers."
+    ]
+  },
+  "${modID}:ShatterTooltip": {
+    "TEXT": [
+      "Shatter",
+      "As an Additional Cost to play this card, a number of Icicles listed below its energy cost must be removed."
     ]
   },
   "${modID}:SinnersMod": {

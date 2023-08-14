@@ -13,7 +13,7 @@ public class SilverShadow extends AbstractRimedancerCard {
     public static final String ID = SilverShadow.class.getSimpleName();
     public SilverShadow(){
         super(ID,2,CardType.SKILL,CardRarity.COMMON,CardTarget.SELF);
-        setBlock(9,4);
+        setBlock(11,4);
         setMagic(1,2);
     }
     public void triggerOnGlowCheck() {

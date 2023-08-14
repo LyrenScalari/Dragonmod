@@ -37,4 +37,12 @@ public class IntensityPower extends BasePower {
     public void updateDescription() {
         description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
+
+    public float[] _lightsOutGetXYRI() {
+        return new float[] {owner.hb.cX, owner.hb.cY, (float) (owner.hb.width+(0.10*amount)), 0.15f * amount};
+    }
+
+    public Color[] _lightsOutGetColor() {
+        return new Color[] {Color.CYAN.cpy()};
+    }
 }

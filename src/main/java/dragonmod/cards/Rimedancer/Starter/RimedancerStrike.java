@@ -1,10 +1,15 @@
 package dragonmod.cards.Rimedancer.Starter;
 
+import com.badlogic.gdx.graphics.Color;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
+import dragonmod.orbs.Icicle;
 import dragonmod.util.Wiz;
 
 
@@ -18,6 +23,12 @@ public class RimedancerStrike extends AbstractRimedancerCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        Wiz.dmg(m,new DamageInfo(p,baseDamage, DamageInfo.DamageType.NORMAL));
+        for (AbstractOrb o : p.orbs){
+            if (o instanceof Icicle){
+                Wiz.atb(new ThrowIcicleAction(o,m.hb, Color.CYAN));
+                break;
+            }
+        }
+        Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
     }
 }

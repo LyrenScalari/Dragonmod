@@ -15,7 +15,7 @@ public abstract class BasePower extends AbstractPower {
     }
     protected AbstractCreature source;
     protected String[] DESCRIPTIONS;
-
+    public AbstractPower powerToLose;
     public BasePower(String id, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
         this(id, powerType, isTurnBased, owner, null, amount);
     }

@@ -170,9 +170,27 @@
       " damage back and reduce this that much."
     ]
   },
+  "${modID}:Precision": {
+    "NAME": "Precision",
+    "DESCRIPTIONS": ["#yShiv cards deal #b",
+      " additional damage."
+    ]
+  },
+  "${modID}:Rimeshank": {
+    "NAME": "Rimeshank",
+    "DESCRIPTIONS": ["#yShiv cards apply #b",
+      " Bleed."
+    ]
+  },
+  "${modID}:Bleed": {
+    "NAME": "Bleed",
+    "DESCRIPTIONS": ["Next turn lose #b",
+      " HP."
+    ]
+  },
   "${modID}:Cryolattice": {
     "NAME": "Cryo-lattice",
-    "DESCRIPTIONS": ["Once per turn after you Evoke an Icicle, gain #b",
+    "DESCRIPTIONS": ["Once per turn after you remove an Icicle, gain #b",
       " Crystal Orb Slot"
     ]
   }
