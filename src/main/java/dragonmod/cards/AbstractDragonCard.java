@@ -21,14 +21,11 @@ import dragonmod.DragonMod;
 import dragonmod.orbs.Icicle;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.util.CardArtRoller;
-import dragonmod.util.CardInfo;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
-
-import static dragonmod.DragonMod.makeID;
 
 public abstract class AbstractDragonCard extends BaseCard {
     public static final CardStrings Manipstrings = CardCrawlGame.languagePack.getCardStrings(makeID("ManipStrings"));
