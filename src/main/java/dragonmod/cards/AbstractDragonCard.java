@@ -21,6 +21,7 @@ import dragonmod.DragonMod;
 import dragonmod.orbs.Icicle;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.util.CardArtRoller;
+import dragonmod.util.CardStats;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
@@ -49,7 +50,7 @@ public abstract class AbstractDragonCard extends BaseCard {
                               final CardRarity rarity,
                               final CardTarget target) {
 
-        super(new CardInfo(cardID,cost,type,target,rarity,color));
+        super(DragonMod.makeID(cardID),new CardStats(color,type,rarity,target,cost));
         CommonKeywordIconsField.useIcons.set(this,true);
     }
     public void renderInLibrary(SpriteBatch sb) {
@@ -163,8 +164,7 @@ public abstract class AbstractDragonCard extends BaseCard {
         super.resetAttributes();
         secondDamage = baseSecondDamage;
         isSecondDamageModified = false;
-    }
-    @Override
+    }    @Override
     protected Texture getPortraitImage() {
         if (textureImg.contains("ui/missing.png")) {
             return CardArtRoller.getPortraitTexture(this);
@@ -173,6 +173,7 @@ public abstract class AbstractDragonCard extends BaseCard {
             return super.getPortraitImage();
         }
     }
+
 
     public void update() {
         super.update();

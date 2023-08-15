@@ -8,7 +8,6 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import dragonmod.DragonMod;
 
 import java.util.HashMap;
-import java.util.Locale;
 
 import static dragonmod.DragonMod.*;
 
@@ -51,22 +50,24 @@ public class TextureLoader {
         return textures.get(filePath);
     }
 
-    public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType)
-    {
-        String textureString = resourcePath("cards/" + cardType.name().toLowerCase(Locale.ROOT) + "/" + cardName + ".png");
+    public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType) {
+        String textureString;
 
-        FileHandle h = Gdx.files.internal(textureString);
-        if (!h.exists())
-        {
-            switch (cardType) {
-                case ATTACK:
-                case POWER:
-                default:
-                    textureString = DragonMod.resourcePath("ui/missing.png");
-                    break;
-            }
+        switch (cardType) {
+            case ATTACK:
+            case POWER:
+            case SKILL:
+                textureString = DragonMod.resourcePath("cards/" + cardName + ".png");
+                break;
+            default:
+                textureString = DragonMod.resourcePath("ui/missing.png");
+                break;
         }
 
+        FileHandle h = Gdx.files.internal(textureString);
+        if (!h.exists()) {
+            textureString = DragonMod.resourcePath("ui/missing.png");
+        }
         return textureString;
     }
 

@@ -2,34 +2,27 @@ package dragonmod.cards;
 
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
-import com.badlogic.gdx.Gdx;
 import basemod.abstracts.DynamicVariable;
-import dragonmod.BasicMod;
-import dragonmod.util.CardStats;
+import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DragonMod;
-import dragonmod.util.CardArtRoller;
+import dragonmod.util.CardStats;
 
 import java.util.ArrayList;
-
-import static dragonmod.util.TextureLoader.getCardTextureString;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static dragonmod.util.GeneralUtils.removePrefix;
 import static dragonmod.util.TextureLoader.getCardTextureString;
 
 
 public abstract class BaseCard extends CustomCard {
     final private static Map<String, DynamicVariable> customVars = new HashMap<>();
 
-    protected static String makeID(String name) { return BasicMod.makeID(name); }
+    protected static String makeID(String name) { return DragonMod.makeID(name); }
     protected CardStrings cardStrings;
     private boolean needsArtRefresh = false;
     private float rotationTimer = 0;
@@ -81,24 +74,15 @@ public abstract class BaseCard extends CustomCard {
     public BaseCard(String ID, CardStats info) {
         this(ID, info.baseCost, info.cardType, info.cardTarget, info.cardRarity, info.cardColor);
     }
-	public BaseCard(String ID, CardStats info, boolean upgradesDescription) {
-        this(ID, info.baseCost, info.cardType, info.cardTarget, info.cardRarity, info.cardColor, upgradesDescription);
-    }
     public BaseCard(String ID, CardStats info, boolean upgradesDescription) {
-        this(ID, info.baseCost, info.cardType, info.cardTarget, info.cardRarity, info.cardColor, upgradesDescription);
+        this(ID, info.baseCost, info.cardType, info.cardTarget, info.cardRarity, info.cardColor);
     }
     public BaseCard(String ID, int cost, CardType cardType, CardTarget target, CardRarity rarity, CardColor color)
     {
-        super(ID, getName(ID), getCardTextureString(removePrefix(ID), cardType), cost, getInitialDescription(ID), cardType, color, rarity, target);
+        super(ID, getName(ID), getCardTextureString(ID.replace(DragonMod.modID + ":", ""),cardType), cost, getInitialDescription(ID), cardType, color, rarity, target);
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(cardID);
         this.originalName = cardStrings.NAME;
         this.baseCost = cost;
-        if (textureImg.contains("ui/missing.png")) {
-            if (!CardLibrary.cards.isEmpty()) {
-                CardArtRoller.computeCard(this);
-            } else
-                needsArtRefresh = true;
-        }
         initializeTitle();
         initializeDescription();
 	}
@@ -111,6 +95,19 @@ public abstract class BaseCard extends CustomCard {
     }
 
     //Methods meant for constructor use
+    protected final void setDamage(int damage)
+    {
+        this.setDamage(damage, 0);
+    }
+    protected final void setDamage(int damage, int damageUpgrade)
+    {
+        this.baseDamage = this.damage = damage;
+        if (damageUpgrade != 0)
+        {
+            this.upgradeDamage = true;
+            this.damageUpgrade = damageUpgrade;
+        }
+    }
     protected final void setDamage2(int damage)
     {
         this.setDamage2(damage, 0);
@@ -119,14 +116,13 @@ public abstract class BaseCard extends CustomCard {
     {
         this.setMagic2(magic, 0);
     }
-    protected final void setDamage2(int damage, int damageUpgrade)
-    {
+    protected final void setDamage2(int damage, int damageUpgrade) {
         this.baseSecondDamage = this.secondDamage = damage;
-        if (damageUpgrade != 0)
-        {
+        if (damageUpgrade != 0) {
             this.upgradeDamage2 = true;
             this.damage2Upgrade = damageUpgrade;
         }
+    }
     protected final void setMagic2(int magic, int magicUpgrade)
     {
         this.BaseSecondMagicNumber = this.SecondMagicNumber = magic;
@@ -266,7 +262,30 @@ public abstract class BaseCard extends CustomCard {
         this.upgRetain = upgRetain;
         this.selfRetain = baseRetain;
     }
-
+    protected final void setExhaust(boolean baseExhaust)
+    {
+        this.baseExhaust = baseExhaust;
+        this.upgExhaust = baseExhaust;
+        this.exhaust = baseExhaust;
+    }
+    protected final void setEthereal(boolean baseEthereal)
+    {
+        this.baseEthereal = baseEthereal;
+        this.upgEthereal = baseEthereal;
+        this.isEthereal = baseEthereal;
+    }
+    protected void setInnate(boolean baseInnate)
+    {
+        this.baseInnate = baseInnate;
+        this.upgInnate = baseInnate;
+        this.isInnate = baseInnate;
+    }
+    protected void setSelfRetain(boolean baseRetain)
+    {
+        this.baseRetain = baseRetain;
+        this.upgRetain = baseRetain;
+        this.selfRetain = baseRetain;
+    }
 
     @Override
     public AbstractCard makeStatEquivalentCopy() {
@@ -386,9 +405,6 @@ public abstract class BaseCard extends CustomCard {
     }
     public void update() {
         super.update();
-        if (needsArtRefresh) {
-            CardArtRoller.computeCard(this);
-        }
         if (!cardToPreview.isEmpty()) {
             if (hb.hovered) {
                 if (rotationTimer <= 0F) {
@@ -417,7 +433,7 @@ public abstract class BaseCard extends CustomCard {
         BaseSecondMagicNumber += amount; // Upgrade the number by the amount you provide in your card.
         SecondMagicNumber = BaseSecondMagicNumber; // Set the number to be equal to the base value.
         upgradedSecondMagicNumber = true; // Upgraded = true - which does what the above method does.
-
+    }
     boolean inCalc = false;
     @Override
     public void applyPowers() {
