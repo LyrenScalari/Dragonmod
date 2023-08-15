@@ -70,7 +70,7 @@ public abstract class BasePotion extends AbstractPotion {
     }
 
     @Override
-    public int getPotency(int ascension) {
+    public int getPotency(int i) {
         return basePotency;
     }
 
