@@ -16,12 +16,11 @@ import dragonmod.util.Wiz;
 public class CryolatticePower extends BasePower implements CloneablePowerInterface, onRemoveOrbPower {
     public AbstractCreature source;
     public boolean used = false;
-
+    private static AbstractPower powerToLose = new EchoPower(null,0);
     public static final String POWER_ID = DragonMod.makeID("Cryolattice");
     public CryolatticePower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,PowerType.BUFF,false,owner,source, amount);
         priority = 70;
-        powerToLose = new EchoPower(owner,amount);
         this.img = powerToLose.img;
         this.region48 = powerToLose.region48;
         this.region128 = powerToLose.region128;

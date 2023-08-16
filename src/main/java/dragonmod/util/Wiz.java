@@ -195,6 +195,10 @@ public class Wiz {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LosePowerPowerStart(AbstractDungeon.player, po, po.amount)));
     }
+    public static void applyToSelfTempstartTop(AbstractPower po) {
+        att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LosePowerPowerStart(AbstractDungeon.player, po, po.amount)));
+        att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
+    }
     public static void applyToSelfNextTurn(AbstractPower po) {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new NextTurnPowerPower(AbstractDungeon.player, po)));
     }

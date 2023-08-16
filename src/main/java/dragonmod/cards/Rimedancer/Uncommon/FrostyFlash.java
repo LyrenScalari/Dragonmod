@@ -67,12 +67,7 @@ public class FrostyFlash extends AbstractRimedancerCard {
                 tothrow = (Icicle) o;
             }
         }
-        Wiz.atb(new ShatterAction(energyCosts, () -> new AbstractGameAction() {
-            @Override
-            public void update() {
-                isDone = true;
-            }
-        }));
+        Wiz.atb(new ShatterAction());
         ArrayList<Hitbox> hbs = new ArrayList<>();
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
             hbs.add(mo.hb);

@@ -19,6 +19,11 @@ public class IcicleFanAction extends AbstractGameAction {
             this.e.add( VFXContainer.icicleThrowEffect(orb, hb, color, false, true));
         }
     }
+    public IcicleFanAction(ArrayList<AbstractOrb> orbs, Hitbox target, Color color) {
+        for (AbstractOrb orb : orbs){
+            this.e.add(VFXContainer.icicleThrowEffect(orb, target, color, false, true));
+        }
+    }
     public IcicleFanAction(Texture tex, float scale,  ArrayList<Hitbox> targets, Color color, boolean bounceOff) {
         for (Hitbox hb : targets) {
             this.e.add(VFXContainer.throwEffect(tex, scale, hb, color, bounceOff, true));

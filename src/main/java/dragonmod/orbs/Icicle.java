@@ -145,6 +145,20 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
     public void playChannelSFX() {
 
     }
+    public int getBasePassiveAmount() {
+        return basePassiveAmount;
+    }
+    public int getBaseEvokeAmount() {
+        return baseEvokeAmount;
+    }
+    public void setBasePassiveAmount(int bonus) {
+        basePassiveAmount += bonus;
+        updateDescription();
+    }
+    public void setBaseEvokeAmount(int bonus) {
+        baseEvokeAmount += bonus;
+        updateDescription();
+    }
     public float[] _lightsOutGetXYRI() {
         return new float[] {hb.x, hb.y, 75f, 0.75f};
     }

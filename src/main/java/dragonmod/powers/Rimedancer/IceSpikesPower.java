@@ -18,13 +18,12 @@ import dragonmod.util.Wiz;
 
 public class IceSpikesPower extends BasePower implements CloneablePowerInterface, OnLoseBlockPower {
     public AbstractCreature source;
-    private AbstractPower powerToLose;
     public static final String POWER_ID = DragonMod.makeID("IceSpikes");
+    private static AbstractPower powerToLose = new ThornsPower(null,0);
     public IceSpikesPower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,PowerType.BUFF,false,owner,source, amount);
         priority = 70;
         this.loadRegion("thorns");
-        powerToLose = new ThornsPower(owner,amount);
         this.img = powerToLose.img;
         this.region48 = powerToLose.region48;
         this.region128 = powerToLose.region128;

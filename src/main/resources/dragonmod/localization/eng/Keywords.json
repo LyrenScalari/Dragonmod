@@ -307,7 +307,15 @@
       "Crystal",
       "crystal"
     ],
-    "DESCRIPTION": "When an Orb is #yEvoked from a crystal orb slot, gain #b1 Temporary Focus and lose that orb slot."
+    "DESCRIPTION": "When an Orb is Removed from a crystal orb slot, gain #b1 Temporary Focus and lose that orb slot."
+  },
+  {
+    "PROPER_NAME": "Hail",
+    "NAMES": [
+      "Hail",
+      "hail"
+    ],
+    "DESCRIPTION": "At the start of your turn, orbs in Hail slots deal damage to a random enemy twice. NL When an Orb is Removed from a hail orb slot lose that orb slot."
   },
   {
     "PROPER_NAME": "Gambit",
@@ -370,5 +378,13 @@
       "rimeburst"
     ],
     "DESCRIPTION": "#yRimeburst effects activate if a card in your hand has #yIce #yCounters on it."
+  },
+  {
+    "PROPER_NAME": "Subzero",
+    "NAMES": [
+      "Subzero",
+      "subzero"
+    ],
+    "DESCRIPTION": "#ySubzero is reduced by Half when you channel an icicle, increasing its base damage that much."
   }
 ]

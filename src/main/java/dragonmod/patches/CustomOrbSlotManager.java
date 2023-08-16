@@ -1,14 +1,19 @@
 package dragonmod.patches;
 
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FocusPower;
+import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.orbs.CrystalOrbSlot;
+import dragonmod.orbs.HailOrbSlot;
 import dragonmod.powers.Rimedancer.onRemoveOrbPower;
 import dragonmod.util.Wiz;
 import javassist.CtBehavior;
@@ -22,6 +27,7 @@ public class CustomOrbSlotManager {
     )
     public static class SlotFields{
         public static SpireField<Boolean> Crystal = new SpireField(() -> false);
+        public static SpireField<Boolean> Hail = new SpireField(() -> false);
         public SlotFields(){}
     }
 
@@ -34,6 +40,9 @@ public class CustomOrbSlotManager {
         public static void onChannelOrb(AbstractPlayer __instance, AbstractOrb orbToSet,int index) {
             if (__instance.orbs.get(index) instanceof CrystalOrbSlot) {
                 CustomOrbSlotManager.SlotFields.Crystal.set(orbToSet,true);
+            }
+            if (__instance.orbs.get(index) instanceof HailOrbSlot) {
+                CustomOrbSlotManager.SlotFields.Hail.set(orbToSet,true);
             }
         }
         public static class ChannelLocator extends SpireInsertLocator {
@@ -54,7 +63,7 @@ public class CustomOrbSlotManager {
             if (SlotFields.Crystal.get(__instance.orbs.get(0))) {
                 ((AbstractOrb)__instance.orbs.get(0)).onEvoke();
                 AbstractOrb CrystalOrb = __instance.orbs.get(0);
-                Wiz.applyToSelfTempstart(new FocusPower(AbstractDungeon.player,1));
+                Wiz.applyToSelfTempstartTop(new FocusPower(AbstractDungeon.player,1));
                 Wiz.att(new AbstractGameAction() {
                     @Override
                     public void update() {
@@ -63,6 +72,17 @@ public class CustomOrbSlotManager {
                         isDone = true;
                     }
                 });
+                int i;
+                for(i = 1; i < __instance.orbs.size(); ++i) {
+                    Collections.swap(__instance.orbs, i, i - 1);
+                }
+                for(i = 0; i < __instance.orbs.size(); ++i) {
+                    ((AbstractOrb)__instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
+                }
+                return SpireReturn.Return();
+            }
+            if (SlotFields.Hail.get(__instance.orbs.get(0))) {
+                ((AbstractOrb)__instance.orbs.get(0)).onEvoke();
                 int i;
                 for(i = 1; i < __instance.orbs.size(); ++i) {
                     Collections.swap(__instance.orbs, i, i - 1);
@@ -96,23 +116,56 @@ public class CustomOrbSlotManager {
                     }
                 }
                 if (SlotFields.Crystal.get(__instance.orbs.get(0))) {
-                    AbstractOrb orbSlot = new CrystalOrbSlot(((AbstractOrb) __instance.orbs.get(0)).cX, ((AbstractOrb) __instance.orbs.get(0)).cY);
-
+                    AbstractOrb CrystalOrb = __instance.orbs.get(0);
+                    Wiz.applyToSelfTempstartTop(new FocusPower(AbstractDungeon.player,1));
+                    Wiz.att(new AbstractGameAction() {
+                        @Override
+                        public void update() {
+                            __instance.maxOrbs--;
+                            __instance.orbs.remove(CrystalOrb);
+                            isDone = true;
+                        }
+                    });
                     int i;
-                    for (i = 1; i < __instance.orbs.size(); ++i) {
+                    for(i = 1; i < __instance.orbs.size(); ++i) {
                         Collections.swap(__instance.orbs, i, i - 1);
                     }
-
-                    __instance.orbs.set(__instance.orbs.size() - 1, orbSlot);
-
-                    for (i = 0; i < __instance.orbs.size(); ++i) {
-                        ((AbstractOrb) __instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
+                    for(i = 0; i < __instance.orbs.size(); ++i) {
+                        ((AbstractOrb)__instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
                     }
                     return SpireReturn.Return();
-                } else
-                    return SpireReturn.Continue();
+                } else if (SlotFields.Hail.get(__instance.orbs.get(0))) {
+                    int i;
+                    for(i = 1; i < __instance.orbs.size(); ++i) {
+                        Collections.swap(__instance.orbs, i, i - 1);
+                    }
+                    for(i = 0; i < __instance.orbs.size(); ++i) {
+                        ((AbstractOrb)__instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
+                    }
+                    return SpireReturn.Return();
+                } else return SpireReturn.Continue();
             }
             return SpireReturn.Continue();
+        }
+    }
+
+    @SpirePatch2(clz = AbstractPlayer.class, method = "applyStartOfTurnOrbs")
+    public static class PassivePatch{
+        @SpirePrefixPatch
+        public static void applyStartOfTurnOrbs(AbstractPlayer __instance) {
+            for (AbstractOrb o : __instance.orbs) {
+                if (CustomOrbSlotManager.SlotFields.Hail.get(o) && !(o instanceof EmptyOrbSlot)) {
+                    for (int i = 0; i < 2; i++) {
+                        AbstractCreature m = AbstractDungeon.getRandomMonster();
+                        if (m != null) {
+                            DamageInfo info = new DamageInfo(AbstractDungeon.player, o.passiveAmount, DamageInfo.DamageType.THORNS);
+                            info.output = AbstractOrb.applyLockOn(m, info.base);
+                            Wiz.atb(new ThrowIcicleAction(o, m.hb, Color.CYAN));
+                            Wiz.dmg(m, info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+                        }
+                    }
+                }
+            }
         }
     }
 }

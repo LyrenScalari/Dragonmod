@@ -87,7 +87,13 @@
   "${modID}:CrystalSlot": {
     "NAME": "Crystal Orb Slot",
     "DESCRIPTION": [
-      "An orb can be channeled into this slot. when an Orb is Evoked from this slot this slot is removed."
+      "An orb can be channeled into this slot. when an Orb is removed from this slot this slot is removed."
+    ]
+  },
+  "${modID}:HailSlot": {
+    "NAME": "Hail Orb Slot",
+    "DESCRIPTION": [
+      "While an orb is channeled into this slot At the start of your turn it deals damage to a random enemy twice. when an Orb is removed from this slot this slot is removed."
     ]
   },
   "${modID}:Sleet": {

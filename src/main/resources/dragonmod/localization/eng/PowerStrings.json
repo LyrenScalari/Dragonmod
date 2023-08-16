@@ -193,5 +193,11 @@
     "DESCRIPTIONS": ["Once per turn after you remove an Icicle, gain #b",
       " Crystal Orb Slot"
     ]
+  },
+  "${modID}:Subzero": {
+    "NAME": "Subzero",
+    "DESCRIPTIONS": ["Icicles Channeled gain #b",
+      " base damage."
+    ]
   }
 }

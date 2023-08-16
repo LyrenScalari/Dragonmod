@@ -3,7 +3,6 @@ package dragonmod.cards.Rimedancer.Common;
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -16,7 +15,6 @@ import dragonmod.actions.ShatterAction;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
-import dragonmod.powers.Rimedancer.PrecisionPower;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
@@ -30,7 +28,6 @@ public class MarkingShiv extends AbstractRimedancerCard {
         super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY);
         setDamage(8, 3);
         setMagic(2,1);
-        tags.add(PrecisionPower.Shiv);
         energyCosts.put(TypeEnergyHelper.Mana.Shatter,1);
         CardModifierManager.addModifier(this,new SCVShatterMod());
     }
@@ -62,9 +59,7 @@ public class MarkingShiv extends AbstractRimedancerCard {
                 tothrow = (Icicle) o;
             }
         }
-        Wiz.atb(new ShatterAction(energyCosts,()-> new AbstractGameAction() {
-            @Override
-            public void update() { isDone = true; }}));
+        Wiz.atb(new ShatterAction());
         Wiz.atb(new ThrowIcicleAction(tothrow,m.hb,Color.CYAN));
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
         Wiz.applyToEnemy(m,new LockOnPower(m,magicNumber));

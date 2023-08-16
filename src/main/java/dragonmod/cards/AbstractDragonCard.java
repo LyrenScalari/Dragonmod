@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.ExceptionHandler;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
@@ -52,6 +53,12 @@ public abstract class AbstractDragonCard extends BaseCard {
 
         super(DragonMod.makeID(cardID),new CardStats(color,type,rarity,target,cost));
         CommonKeywordIconsField.useIcons.set(this,true);
+        if (textureImg.contains("ui/missing.png")) {
+            if (!CardLibrary.cards.isEmpty()) {
+                CardArtRoller.computeCard(this);
+            } else
+                needsArtRefresh = true;
+        }
     }
     public void renderInLibrary(SpriteBatch sb) {
         if (energyCosts.get(TypeEnergyHelper.Mana.Exalt) != null){

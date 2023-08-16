@@ -21,6 +21,7 @@ public class SacrificePower extends BaseTwoAmountPower implements CloneablePower
         super(POWER_ID,NeutralPowertypePatch.NEUTRAL,false,owner,source, amount);
         this.loadRegion("sadistic");
         powerToLose = new SadisticPower(owner,amount);
+        amount2 = 5;
         this.img = powerToLose.img;
         this.region48 = powerToLose.region48;
         this.region128 = powerToLose.region128;

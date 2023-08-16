@@ -713,7 +713,7 @@
   },
   "${modID}:CryoShrapnel": {
     "NAME": "Cryo Shrapnel",
-    "DESCRIPTION": "Add a *Shiv to your hand. NL Add an *Icicle *Shiv to your hand."
+    "DESCRIPTION": "Add !M! *Shivs to your hand. NL Add !M! *Icicle *Shivs to your hand."
   },
   "${modID}:LeadAstray": {
     "NAME": "Lead Astray",
@@ -788,10 +788,19 @@
     "NAME": "Frosty Flash",
     "DESCRIPTION": "Deal !D! damage and apply !M! Lock-On to ALL enemies."
   },
+  "${modID}:RupturingShot": {
+    "NAME": "Rupturing Shot",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Bleed. NL Gain !${modID}:M2! ${modID}:Subzero."
+  },
   "${modID}:ConeofCold": {
     "NAME": "Cone of Cold",
     "DESCRIPTION": "Deal !D! damage to all enemies Twice. NL Return a random card from your discard pile to your hand and ${modID}:Freeze it.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage to all enemies Twice. NL Return !M! random cards from your discard pile to your hand and ${modID}:Freeze them."
+  },
+  "${modID}:GatheringStorm": {
+    "NAME": "Gathering Storm",
+    "DESCRIPTION": "Gain !B! Block. NL Gain !${modID}:M2! ${modID}:Subzero. NL Gain a ${modID}:Hail Orb slot",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Gain !${modID}:M2! ${modID}:Subzero. NL Gain !M! ${modID}:Hail Orb slots."
   },
 
   "${modID}:PilferedCrystal": {
