@@ -93,7 +93,7 @@
   "${modID}:HailSlot": {
     "NAME": "Hail Orb Slot",
     "DESCRIPTION": [
-      "While an orb is channeled into this slot At the start of your turn it deals damage to a random enemy twice. when an Orb is removed from this slot this slot is removed."
+      "At the start of your turn, an orb channeled into this orb slot deals damage equal to its passive amount to a random enemy twice. when an Orb is removed from this slot this slot is removed."
     ]
   },
   "${modID}:Sleet": {

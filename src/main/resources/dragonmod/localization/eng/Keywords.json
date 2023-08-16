@@ -315,7 +315,7 @@
       "Hail",
       "hail"
     ],
-    "DESCRIPTION": "At the start of your turn, orbs in Hail slots deal damage to a random enemy twice. NL When an Orb is Removed from a hail orb slot lose that orb slot."
+    "DESCRIPTION": "An orb channeled into a Hail orb slot in addition to its other effects deals damage to a random enemy twice. NL when an Orb is Removed from a hail orb slot lose that orb slot."
   },
   {
     "PROPER_NAME": "Gambit",
