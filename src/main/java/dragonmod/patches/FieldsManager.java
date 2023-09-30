@@ -20,7 +20,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.ExhaustPanel;
 import com.megacrit.cardcrawl.vfx.BobEffect;
 import dragonmod.characters.TheWarden;
-import dragonmod.util.FieldCard;
+import dragonmod.interfaces.FieldCard;
 import dragonmod.util.Wiz;
 import javassist.CtBehavior;
 

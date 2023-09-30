@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DragonMod;
 import dragonmod.relics.BaseRelic;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
 
 import static dragonmod.DragonMod.makeID;
 

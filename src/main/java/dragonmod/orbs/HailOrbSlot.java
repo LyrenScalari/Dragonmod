@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import dragonmod.DragonMod;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
 
 public class HailOrbSlot extends EmptyOrbSlot {
     public static final String ORB_ID = DragonMod.makeID("HailSlot");

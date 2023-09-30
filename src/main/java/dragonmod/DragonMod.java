@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -20,11 +19,14 @@ import com.evacipated.cardcrawl.mod.stslib.icons.CustomIconHelper;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.Patcher;
+import com.evacipated.cardcrawl.modthespire.lib.Matcher;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -37,19 +39,19 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import dragonmod.DamageModifiers.Icons.*;
-import dragonmod.actions.GainStressAction;
-import dragonmod.cards.AbstractDragonCard;
-import dragonmod.cards.Justicar.AbstractPrimalCard;
+import dragonmod.actions.GainCrystalOrbSlotAction;
+import dragonmod.actions.GainHailOrbSlotAction;
+import dragonmod.cards.Justicar.AbstractJusticarCard;
+import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.characters.TheJusticar;
 import dragonmod.characters.TheRimedancer;
 import dragonmod.orbs.Icicle;
-import dragonmod.patches.TemporalStressField;
-import dragonmod.patches.TemporalStressUI;
 import dragonmod.potions.Dragonkin.DraughtofFervor;
 import dragonmod.potions.Dragonkin.GatlokBrew;
 import dragonmod.potions.Dragonkin.NaruuinsGlow;
-import dragonmod.powers.Dragonkin.PenancePower;
 import dragonmod.powers.Rimedancer.BleedPower;
+import dragonmod.powers.Rimedancer.Subzero;
+import dragonmod.powers.general.ReinforcePower;
 import dragonmod.relics.Dragon.BottledVoice;
 import dragonmod.relics.Dragon.RoyalSignet;
 import dragonmod.relics.Dragonkin.*;
@@ -57,6 +59,8 @@ import dragonmod.relics.Drifter.BronzePocketWatch;
 import dragonmod.relics.Drifter.DraconicTimeCrystal;
 import dragonmod.relics.Rimedancer.CryoniteShard;
 import dragonmod.ui.BleedingOutIntent;
+import dragonmod.ui.KeywordInfo;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.*;
 import dragonmod.variables.DefaultSecondMagicNumber;
 import dragonmod.variables.SecondDamage;
@@ -84,9 +88,11 @@ public class DragonMod implements
         PostInitializeSubscriber ,
         RelicGetSubscriber,
         PreMonsterTurnSubscriber,
-        OnPlayerTurnStartSubscriber,
         StartGameSubscriber,
-        OnStartBattleSubscriber {
+        OnStartBattleSubscriber,
+        PostDungeonUpdateSubscriber,
+        OnPlayerTurnStartPostDrawSubscriber,
+        OnPlayerLoseBlockSubscriber{
     public static ModInfo info;
     public static String modID; //Edit your pom.xml to change this
     static { loadModInfo(); }
@@ -120,10 +126,10 @@ public class DragonMod implements
     public static final String JUSTICAR_RED_ENERGY_ORB = characterPath("Justicar/cardback/energy_orb.png");
     public static final String JUSTICAR_RED_ENERGY_ORB_P = characterPath("Justicar/cardback/energy_orb_p.png");
     public static final String JUSTICAR_RED_SMALL_ORB = characterPath("Justicar/cardback/small_orb.png");
-    public static final String HOLY_ORB = characterPath("Justicar/cardback/energy_orb.png");
-    public static final String HOLY_ORB_P = characterPath("Justicar/cardback/energy_orb_p.png");
-    public static final String PRIMAL_ORB = characterPath("Justicar/cardback/energy_orb.png");
-    public static final String PRIMAL_ORB_P = characterPath("Justicar/cardback/energy_orb_p.png");
+    public static final String HOLY_ORB = characterPath("Justicar/cardback/holy_orb.png");
+    public static final String HOLY_ORB_P = characterPath("Justicar/cardback/holy_orb_p.png");
+    public static final String PRIMAL_ORB = characterPath("Justicar/cardback/primal_orb.png");
+    public static final String PRIMAL_ORB_P = characterPath("Justicar/cardback/primal_orb_p.png");
     public static final String JUSTICAR_SHOULDER_1 = characterPath("Justicar/animation/Dragonkinshoulder.png");
     public static final String JUSTICAR_SHOULDER_2 = characterPath("Justicar/animation/Dragonkinshoulder2.png");
     public static final String JUSTICAR_CORPSE = characterPath("Justicar/animation/DragonkinCorpse.png");
@@ -146,8 +152,13 @@ public class DragonMod implements
     private static final String RIMEDANCER_CYAN_SKILL_P = characterPath("Rimedancer/cardback/skill_p.png");
     private static final String RIMEDANCER_CYAN_POWER = characterPath("Rimedancer/cardback/power.png");
     private static final String RIMEDANCER_CYAN_POWER_P = characterPath("Rimedancer/cardback/power_p.png");
+    public static final String RIMEDANCER_CYAN_ENERGY_ORB = characterPath("Rimedancer/cardback/energy_orb.png");
+    public static final String RIMEDANCER_CYAN_ENERGY_ORB_P= characterPath("Rimedancer/cardback/energy_orb_p.png");
+    public static final String RIMEDANCER_CYAN_SMALL_ORB = characterPath("Rimedancer/cardback/small_orb.png");
     //Vars
-    public static ArrayList<AbstractNotOrb> Seals = new ArrayList<>();
+    public static Matcher[] ExtraIceMatchers =  new Matcher[]{new Matcher.NewExprMatcher(Subzero.class),new Matcher.NewExprMatcher(GainCrystalOrbSlotAction.class),new Matcher.NewExprMatcher(GainHailOrbSlotAction.class)};
+    public static Matcher[] ExtraBoltMatchers =  new Matcher[]{new Matcher.NewExprMatcher(Subzero.class)};
+    public static Matcher[] ExtraFireMatchers =  new Matcher[]{new Matcher.NewExprMatcher(GainHailOrbSlotAction.class)};
     public static int StatusesCycledThisCombat = 0;
     public static int StatusesCycledThisTurn = 0;
     public static int CardsCycledThisCombat = 0;
@@ -157,11 +168,9 @@ public class DragonMod implements
     public static boolean damagetaken = false;
     public static final String ENABLE_CHIMERA_CROSSOVER = "Enable Chimera Crossover";
     public static boolean enableChimeraCrossover = true;
-    public static TemporalStressUI StressUI;
-    public static boolean renderStressUI = false;
     public static final String SHOW_SUBTYPE_TUTORIAL = "Duality Tutorial Seen";
     public static boolean showSubtypeTutorial = true;
-    public static final String SHOW_TS_TUTORIAL = "Temporal Stress Tutorial Seen";
+    public static final String SHOW_TS_TUTORIAL = "Temporal Stigmata Tutorial Seen";
     public static boolean showTsTutorial = true;
     public static SpireConfig justicarConfig;
     public static UIStrings uiStrings;
@@ -186,19 +195,19 @@ public class DragonMod implements
                 JUSTICAR_RED_ATTACK, JUSTICAR_RED_SKILL, JUSTICAR_RED_POWER, JUSTICAR_RED_ENERGY_ORB,
                 JUSTICAR_RED_ATTACK_P, JUSTICAR_RED_SKILL_P, JUSTICAR_RED_POWER_P,
                 JUSTICAR_RED_ENERGY_ORB_P, JUSTICAR_RED_SMALL_ORB);
-        BaseMod.addColor(Warden_Bronze_COLOR, WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(),
+       /* BaseMod.addColor(Warden_Bronze_COLOR, WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(),
                 WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(),
                 WARDEN_BRONZE_ATTACK, WARDEN_BRONZE_SKILL, WARDEN_BRONZE_POWER, WARDEN_BRONZE_ENERGY_ORB,
                 WARDEN_BRONZE_ATTACK_P, WARDEN_BRONZE_SKILL_P, WARDEN_BRONZE_POWER_P,
-                WARDEN_BRONZE_ENERGY_ORB_P, WARDEN_BRONZE_SMALL_ORB);
+                WARDEN_BRONZE_ENERGY_ORB_P, WARDEN_BRONZE_SMALL_ORB);*/
         BaseMod.addColor(Rimedancer_Cyan_COLOR, RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(),
                 RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(),
-                RIMEDANCER_CYAN_ATTACK, RIMEDANCER_CYAN_SKILL, RIMEDANCER_CYAN_POWER, WARDEN_BRONZE_ENERGY_ORB,
+                RIMEDANCER_CYAN_ATTACK, RIMEDANCER_CYAN_SKILL, RIMEDANCER_CYAN_POWER, RIMEDANCER_CYAN_ENERGY_ORB,
                 RIMEDANCER_CYAN_ATTACK_P,RIMEDANCER_CYAN_SKILL_P, RIMEDANCER_CYAN_POWER_P,
-                WARDEN_BRONZE_ENERGY_ORB_P, WARDEN_BRONZE_SMALL_ORB);
+                RIMEDANCER_CYAN_ENERGY_ORB_P, RIMEDANCER_CYAN_SMALL_ORB);
         Properties justicarDefaults = new Properties();
         justicarDefaults.getProperty("Duality Tutorial Seen","TRUE");
-        justicarDefaults.getProperty("Temporal Stress Tutorial Seen","TRUE");
+        justicarDefaults.getProperty("Temporal Stigmata Tutorial Seen","TRUE");
         justicarDefaults.getProperty("Enable Chimera Crossover","TRUE");
         try {
             justicarConfig = new SpireConfig("The Justicar", "DragonkinMod", justicarDefaults);
@@ -208,7 +217,7 @@ public class DragonMod implements
         }
         logger.info("Justicar CONFIG OPTIONS LOADED:");
         logger.info("Duality tutorial seen: " + justicarConfig.getString("Duality Tutorial Seen") + ".");
-        logger.info("Temporal Stress tutorial seen: " + justicarConfig.getString("Temporal Stress Tutorial Seen") + ".");
+        logger.info("Temporal Stigmata tutorial seen: " + justicarConfig.getString("Temporal Stigmata Tutorial Seen") + ".");
         logger.info("Enable Chimera Crossover: " + justicarConfig.getString("Blessing Tutorial Seen") + ".");
         logger.info("Done creating the color");
 
@@ -281,6 +290,8 @@ public class DragonMod implements
         //The information used is taken from your pom.xml file.
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, null);
         CustomIntent.add(new BleedingOutIntent());
+        HymnManager.VersePile = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        CantripManager.CantripPile = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     }
     private static BitmapFont prepFont(FreeTypeFontGenerator g, float size, boolean isLinearFiltering) {
         FreeTypeFontGenerator.FreeTypeFontParameter p = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -313,31 +324,6 @@ public class DragonMod implements
             font.getData().breakChars = LocalizedStrings.break_chars.toCharArray();
         }
         return font;
-    }
-    public static boolean getStressRender(){
-        if (CardCrawlGame.dungeon != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
-            if (renderStressUI) {
-                if (StressUI == null) {
-                    StressUI = new TemporalStressUI(ImageMaster.loadImage("theDragonkinResources/images/ui/Stressvfx.png"));
-                }
-                return true;
-            } else if (TemporalStressField.Stress.get(AbstractDungeon.player) > 0 || AbstractDungeon.player.chosenClass == THE_WARDEN) {
-                renderStressUI = true;
-                if (StressUI == null) {
-                    StressUI = new TemporalStressUI(ImageMaster.loadImage("theDragonkinResources/images/ui/Stressvfx.png"));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-    public static void renderStressCounter(SpriteBatch sb, float current_x){
-        StressUI.render(sb, current_x);
-    }
-
-    public static void updateStressCounter()
-    {
-        StressUI.update();
     }
     /*----------Localization----------*/
 
@@ -444,24 +430,49 @@ public class DragonMod implements
 
     @Override
     public void receiveEditCards() {
+        //Basegame Icons
+        CustomIconHelper.addCustomIcon(BlockIcon.get());
+        CustomIconHelper.addCustomIcon(WeakIcon.get());
+        CustomIconHelper.addCustomIcon(VulnerableIcon.get());
+        CustomIconHelper.addCustomIcon(LockonIcon.get());
+        CustomIconHelper.addCustomIcon(FocusIcon.get());
+        CustomIconHelper.addCustomIcon(FrailIcon.get());
+
+        //Generic Dragon Icons
+        CustomIconHelper.addCustomIcon(ReinforceIcon.get());
+        CustomIconHelper.addCustomIcon(PowerfulIcon.get());
+        CustomIconHelper.addCustomIcon(CourageIcon.get());
+        //Justicar Icons
         CustomIconHelper.addCustomIcon(FireIcon.get());
         CustomIconHelper.addCustomIcon(LightIcon.get());
         CustomIconHelper.addCustomIcon(ExaltIcon.get());
-        CustomIconHelper.addCustomIcon(TemporalIcon.get());
+        CustomIconHelper.addCustomIcon(StigmataIcon.get());
+        CustomIconHelper.addCustomIcon(HolyIcon.get());
+        CustomIconHelper.addCustomIcon(ScorchIcon.get());
+        CustomIconHelper.addCustomIcon(ZealIcon.get());
+        CustomIconHelper.addCustomIcon(SanctifyIcon.get());
+
+        //Rimedancer Icons
+        CustomIconHelper.addCustomIcon(RangedIcon.get());
         CustomIconHelper.addCustomIcon(FrostIcon.get());
+        CustomIconHelper.addCustomIcon(ChillIcon.get());
+        CustomIconHelper.addCustomIcon(BleedIcon.get());
+        CustomIconHelper.addCustomIcon(SubzeroIcon.get());
+
         logger.info("Add variables");
         BaseMod.addDynamicVariable(new DefaultSecondMagicNumber());
         BaseMod.addDynamicVariable(new SecondDamage());
         logger.info("Adding cards");
-        new AutoAdd(modID).packageFilter(AbstractDragonCard.class).setDefaultSeen(true).cards();
+        new AutoAdd(modID).packageFilter(AbstractJusticarCard.class).setDefaultSeen(true).cards();
+        new AutoAdd(modID).packageFilter(AbstractRimedancerCard.class).setDefaultSeen(true).cards();
     }
 
     @Override
     public void receiveEditCharacters() {
         BaseMod.addCharacter(new TheJusticar("the Justicar", THE_JUSTICAR),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_JUSTICAR);
-       /* BaseMod.addCharacter(new TheDrifter("the Drifter", TheDrifter.Enums.THE_DRIFTER),
-                THE_DEFAULT_BUTTON, THE_DEFAULT_PORTRAIT, TheDrifter.Enums.THE_DRIFTER);*/
+      // BaseMod.addCharacter(new TheWarden("the Drifter", THE_WARDEN),
+               //JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_WARDEN);
         BaseMod.addCharacter(new TheRimedancer("the Rimedancer", THE_RIMEDANCER),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_RIMEDANCER);
         receiveEditPotions();
@@ -520,23 +531,13 @@ public class DragonMod implements
     }
 
     @Override
-    public void receiveOnPlayerTurnStart() {
-        damagetaken = false;
-        DecayStagger = false;
-        AbstractSeal.DevotionEffects = false;
-        for (AbstractNotOrb seal : Seals){
-            seal.onStartOfTurn();
-        }
-    }
-
-    @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
         StatusesCycledThisCombat = 0;
         CardsCycledThisCombat = 0;
         BurnsCycledThisCombat = 0;
-        PenancePower.Power = 20;
-        TemporalStressField.Stress.set(AbstractDungeon.player,0);
-        Seals.clear();
+        HymnManager.onBattleStart();
+        StigmataManager.onBattleStart();
+        CantripManager.onBattleStart();
         Icicle.target = null;
     }
 
@@ -545,11 +546,11 @@ public class DragonMod implements
         StatusesCycledThisTurn = 0;
         CardsCycledThisTurn = 0;
         BurnsCycledThisTurn = 0;
-        if (TemporalStressField.Stress.get(AbstractDungeon.player) > 0 && !DecayStagger) {
-            Wiz.att(new GainStressAction(-1*(TemporalStressField.Stress.get(AbstractDungeon.player)/2)));
+        if (StigmataManager.getStigmataTotal() > 0 && !DecayStagger) {
+            StigmataManager.spendStigmata(StigmataManager.getStigmataTotal()/2);
         }
         DecayStagger = true;
-        for (AbstractNotOrb seal : Seals){
+        for (AbstractNotOrb seal : HymnManager.ActiveVerses){
             seal.onEndOfTurn();
         }
         if (abstractMonster.hasPower(BleedPower.POWER_ID) && abstractMonster.currentHealth <= abstractMonster.getPower(BleedPower.POWER_ID).amount){
@@ -566,41 +567,42 @@ public class DragonMod implements
             tilerasShield.counter += 3;
         }
     }
-    public static void TriggerOnCycle(AbstractCard ca){
-        for (AbstractCard c : AbstractDungeon.player.discardPile.group){
-            if (c instanceof TriggerOnCycleEffect){
-                if (c.type == AbstractCard.CardType.STATUS || c instanceof AbstractPrimalCard){
-                    ((TriggerOnCycleEffect) c).TriggerOnCycle(c);
-                }
-            }
-        }
-        for (AbstractCard c : AbstractDungeon.player.drawPile.group){
-            if (c instanceof TriggerOnCycleEffect){
-                if (c.type == AbstractCard.CardType.STATUS || c instanceof AbstractPrimalCard){
-                    ((TriggerOnCycleEffect) c).TriggerOnCycle(c);
-                }
-            }
-        }
-        for (AbstractCard c : AbstractDungeon.player.exhaustPile.group){
-            if (c instanceof TriggerOnCycleEffect){
-                if (c.type == AbstractCard.CardType.STATUS || c instanceof AbstractPrimalCard){
-                    ((TriggerOnCycleEffect) c).TriggerOnCycle(c);
-                }
-            }
-        }
-        for (AbstractCard c : AbstractDungeon.player.hand.group){
-            if (c instanceof TriggerOnCycleEffect){
-                ((TriggerOnCycleEffect) c).TriggerOnCycle(ca);
-            }
-        }
-        for (AbstractRelic r : AbstractDungeon.player.relics){
-            if (r instanceof TriggerOnCycleEffect){
-                ((TriggerOnCycleEffect) r).TriggerOnCycle(ca);
-            }
-        }
-    }
     @Override
     public void receiveStartGame() {
+        CantripManager.cantripPileButton = new CantripManager.CantripPileButton();
+        HymnManager.versePileButton = new HymnManager.VersePileButton();
+    }
 
+    @Override
+    public void receivePostDungeonUpdate() {
+        if (HymnManager.versePileButton != null){
+            HymnManager.versePileButton.update();
+        }
+        if (CantripManager.cantripPileButton != null){
+            CantripManager.cantripPileButton.update();
+        }
+    }
+
+    @Override
+    public int receiveOnPlayerLoseBlock(int i) {
+        if (AbstractDungeon.player.hasPower(ReinforcePower.POWER_ID)){
+            return 0;
+        }
+        return i;
+    }
+
+    @Override
+    public void receiveOnPlayerTurnStartPostDraw() {
+        damagetaken = false;
+        DecayStagger = false;
+        if(!HymnManager.ActiveVerses.isEmpty()){
+            Wiz.atb(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    isDone = true;
+                    HymnManager.ActiveVerses.get(0).onStartOfTurn();
+                }
+            });
+        }
     }
 }

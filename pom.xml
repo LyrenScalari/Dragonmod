@@ -75,6 +75,13 @@
             <systemPath>${stsPath}/mods/LightsOut.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>theprofessor</groupId>
+            <artifactId>TheProfessor</artifactId>
+            <version>0.0.6</version>
+            <scope>system</scope>
+            <systemPath>${stsPath}/mods/TheProfessor.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>actlikeit</groupId>
             <artifactId>actlikeit</artifactId>
             <version>1.0.0</version>

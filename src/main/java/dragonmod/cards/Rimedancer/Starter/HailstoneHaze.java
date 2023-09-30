@@ -1,11 +1,11 @@
 package dragonmod.cards.Rimedancer.Starter;
 
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import dragonmod.actions.FlourishAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
 import dragonmod.util.Wiz;
@@ -31,7 +31,7 @@ public class HailstoneHaze extends AbstractRimedancerCard {
         Wiz.block(p,block);
         Wiz.atb(new ChannelAction(new Icicle()));
         if (AbstractDungeon.actionManager.cardsPlayedThisCombat.size() >= 2 && ((AbstractCard)AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 2)).type == AbstractCard.CardType.SKILL) {
-            Wiz.atb(new DrawCardAction(1));
+           Wiz.atb(new FlourishAction());
         }
     }
 }

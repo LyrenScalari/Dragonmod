@@ -1,95 +1,33 @@
 {
-  "${modID}:MoltenScales": {
-    "NAME": "Magma Scales",
-    "DESCRIPTIONS": ["Whenever you draw a status card apply #b ",
-      " #yScorch to a random enemy. NL Damage from #yBurns is converted to [${modID}:FireIcon]"
+  "${modID}:Reinforce": {
+    "NAME": "Reinforce",
+    "DESCRIPTIONS": ["Block is not lost at the start of your next #b",
+      " turns. Blocked damage is dealt back to attackers."
+    ]
+  },
+  "${modID}:Powerful": {
+    "NAME": "Powerful",
+    "DESCRIPTIONS": ["Deal #b30% more damage and gain #b30% more [dragonmod:BlockIcon] for #b",
+      " turns."
     ]
   },
   "${modID}:Scorch": {
     "NAME": "Scorch",
-    "DESCRIPTIONS": ["When attacked, takes #b",
-      " damage,", " and reduce this by #b1"
-    ]
-  },
-  "${modID}:DivineRetribution": {
-    "NAME": "Divine Retribution",
-    "DESCRIPTIONS": ["At the end of your turn deal #b"," damage to a random enemy"
-    ]
-  },
-  "${modID}:WingsofLight": {
-    "NAME": "Wings of Light",
-    "DESCRIPTIONS": ["The first time"," a Tribute Seal breaks this turn gain #b"," [${modID}:LightIcon] #yBlock",
-      "The first #b"," times"
-    ]
-  },
-  "${modID}:Penance": {
-    "NAME": "Penance",
-    "DESCRIPTIONS": ["When this creature obtains #b",
-      " #yPenance, it loses #b",
-      " HP and increases HP loss from #yPenance by #b10 this combat",
-      "."
-    ]
-  },
-  "${modID}:HolyInfusion": {
-    "NAME": "Condemnation",
-    "DESCRIPTIONS": ["In #b", " Turns, Deal #b", " damage to ALL enemies."
-    ]
-  },
-  "${modID}:AshenArmor": {
-    "NAME": "Molten Core",
-    "DESCRIPTIONS": ["When you draw a #yStatus #yCycle it and replace it with #yMolten #yEmber", ""
-    ]
-  },
-  "${modID}:AcidArmor": {
-    "NAME": "Pain Syphon",
-    "DESCRIPTIONS": ["Upgrade Drawn #yBurns. NL When you attack a #yScorched enemy draw #b", " card, and shuffle a #yBurn into your draw pile."
-    ]
-  },
-  "${modID}:BurningRain": {
-    "NAME": "Fire and Brimstone",
-    "DESCRIPTIONS": ["When you draw a #yStatus #yCycle it and Attack a random enemy for #b", " damage"
+    "DESCRIPTIONS": ["At the start of this creatures turn, it takes #b"," damage"
     ]
   },
   "${modID}:DivineConvictionpower": {
     "NAME": "Holy Power",
-    "DESCRIPTIONS": ["Increases Holy card damage and #yBlock gain by #b"]
+    "DESCRIPTIONS": ["Increases damage dealt and healing from #yCure by #b"]
   },
   "${modID}:SacrificePower": {
     "NAME": "Sacrifice",
     "DESCRIPTIONS": ["When you obtain #b"," spend it and Gain #b1 #yHoly #yPower"]
   },
-  "${modID}:Unbroken": {
-    "NAME": "Unbroken",
-    "DESCRIPTIONS": ["The first time you take damage each turn, gain that much block each next turn"]
+  "${modID}:Sanctify": {
+    "NAME": "Sanctify",
+    "DESCRIPTIONS": ["This creature takes #b25% less damage, when hit attackers are #yCured by #b"," and [dragonmod:SanctifyIcon] is reduced by #b1."]
   },
-  "${modID}:Perseverance": {
-    "NAME": "Perseverance",
-    "DESCRIPTIONS": ["Until your next turn, instead of being debuffed take #b"," damage."]
-  },
-  "${modID}:ReflectiveScales": {
-    "NAME": "Sanctuary",
-    "DESCRIPTIONS": ["Until your next turn, whenever you are attacked apply #b"," #yPenance to the attacker."]
-  },
-  "${modID}:IncendiaryFlow": {
-    "NAME": "Incendiary Flow",
-    "DESCRIPTIONS": ["After you discard a card this turn gain #b"," Block."
-    ]
-  },
-  "${modID}:BorrowedTime": {
-    "NAME": "Borrowed Time",
-    "DESCRIPTIONS":  [
-      "Next turn draw #b"," fewer cards."
-    ]
-  },
-  "${modID}:Subdued": {
-    "NAME": "Subdued",
-    "DESCRIPTIONS": ["This monster can deal no more than #b1 damage."]
-  },
-  "${modID}:CrusaderFormpower": {
-    "NAME": "Seraph Form",
-    "DESCRIPTIONS": ["Whenever you play an #yExalted card next turn, gain #b"," #yHoly #yPower and draw a card."]
-  },
-
 
   "${modID}:BorrowedCards": {
     "NAME": "Borrowed Time - Cards",
@@ -192,6 +130,18 @@
     "NAME": "Cryo-lattice",
     "DESCRIPTIONS": ["Once per turn after you remove an Icicle, gain #b",
       " Crystal Orb Slot"
+    ]
+  },
+  "${modID}:ExposeWeakness": {
+    "NAME": "Expose Weakness",
+    "DESCRIPTIONS": ["On recieving unblocked damage gain #b",
+      " [dragonmod:VulnerableIcon] and take #b1 additional damage this turn."
+    ]
+  },
+  "${modID}:Mark": {
+    "NAME": "Mark",
+    "DESCRIPTIONS": ["Take #b",
+      " additional damage."
     ]
   },
   "${modID}:Subzero": {

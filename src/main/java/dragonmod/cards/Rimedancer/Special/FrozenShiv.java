@@ -1,10 +1,9 @@
 package dragonmod.cards.Rimedancer.Special;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import dragonmod.actions.FireAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.powers.Rimedancer.PrecisionPower;
 import dragonmod.util.Wiz;
@@ -20,13 +19,6 @@ public class FrozenShiv extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
-        Wiz.atb(new AbstractGameAction() {
-            @Override
-            public void update() {
-                isDone = true;
-                AbstractDungeon.player.orbs.get(0).onStartOfTurn();
-                AbstractDungeon.player.orbs.get(0).onEndOfTurn();
-            }
-        });
+        Wiz.atb(new FireAction());
     }
 }

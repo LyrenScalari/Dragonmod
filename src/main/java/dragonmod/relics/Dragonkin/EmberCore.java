@@ -1,11 +1,12 @@
 package dragonmod.relics.Dragonkin;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.common.GainCustomBlockAction;
+import com.evacipated.cardcrawl.mod.stslib.blockmods.BlockModContainer;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import dragonmod.cards.Justicar.HolyWordBarrier;
+import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.relics.BaseRelic;
 
 import static dragonmod.DragonMod.makeID;
@@ -23,10 +24,9 @@ public class EmberCore extends BaseRelic {
 
     @Override
     public void onCardDraw(AbstractCard card){
-        AbstractCard DivineArmorRef = new HolyWordBarrier();
         if (card.type == AbstractCard.CardType.STATUS && !used){
             addToBot(new DrawCardAction(1));
-            addToBot(new GainCustomBlockAction(DivineArmorRef,AbstractDungeon.player,counter));
+            addToBot(new GainCustomBlockAction(new BlockModContainer(this,new DivineBlock(true)),AbstractDungeon.player,counter));
             used = true;
         }
     }

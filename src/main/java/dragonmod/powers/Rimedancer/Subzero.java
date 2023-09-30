@@ -11,11 +11,11 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import dragonmod.DragonMod;
 import dragonmod.orbs.Icicle;
 import dragonmod.powers.BasePower;
-import dragonmod.util.OnChannelOrbPower;
+import dragonmod.interfaces.OnChannelOrbPower;
 import dragonmod.util.Wiz;
 
 import static dragonmod.DragonMod.powerPath;
-import static dragonmod.util.TextureLoader.getTextureNull;
+import static dragonmod.ui.TextureLoader.getTextureNull;
 
 public class Subzero extends BasePower implements CloneablePowerInterface, OnChannelOrbPower {
     public AbstractCreature source;

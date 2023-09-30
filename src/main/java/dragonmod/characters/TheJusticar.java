@@ -21,7 +21,7 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import dragonmod.DragonMod;
-import dragonmod.cards.Justicar.*;
+import dragonmod.cards.Justicar.starter.*;
 import dragonmod.relics.Dragonkin.GarnetScales;
 import dragonmod.ui.EnergyOrbJusticar;
 import org.apache.logging.log4j.LogManager;
@@ -120,8 +120,8 @@ public class TheJusticar extends CustomPlayer {
 
         // =============== TEXT BUBBLE LOCATION =================
 
-        dialogX = (drawX + 80.0F * Settings.scale); // set location for text bubbles
-        dialogY = (drawY + 300.0F * Settings.scale); // you can just copy these values
+        dialogX = (drawX + 120.0F * Settings.scale); // set location for text bubbles
+        dialogY = (drawY + 280.0F * Settings.scale); // you can just copy these values
 
         // =============== /TEXT BUBBLE LOCATION/ =================
 
@@ -144,17 +144,16 @@ public class TheJusticar extends CustomPlayer {
 
         logger.info("Begin loading starter Deck Strings");
 
-        retVal.add(DragonMod.makeID(Strike.ID));
-        retVal.add(DragonMod.makeID(Strike.ID));
-        retVal.add(DragonMod.makeID(HolyStrike.ID));
-        retVal.add(DragonMod.makeID(HolyDefend.ID));
-        retVal.add(DragonMod.makeID(HolySmite.ID));
-        retVal.add(DragonMod.makeID(Defend.ID));
-        retVal.add(DragonMod.makeID(Defend.ID));
-        retVal.add(DragonMod.makeID(PrimalStrike.ID));
-        retVal.add(DragonMod.makeID(PrimalDefend.ID));
-        retVal.add(DragonMod.makeID(BlazingBreath.ID));
-
+        retVal.add(DragonMod.makeID(JusticarStrike.ID));
+        retVal.add(DragonMod.makeID(JusticarStrike.ID));
+        retVal.add(DragonMod.makeID(JusticarStrike.ID));
+        retVal.add(DragonMod.makeID(BlazingStrike.ID));
+        retVal.add(DragonMod.makeID(Sunbeam.ID));
+        retVal.add(DragonMod.makeID(JusticarDefend.ID));
+        retVal.add(DragonMod.makeID(JusticarDefend.ID));
+        retVal.add(DragonMod.makeID(JusticarDefend.ID));
+        retVal.add(DragonMod.makeID(JusticarDefend.ID));
+        retVal.add(DragonMod.makeID(Cauterize.ID));
         return retVal;
     }
 
@@ -225,7 +224,7 @@ public class TheJusticar extends CustomPlayer {
     //Which card should be obtainable from the Match and Keep event?
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new HolySmite();
+        return new JusticarStrike();
     }
 
     // The class name as it appears next to your player name in-game

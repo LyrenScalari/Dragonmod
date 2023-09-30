@@ -5,7 +5,7 @@ import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import dragonmod.DragonMod;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
 
 
 import java.util.ArrayList;

@@ -3,6 +3,7 @@ package dragonmod.cards.Rimedancer.Uncommon;
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -15,6 +16,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.LockOnPower;
 import dragonmod.CardMods.SCVShatterMod;
+import dragonmod.DamageModifiers.RangedDamage;
 import dragonmod.actions.IcicleFanAction;
 import dragonmod.actions.ShatterAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
@@ -35,6 +37,7 @@ public class FrostyFlash extends AbstractRimedancerCard {
         setMagic(2, 1);
         energyCosts.put(TypeEnergyHelper.Mana.Shatter, 1);
         CardModifierManager.addModifier(this, new SCVShatterMod());
+        DamageModifierManager.addModifier(this,new RangedDamage(true));
     }
 
     @Override

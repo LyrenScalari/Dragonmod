@@ -2,9 +2,8 @@ package dragonmod.relics;
 
 import basemod.abstracts.CustomRelic;
 import basemod.helpers.RelicType;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.GeneralUtils;
-import dragonmod.util.TextureLoader;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 

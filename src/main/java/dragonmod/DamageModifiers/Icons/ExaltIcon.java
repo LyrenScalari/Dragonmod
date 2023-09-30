@@ -2,7 +2,7 @@ package dragonmod.DamageModifiers.Icons;
 
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import dragonmod.DragonMod;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
 
 public class ExaltIcon extends AbstractCustomIcon {
     public static final String ID = DragonMod.makeID("Exalt");

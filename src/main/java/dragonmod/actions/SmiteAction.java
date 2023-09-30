@@ -4,8 +4,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import dragonmod.util.DivineEyeParticle;
-import dragonmod.util.SmiteEffect;
+import dragonmod.ui.SmiteEffect;
 
 import java.util.function.Supplier;
 
@@ -40,9 +39,6 @@ public class SmiteAction extends AbstractGameAction {
                 target = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
             }
             AbstractDungeon.effectList.add(new SmiteEffect(target, this));
-            for (int i = 0; i < AbstractDungeon.miscRng.random(20, 30); ++i) {
-                AbstractDungeon.effectsQueue.add(new DivineEyeParticle());
-            }
             shot = true;
         }
         if (doDamage && !target.isDeadOrEscaped()) {

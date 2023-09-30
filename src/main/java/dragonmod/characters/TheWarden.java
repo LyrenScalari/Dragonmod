@@ -10,6 +10,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.colorless.Madness;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
@@ -21,8 +22,6 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import dragonmod.DragonMod;
-import dragonmod.cards.Justicar.HolySmite;
-import dragonmod.cards.Warden.*;
 import dragonmod.relics.Drifter.BronzePocketWatch;
 import dragonmod.ui.EnergyOrbDrifter;
 import org.apache.logging.log4j.LogManager;
@@ -140,16 +139,6 @@ public class TheWarden extends CustomPlayer {
         ArrayList<String> retVal = new ArrayList<>();
 
         logger.info("Begin loading starter Deck Strings");
-        retVal.add(DragonMod.makeID(DrifterStrike.ID));
-        retVal.add(DragonMod.makeID(DrifterStrike.ID));
-        retVal.add(DragonMod.makeID(DrifterStrike.ID));
-        retVal.add(DragonMod.makeID(DrifterStrike.ID));
-        retVal.add(DragonMod.makeID(LeadingLick.ID));
-        retVal.add(DragonMod.makeID(DrifterDefend.ID));
-        retVal.add(DragonMod.makeID(DrifterDefend.ID));
-        retVal.add(DragonMod.makeID(DrifterDefend.ID));
-        retVal.add(DragonMod.makeID(CrumblingBarrier.ID));
-        retVal.add(DragonMod.makeID(Gravitas.ID));
         return retVal;
     }
 
@@ -220,7 +209,7 @@ public class TheWarden extends CustomPlayer {
     //Which card should be obtainable from the Match and Keep event?
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new HolySmite();
+        return new Madness();
     }
 
     // The class name as it appears next to your player name in-game

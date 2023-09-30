@@ -17,7 +17,8 @@ public class LeadAstray extends AbstractRimedancerCard {
     public LeadAstray(){
         super(ID,1,CardType.SKILL,CardRarity.COMMON,CardTarget.ENEMY);
         setMagic(2);
-        setBlock(7,3);
+        setBlock(7);
+        setMagic2(2,2);
     }
     public void triggerOnGlowCheck() {
         if (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && ((AbstractCard)AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.SKILL) {
@@ -42,7 +43,7 @@ public class LeadAstray extends AbstractRimedancerCard {
         if (AbstractDungeon.actionManager.cardsPlayedThisCombat.size() >= 2 &&
                 ((AbstractCard)AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 2)).type
                         == AbstractCard.CardType.SKILL) {
-            Wiz.applyToEnemy(m,new Chillpower(m,p,magicNumber));
+            Wiz.applyToEnemy(m,new Chillpower(m,p,SecondMagicNumber));
         }
     }
 }

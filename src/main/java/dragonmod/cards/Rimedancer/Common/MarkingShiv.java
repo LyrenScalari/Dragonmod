@@ -3,6 +3,7 @@ package dragonmod.cards.Rimedancer.Common;
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.LockOnPower;
 import dragonmod.CardMods.SCVShatterMod;
+import dragonmod.DamageModifiers.RangedDamage;
 import dragonmod.actions.ShatterAction;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
@@ -26,10 +28,11 @@ public class MarkingShiv extends AbstractRimedancerCard {
     private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:ShatterTooltip");
     public MarkingShiv() {
         super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY);
-        setDamage(8, 3);
+        setDamage(6, 3);
         setMagic(2,1);
         energyCosts.put(TypeEnergyHelper.Mana.Shatter,1);
         CardModifierManager.addModifier(this,new SCVShatterMod());
+        DamageModifierManager.addModifier(this,new RangedDamage(true));
     }
     @Override
     public List<TooltipInfo> getCustomTooltips() {

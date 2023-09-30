@@ -1,13 +1,11 @@
 package dragonmod.relics.Drifter;
 
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import dragonmod.cards.Warden.TimeTurner;
 import dragonmod.relics.BaseRelic;
 import dragonmod.relics.onScryRelic;
 
@@ -33,7 +31,6 @@ public class BronzePocketWatch extends BaseRelic implements onScryRelic { // You
     public void atBattleStartPreDraw() {
         used = false;
         this.addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-        this.addToBot(new MakeTempCardInHandAction(new TimeTurner(), 1, false));
     }
 
     // Description

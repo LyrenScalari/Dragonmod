@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.abstracts.TwoAmountPower;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import dragonmod.DragonMod;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
 
 
 import static dragonmod.DragonMod.makeID;

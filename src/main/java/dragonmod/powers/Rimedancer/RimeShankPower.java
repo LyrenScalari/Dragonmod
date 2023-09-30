@@ -3,6 +3,7 @@ package dragonmod.powers.Rimedancer;
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.stslib.patches.NeutralPowertypePatch;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +19,7 @@ public class RimeShankPower extends BasePower implements CloneablePowerInterface
     public AbstractCreature source;
     public static final String POWER_ID = DragonMod.makeID("Rimeshank");
     public RimeShankPower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
-        super(POWER_ID,PowerType.DEBUFF,false,owner,source, amount);
+        super(POWER_ID, NeutralPowertypePatch.NEUTRAL,false,owner,source, amount);
         priority = 70;
         this.loadRegion("fading");
         powerToLose = new PainfulStabsPower(owner);

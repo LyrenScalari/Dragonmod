@@ -3,7 +3,7 @@ package dragonmod.patches.Orbs;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import dragonmod.util.onEvokeOrbOrb;
+import dragonmod.interfaces.onEvokeOrbOrb;
 import javassist.CtBehavior;
 
 

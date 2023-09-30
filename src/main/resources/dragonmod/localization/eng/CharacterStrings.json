@@ -9,10 +9,10 @@
       "NL You Raise your weapon, and ready your voice.",
       "Navigating an unlit street, you come across several hooded figures in the midst of some dark ritual. As you approach, they turn to you in eerie unison. The tallest among them bares fanged teeth and extends a long, pale hand towards you. NL ~\"Join~ ~us~ ~Obsidian~ ~Scion,~ ~and~ ~feel~ ~the~ ~warmth~ ~of~ ~the~ ~Spire.\"~"
     ,
-      "#r~BETRAYAL,~ NL NL You gaze over the crowd of kobolds that called this mountain city home, the Grand Inquisitor is addressing the crowd. you can do nothing but wait in ~silence.~ The Onyx dragon's voice @pierces@ the still air over the ~captured~ ~city~ ~\"Burn~ ~the~ ~Heretic~ ~city~ ~to~ ~the~ ~ground,~ ~Let~ ~None~ ~Survive!\"~ instantly all the divine warriors you fought alongside begin to set the city ablaze. NL You jump into action, against the Grant Inquisitor's command, ~\"The~ ~People~ ~here~ ~have~ ~done~ ~nothing~ ~deserving~ ~of~ ~Death!\"~ your own voice booms, as you take up arms against your former allies. NL You saved many innocent lives that day, after the battle and the surrender of your former allies, a #y@Divine@ #y@Spark@ appeared in the distant mountains to the south a new path."
+      "#r~BETRAYAL.~ NL NL You gaze over the crowd of kobolds that called this mountain city home, the Grand Inquisitor is addressing the crowd. you can do nothing but wait in ~silence.~ The Onyx dragon's voice @pierces@ the still air over the ~captured~ ~city~ ~\"Burn~ ~the~ ~Heretic~ ~city~ ~to~ ~the~ ~ground,~ ~Let~ ~None~ ~Survive!\"~ instantly all the divine warriors you fought alongside begin to set the city ablaze. NL You jump into action, against the Grant Inquisitor's command, ~\"The~ ~People~ ~here~ ~have~ ~done~ ~nothing~ ~deserving~ ~of~ ~Death!\"~ your own voice booms, as you take up arms against your former allies. NL You saved many innocent lives that day, after the battle and the surrender of your former allies, a #y@Divine@ #y@Spark@ appeared in the distant mountains to the south a new path."
     ]
   },
-  "${modID}:TheDrifter": {
+  "${modID}:TheWarden": {
     "NAMES": [
       "The Warden",
       "the Warden"
@@ -22,7 +22,7 @@
       "NL The clock strikes midnight, your empire for the taking.",
       "Navigating an unlit street, you come across several hooded figures in the midst of some dark ritual. As you approach, they turn to you in eerie unison. The tallest among them bares fanged teeth and extends a long, pale hand towards you. NL ~\"Join~ ~us~ ~Brother,~ ~and~ ~feel~ ~the~ ~warmth~ ~of~ ~the~ ~Spire.\"~"
     ,
-      "#p~APATHY,~ NL NL A World of ~Neon~ ruin lays before you, grand lights shower the decaying concrete jungle in a never ending light. NL This city never sleeps, and neither shall you, so long as theirs ~trash~ roaming about. @CRACK@ ... That one didn't even hear you approach... however in that moment, a few of their friends heard you, and you dash your way down the street the goons in pursuit. gunfire rings out, and then the alley you dashed down has no exit. In a panic you fumble to ready your blade, however before you do @CRACK,@ and the world goes dark. NL theirs no rest for the wicked and you later awake to sunrise in the badlands outside the city, the only things you didn't have stolen was your pocket watch, you think, \"work never ends, but maybe, in a different time, another place this could be avoided.\" NL you dive into the shimmering bronze tear in the air your watch creates."
+      "#p~APATHY,~ NL NL A World of ~Neon~ ruin lays before you, grand lights shower the decaying concrete jungle in a never ending light. NL This city never sleeps, and neither shall you, so long as theirs ~trash~ roaming about. @CRACK@ ... That one didn't even hear you approach... however in that moment, a few of their friends heard you, gunfire rings out, and then the alley you dash down has no exit. In a panic you fumble to ready your blade, however before you do @CRACK,@ and the world goes dark. NL theirs no rest for the wicked and you later awake to sunrise in the badlands outside the city, the only things you didn't have stolen was your pocket watch, you think, \"work never ends, but maybe, in a different time, another place this could be avoided.\" NL you dive into the shimmering bronze tear in the air your watch creates."
     ]
   },
   "${modID}:TheRimedancer": {

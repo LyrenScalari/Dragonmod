@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import dragonmod.DamageModifiers.Icons.IceCounter;
 import dragonmod.util.Wiz;
@@ -75,20 +74,6 @@ public class FrozenMod extends AbstractCardModifier {
         ArrayList<TooltipInfo> retval = new ArrayList<TooltipInfo>();
         retval.add(new TooltipInfo(keyword.TEXT[0],keyword.TEXT[1]));
         return retval;
-    }
-    public void onExhausted(AbstractCard card) {
-        Wiz.atb(new AbstractGameAction() {
-            @Override
-            public void update() {
-                isDone = true;
-                AbstractDungeon.player.exhaustPile.moveToDiscardPile(card);
-                FrozenMod.this.duration -= 1;
-                if (FrozenMod.this.duration <= 0){
-                    CardModifierManager.removeSpecificModifier(card, FrozenMod.this,true);
-                    card.selfRetain = false;
-                }
-            }
-        });
     }
     public boolean shouldApply(AbstractCard card) {
         if (CardModifierManager.hasModifier(card,"FrozenMod")){

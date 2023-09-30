@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import dragonmod.actions.GainStressAction;
 import dragonmod.powers.BasePower;
 import dragonmod.util.Wiz;
 
@@ -36,7 +35,6 @@ public class BorrowedTimeCards extends BasePower implements CloneablePowerInterf
         this.description = DESCRIPTIONS[0]+amount+DESCRIPTIONS[1];
     }
     public void atEndOfTurn(boolean isPlayer) {
-        addToBot(new GainStressAction(amount));
         addToBot(new RemoveSpecificPowerAction(owner,owner,this));
     }
     public void onCardDraw(AbstractCard card) {

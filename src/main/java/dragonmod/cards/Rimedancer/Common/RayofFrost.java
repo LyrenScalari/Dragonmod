@@ -29,8 +29,8 @@ public class RayofFrost extends AbstractRimedancerCard {
     }
     public RayofFrost(){
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
-        setDamage(10,3);
-        setBlock(6,3);
+        setDamage(10);
+        setBlock(6,5);
         BlockModifierManager.addModifier(this,new IceArmor(true));
         CardModifierManager.addModifier(this,new AddIconToDescriptionMod(AddIconToDescriptionMod.BLOCK, FrostIcon.get()));
     }

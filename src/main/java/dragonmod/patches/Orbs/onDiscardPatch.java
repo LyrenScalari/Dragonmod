@@ -4,7 +4,7 @@ import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
-import dragonmod.DragonMod;
+import dragonmod.util.HymnManager;
 import dragonmod.util.AbstractNotOrb;
 import dragonmod.util.AbstractRune;
 import javassist.CtBehavior;
@@ -18,7 +18,7 @@ public class onDiscardPatch {
     public static void onDiscardPatch(DiscardAction __instance) {
         boolean endturn = ReflectionHacks.getPrivate(__instance,DiscardAction.class,"endTurn");
         if (!endturn) {
-            for (AbstractNotOrb o : DragonMod.Seals) {
+            for (AbstractNotOrb o : HymnManager.ActiveVerses) {
                 if (o instanceof AbstractRune) {
                     ((AbstractRune) o).onManualDiscard();
                 }

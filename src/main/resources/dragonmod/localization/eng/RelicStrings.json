@@ -1,9 +1,9 @@
 {
   "${modID}:GarnetScales": {
-    "NAME": "Garnet Scales",
-    "FLAVOR": "They Pulse with the Warmth of a Dragon's Fury.",
+    "NAME": "Sunstone Axe",
+    "FLAVOR": "Eschew the Mace and take up the Axe, disgraced Warrior of Light, defector of the corrupt order.",
     "DESCRIPTIONS": [
-      "At the start of combat, gain #b9 [theDragonkin:LightIcon]"
+      "At the start of combat, apply #b5 [dragonmod:SanctifyIcon] to a random enemy."
     ]
   },
   "${modID}:RoyalSignet": {

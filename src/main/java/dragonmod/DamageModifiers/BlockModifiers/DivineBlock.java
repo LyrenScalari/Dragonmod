@@ -1,14 +1,13 @@
 package dragonmod.DamageModifiers.BlockModifiers;
 
 
-import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.blockmods.AbstractBlockModifier;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import java.util.ArrayList;
+import dragonmod.util.Wiz;
 
 import static dragonmod.DragonMod.DIVINE_ARMOR_ICON;
 
@@ -37,15 +36,6 @@ public class DivineBlock extends AbstractBlockModifier {
         return holyTooltip.TEXT[1];
     }
 
-    public ArrayList<TooltipInfo> getCustomTooltips() {
-        ArrayList<TooltipInfo> tips = new ArrayList<>();
-        tips.add(new TooltipInfo(holyTooltip.TEXT[0], holyTooltip.TEXT[1]));
-        return tips;
-    }
-    public Priority priority() {
-        return Priority.TOP;
-    }
-
     public Color blockImageColor() {
         return CardHelper.getColor(255.0f, 255.0f, 255.0f);
     }
@@ -54,13 +44,15 @@ public class DivineBlock extends AbstractBlockModifier {
         return CardHelper.getColor(255.0f, 255.0f, 255.0f);
     }
 
+    public Priority priority() {
+        return Priority.BOTTOM;
+    }
+
     public Texture customBlockImage() {
         return DIVINE_ARMOR_ICON;
     }
 
-    public int amountLostAtStartOfTurn() {
-        return 0;
+    public void atStartOfTurnPreBlockLoss() {
+        Wiz.block(owner,getCurrentAmount()*2);
     }
-
-
 }

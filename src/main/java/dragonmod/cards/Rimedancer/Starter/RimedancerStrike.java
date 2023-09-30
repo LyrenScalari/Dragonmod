@@ -7,9 +7,11 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
 
@@ -23,11 +25,17 @@ public class RimedancerStrike extends AbstractRimedancerCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        for (AbstractOrb o : p.orbs){
-            if (o instanceof Icicle){
-                Wiz.atb(new ThrowIcicleAction(o,m.hb, Color.CYAN));
+        Icicle tothrow = null;
+        for (AbstractOrb o : Wiz.adp().orbs) {
+            if (o instanceof Icicle) {
+                tothrow = (Icicle) o;
                 break;
             }
+        }
+        if (tothrow != null){
+            Wiz.atb(new ThrowIcicleAction(tothrow, m.hb, Color.CYAN));
+        } else {
+            Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
         }
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
     }

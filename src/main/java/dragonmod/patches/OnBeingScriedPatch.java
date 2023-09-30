@@ -13,7 +13,7 @@ import dragonmod.actions.OnBeingScriedInterface;
 import dragonmod.actions.ScryCallbackAction;
 import dragonmod.powers.Drifter.onScriedPower;
 import dragonmod.relics.onScryRelic;
-import dragonmod.util.CardSeenScriedInterface;
+import dragonmod.interfaces.CardSeenScriedInterface;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import javassist.expr.ExprEditor;

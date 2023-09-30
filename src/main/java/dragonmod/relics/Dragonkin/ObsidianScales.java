@@ -1,12 +1,7 @@
 package dragonmod.relics.Dragonkin;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.powers.watcher.VigorPower;
 import dragonmod.DragonMod;
-import dragonmod.cards.Justicar.AbstractPrimalCard;
 import dragonmod.relics.BaseRelic;
 
 import static dragonmod.DragonMod.makeID;
@@ -33,13 +28,7 @@ public class ObsidianScales extends BaseRelic {
 
         return DESCRIPTIONS[0] + sb.toString() + DESCRIPTIONS[1];
     }
-    public void onManualDiscard() {
-        if (AbstractDungeon.player.discardPile.getTopCard() instanceof AbstractPrimalCard ||AbstractDungeon.player.discardPile.getTopCard().type == AbstractCard.CardType.STATUS){
-            this.flash();
-            addToBot(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player, new VigorPower(AbstractDungeon.player,counter)));
-            addToBot(new GainBlockAction(AbstractDungeon.player,counter));
-        }
-    }
+
     @Override
     public void obtain() {
         if (AbstractDungeon.player.hasRelic(GarnetScales.ID)) {

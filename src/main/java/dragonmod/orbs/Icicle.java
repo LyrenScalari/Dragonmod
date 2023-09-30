@@ -24,8 +24,8 @@ import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.powers.Rimedancer.Chillpower;
-import dragonmod.util.OnUseCardOrb;
-import dragonmod.util.TextureLoader;
+import dragonmod.interfaces.OnUseCardOrb;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
 public class Icicle extends CustomOrb implements OnUseCardOrb {
@@ -41,7 +41,7 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
     private float vfxIntervalMax = 0.4f;
     private static final float ORB_WAVY_DIST = 0.04f;
     private static final float PI_4 = 12.566371f;
-    private boolean hFlip1 = MathUtils.randomBoolean();
+    private boolean hFlip1 = false;
     public static boolean chaining = false;
     public boolean thrown = false;
     public float angle = 0.0f;
@@ -49,14 +49,14 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
         super(ORB_ID, orbString.NAME, PASSIVE_AMOUNT, EVOKE_AMOUNT, DESCRIPTIONS[1], DESCRIPTIONS[3], DragonMod.orbPath("Icicle.png"));
         img = TextureLoader.getTexture(DragonMod.orbPath("Icicle.png"));
         updateDescription();
-        angle = MathUtils.random(360.0f); // More Animation-related Numbers
+        angle = MathUtils.random(360f); // More Animation-related Numbers
         channelAnimTimer = 0.5f;
     }
     public Icicle(int power) {
         super(ORB_ID, orbString.NAME, power, power+2, DESCRIPTIONS[1], DESCRIPTIONS[3], DragonMod.orbPath("Icicle.png"));
         img = TextureLoader.getTexture(DragonMod.orbPath("Icicle.png"));
         updateDescription();
-        angle = MathUtils.random(360.0f); // More Animation-related Numbers
+        angle = MathUtils.random(360f); // More Animation-related Numbers
         channelAnimTimer = 0.5f;
     }
     @Override
@@ -72,11 +72,9 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
                     @Override
                     public void update() {
                         if (Icicle.target.hasPower(Chillpower.POWER_ID)) {
-                            if (Icicle.target.currentBlock - evokeAmount > 0) {
-                                Icicle.target.getPower(Chillpower.POWER_ID).flash();
-                                Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
-                                Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
-                            }
+                            Icicle.target.getPower(Chillpower.POWER_ID).flash();
+                            Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
+                            Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
                         }
                         isDone = true;
                     }
@@ -122,23 +120,19 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
             info.output = AbstractOrb.applyLockOn(target, info.base);
             Wiz.atb(new ThrowIcicleAction(this,target.hb,Color.CYAN));
             Wiz.dmg(target,info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-            if (target.hasPower(Chillpower.POWER_ID)) {
-                Wiz.atb(new AbstractGameAction() {
+            Wiz.atb(new AbstractGameAction() {
                     @Override
                     public void update() {
-                        if (target != null) {
+                        if (Icicle.target != null) {
                             if (Icicle.target.hasPower(Chillpower.POWER_ID)) {
-                                if (Icicle.target.currentBlock - passiveAmount < 0) {
-                                    Icicle.target.getPower(Chillpower.POWER_ID).flash();
-                                    Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
-                                    Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
-                                }
+                                Icicle.target.getPower(Chillpower.POWER_ID).flash();
+                                Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
+                                Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
                             }
                         }
                         isDone = true;
                     }
-                });
-            }
+            });
         }
     }
     @Override
@@ -189,13 +183,13 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
                 float targetAngle = vector.angle();
                 if (targetAngle - angle > 180) //Has to rotate 180+ degrees, meaning rotating other way is faster
                     targetAngle -= 360; //Rotate other way
-                angle = MathHelper.slowColorLerpSnap(angle,targetAngle);
+                angle = MathHelper.angleLerpSnap(angle,targetAngle);
             } else {
-                angle = MathHelper.slowColorLerpSnap(angle,0);
+                angle = MathHelper.angleLerpSnap(angle,100);
             }
 
             sb.setColor(new Color(1.0f, 1.0f, 1.0f, c.a / 2.0f));
-            sb.draw(img, this.cX - 48.0F + this.bobEffect.y / 4.0F, this.cY - 48.0F - this.bobEffect.y / 4.0F, 48.0F, 48.0F, 96.0F, 96.0F, this.scale, this.scale, angle, 0, 0, 96, 96, this.hFlip1, false);
+            sb.draw(img, this.cX - 48.0F + this.bobEffect.y / 4.0F, this.cY - 48.0F - this.bobEffect.y / 4.0F, 48.0F, 48.0F, 142.0F, 96.0F, this.scale, this.scale, angle, 0, 0, 142, 96, this.hFlip1, false);
             renderText(sb);
             hb.render(sb);
         }

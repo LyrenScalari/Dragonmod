@@ -5,26 +5,19 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.BobEffect;
-import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
-import com.megacrit.cardcrawl.vfx.combat.MiracleEffect;
-import dragonmod.DragonMod;
-import dragonmod.actions.SmiteAction;
-import dragonmod.powers.Dragonkin.WingsofLight;
+import dragonmod.interfaces.ReciveModifyDamageEffect;
+import dragonmod.ui.DivineEyeParticle;
+import dragonmod.ui.SealParticleEffect;
 
 public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModifyDamageEffect {
-    public static boolean DevotionEffects = false;
-    public boolean DontBreak = true;
-    public boolean reset = true;
+    public boolean escalate = false;
     public AbstractSeal() {
         this.c = Settings.CREAM_COLOR.cpy();
         this.shineColor = new Color(1.0F, 1.0F, 1.0F, 0.0F);
@@ -43,67 +36,60 @@ public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModif
     }
     @Override
     public int onReciveDamage(int damage, DamageInfo info) {
-        if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && PainAmount > 0){
-            if (!AbstractDungeon.actionManager.turnHasEnded){
-                PainAmount -= damage;
-            } else {
-                if (!(info.owner instanceof AbstractMonster)){
-                    PainAmount -= damage;
-                }
-            }
-        }
-        if (PainAmount < 0 && reset){
-            PainAmount = 0;
-        }
-        if (PainAmount == 0){
-            Break();
+        if (!escalate){
+            escalate = true;
+            Chant();
         }
         return damage;
     }
     public void onStartOfTurn() {
-        if (PainAmount <= 0){
-            PainAmount = basePainAmount;
-        }
-        DontBreak = true;
-        reset = true;
+        Chant();
     }
-    public void Break(){
-        AbstractDungeon.actionManager.addToBottom(new VFXAction(new BorderFlashEffect(Color.GOLDENROD, true)));
-        AbstractDungeon.actionManager.addToBottom(new VFXAction(new MiracleEffect()));
-        if (DontBreak){
-            PainAmount = basePainAmount;
-        } else {
-            PainAmount = -1;
-            AbstractDungeon.actionManager.addToTop(new AbstractGameAction() {
+    private void HymnCompletion(int HymnLength){
+        for (AbstractPower p : AbstractDungeon.player.powers){
+            //add Hymn completion code
+        }
+    }
+    public void Coda(){
+    }
+    public void Chant(){
+        Wiz.att(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                for (int i = 0; i < AbstractDungeon.miscRng.random(20, 30); ++i) {
+                    AbstractDungeon.effectsQueue.add(new DivineEyeParticle());
+                }
+            }
+        });
+        Wiz.atb(new AbstractGameAction() {
                 @Override
                 public void update() {
-                    DragonMod.Seals.remove(AbstractSeal.this);
                     isDone = true;
+                    PainAmount -= 1;
+                    System.out.println(name + " Chant count : " + PainAmount);
+                    if (PainAmount <= 0) {
+                        Coda();
+                        HymnManager.ActiveVerses.remove(AbstractSeal.this);
+                        if (HymnManager.ActiveVerses.size() <= 0){
+                            HymnCompletion(HymnManager.VersePile.size());
+                            for (AbstractCard c : HymnManager.VersePile.group){
+                                Wiz.atb(new AbstractGameAction() {
+                                    @Override
+                                    public void update() {
+                                        isDone = true;
+                                        HymnManager.VersePile.removeCard(c);
+                                        AbstractDungeon.getCurrRoom().souls.discard(c);
+                                    }
+                                });
+                            }
+                        }
+                    }
                 }
             });
-        }
-        for (AbstractPower p : AbstractDungeon.player.powers){
-            if (p instanceof WingsofLight){
-                ((WingsofLight) p).onSealBreak();
-            }
-        }
     }
     public void onEndOfTurn() {
-        if (!DevotionEffects){
-            CardCrawlGame.sound.play("POWER_MANTRA", 0.05F);
-            for (int i = 0; i < AbstractDungeon.miscRng.random(10, 15); ++i) {
-                AbstractDungeon.effectsQueue.add(new DivineEyeParticle());
-            }
-            DevotionEffects = true;
-        }
-        if (!DragonMod.damagetaken){
-            AbstractDungeon.actionManager.addToBottom(new VFXAction(new BorderFlashEffect(Color.SCARLET, true)));
-            if (this.PainAmount > 0){
-                AbstractDungeon.actionManager.addToTop(new SmiteAction(AbstractDungeon.player,new DamageInfo(AbstractDungeon.player,this.PainAmount, DamageInfo.DamageType.THORNS)));
-                DontBreak = false;
-                reset = false;
-            }
-        }
+        escalate = false;
     }
     public void updateAnimation() {
         this.bobEffect.update();
@@ -116,7 +102,8 @@ public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModif
         this.c.a = Interpolation.pow2In.apply(1.0F, 0.01F, this.channelAnimTimer / 0.5F);
         this.scale = Interpolation.swingIn.apply(Settings.scale, 0.01F, this.channelAnimTimer / 0.5F);
         if (!AnimTimer){
-            AbstractDungeon.effectsQueue.add(new SealParticleEffect(cX,cY,this));
+            AbstractDungeon.effectsQueue.add(new SealParticleEffect((AbstractDungeon.player.hb.cX-50f) + (float)(dy2*Math.cos((Math.toRadians(angle)))),
+                    (AbstractDungeon.player.hb.cY+50f) + (float)(dy2*Math.sin(Math.toRadians(angle))),this));
             AnimTimer = true;
         }
     }
@@ -125,7 +112,7 @@ public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModif
     }
     public void update() {
         this.hb.update();
-        angle = (360f/DragonMod.Seals.size()) * DragonMod.Seals.indexOf(this);
+        angle = (360f/ HymnManager.ActiveVerses.size()) * HymnManager.ActiveVerses.indexOf(this);
         cX = (AbstractDungeon.player.hb.cX-50f) + (float)(dy2*Math.cos((Math.toRadians(angle))));
         cY = (AbstractDungeon.player.hb.cY+50f) + (float)(dy2*Math.sin(Math.toRadians(angle)));
         hb.move(cX, cY); //I think this is correct, but might not be. Might need some offset calculations
@@ -133,12 +120,5 @@ public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModif
             TipHelper.renderGenericTip(this.cX + 96.0F * Settings.scale, this.cY + 64.0F * Settings.scale, this.name, this.description);
         }
         this.fontScale = MathHelper.scaleLerpSnap(this.fontScale, 0.7F);
-    }
-    public float[] _lightsOutGetXYRI() {
-        return new float[] {hb.cX, hb.cY, 150f, 5f};
-    }
-
-    public Color[] _lightsOutGetColor() {
-        return new Color[] {Color.PURPLE.cpy()};
     }
 }

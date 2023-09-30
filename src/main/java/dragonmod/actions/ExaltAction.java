@@ -7,17 +7,15 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.util.TypeEnergyHelper;
-import dragonmod.util.onExaltPower;
+import dragonmod.interfaces.onExaltPower;
 
 import java.util.EnumMap;
 import java.util.function.Supplier;
 
 public class ExaltAction extends AbstractGameAction {
-    int amt;
     Supplier<AbstractGameAction> ExaltEffect;
     public EnumMap<TypeEnergyHelper.Mana, Integer> ExaltCost;
-    public ExaltAction(int amount, EnumMap<TypeEnergyHelper.Mana, Integer> exaltCost, Supplier<AbstractGameAction> exaltEffect) {
-        amt = amount;
+    public ExaltAction(EnumMap<TypeEnergyHelper.Mana, Integer> exaltCost, Supplier<AbstractGameAction> exaltEffect) {
         ExaltEffect = exaltEffect;
         ExaltCost = exaltCost;
     }

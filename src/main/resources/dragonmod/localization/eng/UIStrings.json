@@ -27,43 +27,89 @@
       "Unplayable "
     ]
   },
-  "${modID}:HolyTooltip": {
+  "${modID}:Reinforce": {
     "TEXT": [
-      "[#94bdff]Holy[]",
-      "Energy spent on [#94bdff]Holy[] cards produces twice as much #ySacrifice, granting [#94bdff]Holy[] [#94bdff]Power[] which increases the damage and block gain of [#94bdff]Holy[] cards for the rest of combat."
+      "[dragonmod:ReinforceIcon] Reinforce",
+      "When gaining [dragonmod:ReinforceIcon] the highest [dragonmod:ReinforceIcon] value is kept instead. Creatures with [dragonmod:ReinforceIcon] do not lose [dragonmod:BlockIcon] at the start of their turn and return blocked attack damage."
     ]
   },
-  "${modID}:DivineBlock": {
+  "${modID}:Powerful": {
     "TEXT": [
-      "[dragonmod:LightIcon] Divine Block",
-      "[dragonmod:LightIcon] #yBlock is Used before other block types and is not lost at the start of your turn."
+      "[dragonmod:PowerfulIcon] Powerful",
+      "When gaining [dragonmod:PowerfulIcon] the highest [dragonmod:PowerfulIcon] value is kept instead. NL Creatures with [dragonmod:PowerfulIcon] deal #b30% more damage and gain #b30% more [dragonmod:BlockIcon] ."
     ]
   },
-  "${modID}:FlameBarrier": {
+  "${modID}:Courage": {
     "TEXT": [
-      "[dragonmod:FireIcon] Flame Barrier",
-      "[dragonmod:FireIcon] blocks and reflects equal damage. [theDragonkin:FireIcon] falls to the total scorch among enemies at the start of turn."
+      "[dragonmod:CourageIcon] Courage",
+      "When gaining [dragonmod:CourageIcon] the highest [dragonmod:CourageIcon] value is kept instead. NL [dragonmod:CourageIcon] draws you a card and grants [E] at the start of each turn and is reduced."
     ]
   },
-  "${modID}:PrimalTooltip": {
+
+  "${modID}:Scorch": {
     "TEXT": [
-      "[#fe513a]Primal[]",
-      "Energy spent on [#fe513a]Primal[] cards applies #yScorch to random enemies."
+      "[dragonmod:ScorchIcon] Scorch",
+      "Creatures with [dragonmod:ScorchIcon] take damage at the start of their turn and lose #b1 [dragonmod:ScorchIcon] ."
     ]
   },
-  "${modID}:StabilityTooltip": {
+  "${modID}:Sanctify": {
     "TEXT": [
-      "[dragonmod:TemporalIcon] Stagger",
-      "[dragonmod:TemporalIcon] is gained whenever you take unblocked damage and is used to determine how much damage you can prevent in the past. NL Stagger is reduced each turn and sufficient Stagger grants an additional card draw each turn."
+      "[dragonmod:SanctifyIcon] Sanctify",
+      "Creatures with [dragonmod:SanctifyIcon] take 25% less damage from attacks, Attackers are #yCured equal to [dragonmod:SanctifyIcon] and [dragonmod:SanctifyIcon] is reduced by #b1."
+    ]
+  },
+  "${modID}:Cure": {
+    "TEXT": [
+      "Cure",
+      "Heal using recently lost HP. Cure in excess of your Max HP or recently lost HP becomes [dragonmod:BlockIcon] ."
+    ]
+  },
+  "${modID}:Zeal": {
+    "TEXT": [
+      "[dragonmod:ZealIcon] Zeal",
+      "Creatures with [dragonmod:ZealIcon] Deal additional damage equal to their [dragonmod:ScorchIcon] and When Dealing damage to creatures with [dragonmod:SanctifyIcon] they lose HP equal to half their [dragonmod:SanctifyIcon] ."
+    ]
+  },
+  "${modID}:Verse": {
+    "TEXT": [
+      "Verse"
     ]
   },
   "${modID}:StressUITooltips": {
     "TEXT": [
-      "Stagger",
-      "Stagger is gained whenever you take unblocked damage, draw an additional card at the start of your turn if you have #b",
-      " or more Stagger. Stagger is spent to Mitigate negative effects of Anomalies, and to recover lost HP."
+      "Stigmata",
+      "Stigmata is gained whenever you take unblocked damage.",
+      " NL Stigmata is spent to recover lost HP, Every 5 Stigmata spent Increases Damage done & Healing received by 1."
     ]
   },
+  "${modID}:HymnPile": {
+    "TEXT": [
+      "Hymn Pile",
+      "This contains all Verse cards played until all active verses reach their Coda.",
+      "I've yet to begin to Preach."
+    ]
+  },
+  "${modID}:DivineBlock": {
+    "TEXT": [
+      "[dragonmod:LightIcon] Barrier",
+      "[dragonmod:LightIcon] prevents damage and becomes twice as much block next turn."
+    ]
+  },
+  "${modID}:HolyDamage": {
+    "TEXT": [
+      "[dragonmod:HolyIcon] Holy Damage",
+      "[dragonmod:HolyIcon] Damage Deals 25% increased damage to creatures with [dragonmod:SanctifyIcon] instead of being reduced but does not Activate [dragonmod:SanctifyIcon] on hit."
+    ]
+  },
+
+
+  "${modID}:StabilityTooltip": {
+    "TEXT": [
+      "[dragonmod:TemporalIcon] Stigmata",
+      "[dragonmod:TemporalIcon] is gained whenever you lose HP. Reduced by Half at the end of your turn. Every 5 [dragonmod:StigmataIcon] spent by Cure Increases Damage done & Healing from #yCure by #b1."
+    ]
+  },
+
   "${modID}:TemporalTooltip": {
     "TEXT": [
       "Anomaly",
@@ -79,12 +125,6 @@
   "${modID}:PurgeAction": {
     "TEXT": [
       "Select a Card to Purge",
-      ""
-    ]
-  },
-  "${modID}:ChiPannel": {
-    "TEXT": [
-      "Chi",
       ""
     ]
   },
@@ -124,6 +164,13 @@
       ""
     ]
   },
+  "${modID}:CantripPile": {
+    "TEXT": [
+      "Bag of Tricks",
+      "All your Cantrips start here at the beginning of combat.",
+      "All out of Tricks, time to improvise."
+    ]
+  },
   "${modID}:Frozen": {
     "TEXT": [
       "Frozen",
@@ -145,6 +192,36 @@
     "TEXT": [
       "[dragonmod:FrostIcon] Ice Armor",
       "[dragonmod:FrostIcon] blocks damage, and applies equal #yChill back to attackers."
+    ]
+  },
+  "${modID}:Ranged": {
+    "TEXT": [
+      "[dragonmod:RangedIcon] Ranged Damage",
+      "[dragonmod:RangedIcon] Damage is increased by Lock-On in addition to other effects."
+    ]
+  },
+  "${modID}:Chill": {
+    "TEXT": [
+      "[dragonmod:ChillIcon] Chill",
+      "#yChilled creatures give #yBlock equal to their chill and lose #b1 chill when they take unblocked attack damage or are damaged by an #yIcicles."
+    ]
+  },
+  "${modID}:Bleed": {
+    "TEXT": [
+      "[dragonmod:BleedIcon] Bleed",
+      "#yBleeding creature lose HP at the start of your turn and lose all Bleed. NL #yBleeding creatures can't act if their [dragonmod:BleedIcon] will kill them."
+    ]
+  },
+  "${modID}:IceSpikes": {
+    "TEXT": [
+      "[dragonmod:IceSpikesIcon] Ice Spikes",
+      "When blocking Attack damage, deals damage back and lose [dragonmod:IceSpikesIcon] equal to the damage blocked. Lose half as much against #yChilled attackers."
+    ]
+  },
+  "${modID}:Subzero": {
+    "TEXT": [
+      "[dragonmod:SubzeroIcon] Subzero",
+      "[dragonmod:SubzeroIcon] is reduced by Half when you channel an icicle, increasing its base damage that much."
     ]
   },
   "${modID}:ShatterTooltip": {

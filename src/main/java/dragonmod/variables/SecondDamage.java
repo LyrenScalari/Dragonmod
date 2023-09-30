@@ -12,7 +12,7 @@ public class SecondDamage extends DynamicVariable {
 
     @Override
     public String key() {
-        return DragonMod.modID+"D2";
+        return DragonMod.modID+":D2";
     }
 
     @Override

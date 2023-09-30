@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -15,7 +13,7 @@ import java.util.Map;
 
 import static dragonmod.DragonMod.TypeEnergyAtlas;
 
-@SpirePatch2(clz = AbstractPlayer.class, method = "render")
+//@SpirePatch2(clz = AbstractPlayer.class, method = "render")
 
 public class RenderFloatyMana {
     public static float angleSpeed = 0.10f;
@@ -31,7 +29,7 @@ public class RenderFloatyMana {
     public static float bobTimer;
     public static float bobX;
     public static int manacount;
-    @SpirePrefixPatch
+    //@SpirePrefixPatch
     public static void patch(AbstractPlayer __instance, SpriteBatch sb) {
         particleTimer -= Gdx.graphics.getRawDeltaTime();
         if (angleSpeed > 1) {

@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.relics.BaseRelic;
-import dragonmod.util.onExaltPower;
+import dragonmod.interfaces.onExaltPower;
 
 import static dragonmod.DragonMod.makeID;
 

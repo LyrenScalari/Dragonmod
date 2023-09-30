@@ -3,6 +3,7 @@ package dragonmod.powers.Rimedancer;
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.stslib.patches.NeutralPowertypePatch;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -19,7 +20,7 @@ public class CryolatticePower extends BasePower implements CloneablePowerInterfa
     private static AbstractPower powerToLose = new EchoPower(null,0);
     public static final String POWER_ID = DragonMod.makeID("Cryolattice");
     public CryolatticePower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
-        super(POWER_ID,PowerType.BUFF,false,owner,source, amount);
+        super(POWER_ID, NeutralPowertypePatch.NEUTRAL,false,owner,source, amount);
         priority = 70;
         this.img = powerToLose.img;
         this.region48 = powerToLose.region48;

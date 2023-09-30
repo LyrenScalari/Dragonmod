@@ -1,12 +1,14 @@
 package dragonmod.cards.Rimedancer.Common;
 
 import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import dragonmod.DamageModifiers.RangedDamage;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
@@ -16,7 +18,8 @@ public class IcicleSpear extends AbstractRimedancerCard {
     public static final String ID = IcicleSpear.class.getSimpleName();
     public IcicleSpear(){
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ALL_ENEMY);
-        setDamage(7,3);
+        setDamage(5,3);
+        DamageModifierManager.addModifier(this,new RangedDamage(true));
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

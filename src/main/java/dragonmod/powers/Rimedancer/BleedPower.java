@@ -1,8 +1,6 @@
 package dragonmod.powers.Rimedancer;
 
 import basemod.interfaces.CloneablePowerInterface;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -11,7 +9,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.PoisonPower;
 import dragonmod.DragonMod;
 import dragonmod.powers.BasePower;
 import dragonmod.util.Wiz;
@@ -30,18 +27,9 @@ public class BleedPower extends BasePower implements CloneablePowerInterface {
     }
     public BleedPower(AbstractCreature owner, int amount) {
         super(POWER_ID, PowerType.DEBUFF, false, owner, Wiz.adp(),amount);
-        this.loadRegion("poison");
-        powerToLose = new PoisonPower(owner,Wiz.adp(),amount);
-        this.img = powerToLose.img;
-        this.region48 = powerToLose.region48;
-        this.region128 = powerToLose.region128;
         updateDescription();
     }
 
-    @Override
-    public void renderIcons(SpriteBatch sb, float x, float y, Color c) {
-        super.renderIcons(sb, x, y, Color.RED.cpy());
-    }
     public void atEndOfRound() {
         flash();
         Wiz.atb(new LoseHPAction(owner,owner,amount));

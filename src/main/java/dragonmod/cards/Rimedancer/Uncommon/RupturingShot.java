@@ -3,6 +3,7 @@ package dragonmod.cards.Rimedancer.Uncommon;
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -10,6 +11,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import dragonmod.CardMods.SCVShatterMod;
+import dragonmod.DamageModifiers.RangedDamage;
 import dragonmod.actions.IcicleFanAction;
 import dragonmod.actions.ShatterAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
@@ -26,10 +28,11 @@ public class RupturingShot extends AbstractRimedancerCard {
     public static final String ID = RupturingShot.class.getSimpleName();
     private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:ShatterTooltip");
     public RupturingShot() {
-        super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY);
+        super(ID, 1, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ENEMY);
         setDamage(8, 4);
         setMagic(8,4);
         setMagic2(4,2);
+        DamageModifierManager.addModifier(this,new RangedDamage(true));
         energyCosts.put(TypeEnergyHelper.Mana.Shatter,2);
         CardModifierManager.addModifier(this,new SCVShatterMod());
     }

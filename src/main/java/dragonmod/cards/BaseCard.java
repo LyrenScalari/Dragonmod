@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static dragonmod.util.TextureLoader.getCardTextureString;
+import static dragonmod.ui.TextureLoader.getCardTextureString;
 
 
 public abstract class BaseCard extends CustomCard {
@@ -38,6 +38,7 @@ public abstract class BaseCard extends CustomCard {
     protected boolean upgradeMagic;
     protected boolean upgradeMagic2;
     protected boolean upgradeDamage2;
+    protected boolean upgradeHeal;
 
     protected int costUpgrade;
     protected int damageUpgrade;
@@ -45,6 +46,7 @@ public abstract class BaseCard extends CustomCard {
     protected int magicUpgrade;
     protected int magic2Upgrade;
     protected int damage2Upgrade;
+    protected int healUpgrade;
 
     protected boolean baseExhaust = false;
     protected boolean upgExhaust = false;
@@ -60,6 +62,7 @@ public abstract class BaseCard extends CustomCard {
     public boolean upgradedSecondMagicNumber; // A boolean to check whether the number has been upgraded or not.
     public boolean isSecondMagicNumberModified; // A boolean to check whether the number has been modified or not, for coloring purposes. (red/green)
 
+
     public int secondDamage;
     public int baseSecondDamage;
     public boolean upgradedSecondDamage;
@@ -69,6 +72,7 @@ public abstract class BaseCard extends CustomCard {
     public int baseThirdDamage;
     public boolean upgradedThirdDamage;
     public boolean isThirdDamageModified;
+
     final protected Map<String, LocalVarInfo> cardVariables = new HashMap<>();
 
     public BaseCard(String ID, CardStats info) {
@@ -81,6 +85,9 @@ public abstract class BaseCard extends CustomCard {
     {
         super(ID, getName(ID), getCardTextureString(ID.replace(DragonMod.modID + ":", ""),cardType), cost, getInitialDescription(ID), cardType, color, rarity, target);
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(cardID);
+        if (cardStrings.UPGRADE_DESCRIPTION != null){
+            upgradesDescription = true;
+        }
         this.originalName = cardStrings.NAME;
         this.baseCost = cost;
         initializeTitle();
@@ -172,7 +179,7 @@ public abstract class BaseCard extends CustomCard {
         cardVariables.put(key, new LocalVarInfo(base, upgrade));
     }
 
-    private LocalVarInfo getCustomVar(String key) {
+    protected LocalVarInfo getCustomVar(String key) {
         return cardVariables.get(key);
     }
 
@@ -214,11 +221,19 @@ public abstract class BaseCard extends CustomCard {
             return -1;
         return var.base;
     }
+    public void setCustomVarBase(String key, int amount) {
+        LocalVarInfo var = cardVariables.get(key);
+        var.base = amount;
+    }
     public int customVar(String key) {
         LocalVarInfo var = cardVariables.get(key);
         if (var == null)
             return -1;
         return var.value;
+    }
+    public void setCustomVarValue(String key,int amount) {
+        LocalVarInfo var = cardVariables.get(key);
+        var.value = amount;
     }
     public boolean isCustomVarModified(String key) {
         LocalVarInfo var = cardVariables.get(key);
@@ -379,6 +394,8 @@ public abstract class BaseCard extends CustomCard {
 
             if (upgradeMagic)
                 this.upgradeMagicNumber(magicUpgrade);
+            if (upgradeMagic2)
+                this.upgradeMagicNumber2(magic2Upgrade);
             for (LocalVarInfo var : cardVariables.values()) {
                 if (var.upgrade != 0) {
                     var.base += var.upgrade;

@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import dragonmod.patches.TemporalStressField;
+import dragonmod.util.StigmataManager;
 import dragonmod.relics.BaseRelic;
 
 import static dragonmod.DragonMod.makeID;
@@ -28,7 +28,7 @@ public class DraconicTimeCrystal  extends BaseRelic {
         this.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
         AbstractPlayer p = AbstractDungeon.player;
         if (p.currentHealth > 0) {
-            p.heal(TemporalStressField.Stress.get(p)/2);
+            p.heal(StigmataManager.StigmataField.Stigmata.get(p)/2);
         }
 
     }

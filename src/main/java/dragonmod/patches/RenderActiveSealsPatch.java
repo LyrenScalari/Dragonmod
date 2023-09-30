@@ -14,14 +14,15 @@ import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.vfx.BobEffect;
 import dragonmod.DragonMod;
 import dragonmod.util.AbstractNotOrb;
-import dragonmod.util.TextureLoader;
+import dragonmod.util.HymnManager;
+import dragonmod.ui.TextureLoader;
 
 @SpirePatch2(clz = AbstractPlayer.class, method = "render")
 public class RenderActiveSealsPatch {
     public static float angle = MathUtils.random(360.0F);
     @SpirePrefixPatch
     public static void patch(AbstractPlayer __instance, SpriteBatch sb) {
-        for (AbstractNotOrb seal : DragonMod.Seals){
+        for (AbstractNotOrb seal : HymnManager.ActiveVerses){
             seal.update();
             seal.updateAnimation();
             seal.updateDescription();

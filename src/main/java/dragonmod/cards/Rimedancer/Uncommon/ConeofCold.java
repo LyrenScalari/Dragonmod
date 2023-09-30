@@ -17,7 +17,7 @@ import dragonmod.DragonMod;
 import dragonmod.actions.IcicleFanAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
 import java.util.ArrayList;

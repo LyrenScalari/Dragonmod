@@ -21,10 +21,10 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import dragonmod.DragonMod;
-import dragonmod.cards.Justicar.HolySmite;
+import dragonmod.cards.Rimedancer.Special.*;
 import dragonmod.cards.Rimedancer.Starter.*;
 import dragonmod.relics.Rimedancer.CryoniteShard;
-import dragonmod.ui.EnergyOrbDrifter;
+import dragonmod.ui.EnergyOrbRimedancer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -87,7 +87,7 @@ public class TheRimedancer extends CustomPlayer {
     // =============== CHARACTER CLASS START =================
 
     public TheRimedancer(String name, PlayerClass setClass) {
-        super(name, setClass, new EnergyOrbDrifter(),
+        super(name, setClass, new EnergyOrbRimedancer(),
                 new SpineAnimation(JUSTICAR_SKELETON_ATLAS,JUSTICAR_SKELETON_JSON,1.0f));
 
 
@@ -141,16 +141,21 @@ public class TheRimedancer extends CustomPlayer {
         ArrayList<String> retVal = new ArrayList<>();
 
         logger.info("Begin loading starter Deck Strings");
-        retVal.add(DragonMod.makeID(RimedancerStrike.ID));
-        retVal.add(DragonMod.makeID(RimedancerStrike.ID));
-        retVal.add(DragonMod.makeID(RimedancerStrike.ID));
-        retVal.add(DragonMod.makeID(RimedancerStrike.ID));
+        for (int i = 0; i < 4 ; i++){
+            retVal.add(DragonMod.makeID(RimedancerStrike.ID));
+        }
         retVal.add(DragonMod.makeID(ExhaleofHoarfrost.ID));
-        retVal.add(DragonMod.makeID(RimedancerDefend.ID));
-        retVal.add(DragonMod.makeID(RimedancerDefend.ID));
-        retVal.add(DragonMod.makeID(RimedancerDefend.ID));
+
+        for (int i = 0; i < 4 ; i++){
+            retVal.add(DragonMod.makeID(RimedancerDefend.ID));
+        }
         retVal.add(DragonMod.makeID(HailstoneHaze.ID));
+
         retVal.add(DragonMod.makeID(FrostyCaltrops.ID));
+        retVal.add(DragonMod.makeID(Nightrunner.ID));
+        retVal.add(DragonMod.makeID(Ambush.ID));
+        retVal.add(DragonMod.makeID(SilverGlimmer.ID));
+        retVal.add(DragonMod.makeID(BladedSleeves.ID));
         return retVal;
     }
 
@@ -221,7 +226,7 @@ public class TheRimedancer extends CustomPlayer {
     //Which card should be obtainable from the Match and Keep event?
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new HolySmite();
+        return new HailstoneHaze();
     }
 
     // The class name as it appears next to your player name in-game

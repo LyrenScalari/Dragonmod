@@ -1,7 +1,7 @@
 package dragonmod.powers;
 
 import dragonmod.util.GeneralUtils;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.core.AbstractCreature;

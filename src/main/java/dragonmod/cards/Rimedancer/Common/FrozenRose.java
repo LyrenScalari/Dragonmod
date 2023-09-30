@@ -2,13 +2,14 @@ package dragonmod.cards.Rimedancer.Common;
 
 import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.mod.stslib.blockmods.BlockModifierManager;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.DamageModifiers.BlockModifiers.IceArmor;
 import dragonmod.DamageModifiers.Icons.FrostIcon;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.powers.Rimedancer.IceSpikesPower;
 import dragonmod.util.Wiz;
 
 public class FrozenRose extends AbstractRimedancerCard {
@@ -17,8 +18,9 @@ public class FrozenRose extends AbstractRimedancerCard {
 
     public FrozenRose() {
         super(ID, 1, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF);
-        setMagic(3,1);
+        setMagic(2,1);
         setBlock(5,3);
+        cardsToPreview = new Shiv();
         BlockModifierManager.addModifier(this,new IceArmor(true));
         CardModifierManager.addModifier(this,new AddIconToDescriptionMod(AddIconToDescriptionMod.BLOCK, FrostIcon.get()));
     }
@@ -28,6 +30,6 @@ public class FrozenRose extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.block(p,block);
-        Wiz.applyToSelf(new IceSpikesPower(p,p,magicNumber));
+        Wiz.atb(new MakeTempCardInHandAction(cardsToPreview.makeStatEquivalentCopy(),magicNumber));
     }
 }

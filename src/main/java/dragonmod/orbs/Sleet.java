@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.vfx.combat.IceShatterEffect;
 import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 import dragonmod.DragonMod;
 import dragonmod.powers.Rimedancer.Chillpower;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
 

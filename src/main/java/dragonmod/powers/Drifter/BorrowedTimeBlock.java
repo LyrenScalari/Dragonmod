@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import dragonmod.actions.GainStressAction;
 import dragonmod.powers.BasePower;
 
 import static dragonmod.DragonMod.makeID;
@@ -43,7 +42,6 @@ public class BorrowedTimeBlock extends BasePower implements CloneablePowerInterf
         this.description = DESCRIPTIONS[0]+amount+DESCRIPTIONS[1];
     }
     public void atEndOfTurn(boolean isPlayer) {
-        addToBot(new GainStressAction(amount));
         addToBot(new RemoveSpecificPowerAction(owner,owner,this));
     }
 

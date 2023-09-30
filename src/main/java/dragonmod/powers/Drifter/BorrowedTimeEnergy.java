@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import dragonmod.actions.GainStressAction;
 import dragonmod.powers.BasePower;
 
 import static dragonmod.DragonMod.makeID;
@@ -30,7 +29,6 @@ public class BorrowedTimeEnergy extends BasePower implements CloneablePowerInter
         this.description = DESCRIPTIONS[0]+amount+DESCRIPTIONS[1];
     }
     public void atEndOfTurn(boolean isPlayer) {
-        addToBot(new GainStressAction(amount));
         addToBot(new RemoveSpecificPowerAction(owner,owner,this));
     }
     public void onEnergyGained(int e){

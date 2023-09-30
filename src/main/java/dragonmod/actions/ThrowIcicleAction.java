@@ -1,6 +1,7 @@
 package dragonmod.actions;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
@@ -14,6 +15,9 @@ public class ThrowIcicleAction extends AbstractGameAction {
 
     public ThrowIcicleAction(AbstractOrb orb, Hitbox target, Color color) {
         this.e = VFXContainer.icicleThrowEffect(orb, target, color, false, true);
+    }
+    public ThrowIcicleAction(Texture tex, float scale, Hitbox target, Color color) {
+        this.e = VFXContainer.throwEffectNoAngle(tex,scale, target, color, false, true);
     }
     @Override
     public void update() {

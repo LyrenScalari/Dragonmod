@@ -36,6 +36,21 @@ public class VFXContainer {
         }
         return builder.build();
     }
+    public static AbstractGameEffect throwEffectNoAngle(Texture tex, float scale, Hitbox target, Color color, boolean bounceOff, boolean sfx) {
+        VfxBuilder builder = new VfxBuilder(tex, Wiz.adp().hb.cX, Wiz.adp().hb.cY, 0.25f)
+                .moveX(Wiz.adp().hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
+                .moveY(Wiz.adp().hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
+                .rotate(0)
+                .setScale(scale)
+                .emitEvery((x,y) -> new ThrowSparkleEffect(color.cpy(), x, y), 0.01f);
+        if (sfx) {
+            builder = builder.playSoundAt(0.0f, "ATTACK_WHIFF_2");
+        }
+        if (bounceOff) {
+            builder = builder.triggerVfxAt(0.25f, 1, (x,y) -> hitBounce(tex, scale, target));
+        }
+        return builder.build();
+    }
     public static AbstractGameEffect icicleThrowEffect(AbstractOrb orb, Hitbox target, Color color, boolean bounceOff, boolean sfx) {
         Texture tex = ReflectionHacks.getPrivate(orb,AbstractOrb.class,"img");
         float scale = ReflectionHacks.getPrivate(orb,AbstractOrb.class,"scale");

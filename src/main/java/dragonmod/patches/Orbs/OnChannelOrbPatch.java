@@ -3,8 +3,9 @@ package dragonmod.patches.Orbs;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import dragonmod.util.OnChannelOrbPower;
+import dragonmod.interfaces.OnChannelOrbPower;
 import javassist.CtBehavior;
 
 @SpirePatch(clz = AbstractPlayer.class, method = "channelOrb")
@@ -15,7 +16,7 @@ public class OnChannelOrbPatch {
     )
     public static void onEvokeOrbOrb(AbstractPlayer __instance, AbstractOrb orbToSet) {
         for (AbstractPower p : __instance.powers) {
-            if (p instanceof OnChannelOrbPower){
+            if (p instanceof OnChannelOrbPower && !(orbToSet instanceof EmptyOrbSlot)){
                 ((OnChannelOrbPower) p).onChannelOrb(orbToSet);
             }
         }

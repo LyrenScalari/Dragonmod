@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import dragonmod.util.OnUseCardOrb;
+import dragonmod.interfaces.OnUseCardOrb;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;

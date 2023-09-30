@@ -9,6 +9,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.combat.StrikeEffect;
 import dragonmod.DragonMod;
+import dragonmod.interfaces.ReciveDamageEffect;
+import dragonmod.interfaces.ReciveDamageinHandCard;
+import dragonmod.interfaces.ReciveModifyDamageEffect;
+import dragonmod.interfaces.onAttackedField;
 import dragonmod.util.*;
 import dragonmod.patches.*;
 import javassist.CtBehavior;
@@ -29,56 +33,56 @@ public class PlayerDamage {
             locator = Locator.class,
             localvars = {"damageAmount", "hadBlock"}
     )
-    public static void Insert(AbstractCreature __instance, DamageInfo info, @ByRef int[] damageAmount, @ByRef boolean[] hadBlock) {
+    public static void Insert(AbstractCreature __instance, DamageInfo info,  int damageAmount, @ByRef boolean[] hadBlock) {
         if (!AbstractDungeon.getCurrRoom().isBattleOver) {
             if (__instance instanceof AbstractPlayer){
                 DragonMod.damagetaken = true;
             }
             for (AbstractCard field : FieldsField.Fields.get(__instance)){
                 if (field instanceof onAttackedField){
-                    damageAmount[0] = ((onAttackedField) field).AttachedOnAttacked(__instance,damageAmount[0], info);
+                    damageAmount = ((onAttackedField) field).AttachedOnAttacked(__instance,damageAmount, info);
                 }
             }
             for (AbstractPower p : AbstractDungeon.player.powers) {
                 if (p instanceof ReciveDamageEffect) {
-                    ((ReciveDamageEffect) p).onReciveDamage(damageAmount[0]);
-                    ((ReciveDamageEffect) p).onReciveDamage(damageAmount[0]);
+                    ((ReciveDamageEffect) p).onReciveDamage(damageAmount);
+                    ((ReciveDamageEffect) p).onReciveDamage(damageAmount);
                 }
                 if (p instanceof ReciveModifyDamageEffect) {
-                    damageAmount[0] = ((ReciveModifyDamageEffect) p).onReciveDamage(damageAmount[0],info);
+                    damageAmount = ((ReciveModifyDamageEffect) p).onReciveDamage(damageAmount,info);
                 }
             }
             for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
                 if (c instanceof ReciveDamageEffect) {
-                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount[0]);
+                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
                 }
             }
             for (AbstractCard c : AbstractDungeon.player.hand.group) {
                 if (c instanceof ReciveDamageinHandCard) {
-                    ((ReciveDamageinHandCard) c).onReciveDamage(damageAmount[0]);
+                    ((ReciveDamageinHandCard) c).onReciveDamage(damageAmount);
                 }
                 if (c instanceof ReciveDamageEffect) {
-                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount[0]);
+                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
                 }
             }
             for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) {
                 if (c instanceof ReciveDamageEffect) {
-                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount[0]);
+                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
                 }
             }
             for (AbstractCard c : AbstractDungeon.player.discardPile.group) {
                 if (c instanceof ReciveDamageEffect) {
-                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount[0]);
+                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
                 }
             }
             for (AbstractCard c : AbstractDungeon.player.limbo.group) {
                 if (c instanceof ReciveDamageEffect) {
-                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount[0]);
+                    ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
                 }
             }
-            for (AbstractNotOrb c : DragonMod.Seals) {
-                if (c instanceof AbstractSeal && (info.owner == AbstractDungeon.player || AbstractDungeon.actionManager.turnHasEnded) ) {
-                    damageAmount[0] = ((ReciveModifyDamageEffect) c).onReciveDamage(damageAmount[0],info);
+            if ((info.owner == AbstractDungeon.player || !AbstractDungeon.actionManager.turnHasEnded) ) {
+                if (!HymnManager.ActiveVerses.isEmpty()){
+                    ((ReciveModifyDamageEffect) HymnManager.ActiveVerses.get(0)).onReciveDamage(damageAmount, info);
                 }
             }
         }

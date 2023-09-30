@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 /*
  * Using SpirePatch, also known as patching, allows you to insert your own code into the basegame code.
- * It is an extremely powerful and useful tool that can appear complicated at first. If you have no experience with modding StS, and especially
+ * It is an extremely PowerfulPower and useful tool that can appear complicated at first. If you have no experience with modding StS, and especially
  * with Java, I recommend you skip this for a while until you have a semi-decent grip on things/until you feel like you need to use it.
  * That being said, at the end of the day, it is not very complex once you understand how it works.
  *

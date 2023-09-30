@@ -12,17 +12,10 @@
   "${modID}:Wrath": {
     "NAME": "Wrath",
     "DESCRIPTION": [
-      "#yBreaks after taking #b",
-      " damage during your turn", " NL #yBreak : Deal #b",
-      " damage to a random enemy"
-    ]
-  },
-  "${modID}:Wisdom": {
-    "NAME": "Wisdom",
-    "DESCRIPTION": [
-      "#yBreaks after taking #b",
-      " damage during your turn", " NL #yBreak :", " Draw #b",
-      " card","s"," Next turn",",","."
+      "Activates in #b",
+      " #yChants", "",
+      " NL #yChant : Deal #b"," damage to a random enemy.",
+      " "
     ]
   },
   "${modID}:Might": {
@@ -33,11 +26,14 @@
       " #yStrength."
     ]
   },
-  "${modID}:Fortitude": {
-    "NAME": "Fortitude",
+  "${modID}:Vigor": {
+    "NAME": "Vigor",
     "DESCRIPTION": [
-      "#yBreaks after taking #b",
-      " damage during your turn", " NL #yBreak : Gain #b", " #yBlock"
+      "Activates in #b",
+      " #yChants ", " NL #yCoda : #yCure #b", " ",
+      "When the light wanes",
+      "Follow the spark of life",
+      "For the remaining light will be your shield against the dark."
     ]
   },
   "${modID}:Lightspeed": {
@@ -47,11 +43,12 @@
       " damage during your turn", " NL #yBreak : #yExalt #b"," Draw a card, draw #b1 less card next turn."
     ]
   },
-  "${modID}:Sanctuary": {
-    "NAME": "Sanctuary",
+  "${modID}:Hallowed": {
+    "NAME": "Hallowed",
     "DESCRIPTION": [
-      "#yBreaks after taking #b",
-      " damage during your turn", " NL #yBreak : Increase the #yBlock gain of the card that created this by #b"," this combat"
+      "Activates in #b",
+      " #yChants ", " NL #yCoda : Apply #b", " [${modID}:SanctifyIcon] to a random enemy.",
+      " "
     ]
   },
   "${modID}:Infusion": {

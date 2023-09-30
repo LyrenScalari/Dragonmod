@@ -1,40 +1,28 @@
 package dragonmod.cards.Rimedancer.Common;
 
-import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Color;
-import com.evacipated.cardcrawl.mod.stslib.blockmods.BlockModifierManager;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import dragonmod.CardMods.AddIconToDescriptionMod;
-import dragonmod.DamageModifiers.BlockModifiers.IceArmor;
-import dragonmod.DamageModifiers.Icons.FrostIcon;
+import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
+import dragonmod.cards.Rimedancer.Special.DazzlingShiv;
 import dragonmod.orbs.Icicle;
-import dragonmod.powers.Rimedancer.IceSpikesPower;
 import dragonmod.ui.IcicleSprayEffect;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
 public class CrystalBarbs extends AbstractRimedancerCard {
     public static final String ID = CrystalBarbs.class.getSimpleName();
-    public void triggerOnGlowCheck() {
-        if (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && ((AbstractCard)AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.SKILL) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        }
-    }
     public CrystalBarbs(){
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
-        setDamage(6,3);
-        setMagic(3,1);
-        BlockModifierManager.addModifier(this,new IceArmor(true));
-        CardModifierManager.addModifier(this,new AddIconToDescriptionMod(AddIconToDescriptionMod.BLOCK, FrostIcon.get()));
+        setDamage(7,4);
+        setMagic(2);
+        cardsToPreview = new DazzlingShiv();
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -45,11 +33,15 @@ public class CrystalBarbs extends AbstractRimedancerCard {
             }
         }
         Wiz.vfx(new IcicleSprayEffect(false));
-        Wiz.atb(new ThrowIcicleAction(tothrow,m.hb, Color.CYAN));
-        Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL));
-        Wiz.atb(new ChannelAction(new Icicle()));
-        if (AbstractDungeon.actionManager.cardsPlayedThisCombat.size() >= 2 && ((AbstractCard)AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 2)).type == AbstractCard.CardType.SKILL) {
-            Wiz.applyToSelf(new IceSpikesPower(p,p,magicNumber));
+        if (tothrow != null){
+            Wiz.atb(new ThrowIcicleAction(tothrow, m.hb, Color.CYAN));
+        } else {
+            Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
         }
+        Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL));
+        for (int i = 0; i < magicNumber; i++){
+                Wiz.atb(new ChannelAction(new Icicle()));
+        }
+        Wiz.atb(new MakeTempCardInHandAction(cardsToPreview.makeStatEquivalentCopy()));
     }
 }

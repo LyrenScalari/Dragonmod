@@ -21,7 +21,7 @@ public class GatheringStorm extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.block(p,block);
-        Wiz.applyToSelf(new Subzero(m,m,SecondMagicNumber));
+        Wiz.applyToSelf(new Subzero(p,p,SecondMagicNumber));
         Wiz.atb(new GainHailOrbSlotAction(magicNumber));
     }
 }

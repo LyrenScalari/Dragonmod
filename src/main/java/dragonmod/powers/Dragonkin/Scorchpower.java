@@ -6,20 +6,22 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.HealthBarRenderPower;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import dragonmod.DragonMod;
+import dragonmod.patches.ScorchPatches;
 import dragonmod.powers.BasePower;
 import dragonmod.relics.Dragonkin.MukySludge;
-import dragonmod.util.TextureLoader;
+import dragonmod.ui.TextureLoader;
+import dragonmod.util.Wiz;
 
-public class Scorchpower extends BasePower implements CloneablePowerInterface, HealthBarRenderPower {
+public class Scorchpower extends BasePower implements CloneablePowerInterface, HealthBarRenderPower, ScorchPatches.StartofTurnPreBlock {
     public AbstractCreature source;
 
     public static final String POWER_ID = DragonMod.makeID("Scorch");
@@ -33,22 +35,8 @@ public class Scorchpower extends BasePower implements CloneablePowerInterface, H
         this.region48 = new TextureAtlas.AtlasRegion(tex32, 0, 0, 32, 32);
         updateDescription();
     }
-
-    @Override
-    public int onAttacked(DamageInfo di, int d){
-        if (di.type == DamageInfo.DamageType.NORMAL) {
-            this.flash();
-            int temp = amount;
-            AbstractDungeon.actionManager.addToTop(
-                    new ReducePowerAction(this.owner, this.owner, this,1));
-            AbstractDungeon.actionManager.addToTop(
-                    new DamageAction(owner,new DamageInfo(owner,temp, DamageInfo.DamageType.THORNS)));
-            if (AbstractDungeon.player.hasPower(AcidArmorpower.POWER_ID)){
-                AbstractDungeon.player.getPower(AcidArmorpower.POWER_ID).onSpecificTrigger();
-            }
-            return d;
-        }
-        return d;
+    public void atStartOfTurn() {
+        //Wiz.dmg(owner,new DamageInfo(owner,amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.FIRE);
     }
     @Override
     public float atDamageFinalGive(float d, DamageInfo.DamageType type){
@@ -68,7 +56,7 @@ public class Scorchpower extends BasePower implements CloneablePowerInterface, H
     }
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + DESCRIPTIONS[2];
+        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
     @Override
     public AbstractPower makeCopy() {
@@ -77,14 +65,7 @@ public class Scorchpower extends BasePower implements CloneablePowerInterface, H
 
     @Override
     public int getHealthBarAmount() {
-        if (AbstractDungeon.player.hoveredCard != null) {
-            if (AbstractDungeon.player.hoveredCard.type == AbstractCard.CardType.ATTACK) {
-                if (AbstractDungeon.player.hoveredCard.target == AbstractCard.CardTarget.ENEMY && !(owner.hb.hovered)) {
-                    return 0;
-                } else return amount;
-            }
-        }
-        return 0;
+      return amount-owner.currentBlock;
     }
 
     @Override
@@ -92,10 +73,19 @@ public class Scorchpower extends BasePower implements CloneablePowerInterface, H
         return CardHelper.getColor(209,107,4);
     }
     public float[] _lightsOutGetXYRI() {
-        return new float[] {owner.hb.cX, owner.hb.cY, owner.hb.width+5, 0.75f};
+        return new float[] {owner.hb.cX, owner.hb.cY, (float)(owner.hb.width+(0.01*amount)), 0.05f * amount};
     }
 
     public Color[] _lightsOutGetColor() {
         return new Color[] {Color.SCARLET.cpy()};
+    }
+
+    @Override
+    public void atStartofTurnPreBlock() {
+        if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
+            this.flashWithoutSound();
+            Wiz.dmg(owner,new DamageInfo(owner,amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.FIRE);
+            Wiz.atb(new ReducePowerAction(owner,owner,this,1));
+        }
     }
 }
