@@ -106,11 +106,6 @@ public class TheJusticar extends CustomPlayer {
 
 
         // =============== ANIMATIONS =================
-
-        loadAnimation(
-                JUSTICAR_SKELETON_ATLAS,
-                JUSTICAR_SKELETON_JSON,
-                1.0f);
         AnimationState.TrackEntry e = state.setAnimation(0, "animation", true);
         AnimationState.TrackEntry e1 = state.setAnimation(1, "WingFlap", true);
         e.setTime(e.getEndTime() * MathUtils.random());

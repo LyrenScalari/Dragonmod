@@ -1,9 +1,9 @@
 {
   "${modID}:UIText": {
     "TEXT": [
-      "View subtype tutorial during the next combat you enter as the Justicar.",
+      "View Cure tutorial during the next combat you enter as the Justicar.",
       "Enable Chimera Crossover Modifers.",
-      "View Temporal Stress tutorial the next combat you enter as the Drifter."
+      "View Cantrip tutorial the next combat you enter as the Rimedancer."
     ]
   },
   "${modID}:MultiIntentStrings": {

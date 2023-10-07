@@ -2,9 +2,7 @@ package dragonmod.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -19,19 +17,14 @@ import com.megacrit.cardcrawl.localization.TutorialStrings;
 import com.megacrit.cardcrawl.ui.FtueTip;
 import com.megacrit.cardcrawl.vfx.combat.BattleStartEffect;
 import dragonmod.DragonMod;
-import dragonmod.characters.TheWarden;
+import dragonmod.characters.TheJusticar;
 
 import java.io.IOException;
 
-
-public class TemporalStressTutorial extends FtueTip {
-    private static final TutorialStrings tutorialStrings = CardCrawlGame.languagePack.getTutorialString("theDragonkin:TemporalStressTutorial");
+public class CureTurtorial extends FtueTip {
+    private static final TutorialStrings tutorialStrings = CardCrawlGame.languagePack.getTutorialString("theDragonkin:DualityTutorial");
     public static final String[] MSG = tutorialStrings.TEXT;
     public static final String[] LABEL = tutorialStrings.LABEL;
-
-    private static final TextureRegion img1 = new TextureRegion(new Texture("theDragonkinResources/images/tutorials/TemporalStress/t1.png"));
-    private static final TextureRegion img2 = new TextureRegion(new Texture("theDragonkinResources/images/tutorials/TemporalStress/t3.png"));
-    private static final TextureRegion img3 = new TextureRegion(new Texture("theDragonkinResources/images/tutorials/TemporalStress/t2.png"));
     private Color screen = Color.valueOf("1c262a00");
     private float x, x1, x2, x3, targetX, startX;
     private float scrollTimer = 0f;
@@ -41,7 +34,7 @@ public class TemporalStressTutorial extends FtueTip {
     private static final String msg2 = MSG[1];
     private static final String msg3 = MSG[2];
 
-    public TemporalStressTutorial() {
+    public CureTurtorial() {
         AbstractDungeon.player.releaseCard();
         if (AbstractDungeon.isScreenUp) {
             AbstractDungeon.dynamicBanner.hide();
@@ -107,10 +100,6 @@ public class TemporalStressTutorial extends FtueTip {
         sb.draw(ImageMaster.WHITE_SQUARE_IMG, 0f, 0f, Settings.WIDTH, Settings.HEIGHT);
 
         sb.setColor(Color.WHITE);
-        sb.draw(img1, x + x1 - img1.getRegionWidth() / 2f, Settings.HEIGHT / 2f - img1.getRegionHeight() / 2f, img1.getRegionWidth() / 2f, img1.getRegionHeight() / 2f, img1.getRegionWidth(), img1.getRegionHeight(), Settings.scale, Settings.scale, 0);
-        sb.draw(img2, x + x2 - img2.getRegionWidth() / 2f, Settings.HEIGHT / 2f - img2.getRegionHeight() / 2f, img2.getRegionWidth() / 2f, img2.getRegionHeight() / 2f, img2.getRegionWidth(), img2.getRegionHeight(), Settings.scale, Settings.scale, 0);
-        sb.draw(img3, x + x3 - img3.getRegionWidth() / 2f, Settings.HEIGHT / 2f - img3.getRegionHeight() / 2f, img3.getRegionWidth() / 2f, img3.getRegionHeight() / 2f, img3.getRegionWidth(), img3.getRegionHeight(), Settings.scale, Settings.scale, 0);
-
         float offsetY = 0f;
         if (Settings.BIG_TEXT_MODE) {
             offsetY = 110f * Settings.scale;
@@ -137,11 +126,11 @@ public class TemporalStressTutorial extends FtueTip {
     )
     public static class ShowTemperatureTutorialPatch {
         public static void Postfix(AbstractPlayer __instance) {
-            if (__instance instanceof TheWarden && DragonMod.justicarConfig.getBool("Temporal Stigmata Tutorial Seen")) {
+            if (__instance instanceof TheJusticar && DragonMod.dragonModConfig.getBool("Duality Tutorial Seen")) {
                 if (AbstractDungeon.screen != AbstractDungeon.CurrentScreen.FTUE) {
-                    DragonMod.justicarConfig.setBool("Temporal Stigmata Tutorial Seen", false);
-                    try { DragonMod.justicarConfig.save(); } catch (IOException e) { e.printStackTrace(); }
-                    AbstractDungeon.ftue = new TemporalStressTutorial();
+                    DragonMod.dragonModConfig.setBool("Duality Tutorial Seen", false);
+                    try { DragonMod.dragonModConfig.save(); } catch (IOException e) { e.printStackTrace(); }
+                    AbstractDungeon.ftue = new CureTurtorial();
                 }
             }
         }

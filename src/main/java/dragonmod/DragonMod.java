@@ -172,7 +172,7 @@ public class DragonMod implements
     public static boolean showSubtypeTutorial = true;
     public static final String SHOW_TS_TUTORIAL = "Temporal Stigmata Tutorial Seen";
     public static boolean showTsTutorial = true;
-    public static SpireConfig justicarConfig;
+    public static SpireConfig dragonModConfig;
     public static UIStrings uiStrings;
     public static boolean DecayStagger = false;
     public static TextureAtlas TypeEnergyAtlas = new TextureAtlas();
@@ -210,15 +210,15 @@ public class DragonMod implements
         justicarDefaults.getProperty("Temporal Stigmata Tutorial Seen","TRUE");
         justicarDefaults.getProperty("Enable Chimera Crossover","TRUE");
         try {
-            justicarConfig = new SpireConfig("The Justicar", "DragonkinMod", justicarDefaults);
+            dragonModConfig = new SpireConfig("The Justicar", "DragonkinMod", justicarDefaults);
         } catch (IOException e) {
             logger.error("DragonkinMod SpireConfig initialization failed:");
             e.printStackTrace();
         }
         logger.info("Justicar CONFIG OPTIONS LOADED:");
-        logger.info("Duality tutorial seen: " + justicarConfig.getString("Duality Tutorial Seen") + ".");
-        logger.info("Temporal Stigmata tutorial seen: " + justicarConfig.getString("Temporal Stigmata Tutorial Seen") + ".");
-        logger.info("Enable Chimera Crossover: " + justicarConfig.getString("Blessing Tutorial Seen") + ".");
+        logger.info("Duality tutorial seen: " + dragonModConfig.getString("Duality Tutorial Seen") + ".");
+        logger.info("Temporal Stigmata tutorial seen: " + dragonModConfig.getString("Temporal Stigmata Tutorial Seen") + ".");
+        logger.info("Enable Chimera Crossover: " + dragonModConfig.getString("Blessing Tutorial Seen") + ".");
         logger.info("Done creating the color");
 
 
@@ -253,26 +253,29 @@ public class DragonMod implements
         float spacingY = 55f;
         uiStrings = CardCrawlGame.languagePack.getUIString(modID + ":UIText");
         ModLabeledToggleButton DualityButton = new ModLabeledToggleButton(uiStrings.TEXT[0], 350.0f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont,
-                justicarConfig.getBool(SHOW_SUBTYPE_TUTORIAL), settingsPanel, (label) -> {}, (button) -> {
-            justicarConfig.setBool(SHOW_SUBTYPE_TUTORIAL, button.enabled);
+                dragonModConfig.getBool(SHOW_SUBTYPE_TUTORIAL), settingsPanel, (label) -> {}, (button) -> {
+            dragonModConfig.setBool(SHOW_SUBTYPE_TUTORIAL, button.enabled);
             showSubtypeTutorial = button.enabled;
-            try {justicarConfig.save();} catch (IOException e) {e.printStackTrace();}
+            try {
+                dragonModConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
         currentYposition -= spacingY;
         ModLabeledToggleButton TemporalStressButton = new ModLabeledToggleButton(uiStrings.TEXT[2], 350.0f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont,
-                justicarConfig.getBool(SHOW_TS_TUTORIAL), settingsPanel, (label) -> {}, (button) -> {
-            justicarConfig.setBool(SHOW_TS_TUTORIAL, button.enabled);
+                dragonModConfig.getBool(SHOW_TS_TUTORIAL), settingsPanel, (label) -> {}, (button) -> {
+            dragonModConfig.setBool(SHOW_TS_TUTORIAL, button.enabled);
             showTsTutorial = button.enabled;
-            try {justicarConfig.save();} catch (IOException e) {e.printStackTrace();}
+            try {
+                dragonModConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
         currentYposition -= spacingY;
         //Starting position
         //Button already multiplies by Settings.scale, so we pass raw X and Y values
         ModLabeledToggleButton enableChimeraCrossoverButton = new ModLabeledToggleButton(uiStrings.TEXT[1], 350.0f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont,
-                justicarConfig.getBool(ENABLE_CHIMERA_CROSSOVER), settingsPanel, (label) -> {}, (button) -> {
-            justicarConfig.setBool(ENABLE_CHIMERA_CROSSOVER, button.enabled);
+                dragonModConfig.getBool(ENABLE_CHIMERA_CROSSOVER), settingsPanel, (label) -> {}, (button) -> {
+            dragonModConfig.setBool(ENABLE_CHIMERA_CROSSOVER, button.enabled);
             enableChimeraCrossover = button.enabled;
-            try {justicarConfig.save();} catch (IOException e) {e.printStackTrace();}
+            try {
+                dragonModConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
         settingsPanel.addUIElement(DualityButton);
         settingsPanel.addUIElement(TemporalStressButton);
@@ -280,7 +283,6 @@ public class DragonMod implements
 
         currentYposition -= spacingY; //reduce the spacing
 //        settingsPanel.addUIElement(BlessingButton);
-        BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
 
         if (Loader.isModLoaded("CardAugments")) {
             AugmentHelper.register();
@@ -288,7 +290,7 @@ public class DragonMod implements
         logger.info("Done loading badge Image and mod options");
         //Set up the mod information displayed in the in-game mods menu.
         //The information used is taken from your pom.xml file.
-        BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, null);
+        BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, settingsPanel);
         CustomIntent.add(new BleedingOutIntent());
         HymnManager.VersePile = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         CantripManager.CantripPile = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
@@ -372,6 +374,8 @@ public class DragonMod implements
                 localizationPath(lang, "RelicStrings.json"));
         BaseMod.loadCustomStringsFile(UIStrings.class,
                 localizationPath(lang, "UIStrings.json"));
+        BaseMod.loadCustomStringsFile(TutorialStrings.class,
+                localizationPath(lang, "TutorialStrings.json"));
     }
 
     @Override

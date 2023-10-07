@@ -107,6 +107,10 @@
   "NAME": "Shoulder Check",
   "DESCRIPTION": "Deal !D! damage. NL If you have [${modID}:ReinforceIcon] gain [E] [E] and draw a card."
   },
+  "${modID}:RelentlessPursuit": {
+    "NAME": "Relentless Pursuit",
+    "DESCRIPTION": "Deal !${modID}:WOG! damage. (Equals half your [${modID}:BlockIcon] ). NL [${modID}:BlockIcon] gained this turn damages target enemy instead."
+  },
   "${modID}:MarchofOtherworldlyLight": {
     "NAME": "Purge the Wicked",
     "DESCRIPTION": "Deal [${modID}:HolyIcon] damage equal to !D! times your ${modID}:Devotion. NL Apply your ${modID}:Devotion plus !M! [${modID}:SanctifyIcon] ."
@@ -134,7 +138,7 @@
   },
   "${modID}:WrathofGod": {
     "NAME": "Wrath of God",
-    "DESCRIPTION": "Your current [${modID}:BlockIcon] increases this cards damage. NL Deal !${modID}:WOG! damage to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "Deal {!${modID}:WOG!|>0=!${modID}:WOG! + !M! damage to ALL enemies. (Equals your [${modID}:BlockIcon] )|<1= X + !M! damage to ALL enemies. (X equals your [${modID}:BlockIcon] ).} . {@@}. NL Exhaust."
   },
   "${modID}:SeraphForm": {
     "NAME": "Seraph Form",
@@ -276,6 +280,10 @@
     "NAME": "Rimeshank",
     "DESCRIPTION": "*Shiv cards deal !M! additional Damage. NL *Shiv cards also apply !${modID}:M2! [dragonmod:BleedIcon] .",
     "UPGRADE_DESCRIPTION": "Innate. NL *Shiv cards deal !M! additional Damage. NL *Shiv cards also apply !${modID}:M2! [dragonmod:BleedIcon] ."
+  },
+  "${modID}:SleevedAce": {
+    "NAME": "Sleeved Ace",
+    "DESCRIPTION": "${modID}:Flourish. NL Choose 1 of !M! non ${modID}:Cantrip cards in your hand, shuffle it into your *Bag *of *Tricks, it costs 0 until played"
   },
   "${modID}:ExposeWeakpoint": {
     "NAME": "Expose Weakpoint",
