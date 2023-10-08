@@ -18,7 +18,7 @@ public class WrathofGod extends AbstractJusticarCard {
     public static final String ID = WrathofGod.class.getSimpleName();
     public WrathofGod(){
         super(ID,1,CardType.ATTACK,CardRarity.RARE,CardTarget.ALL_ENEMY);
-        setCustomVar("WOG",0,0);
+        setCustomVar("WOG",8,2);
         setVarCalculation("WOG", (m, base) -> {
             if (AbstractDungeon.player != null){
                 int tmp = this.baseDamage;
@@ -33,7 +33,6 @@ public class WrathofGod extends AbstractJusticarCard {
                 return base;
             }
         });
-        setMagic(8,2);
         setExhaust(true);
     }
     @Override

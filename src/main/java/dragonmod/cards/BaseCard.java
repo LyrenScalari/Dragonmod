@@ -226,6 +226,7 @@ public abstract class BaseCard extends CustomCard {
         var.base = amount;
     }
     public int customVar(String key) {
+        if (cardVariables == null) return -1;
         LocalVarInfo var = cardVariables.get(key);
         if (var == null)
             return -1;

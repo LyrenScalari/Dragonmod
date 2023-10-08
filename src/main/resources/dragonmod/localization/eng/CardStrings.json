@@ -109,11 +109,12 @@
   },
   "${modID}:RelentlessPursuit": {
     "NAME": "Relentless Pursuit",
-    "DESCRIPTION": "Deal !${modID}:WOG! damage. (Equals half your [${modID}:BlockIcon] ). NL [${modID}:BlockIcon] gained this turn damages target enemy instead."
+    "DESCRIPTION": "Deal {!${modID}:WOG!|>8=!${modID}:WOG! damage. (Equals half your [${modID}:BlockIcon] + 8.)|<9=N + 8 damage. (N equals half your [${modID}:BlockIcon] )} {@@}. NL [${modID}:BlockIcon] gained this turn damages target enemy.",
+    "UPGRADE_DESCRIPTION": "Deal {!${modID}:WOG!|>11=!${modID}:WOG! damage. (Equals half your [${modID}:BlockIcon] + 11.)|<12=N + 11 damage. (N equals half your [${modID}:BlockIcon] )} {@@}. NL [${modID}:BlockIcon] gained this turn damages target enemy."
   },
   "${modID}:MarchofOtherworldlyLight": {
     "NAME": "Purge the Wicked",
-    "DESCRIPTION": "Deal [${modID}:HolyIcon] damage equal to !D! times your ${modID}:Devotion. NL Apply your ${modID}:Devotion plus !M! [${modID}:SanctifyIcon] ."
+    "DESCRIPTION": "Deal {!${modID}:DevaD!|>8=!${modID}:DevaD! damage. (Equals ${modID}:Devotion + 8.)|<9=N + 8 damage} {@@}. NL Apply {!${modID}:Deva!|>0=!${modID}:DevaM! [${modID}:SanctifyIcon] . NL (Equals ${modID}:Devotion + 4.)|<1=N + !M! [${modID}:SanctifyIcon] . NL (N equals your ${modID}:Devotion )} ."
   },
   "${modID}:RepairArmor": {
     "NAME": "Repair Armor",
@@ -138,7 +139,8 @@
   },
   "${modID}:WrathofGod": {
     "NAME": "Wrath of God",
-    "DESCRIPTION": "Deal {!${modID}:WOG!|>0=!${modID}:WOG! + !M! damage to ALL enemies. (Equals your [${modID}:BlockIcon] )|<1= X + !M! damage to ALL enemies. (X equals your [${modID}:BlockIcon] ).} . {@@}. NL Exhaust."
+    "DESCRIPTION": "Deal {!${modID}:WOG!|>8=!${modID}:WOG! damage to ALL enemies. (Equals your [${modID}:BlockIcon] + 8.)|<9=N + 8 damage to ALL enemies. (N equals your [${modID}:BlockIcon] )} {@@}. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Deal {!${modID}:WOG!|>10=!${modID}:WOG! damage to ALL enemies. (Equals your [${modID}:BlockIcon] + 10.)|<11=N + 10 damage to ALL enemies. (N equals your [${modID}:BlockIcon] )} {@@}. NL Exhaust."
   },
   "${modID}:SeraphForm": {
     "NAME": "Seraph Form",

@@ -28,6 +28,10 @@
     "NAME": "Sanctify",
     "DESCRIPTIONS": ["This creature takes #b25% less damage, when hit attackers are #yCured by #b"," and [dragonmod:SanctifyIcon] is reduced by #b1."]
   },
+  "${modID}:Pursuit": {
+    "NAME": "Pursuit",
+    "DESCRIPTIONS": ["Whenever you gain [${modID}:BlockIcon] deal that much damage to #r"]
+  },
 
   "${modID}:BorrowedCards": {
     "NAME": "Borrowed Time - Cards",
