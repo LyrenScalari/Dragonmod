@@ -13,7 +13,8 @@ public class Sanctuary extends AbstractJusticarCard {
     public static final String ID = Sanctuary.class.getSimpleName();
     public Sanctuary(){
         super(ID,1,CardType.SKILL,CardRarity.COMMON,CardTarget.SELF);
-        setMagic(3);
+        setMagic(3,2);
+        setMagic2(3);
         tags.add(HymnManager.Verse);
     }
     @Override
@@ -21,7 +22,7 @@ public class Sanctuary extends AbstractJusticarCard {
         Wiz.atb(new AbstractGameAction() {
             @Override
             public void update() {
-                HymnManager.addVerse(new Hallowed(magicNumber));
+                HymnManager.addVerse(new Hallowed(magicNumber),Sanctuary.this);
                 isDone = true;
             }
         });

@@ -34,7 +34,7 @@ public class PrayerofVigor extends AbstractJusticarCard {
         Wiz.atb(new AbstractGameAction() {
             @Override
             public void update() {
-                HymnManager.ActiveVerses.add(new Vigor(customVar( "H"),magicNumber));
+                HymnManager.addVerse(new Vigor(customVar( "H"),magicNumber), PrayerofVigor.this);
                 isDone = true;
             }
         });

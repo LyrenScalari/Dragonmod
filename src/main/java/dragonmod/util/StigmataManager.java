@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -20,11 +22,12 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import dragonmod.interfaces.onLoseHPField;
-import dragonmod.patches.FieldsField;
-import dragonmod.powers.Dragonkin.SacrificePower;
+import dragonmod.interfaces.*;
+import dragonmod.patches.EnchantmentsField;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
@@ -42,27 +45,37 @@ public class StigmataManager {
     }
 
     public static int getStigmataTotal() {
-        return StigmataField.Stigmata.get(Wiz.adp());
+        return StigmataField.Stigmata.get(Wiz.Player());
     }
 
     public static void gainStigmata(int amount) {
-        StigmataField.Stigmata.set(Wiz.adp(), getStigmataTotal() + amount);
+        StigmataField.Stigmata.set(Wiz.Player(), getStigmataTotal() + amount);
     }
     public static void spendStigmata(int amount) {
-        StigmataField.Stigmata.set(Wiz.adp(), getStigmataTotal() - amount);
+        StigmataField.Stigmata.set(Wiz.Player(), getStigmataTotal() - amount);
     }
     public static void cureHealing(int heal) {
         int cureHeal = Math.min(getStigmataTotal(), heal);
-        int prevHp = Wiz.adp().currentHealth;
-        Wiz.adp().heal(cureHeal);
-        int blockAmount = heal - (Wiz.adp().currentHealth - prevHp);
+        int prevHp = Wiz.Player().currentHealth;
+        int projectedhp = Math.min(prevHp + cureHeal,Wiz.Player().maxHealth);
+        int blockAmount = heal - (projectedhp - prevHp);
         int finalHeal = cureHeal - blockAmount;
         if (blockAmount > 0) {
-            Wiz.atb(new GainBlockAction(Wiz.adp(), blockAmount));
+            Wiz.atb(new GainBlockAction(Wiz.Player(), blockAmount));
+            for (AbstractRelic r : AbstractDungeon.player.relics){
+                if (r instanceof OnCure){
+                    ((OnCure)r).OnCureBlock(blockAmount);
+                }
+            }
         }
         if (finalHeal > 0) {
             spendStigmata(finalHeal);
-            Wiz.applyToSelf(new SacrificePower(AbstractDungeon.player, AbstractDungeon.player, finalHeal));
+            Wiz.Player().heal(finalHeal);
+            for (AbstractRelic r : AbstractDungeon.player.relics){
+                if (r instanceof OnCure){
+                    ((OnCure)r).OnCureHeal(finalHeal);
+                }
+            }
         }
     }
 
@@ -108,13 +121,82 @@ public class StigmataManager {
         if (renderstigmataui) {
             gainStigmata(damageAmount);
         }
-        for (AbstractCard field : FieldsField.Fields.get(__instance)) {
-            if (field instanceof onLoseHPField) {
-                ((onLoseHPField) field).AttachedOnAttacked(__instance);
+        for (AbstractCard field : EnchantmentsField.Enchantments.get(__instance)) {
+            if (field instanceof onLoseHPEnchantment) {
+                ((onLoseHPEnchantment) field).EnchantmentOnAttacked(__instance);
             }
         }
     }
 }
+    @SpirePatch(
+            clz = AbstractPlayer.class,
+            method = "damage"
+    )
+    public static class Damaged {
+        public Damaged() {
+        }
+        @SpireInsertPatch(
+                locator = Locator.class,
+                localvars = {"damageAmount", "hadBlock"}
+        )
+        public static void Insert(AbstractCreature __instance, DamageInfo info, int damageAmount, @ByRef boolean[] hadBlock) {
+            if (!AbstractDungeon.getCurrRoom().isBattleOver) {
+                if (info.type != DamageInfo.DamageType.HP_LOSS) {
+                    for (AbstractPower p : AbstractDungeon.player.powers) {
+                        if (p instanceof ReciveDamageEffect) {
+                            ((ReciveDamageEffect) p).onReciveDamage(damageAmount);
+                            ((ReciveDamageEffect) p).onReciveDamage(damageAmount);
+                        }
+                        if (p instanceof ReciveModifyDamageEffect) {
+                            damageAmount = ((ReciveModifyDamageEffect) p).onReciveDamage(damageAmount, info);
+                        }
+                    }
+                    for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
+                        if (c instanceof ReciveDamageEffect) {
+                            ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
+                        }
+                    }
+                    for (AbstractCard c : AbstractDungeon.player.hand.group) {
+                        if (c instanceof ReciveDamageinHandCard) {
+                            ((ReciveDamageinHandCard) c).onReciveDamage(damageAmount, info.type);
+                        }
+                        if (c instanceof ReciveDamageEffect) {
+                            ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
+                        }
+                    }
+                    for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) {
+                        if (c instanceof ReciveDamageEffect) {
+                            ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
+                        }
+                    }
+                    for (AbstractCard c : AbstractDungeon.player.discardPile.group) {
+                        if (c instanceof ReciveDamageEffect) {
+                            ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
+                        }
+                    }
+                    for (AbstractCard c : AbstractDungeon.player.limbo.group) {
+                        if (c instanceof ReciveDamageEffect) {
+                            ((ReciveDamageEffect) c).onReciveDamage(damageAmount);
+                        }
+                    }
+                }
+                if ((info.owner == AbstractDungeon.player || !AbstractDungeon.actionManager.turnHasEnded) ) {
+                    if (!HymnManager.ActiveVerses.isEmpty()) {
+                        for (AbstractNotOrb Verse : HymnManager.ActiveVerses){
+                            int finalDamageAmount = damageAmount;
+                            Wiz.atb(new AbstractGameAction() {
+                                @Override
+                                public void update() {
+                                    isDone = true;
+                                    ((ReciveModifyDamageEffect)Verse).onReciveDamage(finalDamageAmount, info);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
     private static class Locator extends SpireInsertLocator {
         private Locator() {
         }

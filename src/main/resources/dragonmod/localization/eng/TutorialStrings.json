@@ -2,7 +2,7 @@
   "theDragonkin:DualityTutorial": {
     "TEXT": [
       "The Justicar's devotion to his god grants him the unique ability to invoke divine magic to recover recently lost HP.",
-      "Any HP lost during combat becomes #bStigmata, which can be recovered with #yCure effects. You gain #bSacrifice equal to #bStigmata consumed. For every #b5 #bSacrifice you have, you gain #b1 #yHoly #yPower, increasing your damage and the effectiveness of your #yCures.",
+      "Any HP lost during combat becomes #bStigmata, which can be recovered with #yCure effects.",
       "#yCure will generate [${modID}:BlockIcon] if you don't have enough #bStigmata for it to use."
     ],
     "LABEL": [

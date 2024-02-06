@@ -2,15 +2,14 @@ package dragonmod.cards.Rimedancer.Common;
 
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.cards.tempCards.Shiv;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import dragonmod.CardMods.FrozenMod;
 import dragonmod.CardMods.SCVShatterMod;
+import dragonmod.actions.FireAction;
 import dragonmod.actions.ShatterAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
@@ -28,8 +27,6 @@ public class CryoShrapnel extends AbstractRimedancerCard {
         super(ID, 1, CardType.SKILL, CardRarity.COMMON, CardTarget.ENEMY);
         setMagic(3,1);
         setCostUpgrade(0);
-        cardsToPreview= new Shiv();
-        CardModifierManager.addModifier(cardsToPreview,new FrozenMod());
         energyCosts.put(TypeEnergyHelper.Mana.Shatter,1);
         CardModifierManager.addModifier(this,new SCVShatterMod());
     }
@@ -57,8 +54,16 @@ public class CryoShrapnel extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.atb(new ShatterAction());
-        for (int i = 0; i < magicNumber ; i++){
-            Wiz.att(new MakeTempCardInHandAction(cardsToPreview.makeStatEquivalentCopy()));
-        }
+        Wiz.atb(new AbstractGameAction() {
+            @Override
+            public void update() {
+                for (AbstractOrb o : p.orbs) {
+                    if (o instanceof Icicle) {
+                        Wiz.att(new FireAction(true, Icicle.class));
+                    }
+                }
+                isDone = true;
+            }
+        });
     }
 }

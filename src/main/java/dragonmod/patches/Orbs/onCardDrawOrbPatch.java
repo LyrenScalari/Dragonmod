@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import dragonmod.interfaces.onDrawCardOrb;
+import dragonmod.interfaces.onDrawCard;
 import javassist.CtBehavior;
 
 
@@ -17,9 +17,12 @@ public class onCardDrawOrbPatch {
     )
     public static void onCardDrawOrb(AbstractPlayer __instance) {
         for (AbstractOrb o : AbstractDungeon.player.orbs) {
-            if (o instanceof onDrawCardOrb) {
-                ((onDrawCardOrb) o).OnDrawCard();
+            if (o instanceof onDrawCard) {
+                ((onDrawCard) o).OnDrawCard();
             }
+        }
+        if (__instance.stance instanceof onDrawCard){
+            ((onDrawCard) __instance.stance).OnDrawCard();
         }
     }
 

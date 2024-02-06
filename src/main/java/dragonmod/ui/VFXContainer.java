@@ -22,9 +22,38 @@ public class VFXContainer {
     }
 
     public static AbstractGameEffect throwEffect(Texture tex, float scale, Hitbox target, Color color, boolean bounceOff, boolean sfx) {
-        VfxBuilder builder = new VfxBuilder(tex, Wiz.adp().hb.cX, Wiz.adp().hb.cY, 0.25f)
-                .moveX(Wiz.adp().hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
-                .moveY(Wiz.adp().hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
+        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.25f)
+                .moveX(Wiz.Player().hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
+                .moveY(Wiz.Player().hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
+                .rotate(MathUtils.random(100f, 300f) * (MathUtils.randomBoolean() ? -1 : 1))
+                .setScale(scale)
+                .emitEvery((x,y) -> new ThrowSparkleEffect(color.cpy(), x, y), 0.01f);
+        if (sfx) {
+            builder = builder.playSoundAt(0.0f, "ATTACK_WHIFF_2");
+        }
+        if (bounceOff) {
+            builder = builder.triggerVfxAt(0.25f, 1, (x,y) -> hitBounce(tex, scale, target));
+        }
+        return builder.build();
+    }
+    public static AbstractGameEffect throwShurikenEffect(Texture tex, float scale, Hitbox target, Color color, boolean bounceOff, boolean sfx) {
+        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.25f)
+                .moveX(Wiz.Player().hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
+                .moveY(Wiz.Player().hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
+                .rotateTo(0,360,VfxBuilder.Interpolations.POW2OUT)
+                .setScale(scale)
+                .emitEvery((x,y) -> new ThrowSparkleEffect(color.cpy(), x, y), 0.01f);
+        if (sfx) {
+            builder = builder.playSoundAt(0.0f, "ATTACK_WHIFF_2");
+        }
+        if (bounceOff) {
+            builder = builder.triggerVfxAt(0.25f, 1, (x,y) -> hitBounce(tex, scale, target));
+        }
+        return builder.build();
+    }
+    public static AbstractGameEffect VolleyShurikenEffect(Texture tex, float scale, Hitbox target, Color color, boolean bounceOff, boolean sfx) {
+        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.25f)
+                .arc(Wiz.Player().hb.cX, Wiz.Player().hb.cY,  target.cX, target.cY - (target.height / 2), Wiz.Player().hb.cY*2)
                 .rotate(MathUtils.random(100f, 300f) * (MathUtils.randomBoolean() ? -1 : 1))
                 .setScale(scale)
                 .emitEvery((x,y) -> new ThrowSparkleEffect(color.cpy(), x, y), 0.01f);
@@ -37,9 +66,9 @@ public class VFXContainer {
         return builder.build();
     }
     public static AbstractGameEffect throwEffectNoAngle(Texture tex, float scale, Hitbox target, Color color, boolean bounceOff, boolean sfx) {
-        VfxBuilder builder = new VfxBuilder(tex, Wiz.adp().hb.cX, Wiz.adp().hb.cY, 0.25f)
-                .moveX(Wiz.adp().hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
-                .moveY(Wiz.adp().hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
+        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.25f)
+                .moveX(Wiz.Player().hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
+                .moveY(Wiz.Player().hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
                 .rotate(0)
                 .setScale(scale)
                 .emitEvery((x,y) -> new ThrowSparkleEffect(color.cpy(), x, y), 0.01f);

@@ -36,6 +36,15 @@
       "For the remaining light will be your shield against the dark."
     ]
   },
+  "${modID}:Beacon": {
+    "NAME": "Beacon",
+    "DESCRIPTION": [
+      "Activates in #b",
+      " #yChants", "",
+      " NL #yChant : #yCure #b",".",
+      " "
+    ]
+  },
   "${modID}:Lightspeed": {
     "NAME": "Lightspeed",
     "DESCRIPTION": [
@@ -105,6 +114,18 @@
     "DESCRIPTION": [
       "#yPassive : at the end of your turn deal #b"," damage to ","the last enemy you attacked.",
       " NL #yEvoke : deal #b"," damage to ","the last enemy you attacked "," and evoke your next orb if its an icicle."
+    ]
+  },
+  "${modID}:Dawn": {
+    "NAME": "Dawn",
+    "DESCRIPTION": [
+      "When you play a skill, if the last card played was a different type, gain #b4 [${modID}:BlockIcon] ."
+    ]
+  },
+  "${modID}:Dusk": {
+    "NAME": "Dusk",
+    "DESCRIPTION": [
+      "When you draw a card during your turn, deal #b2 damage to a random enemy."
     ]
   }
 }

@@ -21,14 +21,14 @@ public class GainHailOrbSlotAction extends AbstractGameAction {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             for(int i = 0; i < this.amount; ++i) {
                 if (AbstractDungeon.player.maxOrbs == 10) {
-                    AbstractDungeon.effectList.add(new ThoughtBubble(Wiz.adp().dialogX, Wiz.adp().dialogY, 3.0F, AbstractPlayer.MSG[3], true));
+                    AbstractDungeon.effectList.add(new ThoughtBubble(Wiz.Player().dialogX, Wiz.Player().dialogY, 3.0F, AbstractPlayer.MSG[3], true));
                 } else {
                     CardCrawlGame.sound.play("ORB_SLOT_GAIN", 0.1F);
                     AbstractDungeon.player.maxOrbs += 1;
-                        Wiz.adp().orbs.add(new HailOrbSlot());
+                        Wiz.Player().orbs.add(new HailOrbSlot());
 
-                    for(int iii = 0; iii < Wiz.adp().orbs.size(); ++iii) {
-                        ((AbstractOrb)Wiz.adp().orbs.get(iii)).setSlot(iii, Wiz.adp().maxOrbs);
+                    for(int iii = 0; iii < Wiz.Player().orbs.size(); ++iii) {
+                        ((AbstractOrb)Wiz.Player().orbs.get(iii)).setSlot(iii, Wiz.Player().maxOrbs);
                     }
 
                 }

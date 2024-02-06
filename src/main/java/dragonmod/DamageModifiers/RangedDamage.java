@@ -17,7 +17,7 @@ public class RangedDamage extends AbstractDamageModifier {
     }
     public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCreature target, AbstractCard card) {
         if (target != null) {
-            if (target.hasPower(LockOnPower.POWER_ID) && type == DamageInfo.DamageType.NORMAL) {
+            if (target.hasPower(LockOnPower.POWER_ID) && type != DamageInfo.DamageType.HP_LOSS) {
                 return damage * 1.5F;
             }
         }

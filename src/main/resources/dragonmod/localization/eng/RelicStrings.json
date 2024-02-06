@@ -3,7 +3,14 @@
     "NAME": "Sunstone Axe",
     "FLAVOR": "Eschew the Mace and take up the Axe, disgraced Warrior of Light, defector of the corrupt order.",
     "DESCRIPTIONS": [
-      "At the start of combat, apply #b5 [dragonmod:SanctifyIcon] to a random enemy."
+      "Whenever you heal in combat or gain [${modID}:BlockIcon] from #yCure, deal #b3 damage to a random enemy."
+    ]
+  },
+  "${modID}:AshenCharm": {
+    "NAME": "Ashen Charm",
+    "FLAVOR": "Stand for what you believe in, any less and you'll get burned for.",
+    "DESCRIPTIONS": [
+      "Whenever you heal in combat from #yCure, gain that much [dragonmod:SacrificeIcon] ."
     ]
   },
   "${modID}:RoyalSignet": {
@@ -17,7 +24,7 @@
     "NAME": "Sunlight Fragment",
     "FLAVOR": "It's warm to the touch.",
     "DESCRIPTIONS": [
-      "The First time you draw a #yStatus each turn draw a card and gain #b4 [theDragonkin:LightIcon]"
+      "The First time you draw a #yStatus each turn draw a card and #yCure #b4."
     ]
   },
   "${modID}:MukySludge": {
@@ -63,13 +70,6 @@
       "Whenever you play an #yExalted card, next turn gain [E]"
     ]
   },
-  "${modID}:SunblessedCharm": {
-    "NAME": "Sunblessed Charm",
-    "FLAVOR": "",
-    "DESCRIPTIONS": [
-      "Gain #b3 #yHoly #yPower at the start of each combat. NL Whenever you play an #yExalted card, Draw a card."
-    ]
-  },
   "${modID}:PlaceholderRelic2": {
     "NAME": "Placeholder Relic 2",
     "FLAVOR": "You feel stronger.",
@@ -110,7 +110,7 @@
     "NAME": "Cryonite Shard",
     "FLAVOR": "A glorified prison shank made from an icy blue metal that is perpetually cold to the touch.",
     "DESCRIPTIONS": [
-      "At the start of combat, channel an #yIcicle and add a #yShiv to your hand."
+      "At the start of combat, channel an #yIcicle. NL The first time you remove an Orb each turn Gain #b4 [dragonmod:SubzeroIcon] ."
     ]
   },
   "${modID}:BottledVoice": {

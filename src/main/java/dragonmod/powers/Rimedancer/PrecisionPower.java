@@ -26,7 +26,7 @@ public class PrecisionPower extends BasePower {
         this.region128 = powerToLose.region128;
     }
     public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
-        if (card instanceof com.megacrit.cardcrawl.cards.tempCards.Shiv || card.hasTag(PrecisionPower.Shiv)){
+        if (card.cost == 0){
             return type == DamageInfo.DamageType.NORMAL ? damage + (float)this.amount : damage;
         }
         return damage;

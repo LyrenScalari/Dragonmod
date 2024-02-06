@@ -11,16 +11,33 @@
       " turns."
     ]
   },
-  "${modID}:Scorch": {
-    "NAME": "Scorch",
-    "DESCRIPTIONS": ["At the start of this creatures turn, it takes #b"," damage"
+  "${modID}:Courage": {
+    "NAME": "Courage",
+    "DESCRIPTIONS": ["The next #b",
+      " #yStatus or #pCurse cards you draw are discarded and draw a card."
     ]
   },
-  "${modID}:DivineConvictionpower": {
+  "${modID}:Scorch": {
+    "NAME": "Scorch",
+    "DESCRIPTIONS": ["When attacked, takes #b"," damage and loses #b"," [dragonmod:ScorchIcon] ."
+    ]
+  },
+  "${modID}:Singe": {
+    "NAME": "Singed",
+    "DESCRIPTIONS": ["Next turn, take #b"," damage."
+    ]
+  },
+  "${modID}:Confession": {
+    "NAME": "Confession",
+    "DESCRIPTIONS": ["Whenever you take damage deal #b",
+      " damage to ALL enemies. Halved if it activates outside of your turn."
+    ]
+  },
+  "${modID}:HolyPower": {
     "NAME": "Holy Power",
     "DESCRIPTIONS": ["Increases damage dealt and healing from #yCure by #b"]
   },
-  "${modID}:SacrificePower": {
+  "${modID}:Sacrifice": {
     "NAME": "Sacrifice",
     "DESCRIPTIONS": ["When you obtain #b"," spend it and Gain #b1 #yHoly #yPower"]
   },
@@ -30,7 +47,7 @@
   },
   "${modID}:Pursuit": {
     "NAME": "Pursuit",
-    "DESCRIPTIONS": ["Whenever you gain [${modID}:BlockIcon] deal that much damage to #r"]
+    "DESCRIPTIONS": ["Whenever you gain [${modID}:BlockIcon] deal that much damage to the #yEnchanted target."]
   },
 
   "${modID}:BorrowedCards": {
@@ -102,8 +119,8 @@
   },
   "${modID}:Intensity": {
     "NAME": "Intensity",
-    "DESCRIPTIONS": ["At the start of your next turn, gain #b",
-      " Temporary Focus"
+    "DESCRIPTIONS": ["in #b",
+      " turns lose #b"," [dragonmod:FocusIcon] ."
     ]
   },
   "${modID}:IceSpikes": {
@@ -114,13 +131,13 @@
   },
   "${modID}:Precision": {
     "NAME": "Precision",
-    "DESCRIPTIONS": ["#yShiv cards deal #b",
+    "DESCRIPTIONS": ["0-Cost cards deal #b",
       " additional damage."
     ]
   },
   "${modID}:Rimeshank": {
     "NAME": "Rimeshank",
-    "DESCRIPTIONS": ["#yShiv cards apply #b",
+    "DESCRIPTIONS": ["0-Cost cards apply #b",
       " Bleed."
     ]
   },
@@ -128,6 +145,12 @@
     "NAME": "Bleed",
     "DESCRIPTIONS": ["Next turn lose #b",
       " HP."
+    ]
+  },
+  "${modID}:SilverShadow": {
+    "NAME": "Silver Shadow",
+    "DESCRIPTIONS": ["When attacked apply #b",
+      " [${modID}:LockonIcon] back."
     ]
   },
   "${modID}:Cryolattice": {
@@ -152,6 +175,35 @@
     "NAME": "Subzero",
     "DESCRIPTIONS": ["Icicles Channeled gain #b",
       " base damage."
+    ]
+  },
+  "${modID}:Hailstorm": {
+    "NAME": "Hailstorm",
+    "DESCRIPTIONS": ["At the end of your turn, activate the passive effect of your orbs #b",
+      " times."
+    ]
+  },
+  "${modID}:FrigidForm": {
+    "NAME": "Frigid Form",
+    "DESCRIPTIONS": ["After you remove an orb gain #b",
+      " [dragonmod:SubzeroIcon] ."
+    ]
+  },
+  "${modID}:IcyVeins": {
+    "NAME": "Icy Veins",
+    "DESCRIPTIONS": ["After you remove an orb gain #b",
+      " [dragonmod:BlockIcon] ."
+    ]
+  },
+  "${modID}:Slow": {
+    "NAME": "Lethargy",
+    "DESCRIPTIONS": ["Takes 10% additional damage from cards and orbs this turn for each card played this turn. NL (Takes #b",
+      "% additional damage)."
+    ]
+  },
+  "${modID}:Blossom": {
+    "NAME": "Blossom",
+    "DESCRIPTIONS": ["Gain [E] the next time you play a skill this turn."
     ]
   }
 }

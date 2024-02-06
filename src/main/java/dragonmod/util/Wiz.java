@@ -29,7 +29,7 @@ import java.util.function.Predicate;
 public class Wiz {
     //The wonderful Wizard of Oz allows access to most easy compilations of data, or functions.
 
-    public static AbstractPlayer adp() {
+    public static AbstractPlayer Player() {
         return AbstractDungeon.player;
     }
 

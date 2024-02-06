@@ -26,7 +26,7 @@ public class RimedancerStrike extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Icicle tothrow = null;
-        for (AbstractOrb o : Wiz.adp().orbs) {
+        for (AbstractOrb o : Wiz.Player().orbs) {
             if (o instanceof Icicle) {
                 tothrow = (Icicle) o;
                 break;

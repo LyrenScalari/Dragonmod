@@ -31,6 +31,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
@@ -41,11 +42,16 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import dragonmod.DamageModifiers.Icons.*;
 import dragonmod.actions.GainCrystalOrbSlotAction;
 import dragonmod.actions.GainHailOrbSlotAction;
+import dragonmod.cards.Draconic.AbstractDraconicCard;
+import dragonmod.cards.Draconic.Hubris;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
+import dragonmod.cards.Warden.AbstractWardenCard;
 import dragonmod.characters.TheJusticar;
 import dragonmod.characters.TheRimedancer;
+import dragonmod.characters.TheWarden;
 import dragonmod.orbs.Icicle;
+import dragonmod.patches.EnchantmentsManager;
 import dragonmod.potions.Dragonkin.DraughtofFervor;
 import dragonmod.potions.Dragonkin.GatlokBrew;
 import dragonmod.potions.Dragonkin.NaruuinsGlow;
@@ -55,6 +61,8 @@ import dragonmod.powers.general.ReinforcePower;
 import dragonmod.relics.Dragon.BottledVoice;
 import dragonmod.relics.Dragon.RoyalSignet;
 import dragonmod.relics.Dragonkin.*;
+import dragonmod.relics.Dragonkin.starter.AshenCharm;
+import dragonmod.relics.Dragonkin.starter.GarnetScales;
 import dragonmod.relics.Drifter.BronzePocketWatch;
 import dragonmod.relics.Drifter.DraconicTimeCrystal;
 import dragonmod.relics.Rimedancer.CryoniteShard;
@@ -77,7 +85,7 @@ import static dragonmod.characters.TheJusticar.Enums.THE_JUSTICAR;
 import static dragonmod.characters.TheRimedancer.Enums.Rimedancer_Cyan_COLOR;
 import static dragonmod.characters.TheRimedancer.Enums.THE_RIMEDANCER;
 import static dragonmod.characters.TheWarden.Enums.THE_WARDEN;
-import static dragonmod.characters.TheWarden.Enums.Warden_Bronze_COLOR;
+import static dragonmod.characters.TheWarden.Enums.Warden_Emerald_COLOR;
 @SpireInitializer
 public class DragonMod implements
         EditCardsSubscriber,
@@ -108,8 +116,9 @@ public class DragonMod implements
     }
     //Generic assets
     public static final Color JUSTICAR_RED = CardHelper.getColor(209.0f, 53.0f, 18.0f);
-    public static final Color WARDEN_BRONZE = CardHelper.getColor(209.0f, 180.0f, 18.0f);
+    public static final Color WARDEN_EMERALD = CardHelper.getColor(20.0f, 180.0f, 40.0f);
     public static final Color RIMEDANCER_CYAN = CardHelper.getColor(18.0f, 180.0f, 209.0f);
+    public static final Color DRACONIC_TRAIL = CardHelper.getColor(185.0f, 170.0f, 18.0f);
     private static final String MODNAME = "Dragon Mod";
     private static final String AUTHOR = "Silver";
     private static final String DESCRIPTION = "4 new Spire slaying hero's rise from origins far beyond the spire. each with varied tools and skills for climbing the tower and escaping to return to their lives";
@@ -145,6 +154,14 @@ public class DragonMod implements
     public static final String WARDEN_BRONZE_ENERGY_ORB = characterPath("Warden/cardback/energy_orb.png");
     public static final String WARDEN_BRONZE_ENERGY_ORB_P= characterPath("Warden/cardback/energy_orb_p.png");
     public static final String WARDEN_BRONZE_SMALL_ORB = characterPath("Warden/cardback/small_orb.png");
+    public static final String WARDEN_AMETHYST_ATTACK = characterPath("Warden/cardback/amethyst_attack.png");
+    public static final String WARDEN_AMETHYST_ATTACK_P =  characterPath("Warden/cardback/amethyst_attack_p.png");
+    public static final String WARDEN_AMETHYST_SKILL = characterPath("Warden/cardback/amethyst_skill.png");
+    public static final String WARDEN_AMETHYST_SKILL_P = characterPath("Warden/cardback/amethyst_skill_p.png");
+    public static final String WARDEN_AMBER_ATTACK = characterPath("Warden/cardback/amber_attack.png");
+    public static final String WARDEN_AMBER_ATTACK_P =  characterPath("Warden/cardback/amber_attack_p.png");
+    public static final String WARDEN_AMBER_SKILL = characterPath("Warden/cardback/amber_skill.png");
+    public static final String WARDEN_AMBER_SKILL_P = characterPath("Warden/cardback/amber_skill_p.png");
     //Rimedancer card assets
     private static final String RIMEDANCER_CYAN_ATTACK = characterPath("Rimedancer/cardback/attack.png");
     private static final String RIMEDANCER_CYAN_ATTACK_P =  characterPath("Rimedancer/cardback/attack_p.png");
@@ -155,6 +172,16 @@ public class DragonMod implements
     public static final String RIMEDANCER_CYAN_ENERGY_ORB = characterPath("Rimedancer/cardback/energy_orb.png");
     public static final String RIMEDANCER_CYAN_ENERGY_ORB_P= characterPath("Rimedancer/cardback/energy_orb_p.png");
     public static final String RIMEDANCER_CYAN_SMALL_ORB = characterPath("Rimedancer/cardback/small_orb.png");
+    //Draconic card assets
+    private static final String DRACONIC_ATTACK = characterPath("Draconic/cardback/attack.png");
+    private static final String DRACONIC_ATTACK_P =  characterPath("Draconic/cardback/attack_p.png");
+    private static final String DRACONIC_SKILL = characterPath("Draconic/cardback/skill.png");
+    private static final String DRACONIC_SKILL_P = characterPath("Draconic/cardback/skill_p.png");
+    private static final String DRACONIC_POWER = characterPath("Draconic/cardback/power.png");
+    private static final String DRACONIC_POWER_P = characterPath("Draconic/cardback/power_p.png");
+    public static final String DRACONIC_ENERGY_ORB = characterPath("Draconic/cardback/energy_orb.png");
+    public static final String DRACONIC_ENERGY_ORB_P= characterPath("Draconic/cardback/energy_orb_p.png");
+    public static final String DRACONIC_SMALL_ORB = characterPath("Draconic/cardback/small_orb.png");
     //Vars
     public static Matcher[] ExtraIceMatchers =  new Matcher[]{new Matcher.NewExprMatcher(Subzero.class),new Matcher.NewExprMatcher(GainCrystalOrbSlotAction.class),new Matcher.NewExprMatcher(GainHailOrbSlotAction.class)};
     public static Matcher[] ExtraBoltMatchers =  new Matcher[]{new Matcher.NewExprMatcher(Subzero.class)};
@@ -165,12 +192,13 @@ public class DragonMod implements
     public static int CardsCycledThisTurn = 0;
     public static int BurnsCycledThisCombat = 0;
     public static int BurnsCycledThisTurn = 0;
+    public static ArrayList<AbstractCard> StanceChoices = new ArrayList<>();
     public static boolean damagetaken = false;
     public static final String ENABLE_CHIMERA_CROSSOVER = "Enable Chimera Crossover";
     public static boolean enableChimeraCrossover = true;
     public static final String SHOW_SUBTYPE_TUTORIAL = "Duality Tutorial Seen";
     public static boolean showSubtypeTutorial = true;
-    public static final String SHOW_TS_TUTORIAL = "Temporal Stigmata Tutorial Seen";
+    public static final String SHOW_TS_TUTORIAL = "Charge Stigmata Tutorial Seen";
     public static boolean showTsTutorial = true;
     public static SpireConfig dragonModConfig;
     public static UIStrings uiStrings;
@@ -183,10 +211,15 @@ public class DragonMod implements
         new DragonMod();
     }
     @SpireEnum
-    public static AbstractCard.CardTags Field;
+    public static AbstractCard.CardTags Enchantment;
+    @SpireEnum
+    public static AbstractCard.CardTags Reflexive;
     @SpireEnum
     public static AbstractMonster.Intent BLEEDING_OUT;
-
+    @SpireEnum(name = "Draconic")
+    public static AbstractCard.CardColor Draconic;
+    @SpireEnum(name = "Draconic") @SuppressWarnings("unused")
+    public static CardLibrary.LibraryType LIBRARY_COLOR;
     public DragonMod() {
         BaseMod.subscribe(this); //This will make BaseMod trigger all the subscribers at their appropriate times.
         logger.info(modID + " subscribed to BaseMod.");
@@ -195,19 +228,24 @@ public class DragonMod implements
                 JUSTICAR_RED_ATTACK, JUSTICAR_RED_SKILL, JUSTICAR_RED_POWER, JUSTICAR_RED_ENERGY_ORB,
                 JUSTICAR_RED_ATTACK_P, JUSTICAR_RED_SKILL_P, JUSTICAR_RED_POWER_P,
                 JUSTICAR_RED_ENERGY_ORB_P, JUSTICAR_RED_SMALL_ORB);
-       /* BaseMod.addColor(Warden_Bronze_COLOR, WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(),
-                WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(), WARDEN_BRONZE.cpy(),
+      BaseMod.addColor(Warden_Emerald_COLOR, WARDEN_EMERALD.cpy(), WARDEN_EMERALD.cpy(), WARDEN_EMERALD.cpy(),
+                WARDEN_EMERALD.cpy(), WARDEN_EMERALD.cpy(), WARDEN_EMERALD.cpy(), WARDEN_EMERALD.cpy(),
                 WARDEN_BRONZE_ATTACK, WARDEN_BRONZE_SKILL, WARDEN_BRONZE_POWER, WARDEN_BRONZE_ENERGY_ORB,
                 WARDEN_BRONZE_ATTACK_P, WARDEN_BRONZE_SKILL_P, WARDEN_BRONZE_POWER_P,
-                WARDEN_BRONZE_ENERGY_ORB_P, WARDEN_BRONZE_SMALL_ORB);*/
+                WARDEN_BRONZE_ENERGY_ORB_P, WARDEN_BRONZE_SMALL_ORB);
         BaseMod.addColor(Rimedancer_Cyan_COLOR, RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(),
                 RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(), RIMEDANCER_CYAN.cpy(),
                 RIMEDANCER_CYAN_ATTACK, RIMEDANCER_CYAN_SKILL, RIMEDANCER_CYAN_POWER, RIMEDANCER_CYAN_ENERGY_ORB,
                 RIMEDANCER_CYAN_ATTACK_P,RIMEDANCER_CYAN_SKILL_P, RIMEDANCER_CYAN_POWER_P,
                 RIMEDANCER_CYAN_ENERGY_ORB_P, RIMEDANCER_CYAN_SMALL_ORB);
+        BaseMod.addColor(Draconic, DRACONIC_TRAIL.cpy(), DRACONIC_TRAIL.cpy(), DRACONIC_TRAIL.cpy(),
+                DRACONIC_TRAIL.cpy(), DRACONIC_TRAIL.cpy(), DRACONIC_TRAIL.cpy(), DRACONIC_TRAIL.cpy(),
+                DRACONIC_ATTACK, DRACONIC_SKILL, DRACONIC_POWER, DRACONIC_ENERGY_ORB,
+                DRACONIC_ATTACK_P,DRACONIC_SKILL_P, DRACONIC_POWER_P,
+                DRACONIC_ENERGY_ORB_P, DRACONIC_SMALL_ORB);
         Properties justicarDefaults = new Properties();
         justicarDefaults.getProperty("Duality Tutorial Seen","TRUE");
-        justicarDefaults.getProperty("Temporal Stigmata Tutorial Seen","TRUE");
+        justicarDefaults.getProperty("Charge Stigmata Tutorial Seen","TRUE");
         justicarDefaults.getProperty("Enable Chimera Crossover","TRUE");
         try {
             dragonModConfig = new SpireConfig("The Justicar", "DragonkinMod", justicarDefaults);
@@ -217,7 +255,7 @@ public class DragonMod implements
         }
         logger.info("Justicar CONFIG OPTIONS LOADED:");
         logger.info("Duality tutorial seen: " + dragonModConfig.getString("Duality Tutorial Seen") + ".");
-        logger.info("Temporal Stigmata tutorial seen: " + dragonModConfig.getString("Temporal Stigmata Tutorial Seen") + ".");
+        logger.info("Charge Stigmata tutorial seen: " + dragonModConfig.getString("Charge Stigmata Tutorial Seen") + ".");
         logger.info("Enable Chimera Crossover: " + dragonModConfig.getString("Blessing Tutorial Seen") + ".");
         logger.info("Done creating the color");
 
@@ -376,6 +414,8 @@ public class DragonMod implements
                 localizationPath(lang, "UIStrings.json"));
         BaseMod.loadCustomStringsFile(TutorialStrings.class,
                 localizationPath(lang, "TutorialStrings.json"));
+        BaseMod.loadCustomStringsFile(StanceStrings.class,
+                localizationPath(lang, "StanceStrings.json"));
     }
 
     @Override
@@ -414,6 +454,7 @@ public class DragonMod implements
     public static String powerPath(String file) { return resourcesFolder + "/powers/" + file; }
     public static String relicPath(String file) { return resourcesFolder + "/relics/" + file; }
     public static String orbPath(String file) { return resourcesFolder + "/orbs/" + file; }
+    public static String itemPath(String file) { return resourcesFolder + "/items/" + file; }
     //This determines the mod's ID based on information stored by ModTheSpire.
     private static void loadModInfo() {
         Optional<ModInfo> infos = Arrays.stream(Loader.MODINFOS).filter((modInfo)->{
@@ -435,30 +476,35 @@ public class DragonMod implements
     @Override
     public void receiveEditCards() {
         //Basegame Icons
+        CustomIconHelper.addCustomIcon(StrengthIcon.get());
         CustomIconHelper.addCustomIcon(BlockIcon.get());
         CustomIconHelper.addCustomIcon(WeakIcon.get());
         CustomIconHelper.addCustomIcon(VulnerableIcon.get());
         CustomIconHelper.addCustomIcon(LockonIcon.get());
         CustomIconHelper.addCustomIcon(FocusIcon.get());
         CustomIconHelper.addCustomIcon(FrailIcon.get());
-
+        CustomIconHelper.addCustomIcon(PoisonIcon.get());
         //Generic Dragon Icons
+        CustomIconHelper.addCustomIcon(ChargeCounter.get());
         CustomIconHelper.addCustomIcon(ReinforceIcon.get());
         CustomIconHelper.addCustomIcon(PowerfulIcon.get());
         CustomIconHelper.addCustomIcon(CourageIcon.get());
         //Justicar Icons
         CustomIconHelper.addCustomIcon(FireIcon.get());
         CustomIconHelper.addCustomIcon(LightIcon.get());
+        CustomIconHelper.addCustomIcon(SacrificeIcon.get());
         CustomIconHelper.addCustomIcon(ExaltIcon.get());
         CustomIconHelper.addCustomIcon(StigmataIcon.get());
-        CustomIconHelper.addCustomIcon(HolyIcon.get());
+        CustomIconHelper.addCustomIcon(ConfessionIcon.get());
         CustomIconHelper.addCustomIcon(ScorchIcon.get());
         CustomIconHelper.addCustomIcon(ZealIcon.get());
         CustomIconHelper.addCustomIcon(SanctifyIcon.get());
 
         //Rimedancer Icons
         CustomIconHelper.addCustomIcon(RangedIcon.get());
+        CustomIconHelper.addCustomIcon(IceCounter.get());
         CustomIconHelper.addCustomIcon(FrostIcon.get());
+        CustomIconHelper.addCustomIcon(SlowIcon.get());
         CustomIconHelper.addCustomIcon(ChillIcon.get());
         CustomIconHelper.addCustomIcon(BleedIcon.get());
         CustomIconHelper.addCustomIcon(SubzeroIcon.get());
@@ -469,14 +515,17 @@ public class DragonMod implements
         logger.info("Adding cards");
         new AutoAdd(modID).packageFilter(AbstractJusticarCard.class).setDefaultSeen(true).cards();
         new AutoAdd(modID).packageFilter(AbstractRimedancerCard.class).setDefaultSeen(true).cards();
+        new AutoAdd(modID).packageFilter(AbstractWardenCard.class).setDefaultSeen(true).cards();
+        new AutoAdd(modID).packageFilter(AbstractDraconicCard.class).setDefaultSeen(true).cards();
+        BaseMod.removeCard(Hubris.ID, AbstractCard.CardColor.CURSE);
     }
 
     @Override
     public void receiveEditCharacters() {
         BaseMod.addCharacter(new TheJusticar("the Justicar", THE_JUSTICAR),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_JUSTICAR);
-      // BaseMod.addCharacter(new TheWarden("the Drifter", THE_WARDEN),
-               //JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_WARDEN);
+        BaseMod.addCharacter(new TheWarden("the Warden", THE_WARDEN),
+               JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_WARDEN);
         BaseMod.addCharacter(new TheRimedancer("the Rimedancer", THE_RIMEDANCER),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_RIMEDANCER);
         receiveEditPotions();
@@ -498,6 +547,7 @@ public class DragonMod implements
 
         // Justicar Relics.
         BaseMod.addRelicToCustomPool(new GarnetScales(), Justicar_Red_COLOR);
+        BaseMod.addRelicToCustomPool(new AshenCharm(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new ObsidianScales(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new CitrineScales(), Justicar_Red_COLOR);
         //To Do : Make new common relic for Justicar
@@ -506,8 +556,8 @@ public class DragonMod implements
         BaseMod.addRelicToCustomPool(new BookOfHymns(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new Sulfurian(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new TilerasShield(), Justicar_Red_COLOR);
-        BaseMod.addRelicToCustomPool(new SunblessedCharm(), Justicar_Red_COLOR);
         UnlockTracker.markRelicAsSeen(GarnetScales.ID);
+        UnlockTracker.markRelicAsSeen(AshenCharm.ID);
         UnlockTracker.markRelicAsSeen(ObsidianScales.ID);
         UnlockTracker.markRelicAsSeen(CitrineScales.ID);
         UnlockTracker.markRelicAsSeen(EmberCore.ID);
@@ -515,11 +565,10 @@ public class DragonMod implements
         UnlockTracker.markRelicAsSeen(BookOfHymns.ID);
         UnlockTracker.markRelicAsSeen(Sulfurian.ID);
         UnlockTracker.markRelicAsSeen(TilerasShield.ID);
-        UnlockTracker.markRelicAsSeen(SunblessedCharm.ID);
 
         //Drifter Relics
-        BaseMod.addRelicToCustomPool(new BronzePocketWatch(), Warden_Bronze_COLOR);
-        BaseMod.addRelicToCustomPool(new DraconicTimeCrystal(), Warden_Bronze_COLOR);
+        BaseMod.addRelicToCustomPool(new BronzePocketWatch(), Warden_Emerald_COLOR);
+        BaseMod.addRelicToCustomPool(new DraconicTimeCrystal(), Warden_Emerald_COLOR);
         UnlockTracker.markRelicAsSeen(BronzePocketWatch.ID);
         UnlockTracker.markRelicAsSeen(DraconicTimeCrystal.ID);
 
@@ -557,6 +606,7 @@ public class DragonMod implements
         for (AbstractNotOrb seal : HymnManager.ActiveVerses){
             seal.onEndOfTurn();
         }
+        EnchantmentsManager.startOfTurnMonster(abstractMonster);
         if (abstractMonster.hasPower(BleedPower.POWER_ID) && abstractMonster.currentHealth <= abstractMonster.getPower(BleedPower.POWER_ID).amount){
             return false;
         }
@@ -594,19 +644,42 @@ public class DragonMod implements
         }
         return i;
     }
-
+    public static AbstractGameAction.AttackEffect getRandomSlash(){
+        int random = AbstractDungeon.miscRng.random(0,3);
+        switch (random){
+            case 0: return AbstractGameAction.AttackEffect.SLASH_VERTICAL;
+            case 1: return AbstractGameAction.AttackEffect.SLASH_HORIZONTAL;
+            case 2: return AbstractGameAction.AttackEffect.SLASH_DIAGONAL;
+            case 3: return AbstractGameAction.AttackEffect.SLASH_HEAVY;
+        }
+        return AbstractGameAction.AttackEffect.SLASH_HORIZONTAL;
+    }
+    public static boolean Flash(){
+        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() <= 2){
+            return true;
+        }
+        return ((AbstractCard) AbstractDungeon.actionManager.cardsPlayedThisTurn.get(AbstractDungeon.actionManager.cardsPlayedThisTurn.size() - 2)).type != AbstractCard.CardType.ATTACK;
+    }
+    public static boolean CheckLastType(AbstractCard.CardType type){
+        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() <= 2){
+            return false;
+        }
+        return ((AbstractCard) AbstractDungeon.actionManager.cardsPlayedThisTurn.get(AbstractDungeon.actionManager.cardsPlayedThisTurn.size() - 2)).type != type;
+    }
     @Override
     public void receiveOnPlayerTurnStartPostDraw() {
         damagetaken = false;
         DecayStagger = false;
         if(!HymnManager.ActiveVerses.isEmpty()){
-            Wiz.atb(new AbstractGameAction() {
-                @Override
-                public void update() {
-                    isDone = true;
-                    HymnManager.ActiveVerses.get(0).onStartOfTurn();
-                }
-            });
+            for (AbstractNotOrb Verse : HymnManager.ActiveVerses){
+                Wiz.atb(new AbstractGameAction() {
+                    @Override
+                    public void update() {
+                        isDone = true;
+                        Verse.onStartOfTurn();
+                    }
+                });
+            }
         }
     }
 }

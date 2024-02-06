@@ -17,6 +17,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.TipHelper;
+import com.megacrit.cardcrawl.helpers.controller.CInputActionSet;
+import com.megacrit.cardcrawl.helpers.controller.CInputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.ExhaustPileViewScreen;
@@ -114,7 +116,15 @@ public class CantripManager {
         public void update() {
             super.update();
             bob.update();
+            if (Settings.isControllerMode && !CInputHelper.isTopPanelActive()){
+                if (CInputActionSet.altDown.isJustPressed() || CInputActionSet.altDown.isPressed()){
+                    onHover();
+                } else if (CInputActionSet.altDown.isJustReleased()){
+                    onClick();
+                }
+            }
         }
+
 
         public float getRenderX() {
             return hitbox.x + hitbox.width / 2F;

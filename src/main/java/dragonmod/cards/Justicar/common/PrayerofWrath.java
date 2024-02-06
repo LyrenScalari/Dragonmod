@@ -23,7 +23,7 @@ public class PrayerofWrath extends AbstractJusticarCard {
         Wiz.atb(new AbstractGameAction() {
             @Override
             public void update() {
-                HymnManager.ActiveVerses.add(new Wrath(damage,magicNumber));
+                HymnManager.addVerse(new Wrath(damage,magicNumber), PrayerofWrath.this);
                 isDone = true;
             }
         });

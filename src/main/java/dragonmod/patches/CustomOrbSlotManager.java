@@ -1,24 +1,36 @@
 package dragonmod.patches;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FocusPower;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.vfx.BobEffect;
+import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.orbs.CrystalOrbSlot;
 import dragonmod.orbs.HailOrbSlot;
 import dragonmod.powers.Rimedancer.onRemoveOrbPower;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 import javassist.CtBehavior;
 
 import java.util.Collections;
+
+import static dragonmod.patches.CustomOrbSlotManager.SlotFields.SlotType;
 
 public class CustomOrbSlotManager {
     @SpirePatch(
@@ -26,8 +38,11 @@ public class CustomOrbSlotManager {
             method = "<class>"
     )
     public static class SlotFields{
-        public static SpireField<Boolean> Crystal = new SpireField(() -> false);
-        public static SpireField<Boolean> Hail = new SpireField(() -> false);
+        public static SpireField<SlotTypes> SlotType = new SpireField(() -> null);
+        public enum SlotTypes{
+            Crystal,
+            Hail
+        }
         public SlotFields(){}
     }
 
@@ -39,10 +54,10 @@ public class CustomOrbSlotManager {
         )
         public static void onChannelOrb(AbstractPlayer __instance, AbstractOrb orbToSet,int index) {
             if (__instance.orbs.get(index) instanceof CrystalOrbSlot) {
-                CustomOrbSlotManager.SlotFields.Crystal.set(orbToSet,true);
+                SlotType.set(orbToSet, SlotFields.SlotTypes.Crystal);
             }
             if (__instance.orbs.get(index) instanceof HailOrbSlot) {
-                CustomOrbSlotManager.SlotFields.Hail.set(orbToSet,true);
+                SlotType.set(orbToSet, SlotFields.SlotTypes.Hail);
             }
         }
         public static class ChannelLocator extends SpireInsertLocator {
@@ -60,7 +75,8 @@ public class CustomOrbSlotManager {
                 locator= EvokeLocator.class
         )
         public static SpireReturn<Void> onEvokeOrb(AbstractPlayer __instance) {
-            if (SlotFields.Crystal.get(__instance.orbs.get(0))) {
+            RemoveOrb(__instance.orbs.get(0));
+            if (SlotType.get(__instance.orbs.get(0)) == SlotFields.SlotTypes.Crystal) {
                 ((AbstractOrb)__instance.orbs.get(0)).onEvoke();
                 AbstractOrb CrystalOrb = __instance.orbs.get(0);
                 Wiz.applyToSelfTempstartTop(new FocusPower(AbstractDungeon.player,1));
@@ -81,7 +97,7 @@ public class CustomOrbSlotManager {
                 }
                 return SpireReturn.Return();
             }
-            if (SlotFields.Hail.get(__instance.orbs.get(0))) {
+            if (SlotType.get(__instance.orbs.get(0)) == SlotFields.SlotTypes.Hail) {
                 ((AbstractOrb)__instance.orbs.get(0)).onEvoke();
                 int i;
                 for(i = 1; i < __instance.orbs.size(); ++i) {
@@ -105,17 +121,37 @@ public class CustomOrbSlotManager {
             }
         }
     }
+    public static void RemoveOrb(AbstractOrb orb){
+        for (AbstractRelic r : Wiz.Player().relics){
+            if (r instanceof onRemoveOrbPower){
+                ((onRemoveOrbPower) r).onRemoveOrb(orb);
+            }
+        }
+        for (AbstractPower p : Wiz.Player().powers){
+            if (p instanceof onRemoveOrbPower){
+                ((onRemoveOrbPower) p).onRemoveOrb(orb);
+            }
+        }
+        EnchantmentsManager.RemoveOrbPlayer(orb);
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters){
+            for (AbstractPower p : m.powers){
+                if (p instanceof onRemoveOrbPower){
+                    ((onRemoveOrbPower) p).onRemoveOrb(orb);
+                }
+            }
+            if (!m.isDeadOrEscaped()){
+                EnchantmentsManager.RemoveOrbMonster(orb,m);
+            }
+        }
+    }
+
     @SpirePatch2(clz = AbstractPlayer.class, method = "removeNextOrb")
     public static class EvokePatch2{
         @SpirePrefixPatch
         public static SpireReturn<Void> onEvokeOrb(AbstractPlayer __instance) {
             if (!__instance.orbs.isEmpty() && !(__instance.orbs.get(0) instanceof EmptyOrbSlot)) {
-                for (AbstractPower p : __instance.powers){
-                    if (p instanceof onRemoveOrbPower){
-                        ((onRemoveOrbPower) p).onRemoveOrb(__instance.orbs.get(0));
-                    }
-                }
-                if (SlotFields.Crystal.get(__instance.orbs.get(0))) {
+                RemoveOrb(__instance.orbs.get(0));
+                if (SlotType.get(__instance.orbs.get(0)) == SlotFields.SlotTypes.Crystal) {
                     AbstractOrb CrystalOrb = __instance.orbs.get(0);
                     Wiz.applyToSelfTempstartTop(new FocusPower(AbstractDungeon.player,1));
                     Wiz.att(new AbstractGameAction() {
@@ -134,7 +170,7 @@ public class CustomOrbSlotManager {
                         ((AbstractOrb)__instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
                     }
                     return SpireReturn.Return();
-                } else if (SlotFields.Hail.get(__instance.orbs.get(0))) {
+                } else if (SlotType.get(__instance.orbs.get(0)) == SlotFields.SlotTypes.Hail) {
                     int i;
                     for(i = 1; i < __instance.orbs.size(); ++i) {
                         Collections.swap(__instance.orbs, i, i - 1);
@@ -154,7 +190,7 @@ public class CustomOrbSlotManager {
         @SpirePrefixPatch
         public static void applyStartOfTurnOrbs(AbstractPlayer __instance) {
             for (AbstractOrb o : __instance.orbs) {
-                if (CustomOrbSlotManager.SlotFields.Hail.get(o) && !(o instanceof EmptyOrbSlot)) {
+                if ((SlotType.get(o) == SlotFields.SlotTypes.Hail) && !(o instanceof EmptyOrbSlot)) {
                     for (int i = 0; i < 2; i++) {
                         AbstractCreature m = AbstractDungeon.getRandomMonster();
                         if (m != null) {
@@ -163,6 +199,24 @@ public class CustomOrbSlotManager {
                             Wiz.atb(new ThrowIcicleAction(o, m.hb, Color.CYAN));
                             Wiz.dmg(m, info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
                         }
+                    }
+                }
+            }
+        }
+    }
+    @SpirePatch2(clz = AbstractPlayer.class, method = "render")
+    public static class RenderCustomOrbSlots {
+        public static float angle = MathUtils.random(360.0F);
+        @SpirePrefixPatch
+        public static void patch(AbstractPlayer __instance, SpriteBatch sb) {
+            for (AbstractOrb orb : __instance.orbs){
+                if (orb != null && !(orb instanceof EmptyOrbSlot)) {
+                    if (SlotType.get(orb) != null) {
+                        Texture Crystal = TextureLoader.getTexture(DragonMod.orbPath("empty2.png"));
+                        sb.setColor(Settings.CREAM_COLOR.cpy());
+                        BobEffect bobEffect = new BobEffect(3.0F * Settings.scale, 3.0F);
+                        angle += Gdx.graphics.getDeltaTime() * 10.0F;
+                        sb.draw(Crystal, orb.cX - 48.0F + bobEffect.y / 8.0F, orb.cY - 48.0F - bobEffect.y / 8.0F, 48.0F, 48.0F, 96.0F, 96.0F, 1.0f, 1.0f, angle, 0, 0, 96, 96, false, false);
                     }
                 }
             }

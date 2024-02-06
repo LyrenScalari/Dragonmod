@@ -15,9 +15,9 @@ import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import dragonmod.DamageModifiers.Icons.ChargeCounter;
 import dragonmod.DamageModifiers.Icons.ExaltIcon;
 import dragonmod.DamageModifiers.Icons.ShatterIcon;
-import dragonmod.DamageModifiers.Icons.StigmataIcon;
 import dragonmod.DragonMod;
 import dragonmod.orbs.Icicle;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
@@ -64,8 +64,8 @@ public abstract class AbstractDragonCard extends BaseCard {
         if (energyCosts.get(TypeEnergyHelper.Mana.Exalt) != null){
             ExtraIcons.icon(ExaltIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Exalt))).render(this);
         }
-        if (energyCosts.get(TypeEnergyHelper.Mana.Temporal) != null){
-            ExtraIcons.icon(StigmataIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Temporal))).render(this);
+        if (energyCosts.get(TypeEnergyHelper.Mana.Charge) != null){
+            ExtraIcons.icon(ChargeCounter.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Charge))).render(this);
         }
         if (energyCosts.get(TypeEnergyHelper.Mana.Shatter) != null){
             ExtraIcons.icon(ShatterIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Shatter))).render(this);
@@ -87,7 +87,7 @@ public abstract class AbstractDragonCard extends BaseCard {
                 Color textColor = Color.WHITE.cpy();
                 if (AbstractDungeon.player != null) {
                     int icicles = 0;
-                    for (AbstractOrb o : Wiz.adp().orbs) {
+                    for (AbstractOrb o : Wiz.Player().orbs) {
                         if (o instanceof Icicle) {
                             icicles++;
                         }
@@ -97,6 +97,9 @@ public abstract class AbstractDragonCard extends BaseCard {
                     }
                 }
                 ExtraIcons.icon(ShatterIcon.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Shatter))).textColor(textColor).render(this);
+            }
+            if (energyCosts.get(TypeEnergyHelper.Mana.Charge) != null) {
+                ExtraIcons.icon(ChargeCounter.get().region.getTexture()).text(String.valueOf(energyCosts.get(TypeEnergyHelper.Mana.Charge))).render(this);
             }
             super.render(sb);
         }

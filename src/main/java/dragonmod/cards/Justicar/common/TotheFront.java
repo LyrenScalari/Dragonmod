@@ -2,7 +2,9 @@ package dragonmod.cards.Justicar.common;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import dragonmod.actions.beckonaction;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
+import dragonmod.util.Wiz;
 
 public class TotheFront extends AbstractJusticarCard {
 
@@ -15,5 +17,6 @@ public class TotheFront extends AbstractJusticarCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.atb(new beckonaction(magicNumber));
     }
 }

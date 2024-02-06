@@ -3,6 +3,7 @@ package dragonmod.relics.Dragonkin;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import dragonmod.DragonMod;
 import dragonmod.relics.BaseRelic;
+import dragonmod.relics.Dragonkin.starter.GarnetScales;
 
 import static dragonmod.DragonMod.makeID;
 

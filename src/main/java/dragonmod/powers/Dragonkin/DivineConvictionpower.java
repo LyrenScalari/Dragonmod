@@ -2,11 +2,9 @@ package dragonmod.powers.Dragonkin;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.watcher.MantraPower;
 import dragonmod.DragonMod;
 import dragonmod.powers.BasePower;
 
@@ -15,20 +13,11 @@ import dragonmod.powers.BasePower;
 public class DivineConvictionpower extends BasePower implements CloneablePowerInterface {
     public AbstractCreature source;
 
-    public static final String POWER_ID = DragonMod.makeID("DivineConvictionpower");
+    public static final String POWER_ID = DragonMod.makeID("HolyPower");
 
     public DivineConvictionpower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,PowerType.BUFF,false,owner,source, amount);
-        this.loadRegion("mantra");
-        powerToLose = new MantraPower(owner,amount);
-        this.img = powerToLose.img;
-        this.region48 = powerToLose.region48;
-        this.region128 = powerToLose.region128;
         updateDescription();
-    }
-    @Override
-    public void renderIcons(SpriteBatch sb, float x, float y, Color c) {
-        super.renderIcons(sb, x, y, Color.GOLD.cpy());
     }
     public float atDamageGive(float damage, DamageInfo.DamageType type) {
         if (type == DamageInfo.DamageType.NORMAL) {

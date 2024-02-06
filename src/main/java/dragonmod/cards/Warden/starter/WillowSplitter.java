@@ -1,0 +1,30 @@
+package dragonmod.cards.Warden.starter;
+
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import dragonmod.cards.Warden.AbstractReflexiveCard;
+import dragonmod.cards.Warden.starter.amber.SupernatrualWind;
+import dragonmod.cards.Warden.starter.amethyst.RisingCresent;
+import dragonmod.util.Wiz;
+
+import static dragonmod.DragonMod.Flash;
+
+public class WillowSplitter  extends AbstractReflexiveCard {
+    public static final String ID = WillowSplitter.class.getSimpleName();
+    public WillowSplitter(){
+        super(ID,1,CardType.ATTACK,CardRarity.BASIC,CardTarget.ENEMY);
+        setDamage(5,3);
+        setReflectivePairing(new SupernatrualWind(), new RisingCresent());
+    }
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
+        Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
+        if (Flash()){
+            Wiz.atb(new DrawCardAction(1));
+        }
+    }
+}
+

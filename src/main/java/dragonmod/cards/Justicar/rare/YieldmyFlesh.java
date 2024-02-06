@@ -1,9 +1,9 @@
 package dragonmod.cards.Justicar.rare;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
+import dragonmod.powers.Dragonkin.YieldMyFleshPower;
 import dragonmod.util.Wiz;
 
 public class YieldmyFlesh extends AbstractJusticarCard {
@@ -15,11 +15,6 @@ public class YieldmyFlesh extends AbstractJusticarCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        Wiz.atb(new AbstractGameAction() {
-            @Override
-            public void update() {
-                isDone = true;
-            }
-        });
+        Wiz.applyToSelf(new YieldMyFleshPower(magicNumber));
     }
 }

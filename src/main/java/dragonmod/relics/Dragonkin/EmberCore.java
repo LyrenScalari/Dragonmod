@@ -1,13 +1,12 @@
 package dragonmod.relics.Dragonkin;
 
-import com.evacipated.cardcrawl.mod.stslib.actions.common.GainCustomBlockAction;
-import com.evacipated.cardcrawl.mod.stslib.blockmods.BlockModContainer;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
+import dragonmod.actions.CureAction;
 import dragonmod.relics.BaseRelic;
+import dragonmod.util.Wiz;
 
 import static dragonmod.DragonMod.makeID;
 
@@ -25,8 +24,9 @@ public class EmberCore extends BaseRelic {
     @Override
     public void onCardDraw(AbstractCard card){
         if (card.type == AbstractCard.CardType.STATUS && !used){
+            Wiz.atb(new RelicAboveCreatureAction(Wiz.Player(),this));
             addToBot(new DrawCardAction(1));
-            addToBot(new GainCustomBlockAction(new BlockModContainer(this,new DivineBlock(true)),AbstractDungeon.player,counter));
+            Wiz.atb(new CureAction(counter));
             used = true;
         }
     }

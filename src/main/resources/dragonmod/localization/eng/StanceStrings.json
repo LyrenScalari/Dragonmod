@@ -1,0 +1,14 @@
+{
+  "dragonmod:Dawn": {
+    "NAME": "Dawn",
+    "DESCRIPTION": [
+      "When you play a skill, if the last card played wasn't gain #b4 [${modID}:BlockIcon] ."
+    ]
+  },
+  "dragonmod:Dusk": {
+    "NAME": "Dusk",
+    "DESCRIPTION": [
+      "When you draw a card during your turn, deal #b2 damage to a random enemy."
+    ]
+  }
+}

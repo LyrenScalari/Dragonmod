@@ -22,7 +22,10 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import dragonmod.DragonMod;
-import dragonmod.relics.Drifter.BronzePocketWatch;
+import dragonmod.cards.Warden.starter.ShroudedSky;
+import dragonmod.cards.Warden.starter.WardenDefend;
+import dragonmod.cards.Warden.starter.WardenStrike;
+import dragonmod.cards.Warden.starter.WillowSplitter;
 import dragonmod.ui.EnergyOrbDrifter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static dragonmod.DragonMod.*;
-import static dragonmod.characters.TheWarden.Enums.Warden_Bronze_COLOR;
+import static dragonmod.characters.TheWarden.Enums.Warden_Emerald_COLOR;
 
 public class TheWarden extends CustomPlayer {
     public static final Logger logger = LogManager.getLogger(DragonMod.class.getName());
@@ -46,9 +49,9 @@ public class TheWarden extends CustomPlayer {
     public static class Enums {
         @SpireEnum
         public static PlayerClass THE_WARDEN;
-        @SpireEnum(name = "Warden_Bronze_COLOR") // These two HAVE to have the same absolutely identical name.
-        public static AbstractCard.CardColor Warden_Bronze_COLOR;
-        @SpireEnum(name = "Warden_Bronze_COLOR") @SuppressWarnings("unused")
+        @SpireEnum(name = "Warden_Emerald_COLOR") // These two HAVE to have the same absolutely identical name.
+        public static AbstractCard.CardColor Warden_Emerald_COLOR;
+        @SpireEnum(name = "Warden_Emerald_COLOR") @SuppressWarnings("unused")
         public static CardLibrary.LibraryType LIBRARY_COLOR;
     }
 
@@ -137,7 +140,14 @@ public class TheWarden extends CustomPlayer {
     @Override
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
-
+        for (int i =0; i < 4;i++){
+            retVal.add(DragonMod.makeID(WardenStrike.ID));
+        }
+        retVal.add(DragonMod.makeID(WillowSplitter.ID));
+        for (int i =0; i < 4;i++){
+            retVal.add(DragonMod.makeID(WardenDefend.ID));
+        }
+        retVal.add(DragonMod.makeID(ShroudedSky.ID));
         logger.info("Begin loading starter Deck Strings");
         return retVal;
     }
@@ -145,7 +155,6 @@ public class TheWarden extends CustomPlayer {
     // Starting Relics
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(BronzePocketWatch.ID);
         return retVal;
     }
 
@@ -184,13 +193,13 @@ public class TheWarden extends CustomPlayer {
     // Should return the card color enum to be associated with your character.
     @Override
     public AbstractCard.CardColor getCardColor() {
-        return Warden_Bronze_COLOR;
+        return Warden_Emerald_COLOR;
     }
 
     // Should return a color object to be used to color the trail of moving cards
     @Override
     public Color getCardTrailColor() {
-        return WARDEN_BRONZE;
+        return WARDEN_EMERALD;
     }
 
     // Should return a BitmapFont object that you can use to customize how your
@@ -227,14 +236,14 @@ public class TheWarden extends CustomPlayer {
     // Should return a Color object to be used to color the miniature card images in run history.
     @Override
     public Color getCardRenderColor() {
-        return WARDEN_BRONZE;
+        return WARDEN_EMERALD;
     }
 
     // Should return a Color object to be used as screen tint effect when your
     // character attacks the heart.
     @Override
     public Color getSlashAttackColor() {
-        return WARDEN_BRONZE;
+        return WARDEN_EMERALD;
     }
 
     // Should return an AttackEffect array of any size greater than 0. These effects

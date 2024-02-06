@@ -33,13 +33,13 @@ public class PowerfulPower extends BasePower implements CloneablePowerInterface 
     }
     public float atDamageGive(float damage, DamageInfo.DamageType type) {
         if (type == DamageInfo.DamageType.NORMAL) {
-            return damage * 1.3F;
+            return damage * 1.5F;
         } else {
             return damage;
         }
     }
     public float modifyBlock(float blockAmount) {
-        return blockAmount * 1.3F;
+        return blockAmount * 1.5F;
     }
     public void stackPower(int stackAmount) {
         if (stackAmount > amount){

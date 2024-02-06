@@ -6,15 +6,7 @@
       "scorch",
       "scorched"
     ],
-    "DESCRIPTION": "Creatures with [dragonmod:ScorchIcon] take damage at the start of their turn and lose #b1 [dragonmod:ScorchIcon] ."
-  },
-  {
-    "PROPER_NAME": "Zeal",
-    "NAMES": [
-      "Zeal",
-      "zeal"
-    ],
-    "DESCRIPTION": "#yZealous creatures deal additional damage equal to their [dragonmod:ScorchIcon] and When Dealing damage to creatures with [dragonmod:SanctifyIcon] they lose HP equal to half their [dragonmod:SanctifyIcon] ."
+    "DESCRIPTION": "When a Creature with [dragonmod:ScorchIcon] is attacked it takes damage equal to a quarter of their [dragonmod:ScorchIcon] and is reduced that much."
   },
   {
     "PROPER_NAME": "Sanctify",
@@ -53,20 +45,12 @@
     "DESCRIPTION": "Spend X [#94bdff]Holy[] [#94bdff]Power[] for an effect"
   },
   {
-    "PROPER_NAME": "Verse",
-    "NAMES": [
-      "Verse",
-      "verse"
-    ],
-    "DESCRIPTION": "Add the following effect to the end of your Hymn with a delay. The current Verse's delay decreases at the start and the first time you take damage each turn."
-  },
-  {
     "PROPER_NAME": "Coda",
     "NAMES": [
       "Coda",
       "coda"
     ],
-    "DESCRIPTION": "After you Chant X times, activate the following effect. At the start of each turn, and the first time each turn you take damage, Chant your oldest Verse."
+    "DESCRIPTION": "After you Chant X times, activate the following effect. At the start of each turn, and when you take damage, #yChant ALL your Verses."
   },
   {
     "PROPER_NAME": "Chant",
@@ -74,15 +58,15 @@
       "Chant",
       "chant"
     ],
-    "DESCRIPTION": "Reduce the delay of a Verse by 1. At the start of each turn, and the first time each turn you take damage, #yChant your oldest Verse."
+    "DESCRIPTION": "Reduce the delay of a Verse by 1. At the start of each turn, and when you take damage, #yChant ALL your Verses."
   },
   {
-    "PROPER_NAME": "Barrier",
+    "PROPER_NAME": "Confession",
     "NAMES": [
-      "Barrier",
-      "barrier"
+      "Confession",
+      "confession"
     ],
-    "DESCRIPTION": "[theDragonkin:LightIcon] prevents damage and becomes twice as much block next turn."
+    "DESCRIPTION": "Whenever you take damage or lose HP deal damage to ALL enemies equal to your #yConfesison. NL If isn't your turn, reduce Confession by half."
   },
   {
     "PROPER_NAME": "Sacrifice",
@@ -90,7 +74,7 @@
       "Sacrifice",
       "sacrifice"
     ],
-    "DESCRIPTION": "When you obtain #b5 Sacrifice spend it and gain #b1 [#94bdff]Holy[] [#94bdff]Power[]."
+    "DESCRIPTION": "When you obtain #b5 Sacrifice spend it and increase damage dealt & Healing from #yCure by #b1."
   },
   {
     "PROPER_NAME": "Stigmata",
@@ -114,8 +98,9 @@
       "Devotion",
       "devotion"
     ],
-    "DESCRIPTION": "The number of cards in your hand and #yHymn pile, excluding this one.."
+    "DESCRIPTION": "The number of cards in your hand and #yHymn pile, excluding this one."
   },
+
 
   {
     "PROPER_NAME": "Dragon Affinity",
@@ -128,132 +113,6 @@
     "DESCRIPTION": "This relic only appears for slayers of Draconic Ancestry."
   },
 
-  {
-    "PROPER_NAME": "Field",
-    "NAMES": [
-      "Field",
-      "field",
-      "Fields",
-      "fields",
-      "Field.",
-      "field."
-    ],
-    "DESCRIPTION": "#yField cards attach to the target when played. NL If this field had #ytime #ycounters it detaches when it has none and recovers all time counters."
-  },
-  {
-    "PROPER_NAME": "Fading",
-    "NAMES": [
-      "Fading",
-      "fading"
-    ],
-    "DESCRIPTION": "This #yField loses a Time counter each time it #yTicks."
-  },
-  {
-    "PROPER_NAME": "Tick",
-    "NAMES": [
-      "Tick",
-      "tick"
-    ],
-    "DESCRIPTION": "Trigger an effect if attached to a creature. NL Ticks automatically at the start of your turn."
-  },
-  {
-    "PROPER_NAME": "Borrow",
-    "NAMES": [
-      "Borrow",
-      "borrow"
-    ],
-    "DESCRIPTION": "Take the following resources from your next turn. NL Borrowed resources not accounted for by the end of next turn will be payed for in #yStagger."
-  },
-  {
-    "PROPER_NAME": "Rewind",
-    "NAMES": [
-      "Rewind",
-      "rewind"
-    ],
-    "DESCRIPTION": "#yRewinding a card puts it on the top of your draw pile, and draws you a card next turn."
-  },
-  {
-    "PROPER_NAME": "Riposte",
-    "NAMES": [
-      "Riposte",
-      "riposte"
-    ],
-    "DESCRIPTION": "The next time an enemy breaks your block, retaliate with the following effect."
-  },
-  {
-    "PROPER_NAME": "Panic",
-    "NAMES": [
-      "Panic",
-      "panic"
-    ],
-    "DESCRIPTION": "#yPanicking creatures deal up to #b50% less damage and will additionally hit random a enemy when attacking. NL #yPanic is reduced each turn increased by the number of extra attacks made."
-  },
-  {
-    "PROPER_NAME": "Foresee",
-    "NAMES": [
-      "Foresee",
-      "foresee"
-    ],
-    "DESCRIPTION": "When #yScried, add this to your hand and trigger the following effect."
-  },
-  {
-    "PROPER_NAME": "Foreseen",
-    "NAMES": [
-      "Foreseen",
-      "foreseen"
-    ],
-    "DESCRIPTION": "Has a Bonus effect from being #yScried. NL When #yScried, add this to your hand."
-  },
-  {
-    "PROPER_NAME": "Harmony",
-    "NAMES": [
-      "Harmony",
-      "harmony",
-      "Harmonize",
-      "harmonize"
-    ],
-    "DESCRIPTION": "Reveal the top card of your draw pile, if it matches the listed card type draw it and do the following effect otherwise discard it."
-  },
-  {
-    "PROPER_NAME": "Stanza",
-    "NAMES": [
-      "Stanza",
-      "stanza"
-    ],
-    "DESCRIPTION": "This #yField gains a Time counter each time it #yTicks and performs an effect based on the number of Time counters it has, #yDetaching after the last effect is used."
-  },
-  {
-    "PROPER_NAME": "Sight",
-    "NAMES": [
-      "Sight",
-      "sight"
-    ],
-    "DESCRIPTION": "#ySight reveals cards from the top of your deck at all times."
-  },
-  {
-    "PROPER_NAME": "Resonate",
-    "NAMES": [
-      "Resonate",
-      "resonate"
-    ],
-    "DESCRIPTION": "The effect that follows targets the X closest left adjacent cards. wrapping to the right side of the hand as needed."
-  },
-  {
-    "PROPER_NAME": "Sharpen",
-    "NAMES": [
-      "Sharpen",
-      "sharpen"
-    ],
-    "DESCRIPTION": "Sharpen applied to cards increases the damage they deal this combat."
-  },
-  {
-    "PROPER_NAME": "Shine",
-    "NAMES": [
-      "Shine",
-      "shine"
-    ],
-    "DESCRIPTION": "Shine applied to cards increases the Block they apply this combat."
-  },
   {
     "PROPER_NAME": "Cantrip",
     "NAMES": [
@@ -268,7 +127,31 @@
       "Flourish",
       "flourish"
     ],
-    "DESCRIPTION": "Add a random #yCantrip from yor #yBag #yof #yTricks to your hand."
+    "DESCRIPTION": "Add a random Card from your #yBag #yof #yTricks to your hand."
+  },
+  {
+    "PROPER_NAME": "Sheathe",
+    "NAMES": [
+      "Sheathe",
+      "sheathe"
+    ],
+    "DESCRIPTION": "Shuffle a card into your #yBag #yof #yTricks."
+  },
+  {
+    "PROPER_NAME": "Glimpse",
+    "NAMES": [
+      "Glimpse",
+      "glimpse"
+    ],
+    "DESCRIPTION": "Move the leftmost card in your hand to the right most position."
+  },
+  {
+  "PROPER_NAME": "Tilt",
+  "NAMES": [
+    "Tilt",
+    "tilt"
+  ],
+  "DESCRIPTION": "A Bonus effect if X or more cards are to the right of this."
   },
   {
     "PROPER_NAME": "[dragonmod:ChillIcon] Chill",
@@ -289,14 +172,6 @@
     "DESCRIPTION": "#yOrb : Deals damage to the last enemy you attacked. After being #yEvoked, if your next orb is an #yIcicle #yEvoke it."
   },
   {
-    "PROPER_NAME": "Sleet",
-    "NAMES": [
-      "Sleet",
-      "sleet"
-    ],
-    "DESCRIPTION": "#yOrb : Applies [dragonmod:ChillIcon] to random enemies each turn. When #yEvoked applies [dragonmod:ChillIcon] to ALL enemies."
-  },
-  {
     "PROPER_NAME": "Crystal",
     "NAMES": [
       "Crystal",
@@ -313,12 +188,12 @@
     "DESCRIPTION": "An orb channeled into a Hail orb slot in addition to its other effects deals damage to a random enemy twice. NL when an Orb is Removed from a hail orb slot lose that orb slot."
   },
   {
-    "PROPER_NAME": "Gambit",
+    "PROPER_NAME": "Exploit",
     "NAMES": [
-      "Gambit",
-      "gambit"
+      "Exploit",
+      "exploit"
     ],
-    "DESCRIPTION": "A Bonus effect if the last card played matches the listed type."
+    "DESCRIPTION": "A Bonus effect if the target of this card has the listed Debuff."
   },
   {
     "PROPER_NAME": "Fire",
@@ -329,16 +204,6 @@
     "DESCRIPTION": "Activate the passive effect of your next orb."
   },
   {
-    "PROPER_NAME": "Freeze",
-    "NAMES": [
-      "Freeze",
-      "freeze",
-      "Frozen",
-      "frozen"
-    ],
-    "DESCRIPTION": "#yFreezing a card causing it to #yRetain until retained or played 3 times."
-  },
-  {
     "PROPER_NAME": "[dragonmod:BleedIcon] Bleed",
     "NAMES": [
       "Bleed",
@@ -347,19 +212,69 @@
     "DESCRIPTION": "#yBleeding creature lose HP at the start of your turn and lose all Bleed. NL #yBleeding creatures can't act if their [dragonmod:BleedIcon] will kill them."
   },
   {
-    "PROPER_NAME": "Rimeburst",
-    "NAMES": [
-      "Rimeburst",
-      "rimeburst"
-    ],
-    "DESCRIPTION": "#yRimeburst effects activate if a card in your hand has #yIce #yCounters on it."
-  },
-  {
     "PROPER_NAME": "[dragonmod:SubzeroIcon] Subzero",
     "NAMES": [
       "Subzero",
       "subzero"
     ],
-    "DESCRIPTION": "[dragonmod:SubzeroIcon] is reduced by Half when you channel an icicle, increasing its base damage that much."
+    "DESCRIPTION": "[dragonmod:SubzeroIcon] Increases the base damage of #yIcicles you channel by half your [dragonmod:SubzeroIcon]."
+  },
+  {
+    "PROPER_NAME": "[dragonmod:SlowIcon] Lethargy",
+    "NAMES": [
+      "Lethargy",
+      "lethargy"
+    ],
+    "DESCRIPTION": "Applying [dragonmod:SlowIcon] instead raises it's duration to that amount. NL [dragonmod:SlowIcon] increases incoming damage from cards and orbs by 10% for each card played this turn, [dragonmod:SlowIcon] is reduced by #b1 each turn."
+
+  },
+  {
+    "PROPER_NAME": "Shroud",
+    "NAMES": [
+      "Shroud",
+      "shroud"
+    ],
+    "DESCRIPTION": "#yShrouding an Orb grants it additional effects that will benefit from all modifications the orb currently has."
+  },
+
+  {
+    "PROPER_NAME": "Dawn",
+    "NAMES": [
+      "Dawn",
+      "dawn"
+    ],
+    "DESCRIPTION": "#yStance. After you play a Skill, if the last card played wasn't, gain #b4 [${modID}:BlockIcon] ."
+  },
+  {
+    "PROPER_NAME": "Dusk",
+    "NAMES": [
+      "Dusk",
+      "dusk"
+    ],
+    "DESCRIPTION": "#yStance. After you draw a card during your turn, deal #b2 damage to a random enemy."
+  },
+  {
+    "PROPER_NAME": "Reflexive",
+    "NAMES": [
+      "Reflexive",
+      "reflexive"
+    ],
+    "DESCRIPTION": "Transforms when you change stances, Amber if Dawn, Amethyst if Dusk."
+  },
+  {
+    "PROPER_NAME": "Flash",
+    "NAMES": [
+      "Flash",
+      "flash"
+    ],
+    "DESCRIPTION": "If the last card played this turn was not an Attack gain the following ability."
+  },
+  {
+    "PROPER_NAME": "Bloom",
+    "NAMES": [
+      "Bloom",
+      "bloom"
+    ],
+    "DESCRIPTION": "#yBloom on enemies increases damage taken from cards, and increases the potency of your stance effects."
   }
 ]

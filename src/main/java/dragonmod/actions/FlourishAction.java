@@ -21,50 +21,50 @@ public class FlourishAction extends AbstractGameAction {
             target.unfadeOut();
             target.lighten(true);
             target.resetAttributes();
-            Wiz.adp().hand.addToHand(target);
+            Wiz.Player().hand.addToHand(target);
         } else {
-            for (AbstractCard c : Wiz.adp().drawPile.group){
+            for (AbstractCard c : Wiz.Player().drawPile.group){
                 if (c.hasTag(Cantrip)){
                     Wiz.att(new AbstractGameAction() {
                         @Override
                         public void update() {
                             isDone = true;
-                            Wiz.adp().drawPile.removeCard(c);
+                            Wiz.Player().drawPile.removeCard(c);
                             CantripPile.addToTop(c);
                         }
                     });
                 }
             }
-            for (AbstractCard c : Wiz.adp().discardPile.group){
+            for (AbstractCard c : Wiz.Player().discardPile.group){
                 if (c.hasTag(Cantrip)){
                     Wiz.att(new AbstractGameAction() {
                         @Override
                         public void update() {
                             isDone = true;
-                            Wiz.adp().discardPile.removeCard(c);
+                            Wiz.Player().discardPile.removeCard(c);
                             CantripPile.addToTop(c);
                         }
                     });
                 }
             }
-            for (AbstractCard c : Wiz.adp().exhaustPile.group){
+            for (AbstractCard c : Wiz.Player().exhaustPile.group){
                 if (c.hasTag(Cantrip)){
                     Wiz.att(new AbstractGameAction() {
                         @Override
                         public void update() {
-                            Wiz.adp().discardPile.removeCard(c);
+                            Wiz.Player().discardPile.removeCard(c);
                             CantripPile.addToTop(c);
                         }
                     });
                 }
             }
-            for (AbstractCard c : Wiz.adp().hand.group){
+            for (AbstractCard c : Wiz.Player().hand.group){
                 if (c.hasTag(Cantrip)){
                     Wiz.att(new AbstractGameAction() {
                         @Override
                         public void update() {
                             isDone = true;
-                            Wiz.adp().hand.removeCard(c);
+                            Wiz.Player().hand.removeCard(c);
                             CantripPile.addToTop(c);
                         }
                     });

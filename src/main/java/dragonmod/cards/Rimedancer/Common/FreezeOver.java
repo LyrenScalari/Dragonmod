@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.CardMods.FrozenMod;
 import dragonmod.CardMods.UnplayableCardMod;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.util.Wiz;
@@ -29,7 +28,7 @@ public class FreezeOver extends AbstractRimedancerCard {
             public void update() {
                 isDone = true;
                 for (AbstractCard c : DrawCardAction.drawnCards){
-                    CardModifierManager.addModifier(c,new FrozenMod());
+                    c.retain = true;
                     CardModifierManager.addModifier(c,new UnplayableCardMod());
                 }
             }

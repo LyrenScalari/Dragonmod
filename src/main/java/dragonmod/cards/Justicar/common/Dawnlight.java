@@ -1,13 +1,11 @@
 package dragonmod.cards.Justicar.common;
 
-import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
-import dragonmod.DamageModifiers.HolyDamage;
 import dragonmod.util.HymnManager;
 import dragonmod.util.Wiz;
 
@@ -16,7 +14,6 @@ public class Dawnlight extends AbstractJusticarCard {
     public Dawnlight(){
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ALL);
         setDamage(2,1);
-        DamageModifierManager.addModifier(this,new HolyDamage(true));
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

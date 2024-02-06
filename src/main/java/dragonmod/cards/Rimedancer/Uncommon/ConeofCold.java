@@ -1,18 +1,14 @@
 package dragonmod.cards.Rimedancer.Uncommon;
 
-import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.utility.DiscardToHandAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import dragonmod.CardMods.FrozenMod;
 import dragonmod.DragonMod;
 import dragonmod.actions.IcicleFanAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
@@ -34,7 +30,7 @@ public class ConeofCold extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Icicle tothrow = null;
-        for (AbstractOrb o : Wiz.adp().orbs) {
+        for (AbstractOrb o : Wiz.Player().orbs) {
             if (o instanceof Icicle) {
                 tothrow = (Icicle) o;
             }
@@ -51,19 +47,5 @@ public class ConeofCold extends AbstractRimedancerCard {
             }
             Wiz.atb(new DamageAllEnemiesAction(p, baseDamage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.BLUNT_LIGHT));
         }
-        Wiz.atb(new AbstractGameAction() {
-            @Override
-            public void update() {
-                isDone = true;
-                for (int i = 0; i < magicNumber; i++) {
-                    if (p.discardPile.isEmpty()){
-                        break;
-                    }
-                    AbstractCard toadd = p.discardPile.group.get(AbstractDungeon.miscRng.random(0,p.discardPile.group.size()-1));
-                    CardModifierManager.addModifier(toadd,new FrozenMod());
-                    Wiz.att(new DiscardToHandAction(toadd));
-                }
-            }
-        });
     }
 }

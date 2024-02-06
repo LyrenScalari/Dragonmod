@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.actions.FireAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.cards.Rimedancer.Special.FrozenShiv;
 import dragonmod.orbs.Icicle;
 import dragonmod.util.Wiz;
 
@@ -18,7 +17,6 @@ public class Crackle extends AbstractRimedancerCard {
         super(ID, 1, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF);
         setMagic(1);
         setBlock(8,4);
-        cardsToPreview = new FrozenShiv();
     }
 
 

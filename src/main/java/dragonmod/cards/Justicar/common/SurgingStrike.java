@@ -10,8 +10,8 @@ import dragonmod.util.Wiz;
 public class SurgingStrike extends AbstractJusticarCard {
     public static final String ID = SurgingStrike.class.getSimpleName();
     public SurgingStrike(){
-        super(ID,2,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
-        setDamage(11,2);
+        super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
+        setDamage(9,2);
         setMagic(2);
         tags.add(CardTags.STRIKE);
     }

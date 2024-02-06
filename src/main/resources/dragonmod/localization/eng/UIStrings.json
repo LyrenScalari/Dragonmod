@@ -30,32 +30,37 @@
   "${modID}:Reinforce": {
     "TEXT": [
       "[dragonmod:ReinforceIcon] Reinforce",
-      "When gaining [dragonmod:ReinforceIcon] the highest [dragonmod:ReinforceIcon] value is kept instead. Creatures with [dragonmod:ReinforceIcon] do not lose [dragonmod:BlockIcon] at the start of their turn and return blocked attack damage."
+      "Gaining [dragonmod:ReinforceIcon] instead raise it to that amount. NL Creatures with [dragonmod:ReinforceIcon] do not lose [dragonmod:BlockIcon] at the start of their turn and return blocked attack damage."
     ]
   },
   "${modID}:Powerful": {
     "TEXT": [
       "[dragonmod:PowerfulIcon] Powerful",
-      "When gaining [dragonmod:PowerfulIcon] the highest [dragonmod:PowerfulIcon] value is kept instead. NL Creatures with [dragonmod:PowerfulIcon] deal #b30% more damage and gain #b30% more [dragonmod:BlockIcon] ."
+      "Gaining [dragonmod:PowerfulIcon] instead raises it to that amount. NL Creatures with [dragonmod:PowerfulIcon] deal #b50% more damage and gain #b50% more [dragonmod:BlockIcon] ."
     ]
   },
   "${modID}:Courage": {
     "TEXT": [
       "[dragonmod:CourageIcon] Courage",
-      "When gaining [dragonmod:CourageIcon] the highest [dragonmod:CourageIcon] value is kept instead. NL [dragonmod:CourageIcon] draws you a card and grants [E] at the start of each turn and is reduced."
+      "Gaining [dragonmod:CourageIcon] instead raises it to that amount. NL [dragonmod:CourageIcon] discards #yStatus and #pCurse cards drawn and draws another card."
     ]
   },
-
+  "${modID}:Enchantment": {
+    "TEXT": [
+      "Enchantment",
+      "#yEnchantment cards attach to the creature targeted for as long as it has #yCharges when played, whenever the lingering effect of an #yenchantment activates it loses a charge."
+    ]
+  },
   "${modID}:Scorch": {
     "TEXT": [
       "[dragonmod:ScorchIcon] Scorch",
-      "Creatures with [dragonmod:ScorchIcon] take damage at the start of their turn and lose #b1 [dragonmod:ScorchIcon] ."
+      "When a Creature with [dragonmod:ScorchIcon] is attacked it takes damage equal to a quarter of their [dragonmod:ScorchIcon] and is reduced that much."
     ]
   },
-  "${modID}:Sanctify": {
+  "${modID}:Confession": {
     "TEXT": [
-      "[dragonmod:SanctifyIcon] Sanctify",
-      "Creatures with [dragonmod:SanctifyIcon] take 25% less damage from attacks, Attackers are #yCured equal to [dragonmod:SanctifyIcon] and [dragonmod:SanctifyIcon] is reduced by #b1."
+      "[dragonmod:ConfessionIcon] Confession",
+      "Whenever you take damage or lose HP deal damage to ALL enemies equal to your [dragonmod:ConfessionIcon] . NL If it isn't your turn, reduce [dragonmod:ConfessionIcon] by half."
     ]
   },
   "${modID}:Cure": {
@@ -64,10 +69,10 @@
       "Heal using recently lost HP. Cure in excess of your Max HP or recently lost HP becomes [dragonmod:BlockIcon] ."
     ]
   },
-  "${modID}:Zeal": {
+  "${modID}:Sacrifice": {
     "TEXT": [
-      "[dragonmod:ZealIcon] Zeal",
-      "Creatures with [dragonmod:ZealIcon] Deal additional damage equal to their [dragonmod:ScorchIcon] and When Dealing damage to creatures with [dragonmod:SanctifyIcon] they lose HP equal to half their [dragonmod:SanctifyIcon] ."
+      "[dragonmod:SacrificeIcon] Sacrifice",
+      "When you obtain #b5 [dragonmod:SacrificeIcon] spend it and increase damage dealt & Healing from #yCure by #b1."
     ]
   },
   "${modID}:Verse": {
@@ -102,7 +107,6 @@
     ]
   },
 
-
   "${modID}:StabilityTooltip": {
     "TEXT": [
       "[dragonmod:TemporalIcon] Stigmata",
@@ -110,76 +114,19 @@
     ]
   },
 
-  "${modID}:TemporalTooltip": {
-    "TEXT": [
-      "Anomaly",
-      "#yAnomaly cards will spend #yStagger to disable their #rBacklash."
-    ]
-  },
-  "${modID}:Field": {
-    "TEXT": [
-      "Field",
-      "#yField cards attach to their target when played. NL If this field had #ytime #ycounters it detaches when it has none and recovers all time counters."
-    ]
-  },
-  "${modID}:PurgeAction": {
-    "TEXT": [
-      "Select a Card to Purge",
-      ""
-    ]
-  },
   "${modID}:DragonAffinity": {
     "TEXT": [
       "Dragon Affinity",
       "This relic only appears for slayers of Draconic Ancestry."
     ]
   },
-  "${modID}:Harmonic": {
-    "TEXT": [
-      "Harmonic",
-      "#yStance When entered Draw a card. NL Apply 1 additional debuff whenever you apply one. NL Exit this stance at the end of your turn."
-    ]
-  },
-  "${modID}:Dissonant": {
-    "TEXT": [
-      "Dissonant",
-      "#yStance When entered Discard the top card of your draw pile. NL Deal #b4 Additional damage to enemies with Debuffs."
-    ]
-  },
-  "${modID}:Blue": {
-    "TEXT": [
-      "Blue",
-      ""
-    ]
-  },
-  "theDragonkin:Black": {
-    "TEXT": [
-      "Black",
-      ""
-    ]
-  },
-  "${modID}:Red": {
-    "TEXT": [
-      "Red",
-      ""
-    ]
-  },
+
+
   "${modID}:CantripPile": {
     "TEXT": [
       "Bag of Tricks",
       "All your Cantrips start here at the beginning of combat.",
       "All out of Tricks, time to improvise."
-    ]
-  },
-  "${modID}:Frozen": {
-    "TEXT": [
-      "Frozen",
-      "Retains until its been played or Retained 3 times and Discards instead of being Exhausted."
-    ]
-  },
-  "${modID}:FrozenMod": {
-    "TEXT": [
-      "*Frozen. NL "
     ]
   },
   "${modID}:BleedDeath": {
@@ -188,16 +135,22 @@
       "This creature is unable to act and will die at the start of your turn."
     ]
   },
-  "${modID}:IceArmor": {
-    "TEXT": [
-      "[dragonmod:FrostIcon] Ice Armor",
-      "[dragonmod:FrostIcon] blocks damage, and applies equal #yChill back to attackers."
-    ]
-  },
   "${modID}:Ranged": {
     "TEXT": [
       "[dragonmod:RangedIcon] Ranged Damage",
       "[dragonmod:RangedIcon] Damage is increased by Lock-On in addition to other effects."
+    ]
+  },
+  "${modID}:Icicle": {
+    "TEXT": [
+      "Icicle",
+      "#yOrb : Deals damage to the last enemy you attacked. After being #yEvoked, if your next orb is an #yIcicle #yEvoke it."
+    ]
+  },
+  "${modID}:IceArmor": {
+    "TEXT": [
+      "[dragonmod:FrostIcon] Ice Armor",
+      "[dragonmod:FrostIcon] blocks damage, and applies equal #yChill back to attackers."
     ]
   },
   "${modID}:Chill": {
@@ -212,16 +165,16 @@
       "#yBleeding creature lose HP at the start of your turn and lose all Bleed. NL #yBleeding creatures can't act if their [dragonmod:BleedIcon] will kill them."
     ]
   },
-  "${modID}:IceSpikes": {
-    "TEXT": [
-      "[dragonmod:IceSpikesIcon] Ice Spikes",
-      "When blocking Attack damage, deals damage back and lose [dragonmod:IceSpikesIcon] equal to the damage blocked. Lose half as much against #yChilled attackers."
-    ]
-  },
   "${modID}:Subzero": {
     "TEXT": [
       "[dragonmod:SubzeroIcon] Subzero",
-      "[dragonmod:SubzeroIcon] is reduced by Half when you channel an icicle, increasing its base damage that much."
+      "[dragonmod:SubzeroIcon] Increases the base damage of #yIcicles you channel by half your [dragonmod:SubzeroIcon] ."
+    ]
+  },
+  "${modID}:Slow": {
+    "TEXT": [
+      "[dragonmod:SlowIcon] Lethargy",
+      "Applying [dragonmod:SlowIcon] instead raises it's duration to that amount. NL [dragonmod:SlowIcon] increases incoming damage from cards and orbs by 10% for each card played this turn, [dragonmod:SlowIcon] is reduced by #b1 each turn."
     ]
   },
   "${modID}:ShatterTooltip": {

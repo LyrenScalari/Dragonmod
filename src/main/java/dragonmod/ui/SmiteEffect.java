@@ -34,7 +34,11 @@ public class SmiteEffect extends AbstractGameEffect {
         this.scale = Settings.scale;
         this.img = ImageMaster.EYE_ANIM_0;
         this.scale = MathUtils.random(1.0F, 1.5F);
-        this.startingDuration = this.scale + 0.8F;
+        if (Settings.FAST_MODE){
+            this.startingDuration = 0.8F;
+        } else {
+            this.startingDuration = this.scale + 0.8F;
+        }
         this.duration = this.startingDuration;
         Target = target;
         this.sX = sX;

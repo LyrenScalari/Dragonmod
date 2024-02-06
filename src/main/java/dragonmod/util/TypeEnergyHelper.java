@@ -95,7 +95,8 @@ public class TypeEnergyHelper {
         Rakados,
         Bolas,
         Exalt,
-        Temporal,
-        Shatter
+        Charge,
+        Shatter,
+        BaseCharge
     }
 }

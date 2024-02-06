@@ -4,7 +4,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
-import dragonmod.powers.Dragonkin.SanctifyPower;
+import dragonmod.powers.Dragonkin.ConfessionPower;
 import dragonmod.util.Wiz;
 
 public class Sunbeam extends AbstractJusticarCard {
@@ -17,6 +17,6 @@ public class Sunbeam extends AbstractJusticarCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL));
-        Wiz.applyToEnemy(m,new SanctifyPower(m,p,magicNumber));
+        Wiz.applyToSelf(new ConfessionPower(Wiz.Player(),magicNumber));
     }
 }

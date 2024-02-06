@@ -26,7 +26,7 @@ public class BleedPower extends BasePower implements CloneablePowerInterface {
         return new BleedPower(owner,amount);
     }
     public BleedPower(AbstractCreature owner, int amount) {
-        super(POWER_ID, PowerType.DEBUFF, false, owner, Wiz.adp(),amount);
+        super(POWER_ID, PowerType.DEBUFF, false, owner, Wiz.Player(),amount);
         updateDescription();
     }
 

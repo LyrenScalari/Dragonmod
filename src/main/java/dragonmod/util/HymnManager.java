@@ -49,11 +49,12 @@ public class HymnManager {
         HymnManager.ActiveVerses.clear();
         HymnManager.VersePile.clear();
     }
-    public static void addVerse(AbstractSeal Verse) {
+    public static void addVerse(AbstractSeal Verse, AbstractCard source) {
+        Verse.VerseSource = source;
         HymnManager.ActiveVerses.add(Verse);
     }
     public static int getDevotion() {
-        return HymnManager.VersePile.size() + Wiz.adp().hand.size()-1;
+        return HymnManager.VersePile.size() + Wiz.Player().hand.size()-1;
     }
     public static class VersePileButton extends ClickableUIElement {
         private static final float X_OFF = 0f * Settings.scale;
@@ -303,6 +304,35 @@ public class HymnManager {
     public static class RenderVerseButton {
         public static void Postfix(DrawPilePanel __instance, SpriteBatch spriteBatch) {
             HymnManager.renderCombatUiElements(spriteBatch);
+        }
+    }
+    private static class Locator extends SpireInsertLocator {
+        private Locator() {
+        }
+
+        public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
+            Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractPlayer.class, "decrementBlock");
+            return offset(LineFinder.findInOrder(ctMethodToPatch, new ArrayList(), finalMatcher),0);
+        }
+
+        private static int[] offset(int[] originalArr, int offset) {
+            for(int i = 0; i < originalArr.length; ++i) {
+                originalArr[i] += offset;
+            }
+
+            return originalArr;
+        }
+    }
+    @SpirePatch(
+            clz = AbstractRoom.class,
+            method = "endBattle"
+    )
+    public static class BattleEnd {
+        public BattleEnd() {
+        }
+
+        public static void Prefix(AbstractRoom __instance) {
+            HymnManager.ActiveVerses.clear();
         }
     }
 }

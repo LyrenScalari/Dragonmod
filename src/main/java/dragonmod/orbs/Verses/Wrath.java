@@ -26,7 +26,7 @@ public class Wrath extends AbstractSeal {
     public void Chant(){
         super.Chant();
         AbstractMonster target = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
-        Wiz.atb(new SmiteAction(target,new DamageInfo(Wiz.adp(),BreakAmount, DamageInfo.DamageType.THORNS)));
+        Wiz.atb(new SmiteAction(target,new DamageInfo(Wiz.Player(),BreakAmount, DamageInfo.DamageType.THORNS)));
     }
     public void updateDescription() {
         description = DESCRIPTIONS[0] + PainAmount + DESCRIPTIONS[1] + DESCRIPTIONS[3] + BreakAmount + DESCRIPTIONS[4] + DESCRIPTIONS[2];

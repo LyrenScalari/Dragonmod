@@ -7,8 +7,8 @@ import com.evacipated.cardcrawl.mod.stslib.patches.NeutralPowertypePatch;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.PainfulStabsPower;
 import dragonmod.DragonMod;
@@ -34,7 +34,7 @@ public class RimeShankPower extends BasePower implements CloneablePowerInterface
     }
 
     public void onUseCard(AbstractCard card, UseCardAction action) {
-        if (card instanceof Shiv || card.hasTag(PrecisionPower.Shiv)){
+        if (card.cost == 0 && action.target instanceof AbstractMonster){
             Wiz.atb(new ApplyPowerAction(action.target,owner,new BleedPower(action.target,amount)));
         }
     }

@@ -10,7 +10,7 @@ public class IceBarrier extends AbstractRimedancerCard {
 
     public static final String ID = IceBarrier.class.getSimpleName();
     public IceBarrier(){
-        super(ID,2,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.SELF);
+        super(ID,2,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.ALL);
         setBlock(12,3);
         setMagic(2,1);
     }

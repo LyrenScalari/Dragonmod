@@ -22,7 +22,8 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.starter.*;
-import dragonmod.relics.Dragonkin.GarnetScales;
+import dragonmod.relics.Dragonkin.starter.AshenCharm;
+import dragonmod.relics.Dragonkin.starter.GarnetScales;
 import dragonmod.ui.EnergyOrbJusticar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -142,7 +143,7 @@ public class TheJusticar extends CustomPlayer {
         retVal.add(DragonMod.makeID(JusticarStrike.ID));
         retVal.add(DragonMod.makeID(JusticarStrike.ID));
         retVal.add(DragonMod.makeID(JusticarStrike.ID));
-        retVal.add(DragonMod.makeID(BlazingStrike.ID));
+        retVal.add(DragonMod.makeID(JusticarStrike.ID));
         retVal.add(DragonMod.makeID(Sunbeam.ID));
         retVal.add(DragonMod.makeID(JusticarDefend.ID));
         retVal.add(DragonMod.makeID(JusticarDefend.ID));
@@ -156,6 +157,7 @@ public class TheJusticar extends CustomPlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         retVal.add(GarnetScales.ID);
+        retVal.add(AshenCharm.ID);
         return retVal;
     }
 

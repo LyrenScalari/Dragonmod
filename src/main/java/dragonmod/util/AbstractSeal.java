@@ -12,12 +12,15 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.BobEffect;
+import dragonmod.interfaces.OnChant;
+import dragonmod.interfaces.OnCoda;
 import dragonmod.interfaces.ReciveModifyDamageEffect;
 import dragonmod.ui.DivineEyeParticle;
 import dragonmod.ui.SealParticleEffect;
 
 public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModifyDamageEffect {
     public boolean escalate = false;
+    public AbstractCard VerseSource;
     public AbstractSeal() {
         this.c = Settings.CREAM_COLOR.cpy();
         this.shineColor = new Color(1.0F, 1.0F, 1.0F, 0.0F);
@@ -36,10 +39,7 @@ public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModif
     }
     @Override
     public int onReciveDamage(int damage, DamageInfo info) {
-        if (!escalate){
-            escalate = true;
-            Chant();
-        }
+        Chant();
         return damage;
     }
     public void onStartOfTurn() {
@@ -47,10 +47,21 @@ public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModif
     }
     private void HymnCompletion(int HymnLength){
         for (AbstractPower p : AbstractDungeon.player.powers){
-            //add Hymn completion code
+            //TO-DO add Hymn completion code
         }
     }
     public void Coda(){
+        for (AbstractPower p : AbstractDungeon.player.powers){
+            if (p instanceof OnCoda){
+                Wiz.atb(new AbstractGameAction() {
+                    @Override
+                    public void update() {
+                        isDone = true;
+                        ((OnCoda) p).triggerOnCoda();
+                    }
+                });
+            }
+        }
     }
     public void Chant(){
         Wiz.att(new AbstractGameAction() {
@@ -87,6 +98,17 @@ public abstract class AbstractSeal extends AbstractNotOrb implements ReciveModif
                     }
                 }
             });
+        for (AbstractPower p : AbstractDungeon.player.powers){
+            if (p instanceof OnChant){
+                Wiz.atb(new AbstractGameAction() {
+                    @Override
+                    public void update() {
+                        isDone = true;
+                        ((OnChant) p).triggerOnChant();
+                    }
+                });
+            }
+        }
     }
     public void onEndOfTurn() {
         escalate = false;

@@ -2,11 +2,9 @@ package dragonmod.orbs.Verses;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DragonMod;
-import dragonmod.powers.Dragonkin.SanctifyPower;
+import dragonmod.powers.Dragonkin.ConfessionPower;
 import dragonmod.util.AbstractSeal;
 import dragonmod.util.Wiz;
 
@@ -20,20 +18,20 @@ public class Hallowed extends AbstractSeal {
     public Hallowed(int Pain) {
         super();
         name = orbString.NAME;
-        basePainAmount = PainAmount = Pain;
-    }
+        basePainAmount = PainAmount = 3;
+        baseBreakAmount = BreakAmount = Pain;
+        }
     public void Coda(){
         Wiz.atb(new AbstractGameAction() {
             @Override
             public void update() {
                 isDone = true;
-                AbstractMonster target = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
-                Wiz.applyToEnemy(target,new SanctifyPower(target,Wiz.adp(),getDevotion()));
+                Wiz.applyToSelf(new ConfessionPower(Wiz.Player(),BreakAmount));
             }
         });
     }
     public void updateDescription() {
         description = DESCRIPTIONS[0] + PainAmount + DESCRIPTIONS[1] + DESCRIPTIONS[2] + getDevotion() + DESCRIPTIONS[3];
-        baseBreakAmount = BreakAmount = getDevotion();
+        baseBreakAmount = BreakAmount = 3;
     }
 }

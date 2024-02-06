@@ -1,16 +1,11 @@
 package dragonmod.cards.Rimedancer.Uncommon;
 
-import basemod.helpers.CardModifierManager;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
-import dragonmod.CardMods.FrozenMod;
+import dragonmod.actions.GainHailOrbSlotAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.orbs.Sleet;
 import dragonmod.util.Wiz;
 
 public class StreetRink extends AbstractRimedancerCard {
@@ -18,31 +13,20 @@ public class StreetRink extends AbstractRimedancerCard {
 
     public StreetRink() {
         super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.ENEMY);
-        setMagic(1,1);
-        setMagic2(2);
+        setMagic(2);
     }
 
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        for (int i = 0; i < magicNumber; i++){
-            Wiz.atb(new ChannelAction(new Sleet()));
-        }
+        Wiz.atb(new GainHailOrbSlotAction(1));
         if (!upgraded){
-            Wiz.applyToEnemy(m,new VulnerablePower(m,SecondMagicNumber,false));
+            Wiz.applyToEnemy(m,new VulnerablePower(m,magicNumber,false));
         } else {
             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
-                Wiz.applyToEnemy(mo,new VulnerablePower(mo,SecondMagicNumber,false));
+                Wiz.applyToEnemy(mo,new VulnerablePower(mo,magicNumber,false));
             }
         }
-        Wiz.atb(new AbstractGameAction() {
-            @Override
-            public void update() {
-                AbstractCard target = p.hand.getRandomCard(true);
-                CardModifierManager.addModifier(target,new FrozenMod());
-                isDone = true;
-            }
-        });
     }
     @Override
     public void upgrade() {

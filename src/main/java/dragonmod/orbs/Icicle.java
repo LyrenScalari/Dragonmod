@@ -74,7 +74,7 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
                         if (Icicle.target.hasPower(Chillpower.POWER_ID)) {
                             Icicle.target.getPower(Chillpower.POWER_ID).flash();
                             Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
-                            Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
+                            Wiz.block(Wiz.Player(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
                         }
                         isDone = true;
                     }
@@ -109,6 +109,12 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
     public AbstractOrb makeCopy() {
         return new Icicle();
     }
+    public void passiveEffect(AbstractMonster focus){
+        DamageInfo info = new DamageInfo(AbstractDungeon.player, this.passiveAmount, DamageInfo.DamageType.THORNS);
+        info.output = AbstractOrb.applyLockOn(focus, info.base);
+        Wiz.atb(new ThrowIcicleAction(this,focus.hb,Color.CYAN));
+        Wiz.dmg(focus,info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+    }
 
     @Override
     public void onEndOfTurn() {
@@ -127,7 +133,7 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
                             if (Icicle.target.hasPower(Chillpower.POWER_ID)) {
                                 Icicle.target.getPower(Chillpower.POWER_ID).flash();
                                 Wiz.att(new ReducePowerAction(Icicle.target, Icicle.target, Icicle.target.getPower(Chillpower.POWER_ID), 1));
-                                Wiz.block(Wiz.adp(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
+                                Wiz.block(Wiz.Player(), Icicle.target.getPower(Chillpower.POWER_ID).amount);
                             }
                         }
                         isDone = true;

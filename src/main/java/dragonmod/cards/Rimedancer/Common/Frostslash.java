@@ -1,15 +1,11 @@
 package dragonmod.cards.Rimedancer.Common;
 
-import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Color;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsCenteredAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import dragonmod.CardMods.FrozenMod;
 import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
@@ -27,7 +23,7 @@ public class Frostslash extends AbstractRimedancerCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         Icicle tothrow = null;
         Icicle tothrow2 = null;
-        for (AbstractOrb o : Wiz.adp().orbs) {
+        for (AbstractOrb o : Wiz.Player().orbs) {
             if (o instanceof Icicle) {
                 if (tothrow == null){
                     tothrow = (Icicle) o;
@@ -47,21 +43,5 @@ public class Frostslash extends AbstractRimedancerCard {
         } else  Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
 
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-        if (!upgraded){
-            Wiz.atb(new AbstractGameAction() {
-                @Override
-                public void update() {
-                    AbstractCard target = p.hand.getRandomCard(true);
-                    CardModifierManager.addModifier(target,new FrozenMod());
-                    isDone = true;
-                }
-            });
-        } else {
-            Wiz.atb(new SelectCardsCenteredAction(p.hand.group,1, cardStrings.EXTENDED_DESCRIPTION[0],false,(card)->true,(cards)->{
-                for (AbstractCard c : cards){
-                    CardModifierManager.addModifier(c,new FrozenMod());
-                }
-            }));
-        }
     }
 }

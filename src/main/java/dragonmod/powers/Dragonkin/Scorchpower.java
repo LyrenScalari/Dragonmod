@@ -3,40 +3,27 @@ package dragonmod.powers.Dragonkin;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.HealthBarRenderPower;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import dragonmod.DragonMod;
-import dragonmod.patches.ScorchPatches;
-import dragonmod.powers.BasePower;
+import dragonmod.powers.BaseTwoAmountPower;
 import dragonmod.relics.Dragonkin.MukySludge;
-import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
-public class Scorchpower extends BasePower implements CloneablePowerInterface, HealthBarRenderPower, ScorchPatches.StartofTurnPreBlock {
+public class Scorchpower extends BaseTwoAmountPower implements CloneablePowerInterface, HealthBarRenderPower {
     public AbstractCreature source;
 
     public static final String POWER_ID = DragonMod.makeID("Scorch");
-    private static final Texture tex84 = TextureLoader.getTexture(DragonMod.powerPath("Scorch.png"));
-    private static final Texture tex32 = TextureLoader.getTexture(DragonMod.powerPath("Scorch.png"));
 
     public Scorchpower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
         super(POWER_ID,PowerType.DEBUFF,false,owner,source, amount);
-        img = tex84;
-        this.region128 = new TextureAtlas.AtlasRegion(tex84, 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(tex32, 0, 0, 32, 32);
         updateDescription();
-    }
-    public void atStartOfTurn() {
-        //Wiz.dmg(owner,new DamageInfo(owner,amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.FIRE);
     }
     @Override
     public float atDamageFinalGive(float d, DamageInfo.DamageType type){
@@ -54,9 +41,17 @@ public class Scorchpower extends BasePower implements CloneablePowerInterface, H
                     new ReducePowerAction(this.owner, this.owner, this,1));
         }
     }
+    public int onAttacked(DamageInfo info, int damageAmount) {
+        if (info.type == DamageInfo.DamageType.NORMAL){
+            Wiz.atb(new DamageAction(owner,new DamageInfo(owner, (int) Math.ceil((amount*0.25)), DamageInfo.DamageType.THORNS)));
+            Wiz.att(new ReducePowerAction(owner,owner,this,(int) Math.ceil((amount*0.25))));
+        }
+        return damageAmount;
+    }
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
+        amount2 = (int) Math.ceil((amount*0.25));
+        description = DESCRIPTIONS[0] + amount2 + DESCRIPTIONS[1] + amount2 + DESCRIPTIONS[2];
     }
     @Override
     public AbstractPower makeCopy() {
@@ -65,7 +60,7 @@ public class Scorchpower extends BasePower implements CloneablePowerInterface, H
 
     @Override
     public int getHealthBarAmount() {
-      return amount-owner.currentBlock;
+      return Math.max(amount-owner.currentBlock,0);
     }
 
     @Override
@@ -75,17 +70,8 @@ public class Scorchpower extends BasePower implements CloneablePowerInterface, H
     public float[] _lightsOutGetXYRI() {
         return new float[] {owner.hb.cX, owner.hb.cY, (float)(owner.hb.width+(0.01*amount)), 0.05f * amount};
     }
-
     public Color[] _lightsOutGetColor() {
         return new Color[] {Color.SCARLET.cpy()};
     }
 
-    @Override
-    public void atStartofTurnPreBlock() {
-        if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
-            this.flashWithoutSound();
-            Wiz.dmg(owner,new DamageInfo(owner,amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.FIRE);
-            Wiz.atb(new ReducePowerAction(owner,owner,this,1));
-        }
-    }
 }

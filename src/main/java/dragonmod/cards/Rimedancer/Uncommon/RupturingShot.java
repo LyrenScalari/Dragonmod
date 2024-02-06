@@ -59,7 +59,7 @@ public class RupturingShot extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         ArrayList<AbstractOrb> orbs = new ArrayList<>();
-        for (AbstractOrb o : Wiz.adp().orbs) {
+        for (AbstractOrb o : Wiz.Player().orbs) {
             if (o instanceof Icicle && orbs.size() < energyCosts.get(TypeEnergyHelper.Mana.Shatter)) {
                 orbs.add(o);
             }
@@ -70,6 +70,6 @@ public class RupturingShot extends AbstractRimedancerCard {
         }
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
         Wiz.applyToEnemy(m,new BleedPower(m,magicNumber));
-        Wiz.applyToSelf(new Subzero(p,p,SecondMagicNumber));
+        Wiz.applyToSelf(new Subzero(SecondMagicNumber));
     }
 }

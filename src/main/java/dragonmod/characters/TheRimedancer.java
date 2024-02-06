@@ -144,7 +144,7 @@ public class TheRimedancer extends CustomPlayer {
         for (int i = 0; i < 4 ; i++){
             retVal.add(DragonMod.makeID(RimedancerStrike.ID));
         }
-        retVal.add(DragonMod.makeID(ExhaleofHoarfrost.ID));
+        retVal.add(DragonMod.makeID(CrystalChakram.ID));
 
         for (int i = 0; i < 4 ; i++){
             retVal.add(DragonMod.makeID(RimedancerDefend.ID));

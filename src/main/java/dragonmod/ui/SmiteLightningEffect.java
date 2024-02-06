@@ -35,8 +35,13 @@ public class SmiteLightningEffect extends AbstractGameEffect {
         this.dY = dY;
         this.dst = Vector2.dst(this.sX, this.sY, this.dX, this.dY) / Settings.scale;
         this.color = Color.GOLD.cpy();
-        this.duration = 0.2F;
-        this.startingDuration = 0.2F;
+        if (Settings.FAST_MODE){
+            duration = 0.2F;
+            startingDuration =0.2F;
+        } else {
+            duration = 0.4F;
+            startingDuration = 0.4F;
+        }
         this.rotation = MathUtils.atan2(dX - sX, dY - sY);
         this.rotation *= 57.295776F;
         this.rotation = -this.rotation + 90.0F;
