@@ -8,6 +8,7 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
@@ -74,8 +75,7 @@ public class CustomOrbSlotManager {
         public static SpireReturn<Void> onEvokeOrb(AbstractPlayer __instance) {
             RemoveOrb(__instance.orbs.get(0));
             if (SlotType.get(__instance.orbs.get(0)) != null) {
-                SpecialSlots.get(SlotType.get(__instance.orbs.get(0))).ContainedOrbRemoved(__instance.orbs.get(0));
-                return SpireReturn.Continue();
+                return  SpecialSlots.get(SlotType.get(__instance.orbs.get(0))).ContainedOrbRemoved(__instance.orbs.get(0),false);
             }
             return SpireReturn.Continue();
         }
@@ -121,8 +121,7 @@ public class CustomOrbSlotManager {
             if (!__instance.orbs.isEmpty() && !(__instance.orbs.get(0) instanceof EmptyOrbSlot)) {
                 RemoveOrb(__instance.orbs.get(0));
                 if (SlotType.get(__instance.orbs.get(0)) != null) {
-                    SpecialSlots.get(SlotType.get(__instance.orbs.get(0))).ContainedOrbRemoved(__instance.orbs.get(0));
-                    return SpireReturn.Continue();
+                    return SpecialSlots.get(SlotType.get(__instance.orbs.get(0))).ContainedOrbRemoved(__instance.orbs.get(0),true);
                 }
                 return SpireReturn.Continue();
             }
@@ -138,6 +137,43 @@ public class CustomOrbSlotManager {
                 if ((SlotType.get(o) != null) && !(o instanceof EmptyOrbSlot)) {
                     SpecialSlots.get(SlotType.get(o)).ContainedOrbTurnStart(o);
                 }
+            }
+        }
+    }
+    @SpirePatch2(clz = AbstractOrb.class, method = "onEndOfTurn")
+    public static class EndTurnPatch{
+        @SpirePrefixPatch
+        public static void applyStartOfTurnOrbs(AbstractOrb __instance) {
+            if ((SlotType.get(__instance) != null) && !(__instance instanceof EmptyOrbSlot)) {
+                SpecialSlots.get(SlotType.get(__instance)).ContainedOrbTurnEnd(__instance);
+            }
+        }
+    }
+    @SpirePatch2(clz = AbstractOrb.class, method = "applyFocus")
+    public static class ApplyFocusPatch{
+        @SpirePrefixPatch
+        public static void applyStartOfTurnOrbs(AbstractOrb __instance) {
+            if ((SlotType.get(__instance) != null) && !(__instance instanceof EmptyOrbSlot)) {
+                SpecialSlots.get(SlotType.get(__instance)).ContainedOrbApplyFocus(__instance);
+            }
+        }
+    }
+    @SpirePatch2(clz = AbstractOrb.class, method = "update")
+    public static class SlotTipPatch {
+        @SpireInsertPatch(locator= EvokeLocator.class)
+        public static void ApplyLockOnPatch(AbstractOrb __instance) {
+            if ((SlotType.get(__instance) != null) && !(__instance instanceof EmptyOrbSlot)) {
+                SpecialSlots.get(SlotType.get(__instance)).SlotTip(__instance);
+            }
+        }
+        private static class EvokeLocator extends SpireInsertLocator {
+            private EvokeLocator() {
+            }
+
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(TipHelper.class, "renderGenericTip");
+                int[] tmp = LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher);
+                return new int[]{tmp[0]};
             }
         }
     }

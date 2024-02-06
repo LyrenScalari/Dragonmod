@@ -4,11 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
@@ -44,7 +47,10 @@ public class HailOrbSlot extends SpecialOrbSlot {
         this.cY = AbstractDungeon.player.drawY + AbstractDungeon.player.hb_y + AbstractDungeon.player.hb_h / 2.0F;
         this.updateDescription();
     }
-    public void ContainedOrbRemoved(AbstractOrb Source){
+    public SpireReturn<Void> ContainedOrbRemoved(AbstractOrb Source, boolean removal){
+        if (!removal){
+            Source.onEvoke();
+        }
         Wiz.att(new AbstractGameAction() {
             @Override
             public void update() {
@@ -60,6 +66,7 @@ public class HailOrbSlot extends SpecialOrbSlot {
         for(i = 0; i < Wiz.Player().orbs.size(); ++i) {
             ((AbstractOrb)Wiz.Player().orbs.get(i)).setSlot(i, Wiz.Player().maxOrbs);
         }
+        return SpireReturn.Return();
     }
     public  void ContainedOrbTurnStart(AbstractOrb Source){
         for (int i = 0; i < 2; i++) {
@@ -71,6 +78,9 @@ public class HailOrbSlot extends SpecialOrbSlot {
                 Wiz.dmg(m, info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
             }
         }
+    }
+    public void SlotTip(AbstractOrb Source){
+        TipHelper.renderGenericTip(this.tX + 96.0F * Settings.scale, this.tY + 128.0F * Settings.scale,orbString.NAME, orbString.DESCRIPTION[1]+Source.passiveAmount+DESCRIPTIONS[2]);
     }
     public void updateDescription() {
         this.description = orbString.DESCRIPTION[0];

@@ -93,13 +93,15 @@
   "${modID}:CrystalSlot": {
     "NAME": "Crystal Orb Slot",
     "DESCRIPTION": [
-      "An orb can be channeled into this slot. when an Orb is removed from this slot this slot is removed."
+      "An orb can be channeled into this slot."," NL When an Orb is removed from this slot gain #b1 Temporary [dragonmod:FocusIcon] then slot is removed.",
+      "When an Orb is removed from this slot gain #b1 Temporary [dragonmod:FocusIcon] then this slot is removed."
     ]
   },
   "${modID}:HailSlot": {
     "NAME": "Hail Orb Slot",
     "DESCRIPTION": [
-      "At the start of your turn, an orb channeled into this orb slot deals damage equal to its passive amount to a random enemy twice. when an Orb is removed from this slot this slot is removed."
+      "At the start of your turn, an orb channeled into this orb slot deals damage equal to its passive amount to a random enemy twice. when an Orb is removed from this slot this slot is removed.",
+      "At the start of your turn, deal #b"," damage random enemy twice. NL When an Orb is removed from this slot it is removed."
     ]
   },
   "${modID}:Sleet": {
