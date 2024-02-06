@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TypeEnergyHelper {
-    public static EnumMap<Mana, Integer> currentMana = new EnumMap<Mana, Integer>(Mana.class);
+    public static EnumMap<Mana, Integer> currentMana = new EnumMap<>(Mana.class);
 
     public static int getManaByEnum(Mana mana){
         return currentMana.getOrDefault(mana, 0);

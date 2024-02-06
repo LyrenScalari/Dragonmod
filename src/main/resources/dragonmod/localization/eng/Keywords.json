@@ -234,7 +234,7 @@
       "Shroud",
       "shroud"
     ],
-    "DESCRIPTION": "#yShrouding an Orb grants it additional effects that will benefit from all modifications the orb currently has."
+    "DESCRIPTION": "#yShrouding an Orb applies additional effects to its orb slot, an orb slot may only have one additional effect at a time a Shroud is removed alongside the contained orb."
   },
 
   {

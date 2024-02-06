@@ -1,17 +1,25 @@
 package dragonmod.orbs;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import dragonmod.DragonMod;
+import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.ui.TextureLoader;
+import dragonmod.util.Wiz;
 
-public class HailOrbSlot extends EmptyOrbSlot {
+import java.util.Collections;
+
+public class HailOrbSlot extends SpecialOrbSlot {
     public static final String ORB_ID = DragonMod.makeID("HailSlot");
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(ORB_ID);
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
@@ -36,7 +44,34 @@ public class HailOrbSlot extends EmptyOrbSlot {
         this.cY = AbstractDungeon.player.drawY + AbstractDungeon.player.hb_y + AbstractDungeon.player.hb_h / 2.0F;
         this.updateDescription();
     }
-
+    public void ContainedOrbRemoved(AbstractOrb Source){
+        Wiz.att(new AbstractGameAction() {
+            @Override
+            public void update() {
+                Wiz.Player().maxOrbs--;
+                Wiz.Player().orbs.remove(Source);
+                isDone = true;
+            }
+        });
+        int i;
+        for(i = 1; i < Wiz.Player().orbs.size(); ++i) {
+            Collections.swap(Wiz.Player().orbs, i, i - 1);
+        }
+        for(i = 0; i < Wiz.Player().orbs.size(); ++i) {
+            ((AbstractOrb)Wiz.Player().orbs.get(i)).setSlot(i, Wiz.Player().maxOrbs);
+        }
+    }
+    public  void ContainedOrbTurnStart(AbstractOrb Source){
+        for (int i = 0; i < 2; i++) {
+            AbstractCreature m = AbstractDungeon.getRandomMonster();
+            if (m != null) {
+                DamageInfo info = new DamageInfo(AbstractDungeon.player, Source.passiveAmount, DamageInfo.DamageType.THORNS);
+                info.output = AbstractOrb.applyLockOn(m, info.base);
+                Wiz.atb(new ThrowIcicleAction(Source, m.hb, Color.CYAN));
+                Wiz.dmg(m, info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+            }
+        }
+    }
     public void updateDescription() {
         this.description = orbString.DESCRIPTION[0];
     }

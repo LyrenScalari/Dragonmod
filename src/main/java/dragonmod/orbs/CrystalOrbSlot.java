@@ -3,15 +3,20 @@ package dragonmod.orbs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
+import com.megacrit.cardcrawl.powers.FocusPower;
 import dragonmod.DragonMod;
 import dragonmod.ui.TextureLoader;
+import dragonmod.util.Wiz;
 
-public class CrystalOrbSlot extends EmptyOrbSlot {
+import java.util.Collections;
+
+public class CrystalOrbSlot extends SpecialOrbSlot {
     public static final String ORB_ID = DragonMod.makeID("CrystalSlot");
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(ORB_ID);
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
@@ -35,6 +40,24 @@ public class CrystalOrbSlot extends EmptyOrbSlot {
         this.cX = AbstractDungeon.player.drawX + AbstractDungeon.player.hb_x;
         this.cY = AbstractDungeon.player.drawY + AbstractDungeon.player.hb_y + AbstractDungeon.player.hb_h / 2.0F;
         this.updateDescription();
+    }
+    public void ContainedOrbRemoved(AbstractOrb Source){
+        Wiz.applyToSelfTempstartTop(new FocusPower(AbstractDungeon.player,1));
+        Wiz.att(new AbstractGameAction() {
+            @Override
+            public void update() {
+                Wiz.Player().maxOrbs--;
+                Wiz.Player().orbs.remove(Source);
+                isDone = true;
+            }
+        });
+        int i;
+        for(i = 1; i < Wiz.Player().orbs.size(); ++i) {
+            Collections.swap(Wiz.Player().orbs, i, i - 1);
+        }
+        for(i = 0; i < Wiz.Player().orbs.size(); ++i) {
+            ((AbstractOrb)Wiz.Player().orbs.get(i)).setSlot(i, Wiz.Player().maxOrbs);
+        }
     }
 
     public void updateDescription() {

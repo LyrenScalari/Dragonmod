@@ -1,36 +1,32 @@
 package dragonmod.patches;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.FocusPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.BobEffect;
 import dragonmod.DragonMod;
-import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.orbs.CrystalOrbSlot;
 import dragonmod.orbs.HailOrbSlot;
+import dragonmod.orbs.SpecialOrbSlot;
 import dragonmod.powers.Rimedancer.onRemoveOrbPower;
 import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 import javassist.CtBehavior;
 
-import java.util.Collections;
+import java.util.EnumMap;
 
 import static dragonmod.patches.CustomOrbSlotManager.SlotFields.SlotType;
+import static dragonmod.patches.CustomOrbSlotManager.SlotFields.SpecialSlots;
 
 public class CustomOrbSlotManager {
     @SpirePatch(
@@ -39,11 +35,15 @@ public class CustomOrbSlotManager {
     )
     public static class SlotFields{
         public static SpireField<SlotTypes> SlotType = new SpireField(() -> null);
+        public static EnumMap<SlotTypes, SpecialOrbSlot> SpecialSlots = new EnumMap<>(SlotTypes.class);
         public enum SlotTypes{
             Crystal,
             Hail
         }
-        public SlotFields(){}
+        public SlotFields(){
+            SpecialSlots.put(SlotTypes.Crystal,new CrystalOrbSlot());
+            SpecialSlots.put(SlotTypes.Hail,new HailOrbSlot());
+        }
     }
 
     @SpirePatch2(clz = AbstractPlayer.class, method = "channelOrb")
@@ -53,11 +53,8 @@ public class CustomOrbSlotManager {
                 localvars = {"orbToSet","index"}
         )
         public static void onChannelOrb(AbstractPlayer __instance, AbstractOrb orbToSet,int index) {
-            if (__instance.orbs.get(index) instanceof CrystalOrbSlot) {
-                SlotType.set(orbToSet, SlotFields.SlotTypes.Crystal);
-            }
-            if (__instance.orbs.get(index) instanceof HailOrbSlot) {
-                SlotType.set(orbToSet, SlotFields.SlotTypes.Hail);
+            if (SlotType.get(__instance.orbs.get(index)) != null) {
+                SlotType.set(orbToSet, SlotType.get(__instance.orbs.get(index)));
             }
         }
         public static class ChannelLocator extends SpireInsertLocator {
@@ -76,37 +73,9 @@ public class CustomOrbSlotManager {
         )
         public static SpireReturn<Void> onEvokeOrb(AbstractPlayer __instance) {
             RemoveOrb(__instance.orbs.get(0));
-            if (SlotType.get(__instance.orbs.get(0)) == SlotFields.SlotTypes.Crystal) {
-                ((AbstractOrb)__instance.orbs.get(0)).onEvoke();
-                AbstractOrb CrystalOrb = __instance.orbs.get(0);
-                Wiz.applyToSelfTempstartTop(new FocusPower(AbstractDungeon.player,1));
-                Wiz.att(new AbstractGameAction() {
-                    @Override
-                    public void update() {
-                        __instance.maxOrbs--;
-                        __instance.orbs.remove(CrystalOrb);
-                        isDone = true;
-                    }
-                });
-                int i;
-                for(i = 1; i < __instance.orbs.size(); ++i) {
-                    Collections.swap(__instance.orbs, i, i - 1);
-                }
-                for(i = 0; i < __instance.orbs.size(); ++i) {
-                    ((AbstractOrb)__instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
-                }
-                return SpireReturn.Return();
-            }
-            if (SlotType.get(__instance.orbs.get(0)) == SlotFields.SlotTypes.Hail) {
-                ((AbstractOrb)__instance.orbs.get(0)).onEvoke();
-                int i;
-                for(i = 1; i < __instance.orbs.size(); ++i) {
-                    Collections.swap(__instance.orbs, i, i - 1);
-                }
-                for(i = 0; i < __instance.orbs.size(); ++i) {
-                    ((AbstractOrb)__instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
-                }
-                return SpireReturn.Return();
+            if (SlotType.get(__instance.orbs.get(0)) != null) {
+                SpecialSlots.get(SlotType.get(__instance.orbs.get(0))).ContainedOrbRemoved(__instance.orbs.get(0));
+                return SpireReturn.Continue();
             }
             return SpireReturn.Continue();
         }
@@ -151,35 +120,11 @@ public class CustomOrbSlotManager {
         public static SpireReturn<Void> onEvokeOrb(AbstractPlayer __instance) {
             if (!__instance.orbs.isEmpty() && !(__instance.orbs.get(0) instanceof EmptyOrbSlot)) {
                 RemoveOrb(__instance.orbs.get(0));
-                if (SlotType.get(__instance.orbs.get(0)) == SlotFields.SlotTypes.Crystal) {
-                    AbstractOrb CrystalOrb = __instance.orbs.get(0);
-                    Wiz.applyToSelfTempstartTop(new FocusPower(AbstractDungeon.player,1));
-                    Wiz.att(new AbstractGameAction() {
-                        @Override
-                        public void update() {
-                            __instance.maxOrbs--;
-                            __instance.orbs.remove(CrystalOrb);
-                            isDone = true;
-                        }
-                    });
-                    int i;
-                    for(i = 1; i < __instance.orbs.size(); ++i) {
-                        Collections.swap(__instance.orbs, i, i - 1);
-                    }
-                    for(i = 0; i < __instance.orbs.size(); ++i) {
-                        ((AbstractOrb)__instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
-                    }
-                    return SpireReturn.Return();
-                } else if (SlotType.get(__instance.orbs.get(0)) == SlotFields.SlotTypes.Hail) {
-                    int i;
-                    for(i = 1; i < __instance.orbs.size(); ++i) {
-                        Collections.swap(__instance.orbs, i, i - 1);
-                    }
-                    for(i = 0; i < __instance.orbs.size(); ++i) {
-                        ((AbstractOrb)__instance.orbs.get(i)).setSlot(i, __instance.maxOrbs);
-                    }
-                    return SpireReturn.Return();
-                } else return SpireReturn.Continue();
+                if (SlotType.get(__instance.orbs.get(0)) != null) {
+                    SpecialSlots.get(SlotType.get(__instance.orbs.get(0))).ContainedOrbRemoved(__instance.orbs.get(0));
+                    return SpireReturn.Continue();
+                }
+                return SpireReturn.Continue();
             }
             return SpireReturn.Continue();
         }
@@ -190,16 +135,8 @@ public class CustomOrbSlotManager {
         @SpirePrefixPatch
         public static void applyStartOfTurnOrbs(AbstractPlayer __instance) {
             for (AbstractOrb o : __instance.orbs) {
-                if ((SlotType.get(o) == SlotFields.SlotTypes.Hail) && !(o instanceof EmptyOrbSlot)) {
-                    for (int i = 0; i < 2; i++) {
-                        AbstractCreature m = AbstractDungeon.getRandomMonster();
-                        if (m != null) {
-                            DamageInfo info = new DamageInfo(AbstractDungeon.player, o.passiveAmount, DamageInfo.DamageType.THORNS);
-                            info.output = AbstractOrb.applyLockOn(m, info.base);
-                            Wiz.atb(new ThrowIcicleAction(o, m.hb, Color.CYAN));
-                            Wiz.dmg(m, info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-                        }
-                    }
+                if ((SlotType.get(o) != null) && !(o instanceof EmptyOrbSlot)) {
+                    SpecialSlots.get(SlotType.get(o)).ContainedOrbTurnStart(o);
                 }
             }
         }
@@ -212,7 +149,12 @@ public class CustomOrbSlotManager {
             for (AbstractOrb orb : __instance.orbs){
                 if (orb != null && !(orb instanceof EmptyOrbSlot)) {
                     if (SlotType.get(orb) != null) {
-                        Texture Crystal = TextureLoader.getTexture(DragonMod.orbPath("empty2.png"));
+                        Texture Crystal;
+                        if (SpecialSlots.get(SlotType.get(orb)).overlayimg != null){
+                            Crystal = SpecialSlots.get(SlotType.get(orb)).overlayimg;
+                        } else {
+                            Crystal = TextureLoader.getTexture(DragonMod.orbPath("empty2.png"));
+                        }
                         sb.setColor(Settings.CREAM_COLOR.cpy());
                         BobEffect bobEffect = new BobEffect(3.0F * Settings.scale, 3.0F);
                         angle += Gdx.graphics.getDeltaTime() * 10.0F;
