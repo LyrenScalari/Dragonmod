@@ -3,27 +3,26 @@ package dragonmod.stances;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.OrbStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.localization.StanceStrings;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.DivinityParticleEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
 import dragonmod.DragonMod;
-import dragonmod.actions.ThrowShurikenAction;
-import dragonmod.interfaces.onDrawCard;
+import dragonmod.powers.Warden.AmberBlossomPower;
+import dragonmod.powers.Warden.AmethystBlossomPower;
 import dragonmod.util.Wiz;
 
-public class DuskStance extends AbstractStance implements onDrawCard {
+public class DuskStance extends AbstractStance {
     public static final String STANCE_ID =  DragonMod.makeID("Dusk");
-    private static final OrbStrings stanceString = CardCrawlGame.languagePack.getOrbString(STANCE_ID);
+    public static int MaxPow = 2;
+    private static final StanceStrings stanceString = CardCrawlGame.languagePack.getStanceString(STANCE_ID);
     public DuskStance() {
         this.ID = STANCE_ID;
         this.name = stanceString.NAME;// 23
@@ -31,7 +30,17 @@ public class DuskStance extends AbstractStance implements onDrawCard {
     }
     @Override
     public void updateDescription() {
-        this.description = stanceString.DESCRIPTION[0];
+        AbstractPower AmethystBlossom = Wiz.Player().getPower(AmethystBlossomPower.POWER_ID);
+        int totalpow;
+        if (AmethystBlossom != null){
+            totalpow = MaxPow+AmethystBlossom.amount;
+        } else totalpow = MaxPow;
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(stanceString.DESCRIPTION[0]);
+        builder.append(totalpow);
+        builder.append(stanceString.DESCRIPTION[1]);
+        this.description = builder.toString();
     }
     public void updateAnimation() {
         if (!Settings.DISABLE_EFFECTS) {// 46
@@ -53,20 +62,20 @@ public class DuskStance extends AbstractStance implements onDrawCard {
         AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.NAVY, true));
         AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, "Calm"));
     }
-    @Override
-    public void OnDrawCard() {
-        if (!AbstractDungeon.actionManager.turnHasEnded){
-            Wiz.att(new AbstractGameAction() {
-                @Override
-                public void update() {
-                    AbstractMonster target = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
-                    if (target != null){
-                        Wiz.att(new DamageAction(target,new DamageInfo(AbstractDungeon.player,2, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-                        Wiz.att(new ThrowShurikenAction("shuriken",1,target.hb, Color.GRAY.cpy(),false));
-                    }
-                    isDone = true;
-                }
-            });
+    public void onExitStance() {
+        MaxPow = 2;
+        Wiz.applyToSelf(new AmberBlossomPower(Wiz.Player(),Wiz.Player(),1));
+        this.stopIdleSfx();
+    }
+    public void atStartOfTurn() {
+        AbstractPower AmethystBlossom = Wiz.Player().getPower(AmethystBlossomPower.POWER_ID);
+        int totalpow;
+        if (AmethystBlossom != null){
+            totalpow = MaxPow+AmethystBlossom.amount;
+        } else totalpow = MaxPow;
+        if (totalpow > 0){
+            Wiz.atb(new DrawCardAction(totalpow));
+            MaxPow -= 1;
         }
     }
 }

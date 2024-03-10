@@ -1,10 +1,8 @@
 package dragonmod.cards.Justicar.uncommon;
 
-import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.DamageModifiers.HolyDamage;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.util.HymnManager;
 
@@ -44,7 +42,6 @@ public class MarchofOtherworldlyLight extends AbstractJusticarCard {
             }
         });
         setMagic(4);
-        DamageModifierManager.addModifier(this,new HolyDamage(true));
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

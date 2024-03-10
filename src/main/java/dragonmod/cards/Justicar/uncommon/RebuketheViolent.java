@@ -15,7 +15,7 @@ import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.interfaces.onAttackedEnchantment;
-import dragonmod.patches.EnchantmentsManager;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 

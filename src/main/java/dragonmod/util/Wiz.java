@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -38,7 +39,21 @@ public class Wiz {
             consumer.accept(c);
         }
     }
+    public static CardGroup hand() {
+        return AbstractDungeon.player.hand;
+    }
 
+    public static CardGroup drawPile() {
+        return AbstractDungeon.player.drawPile;
+    }
+
+    public static CardGroup discardPile() {
+        return AbstractDungeon.player.discardPile;
+    }
+
+    public static CardGroup deck() {
+        return AbstractDungeon.player.masterDeck;
+    }
     public static ArrayList<AbstractCard> getAllCardsInCardGroups(boolean includeHand, boolean includeExhaust) {
         ArrayList<AbstractCard> masterCardsList = new ArrayList<>();
         masterCardsList.addAll(AbstractDungeon.player.drawPile.group);

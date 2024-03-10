@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.powers.watcher.VigorPower;
 import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.DragonMod;
 import dragonmod.interfaces.TurnStartEnchantment;
-import dragonmod.patches.EnchantmentsManager;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 

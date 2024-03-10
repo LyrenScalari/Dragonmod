@@ -4,7 +4,7 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.util.CantripManager;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 
 public class Nightrunner extends AbstractRimedancerCard {
@@ -13,7 +13,7 @@ public class Nightrunner extends AbstractRimedancerCard {
         super(ID,0,CardType.SKILL,CardRarity.SPECIAL,CardTarget.SELF,true);
         setBlock(4,2);
         setExhaust(true);
-        tags.add(CantripManager.Cantrip);
+        tags.add(EnchantmentsManager.Cantrip);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

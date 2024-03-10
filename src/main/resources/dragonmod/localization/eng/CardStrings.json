@@ -27,7 +27,7 @@
   },
   "${modID}:Cauterize": {
     "NAME": "Cauterize",
-    "DESCRIPTION": "${modID}:Cure !${modID}:H!. NL Gain !M! [${modID}:ScorchIcon] ."
+    "DESCRIPTION": "${modID}:Cure !${modID}:H!. NL Take !M! damage."
   },
 
   "${modID}:InnerFire": {
@@ -421,44 +421,122 @@
 
   "${modID}:WillowSplitter": {
     "NAME": "Willow Splitter",
-    "DESCRIPTION": "${modID}:Reflexive. NL Deal !D! damage twice. NL ${modID}:Flash: Draw a card."
+    "DESCRIPTION": "Deal !D! damage twice."
   },
   "${modID}:RisingCresent": {
     "NAME": "Rising Cresent",
-    "DESCRIPTION": "${modID}:Reflexive. NL Deal !D! damage. NL ${modID}:Flash: Draw !M! cards."
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [${modID}:WeakIcon]"
   },
   "${modID}:SupernatrualWind": {
     "NAME": "Supernatural Wind",
-    "DESCRIPTION": "${modID}:Reflexive. NL Deal !D! damage !M! times. NL ${modID}:Flash: Gain [E] the next time you play a skill this turn."
+    "DESCRIPTION": "Deal !D! damage !M! times."
   },
 
   "${modID}:ShroudedSky": {
     "NAME": "Shrouded Sky",
-    "DESCRIPTION": "${modID}:Reflexive. NL Gain !B! [${modID}:BlockIcon] . NL Enter ${modID}:Dawn or ${modID}:Dusk."
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Enter ${modID}:Dawn or ${modID}:Dusk."
   },
   "${modID}:AmberHaze": {
     "NAME": "Amber Haze",
-    "DESCRIPTION": "${modID}:Reflexive. NL Gain !B! [${modID}:BlockIcon] . NL Deal !D! damage twice. NL Exit your Stance ."
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Deal !D! damage twice. NL ${modID}:Recenter."
   },
   "${modID}:AmethystHaze": {
     "NAME": "Amethyst Haze",
-    "DESCRIPTION": "${modID}:Reflexive. NL Gain !B! [${modID}:BlockIcon] . NL Draw !M! cards. NL Exit your Stance ."
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Draw !M! cards. NL ${modID}:Recenter."
   },
 
+
+  "${modID}:DarkStrike": {
+    "NAME": "Dark Strike",
+    "DESCRIPTION": "Deal !D! [${modID}:DarkIcon] damage. NL Apply !M! [${modID}:HexIcon] ."
+  },
+  "${modID}:MountainMists": {
+    "NAME": "Mountain Mists",
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL When Attacked, Apply !M! [${modID}:HexIcon] to the attacker."
+  },
+  "${modID}:PeircingLight": {
+    "NAME": "Piercing Light",
+    "DESCRIPTION": "Deal !D! damage. NL If in ${modID}:Dawn, ${modID}:Recenter and gain !M! [${modID}:EmeraldBlossomIcon] . NL Otherwise enter ${modID}:Dawn."
+  },
+  "${modID}:NightmareShroud": {
+    "NAME": "Nightmare Shroud",
+    "DESCRIPTION": "Deal !D! damage. NL Draw a card. NL ${modID}:Exploit [${modID}:PoisonIcon] : Deal !D! damage again, else apply !M! [${modID}:HexIcon] ."
+  },
+  "${modID}:DriftingMoon": {
+    "NAME": "Drifting Moon",
+    "DESCRIPTION": "${modID}:Conjure a random card.",
+    "UPGRADE_DESCRIPTION": "${modID}:Conjure a random card. NL Draw a card."
+  },
+  "${modID}:Wingbeat": {
+    "NAME": "Wingbeat",
+    "DESCRIPTION": "Whenever a card ${modID}:Vanishes, deal !M! damage to a random enemy."
+  },
+  "${modID}:BlazingEdge": {
+    "NAME": "Blazing Edge",
+    "DESCRIPTION": "Retain. Unplayable. NL When drawn or ${modID}:Vanish : Deal !M! damage to a random enemy twice.",
+    "UPGRADE_DESCRIPTION":"Unplayable. NL When drawn or ${modID}:Vanish : Deal !M! damage to a random enemy twice.",
+    "EXTENDED_DESCRIPTION": ["#rImpossible."]
+  },
+  "${modID}:ShadowBreak": {
+    "NAME": "Shadow Break",
+    "DESCRIPTION": "Exhaust the card left of this. NL Deal !D! damage."
+  },
+  "${modID}:MirrorBlade": {
+    "NAME": "Mirror Blade",
+    "DESCRIPTION": "${modID}:Banish the card right of this. NL ${modID}:Illude the card left of this"
+  },
+
+  "${modID}:Solstice": {
+    "NAME": "Dream Blade",
+    "DESCRIPTION": "Deal !D! damage. NL Remove and ${modID}:Illude the top card of your draw pile. NL Apply !M! [${modID}:HexIcon] ."
+  },
+  "${modID}:DreamLance": {
+    "NAME": "Moonlight Sweep",
+    "DESCRIPTION": "Deal !D! damage. NL Remove and ${modID}:Illude the top 2 cards of your draw pile. NL Apply !M! [${modID}:WeakIcon] ."
+  },
+  "${modID}:ShadowStrike": {
+    "NAME": "Shadow Swipe",
+    "DESCRIPTION": "Apply !M! [${modID}:HexIcon] . NL ${modID}:Exploit [${modID}:PoisonIcon] : Draw 2 cards."
+  },
+  "${modID}:RoaringWind": {
+    "NAME": "Roaring Wind",
+    "DESCRIPTION": "Gain 2 [${modID}:AmethystBlossomIcon] . NL While in ${modID}:Dusk Deal !M! damage to a random enemy after you draw a card during your turn."
+  },
+  "${modID}:YinYangTalisman": {
+    "NAME": "Yin-Yang Talisman",
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL ${modID}:Banish a card in your Exhaust pile to gain !M! Strength."
+  },
+
+  "${modID}:WingsofHeaven": {
+    "NAME": "Wings of Heaven",
+    "DESCRIPTION": "Deal !D! damage. NL Gain !M! [${modID}:EmeraldBlossomIcon] . NL Enter ${modID}:Dawn or ${modID}:Dusk."
+  },
+  "${modID}:ShadeDancer": {
+    "NAME": "Shade Dancer",
+    "DESCRIPTION": "Deal !D! damage. NL Draw a card. NL ${modID}:Exploit [${modID}:PoisonIcon] : deal !D! damage and gain 1 [${modID}:EmeraldBlossomIcon] ."
+  },
+  "${modID}:FieryDance": {
+    "NAME": "Fiery Dance",
+    "DESCRIPTION": "Deal !D! damage to a random enemy twice. NL Draw a Card. NL If its an Attack deal !D! damage to a random enemy and gain 1 [${modID}:EmeraldBlossomIcon] ."
+  },
 
   "${modID}:PetalBlizzard": {
     "NAME": "Petal Blizzard",
-    "DESCRIPTION": "Deal !D! damage and apply 1 ${modID}:Bloom to a random enemy !M! times."
+    "DESCRIPTION": "Deal !D! damage to a random enemy and gain 1 [${modID}:EmeraldBlossomIcon] , [${modID}:AmberBlossomIcon] , or [${modID}:AmethystBlossomIcon] at random !M! times. NL Exhaust."
+  },
+  "${modID}:FeatherDance": {
+    "NAME": "Feather Dance",
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Gain !M! [${modID}:ReinforceIcon] . NL Enter ${modID}:Dawn or ${modID}:Dusk."
+  },
+  "${modID}:WaterfowlDance": {
+    "NAME": "Waterfowl Dance",
+    "DESCRIPTION": "Deal !D! damage to a random enemy !M! times. NL ${modID}:Recenter."
+  },
+  "${modID}:RavenousViper": {
+    "NAME": "Ravenous Viper",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [${modID}:HexIcon] . NL ${modID}:Recenter."
   },
 
-  "${modID}:LunarArc": {
-    "NAME": "Lunar Arc",
-    "DESCRIPTION": "${modID}:Reflexive. NL Deal !D! damage to a random enemy twice. NL Draw a card."
-  },
-  "${modID}:BlossomSlicer": {
-    "NAME": "Blossom Slicer",
-    "DESCRIPTION": "${modID}:Reflexive. NL Deal !D! damage for each enemy. NL Gain [E] the next time you play a skill this turn."
-  },
   "${modID}:DawnStanceCard": {
     "NAME": "Dawn",
     "DESCRIPTION": "Enter ${modID}:Dawn."

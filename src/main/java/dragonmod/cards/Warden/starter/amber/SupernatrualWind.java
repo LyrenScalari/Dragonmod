@@ -1,16 +1,15 @@
 package dragonmod.cards.Warden.starter.amber;
 
+import basemod.patches.com.megacrit.cardcrawl.dungeons.AbstractDungeon.NoPools;
 import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.DragonMod;
 import dragonmod.cards.Warden.AbstractReflexiveCard;
-import dragonmod.powers.Warden.BlossomPower;
 import dragonmod.util.Wiz;
-
-import static dragonmod.DragonMod.Flash;
 @NoCompendium
+@NoPools
 public class SupernatrualWind extends AbstractReflexiveCard {
     public static final String ID = SupernatrualWind.class.getSimpleName();
     public SupernatrualWind(){
@@ -23,9 +22,6 @@ public class SupernatrualWind extends AbstractReflexiveCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         for (int i = 0; i < magicNumber; i++){
             Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), DragonMod.getRandomSlash());
-        }
-        if (Flash()){
-            Wiz.applyToSelf(new BlossomPower());
         }
     }
 }

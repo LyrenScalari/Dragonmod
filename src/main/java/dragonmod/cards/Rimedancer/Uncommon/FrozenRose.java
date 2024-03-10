@@ -19,7 +19,7 @@ import dragonmod.DamageModifiers.Icons.FrostIcon;
 import dragonmod.DragonMod;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.interfaces.onAttackedEnchantment;
-import dragonmod.patches.EnchantmentsManager;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 

@@ -13,7 +13,7 @@ import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.cards.Justicar.special.consecration;
-import dragonmod.patches.EnchantmentsManager;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.powers.Dragonkin.DivineConvictionpower;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;

@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.util.CantripManager;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 
 public class Ambush extends AbstractRimedancerCard {
@@ -15,7 +15,7 @@ public class Ambush extends AbstractRimedancerCard {
         super(ID,1,CardType.ATTACK,CardRarity.SPECIAL,CardTarget.ENEMY,true);
         setDamage(6,2);
         setMagic(2);
-        tags.add(CantripManager.Cantrip);
+        tags.add(EnchantmentsManager.Cantrip);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

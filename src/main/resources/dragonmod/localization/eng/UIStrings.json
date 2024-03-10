@@ -30,7 +30,7 @@
   "${modID}:Reinforce": {
     "TEXT": [
       "[dragonmod:ReinforceIcon] Reinforce",
-      "Gaining [dragonmod:ReinforceIcon] instead raise it to that amount. NL Creatures with [dragonmod:ReinforceIcon] do not lose [dragonmod:BlockIcon] at the start of their turn and return blocked attack damage."
+      "Gaining [dragonmod:ReinforceIcon] instead raises it to that amount. NL Creatures with [dragonmod:ReinforceIcon] do not lose [dragonmod:BlockIcon] at the start of their turn and return blocked attack damage."
     ]
   },
   "${modID}:Powerful": {
@@ -181,6 +181,55 @@
     "TEXT": [
       "Shatter",
       "As an Additional Cost to play this card, a number of Icicles listed below its energy cost must be removed."
+    ]
+  },
+
+  "${modID}:Reflexive": {
+    "TEXT": [
+      "Reflexive",
+      "Transforms when you change stances, Amber if Dawn, Amethyst if Dusk."
+    ]
+  },
+  "${modID}:Dark": {
+    "TEXT": [
+      "[dragonmod:DarkIcon] Dark Damage",
+      "[dragonmod:DarkIcon] Damage is increased by #b50% against #yWeak targets in addition to other effects."
+    ]
+  },
+  "${modID}:Hex": {
+    "TEXT": [
+      "[dragonmod:HexIcon] Hex",
+      "[dragonmod:HexIcon] Deals [dragonmod:DarkIcon] damage and applies [dragonmod:PoisonIcon] over #b3 turns."
+    ]
+  },
+  "${modID}:Light": {
+    "TEXT": [
+      "[dragonmod:LightIcon] Light Damage",
+      "[dragonmod:LightIcon] Damage is increased by the number of #yExhausted cards in addition to other effects."
+    ]
+  },
+  "${modID}:AmberBlossom": {
+    "TEXT": [
+      "[dragonmod:AmberBlossomIcon] Amber Blossom",
+      "[dragonmod:AmberBlossomIcon] Increases the Maximum damage of Dawn stance."
+    ]
+  },
+  "${modID}:AmethystBlossom": {
+    "TEXT": [
+      "[dragonmod:AmethystBlossomIcon] Amethyst Blossom",
+      "[dragonmod:AmethystBlossomIcon] Increase the cards drawn by Dusk stance."
+    ]
+  },
+  "${modID}:EmeraldBlossom": {
+    "TEXT": [
+      "[dragonmod:EmeraldBlossomIcon] Emerald Blossom",
+      "When you obtain #b3 [dragonmod:EmeraldBlossomIcon] gain [E] ."
+    ]
+  },
+  "${modID}:BanishFromExhaustAction": {
+    "TEXT": [
+      "Banish",
+      ""
     ]
   },
   "${modID}:SinnersMod": {

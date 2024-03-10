@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
-import dragonmod.util.CantripManager;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 
 public class BladedSleeves extends AbstractRimedancerCard {
@@ -16,7 +16,7 @@ public class BladedSleeves extends AbstractRimedancerCard {
             super(ID,0,CardType.ATTACK,CardRarity.SPECIAL,CardTarget.ENEMY,true);
             setMagic(1,1);
             setDamage(4,2);
-            tags.add(CantripManager.Cantrip);
+            tags.add(EnchantmentsManager.Cantrip);
         }
         @Override
         public void use(AbstractPlayer p, AbstractMonster m) {

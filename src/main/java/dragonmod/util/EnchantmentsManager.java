@@ -1,10 +1,10 @@
-package dragonmod.patches;
+package dragonmod.util;
 
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.UnlimboAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -15,26 +15,34 @@ import com.megacrit.cardcrawl.core.OverlayMenu;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.TipHelper;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.screens.ExhaustPileViewScreen;
 import com.megacrit.cardcrawl.ui.panels.ExhaustPanel;
 import com.megacrit.cardcrawl.vfx.BobEffect;
 import dragonmod.cards.AbstractDragonCard;
 import dragonmod.interfaces.TurnStartEnchantment;
 import dragonmod.interfaces.onAttackedEnchantment;
+import dragonmod.interfaces.onExhaustedEnchantment;
 import dragonmod.interfaces.onRemoveOrbEnchantment;
-import dragonmod.util.TypeEnergyHelper;
-import dragonmod.util.Wiz;
+import dragonmod.patches.CardCounterPatch;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
+import static dragonmod.DragonMod.makeID;
+
 public class EnchantmentsManager {
     public static final float Y_OFFSET = 140f * Settings.scale;
-    public static final float X_OFFSET = 100f * Settings.scale;
-    public static final CardGroup cards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+    public static final float X_OFFSET = 400f * Settings.scale;
     private static final BobEffect bob = new BobEffect(3.0f * Settings.scale, 3.0f);
+    public static CardGroup BanishedCards;
+    @SpireEnum
+    public static AbstractCard.CardTags Cantrip;
+    @SpireEnum
+    public static AbstractCard.CardTags Sleeved;
     public static AbstractCard hovered;
     public static void render(SpriteBatch sb) {
         if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null) {
@@ -134,6 +142,26 @@ public class EnchantmentsManager {
             }
         }
     }
+    public static boolean EmptyBagOfTricks() {
+        boolean empty = true;
+        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+            if (card.hasTag(Cantrip) || card.hasTag(Sleeved)){
+                empty = false;
+            }
+        }
+        return empty;
+    }
+    public static AbstractCard getSleevedCard() {
+        AbstractCard Sleeved;
+        CardGroup pool = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+            if (card.hasTag(Cantrip) || card.hasTag(EnchantmentsManager.Sleeved)){
+                pool.addToBottom(card);
+            }
+        }
+        Sleeved = pool.getRandomCard(true);
+        return Sleeved;
+    }
     public static void startOfTurnMonster(AbstractMonster m) {
             if (EnchantmentsField.Enchantments.get(m) != null && !m.isDeadOrEscaped()) {
                 for (AbstractCard card : EnchantmentsField.Enchantments.get(m)) {
@@ -216,6 +244,7 @@ public class EnchantmentsManager {
     public static void addCard(AbstractCard card, boolean playSFX, AbstractCreature target) {
         card.targetAngle = 0f;
         card.beginGlowing();
+        card.unfadeOut();
         card.initializeDescription();
         if (EnchantmentsField.Enchantments.get(target) == null){
             EnchantmentsField.Enchantments.set(target,new ArrayList<>());
@@ -227,29 +256,44 @@ public class EnchantmentsManager {
         if (playSFX) {
             CardCrawlGame.sound.play("ORB_SLOT_GAIN", 0.1F);
         }
+        EnchantmentsManager.update();
         CardCounterPatch.cardsProjectedThisTurn++;
         CardCounterPatch.cardsProjectedThisCombat++;
     }
-
-    @SpirePatch2(clz = AbstractCard.class, method = SpirePatch.CLASS)
-    public static class ProjectedCardField {
-        public static SpireField<Boolean> projectedField = new SpireField<>(() -> false);
-    }
-
-    @SpirePatch2(clz = UseCardAction.class, method = SpirePatch.CLASS)
-    public static class ProjectedActionField {
-        public static SpireField<Boolean> projectedField = new SpireField<>(() -> false);
-    }
-
-    @SpirePatch2(clz = UseCardAction.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class, AbstractCreature.class})
-    public static class InheritProjectedField {
-        @SpirePrefixPatch
-        public static void pushProjected(UseCardAction __instance, AbstractCard card) {
-            if (ProjectedCardField.projectedField.get(card)) {
-                ProjectedActionField.projectedField.set(__instance, true);
-                ProjectedCardField.projectedField.set(card, false);
+    public static void InitCantrips(){
+        ArrayList<AbstractCard> moveToDiscard = new ArrayList<>();
+        for (AbstractCard c : Wiz.Player().drawPile.group) {
+            if (c.hasTag(Cantrip)) {
+                moveToDiscard.add(c);
             }
         }
+        for (AbstractCard c : moveToDiscard) {
+            AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    isDone = true;
+                    if (AbstractDungeon.player.hoveredCard == c) {
+                        AbstractDungeon.player.releaseCard();
+                    }
+                    AbstractDungeon.actionManager.removeFromQueue(c);
+                    c.unhover();
+                    c.untip();
+                    c.stopGlowing();
+                    AbstractDungeon.player.drawPile.group.remove(c);
+                    c.shrink();
+                    AbstractDungeon.getCurrRoom().souls.empower(c);
+                    EnchantmentsManager.addCard(c,false,Wiz.Player());
+                }
+            });
+        }
+        Wiz.atb(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                System.out.println("Enchantment Field Render Count :" + (EnchantmentsField.Enchantments.get(Wiz.Player()).size()));
+                UpdatePile.update(Wiz.Player());
+            }
+        });
     }
     @SpirePatch2(clz = AbstractPlayer.class, method = "applyStartOfTurnCards")
     public static class PlayCards {
@@ -286,7 +330,7 @@ public class EnchantmentsManager {
     @SpirePatch2(clz = AbstractPlayer.class, method = "preBattlePrep")
     @SpirePatch2(clz = AbstractPlayer.class, method = "onVictory")
     public static class EmptyCards {
-        @SpirePostfixPatch
+        @SpirePrefixPatch
         public static void yeet() {
             if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null) {
                 EnchantmentsField.Enchantments.set(AbstractDungeon.player, new ArrayList<>());
@@ -326,6 +370,85 @@ public class EnchantmentsManager {
                             }});
                     }
                 }
+            }
+        }
+    }
+    @SpirePatch(
+            clz = CardGroup.class,
+            method = "moveToExhaustPile"
+    )
+    public static class OnExhaust {
+        public OnExhaust() {
+        }
+        @SpireInsertPatch(
+                locator = PowersLocator.class
+        )
+        public static void Insert(CardGroup __instance, AbstractCard c) {
+            for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+                if (enchantment instanceof onExhaustedEnchantment) {
+                    Wiz.Player().limbo.group.add(enchantment);
+                    Wiz.atb(new AbstractGameAction() {
+                        @Override
+                        public void update() {
+                            EnchantmentsField.Enchantments.get(Wiz.Player()).remove(enchantment);
+                            Wiz.atb(new UnlimboAction(enchantment));
+                            ((onExhaustedEnchantment) enchantment).EnchantedOnExhaust(c);
+                            addToBot(new AbstractGameAction() {
+                                @Override
+                                public void update() {
+                                    EnchantmentsManager.ActivateEnchantments(enchantment, Wiz.Player());
+                                    isDone = true;
+                                }
+                            });
+                            isDone = true;
+                        }});
+                }
+            }
+        }
+        private static class PowersLocator extends SpireInsertLocator {
+            private PowersLocator() {
+            }
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractPlayer.class, "powers");
+                return offset(LineFinder.findInOrder(ctMethodToPatch, finalMatcher), 0);
+            }
+            private static int[] offset(int[] originalArr, int offset) {
+                for(int i = 0; i < originalArr.length; ++i) {
+                    originalArr[i] += offset;
+                }
+                return originalArr;
+            }
+        }
+    }
+    public static class ExhaustPileViewScreenPatches {
+
+        public static boolean showCollection = false;
+        private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("CantripPile"));
+
+        @SpirePatch(
+                clz = ExhaustPileViewScreen.class,
+                method = "open"
+        )
+        public static class OpenExhaustPileViewScreenPatch {
+            @SpireInsertPatch(locator = ExhaustPileViewScreenPatches.OpenExhaustPileViewScreenPatchLocator.class)
+            public static void Insert(ExhaustPileViewScreen _instance) {
+                CardGroup group = ReflectionHacks.getPrivate(_instance, ExhaustPileViewScreen.class, "exhaustPileCopy");
+                group.group.addAll(BanishedCards.group);
+                for (AbstractCard c : group.group) {
+                    c.resetAttributes();
+                    c.unhover();
+                    c.stopGlowing();
+                    c.setAngle(0.0F, true);
+                    c.lighten(true);
+                }
+            }
+        }
+
+        private static class OpenExhaustPileViewScreenPatchLocator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher matcher = new Matcher.MethodCallMatcher(ExhaustPileViewScreen.class, "hideCards");
+                return LineFinder.findInOrder(ctBehavior, matcher);
             }
         }
     }

@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
-import dragonmod.patches.EnchantmentsManager;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 

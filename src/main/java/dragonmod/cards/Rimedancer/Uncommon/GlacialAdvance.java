@@ -24,7 +24,7 @@ import dragonmod.actions.IcicleFanAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.interfaces.onRemoveOrbEnchantment;
 import dragonmod.orbs.Icicle;
-import dragonmod.patches.EnchantmentsManager;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.ui.TextureLoader;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;

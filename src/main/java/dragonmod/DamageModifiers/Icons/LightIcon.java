@@ -13,9 +13,9 @@ import java.util.List;
 public class LightIcon extends AbstractCustomIcon {
     public static final String ID = DragonMod.makeID("Light");
     private static LightIcon singleton;
-    private static final UIStrings DivineBlockTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:DivineBlock");
+    private static final UIStrings DivineBlockTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Light");
     public LightIcon() {
-        super(ID,TextureLoader.getTexture(DragonMod.uiPath("DivineArmor.png")));
+        super(ID,TextureLoader.getTexture(DragonMod.uiPath("Light.png")));
     }
 
     public static LightIcon get()

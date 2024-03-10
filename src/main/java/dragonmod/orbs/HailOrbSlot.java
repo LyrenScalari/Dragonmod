@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
+import dragonmod.patches.CustomOrbSlotManager;
 import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
@@ -46,6 +47,7 @@ public class HailOrbSlot extends SpecialOrbSlot {
         this.cX = AbstractDungeon.player.drawX + AbstractDungeon.player.hb_x;
         this.cY = AbstractDungeon.player.drawY + AbstractDungeon.player.hb_y + AbstractDungeon.player.hb_h / 2.0F;
         this.updateDescription();
+        CustomOrbSlotManager.SlotFields.SlotType.set(this, CustomOrbSlotManager.SlotFields.SlotTypes.Hail);
     }
     public SpireReturn<Void> ContainedOrbRemoved(AbstractOrb Source, boolean removal){
         if (!removal){
@@ -80,7 +82,8 @@ public class HailOrbSlot extends SpecialOrbSlot {
         }
     }
     public void SlotTip(AbstractOrb Source){
-        TipHelper.renderGenericTip(this.tX + 96.0F * Settings.scale, this.tY + 128.0F * Settings.scale,orbString.NAME, orbString.DESCRIPTION[1]+Source.passiveAmount+DESCRIPTIONS[2]);
+
+        TipHelper.renderGenericTip(Source.tX + 48.0F * Settings.scale, Source.tY + 64.0F * Settings.scale,orbString.NAME, orbString.DESCRIPTION[1]+Source.passiveAmount+DESCRIPTIONS[2]);
     }
     public void updateDescription() {
         this.description = orbString.DESCRIPTION[0];

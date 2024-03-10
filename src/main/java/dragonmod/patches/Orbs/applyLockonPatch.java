@@ -11,7 +11,7 @@ import javassist.CtBehavior;
 @SpirePatch2(clz = AbstractOrb.class, method = "applyLockOn")
 public class applyLockonPatch {
     @SpireInsertPatch(locator= EvokeLocator.class,localvars = {"retVal"})
-    public static SpireReturn ApplyLockOnPatch(int __result, AbstractCreature target, int dmg,int retVal) {
+    public static SpireReturn ApplyLockOnPatch(AbstractCreature target, int dmg,int retVal) {
         for (AbstractPower p : target.powers){
             if (p instanceof atLockonReceive){
                 retVal = (int) ((atLockonReceive) p).applyLockOn(target,retVal);

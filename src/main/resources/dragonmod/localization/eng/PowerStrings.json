@@ -201,9 +201,32 @@
       "% additional damage)."
     ]
   },
-  "${modID}:Blossom": {
-    "NAME": "Blossom",
-    "DESCRIPTIONS": ["Gain [E] the next time you play a skill this turn."
+
+  "${modID}:Hex": {
+    "NAME": "Hex",
+    "DESCRIPTIONS": ["Takes #b",
+      " [${modID}:DarkIcon] damage and gains #b"," [${modID}:PoisonIcon] at the start of their turn. NL Lasts #b"," turns"
+    ]
+  },
+  "${modID}:Banish": {
+    "NAME": "Banish",
+    "DESCRIPTIONS": ["When this obtains at least #b",
+      " [${modID}:BanishIcon] it takes [${modID}:LightIcon] damage equal to its [${modID}:BanishIcon] ."
+    ]
+  },
+  "${modID}:EmeraldBlossom": {
+    "NAME": "Emerald Blossom",
+    "DESCRIPTIONS": ["When you obtain #b3 [dragonmod:EmeraldBlossomIcon] gain [E] ."
+    ]
+  },
+  "${modID}:AmethystBlossom": {
+    "NAME": "Amethyst Blossom",
+    "DESCRIPTIONS": ["[dragonmod:AmethystBlossomIcon] increases the number of cards drawn by #yDusk stance by #b"," ."
+    ]
+  },
+  "${modID}:AmberBlossom": {
+    "NAME": "Amber Blossom",
+    "DESCRIPTIONS": ["[dragonmod:AmberBlossomIcon] increases the maximum damage of #yDawn stance by #b"," ."
     ]
   }
 }

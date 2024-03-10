@@ -1,4 +1,4 @@
-package dragonmod.patches;
+package dragonmod.util;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;

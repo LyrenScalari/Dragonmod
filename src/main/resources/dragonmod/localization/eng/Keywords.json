@@ -119,7 +119,7 @@
       "Cantrip",
       "cantrip"
     ],
-    "DESCRIPTION": "This card starts combat in your #yBag #yof #yTricks."
+    "DESCRIPTION": "This card starts combat set aside."
   },
   {
     "PROPER_NAME": "Flourish",
@@ -127,7 +127,7 @@
       "Flourish",
       "flourish"
     ],
-    "DESCRIPTION": "Add a random Card from your #yBag #yof #yTricks to your hand."
+    "DESCRIPTION": "Retrieve a random set aside #yCantrip or #ySheathed card."
   },
   {
     "PROPER_NAME": "Sheathe",
@@ -135,7 +135,7 @@
       "Sheathe",
       "sheathe"
     ],
-    "DESCRIPTION": "Shuffle a card into your #yBag #yof #yTricks."
+    "DESCRIPTION": "Set a card aside, retrieve it later when you #yFlourish."
   },
   {
     "PROPER_NAME": "Glimpse",
@@ -243,7 +243,7 @@
       "Dawn",
       "dawn"
     ],
-    "DESCRIPTION": "#yStance. After you play a Skill, if the last card played wasn't, gain #b4 [${modID}:BlockIcon] ."
+    "DESCRIPTION": "#yStance. Whenever you play an attack, deal damage equal to the number of cards in your hand to a random enemy, up to 4, then reduce the maximum damage by 1. On Exit: gain 1 [dragonmod:AmethystBlossomIcon] ."
   },
   {
     "PROPER_NAME": "Dusk",
@@ -251,7 +251,7 @@
       "Dusk",
       "dusk"
     ],
-    "DESCRIPTION": "#yStance. After you draw a card during your turn, deal #b2 damage to a random enemy."
+    "DESCRIPTION": "#yStance. At the start of your turn, draw 2 extra cards, then reduce this amount by 1.  On Exit: gain 1 [dragonmod:AmberBlossomIcon] ."
   },
   {
     "PROPER_NAME": "Reflexive",
@@ -262,6 +262,30 @@
     "DESCRIPTION": "Transforms when you change stances, Amber if Dawn, Amethyst if Dusk."
   },
   {
+    "PROPER_NAME": "[dragonmod:AmberBlossomIcon] Amber Blossom",
+    "NAMES": [
+      "Amber_Blossom",
+      "amber_blossom"
+    ],
+    "DESCRIPTION": "[dragonmod:AmberBlossomIcon] Increases the Maximum damage of Dawn stance."
+  },
+  {
+    "PROPER_NAME": "[dragonmod:AmethystBlossomIcon] Amethyst Blossom",
+    "NAMES": [
+      "Amethyst_Blossom",
+      "amethyst_blossom"
+    ],
+    "DESCRIPTION": "[dragonmod:AmethystBlossomIcon] Increase the cards drawn by Dusk stance."
+  },
+  {
+    "PROPER_NAME": "[dragonmod:EmeraldBlossomIcon] Emerald Blossom",
+    "NAMES": [
+      "Emerald_Blossom",
+      "emerald_blossom"
+    ],
+    "DESCRIPTION": "When you obtain #b3 [dragonmod:EmeraldBlossomIcon] gain [E] ."
+  },
+  {
     "PROPER_NAME": "Flash",
     "NAMES": [
       "Flash",
@@ -270,11 +294,45 @@
     "DESCRIPTION": "If the last card played this turn was not an Attack gain the following ability."
   },
   {
-    "PROPER_NAME": "Bloom",
+    "PROPER_NAME": "Illude",
     "NAMES": [
-      "Bloom",
-      "bloom"
+      "Illude",
+      "illude"
     ],
-    "DESCRIPTION": "#yBloom on enemies increases damage taken from cards, and increases the potency of your stance effects."
+    "DESCRIPTION": "Create and Exhaust a copy of a card."
+  },
+  {
+    "PROPER_NAME": "Banish",
+    "NAMES": [
+      "Banish",
+      "banish"
+    ],
+    "DESCRIPTION": "Removed until the end of combat. Does #rNot go to the exhaust pile but can be viewed there."
+  },
+  {
+    "PROPER_NAME": "Conjure",
+    "NAMES": [
+      "Conjure",
+      "conjure"
+    ],
+    "DESCRIPTION": "#yConjuring a card shuffles it from the #yExhaust pile into your draw pile it gains #yExhaust and #yBanishes when it enters the #yExhaust pile."
+  },
+  {
+    "PROPER_NAME": "Vanish",
+    "NAMES": [
+      "Vanish",
+      "vanish",
+      "Vanishes",
+      "vanishes"
+    ],
+    "DESCRIPTION": "#yVanish effects occur when a card is removed from play."
+  },
+  {
+    "PROPER_NAME": "Recenter",
+    "NAMES": [
+      "Recenter",
+      "recenter"
+    ],
+    "DESCRIPTION": "If you are in a Stance, exit it and draw a card."
   }
 ]

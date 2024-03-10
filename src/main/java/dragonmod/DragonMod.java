@@ -50,8 +50,10 @@ import dragonmod.cards.Warden.AbstractWardenCard;
 import dragonmod.characters.TheJusticar;
 import dragonmod.characters.TheRimedancer;
 import dragonmod.characters.TheWarden;
+import dragonmod.orbs.CrystalOrbSlot;
+import dragonmod.orbs.HailOrbSlot;
 import dragonmod.orbs.Icicle;
-import dragonmod.patches.EnchantmentsManager;
+import dragonmod.patches.CustomOrbSlotManager;
 import dragonmod.potions.Dragonkin.DraughtofFervor;
 import dragonmod.potions.Dragonkin.GatlokBrew;
 import dragonmod.potions.Dragonkin.NaruuinsGlow;
@@ -86,6 +88,9 @@ import static dragonmod.characters.TheRimedancer.Enums.Rimedancer_Cyan_COLOR;
 import static dragonmod.characters.TheRimedancer.Enums.THE_RIMEDANCER;
 import static dragonmod.characters.TheWarden.Enums.THE_WARDEN;
 import static dragonmod.characters.TheWarden.Enums.Warden_Emerald_COLOR;
+import static dragonmod.patches.CustomOrbSlotManager.SlotFields.SpecialSlots;
+import static dragonmod.util.EnchantmentsManager.BanishedCards;
+
 @SpireInitializer
 public class DragonMod implements
         EditCardsSubscriber,
@@ -213,7 +218,7 @@ public class DragonMod implements
     @SpireEnum
     public static AbstractCard.CardTags Enchantment;
     @SpireEnum
-    public static AbstractCard.CardTags Reflexive;
+    public static AbstractCard.CardTags Banish;
     @SpireEnum
     public static AbstractMonster.Intent BLEEDING_OUT;
     @SpireEnum(name = "Draconic")
@@ -331,7 +336,7 @@ public class DragonMod implements
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, settingsPanel);
         CustomIntent.add(new BleedingOutIntent());
         HymnManager.VersePile = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        CantripManager.CantripPile = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        BanishedCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     }
     private static BitmapFont prepFont(FreeTypeFontGenerator g, float size, boolean isLinearFiltering) {
         FreeTypeFontGenerator.FreeTypeFontParameter p = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -509,6 +514,16 @@ public class DragonMod implements
         CustomIconHelper.addCustomIcon(BleedIcon.get());
         CustomIconHelper.addCustomIcon(SubzeroIcon.get());
 
+        //Warden Icons
+        CustomIconHelper.addCustomIcon(LightIcon.get());
+        CustomIconHelper.addCustomIcon(BanishIcon.get());
+        CustomIconHelper.addCustomIcon(BanishIcon2.get());
+        CustomIconHelper.addCustomIcon(DarkIcon.get());
+        CustomIconHelper.addCustomIcon(HexIcon.get());
+        CustomIconHelper.addCustomIcon(AmberBlossomIcon.get());
+        CustomIconHelper.addCustomIcon(AmethystBlossomIcon.get());
+        CustomIconHelper.addCustomIcon(EmeraldBlossomIcon.get());
+
         logger.info("Add variables");
         BaseMod.addDynamicVariable(new DefaultSecondMagicNumber());
         BaseMod.addDynamicVariable(new SecondDamage());
@@ -585,13 +600,16 @@ public class DragonMod implements
 
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+        SpecialSlots.put(CustomOrbSlotManager.SlotFields.SlotTypes.Crystal,new CrystalOrbSlot());
+        SpecialSlots.put(CustomOrbSlotManager.SlotFields.SlotTypes.Hail,new HailOrbSlot());
         StatusesCycledThisCombat = 0;
         CardsCycledThisCombat = 0;
         BurnsCycledThisCombat = 0;
         HymnManager.onBattleStart();
         StigmataManager.onBattleStart();
-        CantripManager.onBattleStart();
+        BanishedCards.clear();
         Icicle.target = null;
+        EnchantmentsManager.InitCantrips();
     }
 
     @Override
@@ -623,7 +641,6 @@ public class DragonMod implements
     }
     @Override
     public void receiveStartGame() {
-        CantripManager.cantripPileButton = new CantripManager.CantripPileButton();
         HymnManager.versePileButton = new HymnManager.VersePileButton();
     }
 
@@ -631,9 +648,6 @@ public class DragonMod implements
     public void receivePostDungeonUpdate() {
         if (HymnManager.versePileButton != null){
             HymnManager.versePileButton.update();
-        }
-        if (CantripManager.cantripPileButton != null){
-            CantripManager.cantripPileButton.update();
         }
     }
 
@@ -654,17 +668,36 @@ public class DragonMod implements
         }
         return AbstractGameAction.AttackEffect.SLASH_HORIZONTAL;
     }
-    public static boolean Flash(){
-        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() <= 2){
-            return true;
+    public static ArrayList<AbstractCard> getNeighbors(AbstractCard c) {
+        ArrayList<AbstractCard> neighbors = new ArrayList<>();
+        if (Wiz.hand().contains(c)) {
+            int index = Wiz.hand().group.indexOf(c);
+            if (index > 0) {
+                neighbors.add(Wiz.hand().group.get(index -1));
+            }
+            if (index < Wiz.hand().size() - 1) {
+                neighbors.add(Wiz.hand().group.get(index + 1));
+            }
         }
-        return ((AbstractCard) AbstractDungeon.actionManager.cardsPlayedThisTurn.get(AbstractDungeon.actionManager.cardsPlayedThisTurn.size() - 2)).type != AbstractCard.CardType.ATTACK;
+        return neighbors;
     }
-    public static boolean CheckLastType(AbstractCard.CardType type){
-        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() <= 2){
-            return false;
+    public static AbstractCard getLeftCard(AbstractCard c) {
+        if (Wiz.hand().contains(c)) {
+            int index = Wiz.hand().group.indexOf(c);
+            if (index > 0) {
+                return Wiz.hand().group.get(index -1);
+            }
         }
-        return ((AbstractCard) AbstractDungeon.actionManager.cardsPlayedThisTurn.get(AbstractDungeon.actionManager.cardsPlayedThisTurn.size() - 2)).type != type;
+        return null;
+    }
+    public static AbstractCard getRightCard(AbstractCard c) {
+        if (Wiz.hand().contains(c)) {
+            int index = Wiz.hand().group.indexOf(c);
+            if (index < Wiz.hand().size() - 1) {
+                return Wiz.hand().group.get(index + 1);
+            }
+        }
+        return null;
     }
     @Override
     public void receiveOnPlayerTurnStartPostDraw() {

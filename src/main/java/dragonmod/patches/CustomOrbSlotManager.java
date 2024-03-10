@@ -8,7 +8,6 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
@@ -16,11 +15,10 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.BobEffect;
 import dragonmod.DragonMod;
-import dragonmod.orbs.CrystalOrbSlot;
-import dragonmod.orbs.HailOrbSlot;
 import dragonmod.orbs.SpecialOrbSlot;
 import dragonmod.powers.Rimedancer.onRemoveOrbPower;
 import dragonmod.ui.TextureLoader;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 import javassist.CtBehavior;
 
@@ -42,8 +40,6 @@ public class CustomOrbSlotManager {
             Hail
         }
         public SlotFields(){
-            SpecialSlots.put(SlotTypes.Crystal,new CrystalOrbSlot());
-            SpecialSlots.put(SlotTypes.Hail,new HailOrbSlot());
         }
     }
 
@@ -160,20 +156,12 @@ public class CustomOrbSlotManager {
     }
     @SpirePatch2(clz = AbstractOrb.class, method = "update")
     public static class SlotTipPatch {
-        @SpireInsertPatch(locator= EvokeLocator.class)
-        public static void ApplyLockOnPatch(AbstractOrb __instance) {
+        @SpirePostfixPatch
+        public static void renderSlotTipPatch(AbstractOrb __instance) {
             if ((SlotType.get(__instance) != null) && !(__instance instanceof EmptyOrbSlot)) {
-                SpecialSlots.get(SlotType.get(__instance)).SlotTip(__instance);
-            }
-        }
-        private static class EvokeLocator extends SpireInsertLocator {
-            private EvokeLocator() {
-            }
-
-            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(TipHelper.class, "renderGenericTip");
-                int[] tmp = LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher);
-                return new int[]{tmp[0]};
+                if (__instance.hb.hovered){
+                    SpecialSlots.get(SlotType.get(__instance)).SlotTip(__instance);
+                }
             }
         }
     }

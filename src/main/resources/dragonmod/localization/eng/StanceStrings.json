@@ -2,13 +2,13 @@
   "dragonmod:Dawn": {
     "NAME": "Dawn",
     "DESCRIPTION": [
-      "When you play a skill, if the last card played wasn't gain #b4 [${modID}:BlockIcon] ."
+      "Whenever you play an Attack deal #b"," damage and reduce the maximum damage by #b1. NL (damage is equal to the number of cards in your hand to a maximum of #b"," .) When Exited Gain #b1 [dragonmod:AmethystBlossomIcon]"
     ]
   },
   "dragonmod:Dusk": {
     "NAME": "Dusk",
     "DESCRIPTION": [
-      "When you draw a card during your turn, deal #b2 damage to a random enemy."
+      "At the start of your turn draw #b"," cards, and reduce this by #b1. NL When Exited gain #b1 [dragonmod:AmberBlossomIcon]"
     ]
   }
 }

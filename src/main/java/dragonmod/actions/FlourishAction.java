@@ -2,10 +2,12 @@ package dragonmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import dragonmod.util.EnchantmentsField;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 
-import static dragonmod.util.CantripManager.Cantrip;
-import static dragonmod.util.CantripManager.CantripPile;
+import static dragonmod.util.EnchantmentsManager.Cantrip;
+import static dragonmod.util.EnchantmentsManager.EmptyBagOfTricks;
 
 public class FlourishAction extends AbstractGameAction {
     public FlourishAction() {
@@ -15,9 +17,9 @@ public class FlourishAction extends AbstractGameAction {
     @Override
     public void update() {
         isDone = true;
-        if (!CantripPile.isEmpty()){
-            AbstractCard target = CantripPile.getRandomCard(true);
-            CantripPile.removeCard(target);
+        if (!EmptyBagOfTricks()){
+            AbstractCard target = EnchantmentsManager.getSleevedCard();
+            EnchantmentsField.Enchantments.get(Wiz.Player()).remove(target);
             target.unfadeOut();
             target.lighten(true);
             target.resetAttributes();
@@ -30,7 +32,7 @@ public class FlourishAction extends AbstractGameAction {
                         public void update() {
                             isDone = true;
                             Wiz.Player().drawPile.removeCard(c);
-                            CantripPile.addToTop(c);
+                            EnchantmentsManager.addCard(c,true,Wiz.Player());
                         }
                     });
                 }
@@ -42,7 +44,7 @@ public class FlourishAction extends AbstractGameAction {
                         public void update() {
                             isDone = true;
                             Wiz.Player().discardPile.removeCard(c);
-                            CantripPile.addToTop(c);
+                            EnchantmentsManager.addCard(c,true,Wiz.Player());
                         }
                     });
                 }
@@ -52,8 +54,8 @@ public class FlourishAction extends AbstractGameAction {
                     Wiz.att(new AbstractGameAction() {
                         @Override
                         public void update() {
-                            Wiz.Player().discardPile.removeCard(c);
-                            CantripPile.addToTop(c);
+                            Wiz.Player().exhaustPile.removeCard(c);
+                            EnchantmentsManager.addCard(c,true,Wiz.Player());
                         }
                     });
                 }
@@ -65,12 +67,13 @@ public class FlourishAction extends AbstractGameAction {
                         public void update() {
                             isDone = true;
                             Wiz.Player().hand.removeCard(c);
-                            CantripPile.addToTop(c);
+                            EnchantmentsManager.addCard(c,true,Wiz.Player());
                         }
                     });
                 }
             }
             Wiz.atb(new FlourishAction());
+            EnchantmentsManager.update();
         }
     }
 }

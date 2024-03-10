@@ -27,7 +27,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import dragonmod.interfaces.*;
-import dragonmod.patches.EnchantmentsField;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
