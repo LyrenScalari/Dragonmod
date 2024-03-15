@@ -35,8 +35,8 @@ import java.util.ArrayList;
 import static dragonmod.DragonMod.makeID;
 
 public class EnchantmentsManager {
-    public static final float Y_OFFSET = 400f * Settings.scale;
-    public static final float X_OFFSET = 70f * Settings.scale;
+    public static final float Y_OFFSET = 1000f * Settings.scale;
+    public static final float X_OFFSET = 100f * Settings.scale;
     private static final BobEffect bob = new BobEffect(3.0f * Settings.scale, 3.0f);
     public static CardGroup BanishedCards;
     @SpireEnum
@@ -74,22 +74,25 @@ public class EnchantmentsManager {
     public static void update() {
         bob.update();
         int i = 0;
+        int j = 0;
         hovered = null;
-        if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null){
-            for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
-                card.target_y = Wiz.Player().hb.cY + Wiz.Player().hb.height / 2f + Y_OFFSET + bob.y;
-                card.target_x = Wiz.Player().hb.cX + X_OFFSET * (EnchantmentsField.Enchantments.get(Wiz.Player()).size() - 1) / 2f - X_OFFSET * i;
-                card.targetAngle = 0f;
-                card.update();
-                card.hb.update();
-                if (card.hb.hovered && hovered == null) {
-                    card.targetDrawScale = 0.75f;
-                    hovered = card;
-                } else {
-                    card.targetDrawScale = 0.2f;
-                }
-                card.applyPowers();
-                i++;
+        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
+            card.target_y = Wiz.Player().hb.cY + Wiz.Player().hb.height/2f + Y_OFFSET*(j+1) + bob.y;
+            card.target_x = Wiz.Player().hb.cX + X_OFFSET * Math.min(9, (EnchantmentsField.Enchantments.get(Wiz.Player())).size()-1-10*j) / 2f - X_OFFSET * i;
+            card.targetAngle = 0f;
+            card.update();
+            card.hb.update();
+            if (card.hb.hovered && hovered == null) {
+                card.targetDrawScale = 0.75f;
+                hovered = card;
+            } else {
+                card.targetDrawScale = 0.2f;
+            }
+            card.applyPowers();
+            i++;
+            if (i == 10) {
+                i = 0;
+                j++;
             }
         }
 
@@ -244,19 +247,16 @@ public class EnchantmentsManager {
     public static void addCard(AbstractCard card, boolean playSFX, AbstractCreature target) {
         card.targetAngle = 0f;
         card.beginGlowing();
-        card.unfadeOut();
-        card.initializeDescription();
         if (EnchantmentsField.Enchantments.get(target) == null){
             EnchantmentsField.Enchantments.set(target,new CardGroup(CardGroup.CardGroupType.UNSPECIFIED));
-            EnchantmentsField.Enchantments.get(target).group.add(card);
+            EnchantmentsField.Enchantments.get(target).addToTop(card);
         } else {
-            EnchantmentsField.Enchantments.get(target).group.add(card);
+            EnchantmentsField.Enchantments.get(target).addToTop(card);
         }
 
         if (playSFX) {
             CardCrawlGame.sound.play("ORB_SLOT_GAIN", 0.1F);
         }
-        EnchantmentsManager.update();
         CardCounterPatch.cardsProjectedThisTurn++;
         CardCounterPatch.cardsProjectedThisCombat++;
     }
