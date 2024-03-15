@@ -327,7 +327,7 @@
   },
   "${modID}:SilverShadow": {
     "NAME": "Silver Shadow",
-    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Tilt 3: Whenever you are attacked this turn, apply !M! [${modID}:LockonIcon]  back.",
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Tilt 3: Whenever you are attacked this turn, apply !M! [${modID}:LockonIcon] back.",
     "EXTENDED_DESCRIPTION": ["Dodgy Fog"]
   },
   "${modID}:SparklingShiv": {

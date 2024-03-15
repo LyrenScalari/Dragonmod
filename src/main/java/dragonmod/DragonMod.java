@@ -607,7 +607,6 @@ public class DragonMod implements
         BurnsCycledThisCombat = 0;
         HymnManager.onBattleStart();
         StigmataManager.onBattleStart();
-        BanishedCards.clear();
         Icicle.target = null;
         EnchantmentsManager.InitCantrips();
     }

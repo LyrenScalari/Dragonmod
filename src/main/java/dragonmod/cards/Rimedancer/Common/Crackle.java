@@ -1,6 +1,6 @@
 package dragonmod.cards.Rimedancer.Common;
 
-import basemod.helpers.CardModifierManager;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -19,19 +19,30 @@ public class Crackle extends AbstractRimedancerCard {
         setBlock(8,4);
     }
 
-
+    public void triggerOnGlowCheck() {
+        this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        int tilt = 0;
+        for (AbstractCard c : Wiz.Player().hand.group){
+            if (Wiz.Player().hand.group.indexOf(c) > Wiz.Player().hand.group.indexOf(this)){
+                tilt += 1;
+            }
+        }
+        if (tilt >= 2){
+            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        }
+    }
     // Actions the card should do.
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.atb(new FireAction(Icicle.class));
-        boolean frozen = false;
-        for (AbstractCard c : p.hand.group){
-            if (CardModifierManager.hasModifier(c,"FrozenMod")){
-                frozen = true;
+        int tilt = 0;
+        for (AbstractCard c : Wiz.Player().hand.group){
+            if (Wiz.Player().hand.group.indexOf(c) > Wiz.Player().hand.group.indexOf(Crackle.this)){
+                tilt += 1;
             }
         }
-        if (frozen){
-            Wiz.block(p,block);
+        if (tilt >= 3){
+            Wiz.atb(new GainBlockAction(p,block));
         }
     }
 }
