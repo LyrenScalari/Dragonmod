@@ -35,8 +35,8 @@ import java.util.ArrayList;
 import static dragonmod.DragonMod.makeID;
 
 public class EnchantmentsManager {
-    public static final float Y_OFFSET = 140f * Settings.scale;
-    public static final float X_OFFSET = 400f * Settings.scale;
+    public static final float Y_OFFSET = 400f * Settings.scale;
+    public static final float X_OFFSET = 70f * Settings.scale;
     private static final BobEffect bob = new BobEffect(3.0f * Settings.scale, 3.0f);
     public static CardGroup BanishedCards;
     @SpireEnum
@@ -261,6 +261,7 @@ public class EnchantmentsManager {
         CardCounterPatch.cardsProjectedThisCombat++;
     }
     public static void InitCantrips(){
+        BanishedCards.clear();
         ArrayList<AbstractCard> moveToDiscard = new ArrayList<>();
         for (AbstractCard c : Wiz.Player().drawPile.group) {
             if (c.hasTag(Cantrip)) {
