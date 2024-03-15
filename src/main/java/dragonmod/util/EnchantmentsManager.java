@@ -46,18 +46,18 @@ public class EnchantmentsManager {
     public static AbstractCard hovered;
     public static void render(SpriteBatch sb) {
         if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null) {
-            for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+            for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
                 if (card != hovered) {
                     card.render(sb);
                 }
             }
         } else {
-            EnchantmentsField.Enchantments.set(Wiz.Player(),new ArrayList<>());
+            EnchantmentsField.Enchantments.set(Wiz.Player(),new CardGroup(CardGroup.CardGroupType.UNSPECIFIED));
         }
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
             for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (EnchantmentsField.Enchantments.get(m) != null && !m.isDeadOrEscaped()) {
-                    for (AbstractCard card : EnchantmentsField.Enchantments.get(m)) {
+                    for (AbstractCard card : EnchantmentsField.Enchantments.get(m).group) {
                         if (card != hovered) {
                             card.render(sb);
                         }
@@ -76,7 +76,7 @@ public class EnchantmentsManager {
         int i = 0;
         hovered = null;
         if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null){
-            for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+            for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
                 card.target_y = Wiz.Player().hb.cY + Wiz.Player().hb.height / 2f + Y_OFFSET + bob.y;
                 card.target_x = Wiz.Player().hb.cX + X_OFFSET * (EnchantmentsField.Enchantments.get(Wiz.Player()).size() - 1) / 2f - X_OFFSET * i;
                 card.targetAngle = 0f;
@@ -96,7 +96,7 @@ public class EnchantmentsManager {
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
             for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (EnchantmentsField.Enchantments.get(m) != null) {
-                    for (AbstractCard card : EnchantmentsField.Enchantments.get(m)) {
+                    for (AbstractCard card : EnchantmentsField.Enchantments.get(m).group) {
                         card.target_y = m.hb.cY + m.hb.height / 2f + Y_OFFSET + bob.y;
                         card.target_x = m.hb.cX + X_OFFSET * (EnchantmentsField.Enchantments.get(m).size() - 1) / 2f - X_OFFSET * i;
                         card.targetAngle = 0f;
@@ -120,13 +120,13 @@ public class EnchantmentsManager {
     }
 
     public static void startOfTurnPlayer() {
-        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
             if (card instanceof TurnStartEnchantment) {
                 Wiz.Player().limbo.group.add(card);
                 Wiz.atb(new AbstractGameAction() {
                     @Override
                     public void update() {
-                        EnchantmentsField.Enchantments.get(Wiz.Player()).remove(card);
+                        EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(card);
                         Wiz.atb(new UnlimboAction(card));
                          ((TurnStartEnchantment) card).EnchantedTurnStart(Wiz.Player());
                         addToBot(new AbstractGameAction() {
@@ -144,7 +144,7 @@ public class EnchantmentsManager {
     }
     public static boolean EmptyBagOfTricks() {
         boolean empty = true;
-        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
             if (card.hasTag(Cantrip) || card.hasTag(Sleeved)){
                 empty = false;
             }
@@ -154,7 +154,7 @@ public class EnchantmentsManager {
     public static AbstractCard getSleevedCard() {
         AbstractCard Sleeved;
         CardGroup pool = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
             if (card.hasTag(Cantrip) || card.hasTag(EnchantmentsManager.Sleeved)){
                 pool.addToBottom(card);
             }
@@ -164,13 +164,13 @@ public class EnchantmentsManager {
     }
     public static void startOfTurnMonster(AbstractMonster m) {
             if (EnchantmentsField.Enchantments.get(m) != null && !m.isDeadOrEscaped()) {
-                for (AbstractCard card : EnchantmentsField.Enchantments.get(m)) {
+                for (AbstractCard card : EnchantmentsField.Enchantments.get(m).group) {
                     if (card instanceof TurnStartEnchantment) {
                         Wiz.Player().limbo.group.add(card);
                         Wiz.atb(new AbstractGameAction() {
                             @Override
                             public void update() {
-                                EnchantmentsField.Enchantments.get(m).remove(card);
+                                EnchantmentsField.Enchantments.get(m).group.remove(card);
                                 Wiz.atb(new UnlimboAction(card));
                                 ((TurnStartEnchantment) card).EnchantedTurnStart(m);
                                 addToBot(new AbstractGameAction() {
@@ -189,13 +189,13 @@ public class EnchantmentsManager {
     }
     public static void RemoveOrbPlayer(AbstractOrb orb) {
         if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null && !Wiz.Player().isDeadOrEscaped()) {
-            for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+            for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
                 if (card instanceof onRemoveOrbEnchantment) {
                     Wiz.Player().limbo.group.add(card);
                     Wiz.atb(new AbstractGameAction() {
                         @Override
                         public void update() {
-                            EnchantmentsField.Enchantments.get(Wiz.Player()).remove(card);
+                            EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(card);
                             Wiz.atb(new UnlimboAction(card));
                             boolean triggered = ((onRemoveOrbEnchantment) card).EnchantedOnRemoveOrb(Wiz.Player(),orb);
                             if (triggered){
@@ -216,13 +216,13 @@ public class EnchantmentsManager {
     }
     public static void RemoveOrbMonster(AbstractOrb orb, AbstractMonster m) {
         if (EnchantmentsField.Enchantments.get(m) != null && !m.isDeadOrEscaped()) {
-            for (AbstractCard card : EnchantmentsField.Enchantments.get(m)) {
+            for (AbstractCard card : EnchantmentsField.Enchantments.get(m).group) {
                 if (card instanceof onRemoveOrbEnchantment) {
                     Wiz.Player().limbo.group.add(card);
                     Wiz.atb(new AbstractGameAction() {
                         @Override
                         public void update() {
-                            EnchantmentsField.Enchantments.get(m).remove(card);
+                            EnchantmentsField.Enchantments.get(m).group.remove(card);
                             Wiz.atb(new UnlimboAction(card));
                             boolean triggered = ((onRemoveOrbEnchantment) card).EnchantedOnRemoveOrb(m,orb);
                             if (triggered){
@@ -247,10 +247,10 @@ public class EnchantmentsManager {
         card.unfadeOut();
         card.initializeDescription();
         if (EnchantmentsField.Enchantments.get(target) == null){
-            EnchantmentsField.Enchantments.set(target,new ArrayList<>());
-            EnchantmentsField.Enchantments.get(target).add(card);
+            EnchantmentsField.Enchantments.set(target,new CardGroup(CardGroup.CardGroupType.UNSPECIFIED));
+            EnchantmentsField.Enchantments.get(target).group.add(card);
         } else {
-            EnchantmentsField.Enchantments.get(target).add(card);
+            EnchantmentsField.Enchantments.get(target).group.add(card);
         }
 
         if (playSFX) {
@@ -334,7 +334,7 @@ public class EnchantmentsManager {
         @SpirePrefixPatch
         public static void yeet() {
             if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null) {
-                EnchantmentsField.Enchantments.set(AbstractDungeon.player, new ArrayList<>());
+                EnchantmentsField.Enchantments.set(AbstractDungeon.player, new CardGroup(CardGroup.CardGroupType.UNSPECIFIED));
             }
         }
     }
@@ -351,13 +351,13 @@ public class EnchantmentsManager {
         )
         public static void Insert(AbstractCreature __instance, DamageInfo info, int damageAmount, @ByRef boolean[] hadBlock) {
             if (!AbstractDungeon.getCurrRoom().isBattleOver && info.type == DamageInfo.DamageType.NORMAL) {
-                for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(__instance)) {
+                for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(__instance).group) {
                     if (enchantment instanceof onAttackedEnchantment) {
                         Wiz.Player().limbo.group.add(enchantment);
                         Wiz.atb(new AbstractGameAction() {
                             @Override
                             public void update() {
-                                EnchantmentsField.Enchantments.get(__instance).remove(enchantment);
+                                EnchantmentsField.Enchantments.get(__instance).group.remove(enchantment);
                                 Wiz.atb(new UnlimboAction(enchantment));
                                 ((onAttackedEnchantment) enchantment).EnchantedOnAttacked(__instance, damageAmount, info);
                                 addToBot(new AbstractGameAction() {
@@ -385,13 +385,13 @@ public class EnchantmentsManager {
                 locator = PowersLocator.class
         )
         public static void Insert(CardGroup __instance, AbstractCard c) {
-            for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+            for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
                 if (enchantment instanceof onExhaustedEnchantment) {
                     Wiz.Player().limbo.group.add(enchantment);
                     Wiz.atb(new AbstractGameAction() {
                         @Override
                         public void update() {
-                            EnchantmentsField.Enchantments.get(Wiz.Player()).remove(enchantment);
+                            EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(enchantment);
                             Wiz.atb(new UnlimboAction(enchantment));
                             ((onExhaustedEnchantment) enchantment).EnchantedOnExhaust(c);
                             addToBot(new AbstractGameAction() {
@@ -466,13 +466,13 @@ public class EnchantmentsManager {
         )
         public static void Insert(AbstractMonster __instance, DamageInfo info, int damageAmount, @ByRef boolean[] hadBlock) {
             if (EnchantmentsField.Enchantments.get(__instance) != null && !AbstractDungeon.getCurrRoom().isBattleOver && info.type == DamageInfo.DamageType.NORMAL) {
-                for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(__instance)) {
+                for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(__instance).group) {
                     if (enchantment instanceof onAttackedEnchantment) {
                         Wiz.Player().limbo.group.add(enchantment);
                         Wiz.atb(new AbstractGameAction() {
                             @Override
                             public void update() {
-                                EnchantmentsField.Enchantments.get(__instance).remove(enchantment);
+                                EnchantmentsField.Enchantments.get(__instance).group.remove(enchantment);
                                 Wiz.atb(new UnlimboAction(enchantment));
                                 ((onAttackedEnchantment) enchantment).EnchantedOnAttacked(__instance, damageAmount, info);
                                 addToBot(new AbstractGameAction() {
@@ -521,11 +521,11 @@ public class EnchantmentsManager {
         }
     }
     public static void EmptyEnchantments(AbstractCreature owner){
-        for (AbstractCard card : EnchantmentsField.Enchantments.get(owner)) {
+        for (AbstractCard card : EnchantmentsField.Enchantments.get(owner).group) {
             Wiz.atb(new AbstractGameAction() {
                 @Override
                 public void update() {
-                    EnchantmentsField.Enchantments.get(owner).remove(card);
+                    EnchantmentsField.Enchantments.get(owner).group.remove(card);
                     if (card.type != AbstractCard.CardType.POWER) {
                         if (card.exhaust) {
                             ((AbstractDragonCard)card).energyCosts.put(TypeEnergyHelper.Mana.Charge,((AbstractDragonCard) card).energyCosts.get(TypeEnergyHelper.Mana.BaseCharge));
@@ -563,7 +563,7 @@ public class EnchantmentsManager {
                 }
             });
         }else {
-            EnchantmentsField.Enchantments.get(owner).add(enchantment);
+            EnchantmentsField.Enchantments.get(owner).group.add(enchantment);
         }
     }
 }

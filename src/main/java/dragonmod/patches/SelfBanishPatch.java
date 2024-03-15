@@ -32,13 +32,13 @@ public class SelfBanishPatch {
             AbstractDungeon.player.cardInUse = null;
             AbstractDungeon.effectsQueue.add(new PurgeCardEffect(targetcard));
             targetcard.triggerOnExhaust();
-            for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(Wiz.Player())) {
+            for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
                 if (enchantment instanceof onExhaustedEnchantment) {
                     Wiz.Player().limbo.group.add(enchantment);
                     Wiz.atb(new AbstractGameAction() {
                         @Override
                         public void update() {
-                            EnchantmentsField.Enchantments.get(Wiz.Player()).remove(enchantment);
+                            EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(enchantment);
                             Wiz.atb(new UnlimboAction(enchantment));
                             ((onExhaustedEnchantment) enchantment).EnchantedOnExhaust(targetcard);
                             addToBot(new AbstractGameAction() {

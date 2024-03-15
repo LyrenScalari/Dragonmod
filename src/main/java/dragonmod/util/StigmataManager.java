@@ -120,7 +120,7 @@ public class StigmataManager {
         if (renderstigmataui) {
             gainStigmata(damageAmount);
         }
-        for (AbstractCard field : EnchantmentsField.Enchantments.get(__instance)) {
+        for (AbstractCard field : EnchantmentsField.Enchantments.get(__instance).group) {
             if (field instanceof onLoseHPEnchantment) {
                 ((onLoseHPEnchantment) field).EnchantmentOnAttacked(__instance);
             }

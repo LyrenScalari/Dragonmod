@@ -19,7 +19,7 @@ public class FlourishAction extends AbstractGameAction {
         isDone = true;
         if (!EmptyBagOfTricks()){
             AbstractCard target = EnchantmentsManager.getSleevedCard();
-            EnchantmentsField.Enchantments.get(Wiz.Player()).remove(target);
+            EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(target);
             target.unfadeOut();
             target.lighten(true);
             target.resetAttributes();
