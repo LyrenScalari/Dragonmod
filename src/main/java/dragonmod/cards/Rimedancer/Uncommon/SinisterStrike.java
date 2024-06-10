@@ -24,6 +24,7 @@ public class SinisterStrike extends AbstractRimedancerCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
         Wiz.atb(new FlourishAction());
+        Wiz.atb(new FlourishAction());
         Wiz.atb(new AbstractGameAction() {
             @Override
             public void update() {

@@ -6,9 +6,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.LockOnPower;
 import dragonmod.actions.ExploitAction;
-import dragonmod.actions.FireAction;
+import dragonmod.actions.FlourishAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.orbs.Icicle;
 import dragonmod.util.Wiz;
 
 public class Feint  extends AbstractRimedancerCard {
@@ -26,8 +25,9 @@ public class Feint  extends AbstractRimedancerCard {
             @Override
             public void update() {
                 isDone = true;
-                Wiz.atb(new FireAction(Icicle.class));
+                Wiz.atb(new FlourishAction());
+                Wiz.atb(new FlourishAction());
             }
-        },magicNumber,m));
+        },1,m));
     }
 }

@@ -227,7 +227,7 @@
   },
   "${modID}:CryoShrapnel": {
     "NAME": "Cryo Shrapnel",
-    "DESCRIPTION": "Channel !M! ${modID}:Hail."
+    "DESCRIPTION": "${modID}:Flourish !M! times. NL ALL enemies take !M! additional damage this turn."
   },
   "${modID}:LeadAstray": {
     "NAME": "Lead Astray",
@@ -243,7 +243,7 @@
   },
   "${modID}:Feint": {
     "NAME": "Feint",
-    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [${modID}:LockonIcon] . NL ${modID}:Exploit any: ${modID}:Fire an ${modID}:Icicle."
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [${modID}:LockonIcon] . NL ${modID}:Exploit any: ${modID}:Flourish twice."
   },
   "${modID}:LeadthePrey": {
     "NAME": "Frosty Gaze",
@@ -364,7 +364,7 @@
   },
   "${modID}:Squall": {
     "NAME": "Squall",
-    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Apply !M! [${modID}:LockonIcon]"
+    "DESCRIPTION": "Apply !M! [${modID}:LockonIcon] . NL ${modID}:Sheathe cards next to this."
   },
   "${modID}:IcyWind": {
     "NAME": "Icy Wind",
@@ -399,7 +399,7 @@
   },
   "${modID}:CordonofMirages": {
     "NAME": "Trickster's Ruse",
-    "DESCRIPTION": "Add !M! *Dazed to your hand. NL ${modID}:Glimpse !M!. NL Draw a card."
+    "DESCRIPTION": "Add !M! *Dazed to your hand. NL ${modID}:Glimpse !M!. NL ${modID}:Flourish."
   },
   "${modID}:MagiciansHaze": {
     "NAME": "Magicians Haze",
@@ -411,7 +411,7 @@
   },
   "${modID}:SinisterStrike": {
     "NAME": "Sinister Strike",
-    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Flourish then ${modID}:Sheathe the top card of your draw pile."
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Flourish twice, then ${modID}:Sheathe the top card of your draw pile."
   },
 
 
@@ -455,7 +455,7 @@
   },
   "${modID}:ThousandKnives": {
     "NAME": "Thousand Knives",
-    "DESCRIPTION": "At the start of your turn and whenever you ${modID}:Flourish add {!M!|1=a *Shiv|1>=!M! *Shivs}{@@} to your hand."
+    "DESCRIPTION": "At the start of your turn and whenever you ${modID}:Flourish, add {!M!|1=a *Shiv|1>=!M! *Shivs}{@@} to your hand."
   },
 
   "${modID}:WardenStrike": {
