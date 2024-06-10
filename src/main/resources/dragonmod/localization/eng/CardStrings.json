@@ -409,6 +409,10 @@
     "NAME": "Frozen Rose",
     "DESCRIPTION": "Gain !B! . NL When Attacked, deal !M! damage to ALL enemies."
   },
+  "${modID}:SinisterStrike": {
+    "NAME": "Sinister Strike",
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Flourish then ${modID}:Sheathe the top card of your draw pile."
+  },
 
 
   "${modID}:DiamondDust": {
@@ -451,7 +455,7 @@
   },
   "${modID}:ThousandKnives": {
     "NAME": "Thousand Knives",
-    "DESCRIPTION": "At the start of your turn and whenever you ${modID}:Flourish add {!M!|1=a *Shiv|1>=!M! *Shivs} to your hand."
+    "DESCRIPTION": "At the start of your turn and whenever you ${modID}:Flourish add {!M!|1=a *Shiv|1>=!M! *Shivs}{@@} to your hand."
   },
 
   "${modID}:WardenStrike": {
