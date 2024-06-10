@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,8 +16,6 @@ import dragonmod.DragonMod;
 import dragonmod.patches.CustomOrbSlotManager;
 import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
-
-import java.util.Collections;
 
 public class CrystalOrbSlot extends SpecialOrbSlot {
     public static final String ORB_ID = DragonMod.makeID("CrystalSlot");
@@ -51,18 +48,9 @@ public class CrystalOrbSlot extends SpecialOrbSlot {
             Source.onEvoke();
         }
         Wiz.applyToSelfTempstartTop(new FocusPower(AbstractDungeon.player,1));
-        Wiz.att(new AbstractGameAction() {
-            @Override
-            public void update() {
-                Wiz.Player().maxOrbs--;
-                Wiz.Player().orbs.remove(Source);
-                isDone = true;
-            }
-        });
+        Wiz.Player().maxOrbs--;
+        Wiz.Player().orbs.remove(Source);
         int i;
-        for(i = 1; i < Wiz.Player().orbs.size(); ++i) {
-            Collections.swap(Wiz.Player().orbs, i, i - 1);
-        }
         for(i = 0; i < Wiz.Player().orbs.size(); ++i) {
             ((AbstractOrb)Wiz.Player().orbs.get(i)).setSlot(i, Wiz.Player().maxOrbs);
         }

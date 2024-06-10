@@ -172,7 +172,8 @@
   },
   "${modID}:HailstoneHaze": {
     "NAME": "Hailstone Haze",
-    "DESCRIPTION": "${modID}:Flourish. NL Channel an ${modID}:Icicle."
+    "DESCRIPTION": "${modID}:Flourish. NL Channel an ${modID}:Icicle.",
+    "UPGRADE_DESCRIPTION": "${modID}:Flourish. NL Channel !M! ${modID}:Icicles."
   },
 
   "${modID}:FrostyCaltrops": {
