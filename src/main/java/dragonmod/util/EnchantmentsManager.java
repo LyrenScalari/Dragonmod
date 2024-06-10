@@ -242,19 +242,13 @@ public class EnchantmentsManager {
             for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
                 if (card instanceof onRemoveOrbEnchantment && ((AbstractDragonCard)card).energyCosts.get(TypeEnergyHelper.Mana.Charge) > 0) {
                     Wiz.Player().limbo.group.add(card);
+                    ActivateEnchantments(card,Wiz.Player());
                     Wiz.atb(new AbstractGameAction() {
                         @Override
                         public void update() {
                             EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(card);
                             Wiz.atb(new UnlimboAction(card));
                             ((onRemoveOrbEnchantment) card).EnchantedOnRemoveOrb(Wiz.Player(),orb);
-                            addToBot(new AbstractGameAction() {
-                                @Override
-                                public void update() {
-                                    ActivateEnchantments(card,Wiz.Player());
-                                    isDone = true;
-                                }
-                            });
                             isDone = true;
                         }
                     });
@@ -267,19 +261,12 @@ public class EnchantmentsManager {
             for (AbstractCard card : EnchantmentsField.Enchantments.get(m).group) {
                 if (card instanceof onRemoveOrbEnchantment && ((AbstractDragonCard)card).energyCosts.get(TypeEnergyHelper.Mana.Charge) > 0) {
                     Wiz.Player().limbo.group.add(card);
+                    ((onRemoveOrbEnchantment) card).EnchantedOnRemoveOrb(m,orb);
                     Wiz.atb(new AbstractGameAction() {
                         @Override
                         public void update() {
                             EnchantmentsField.Enchantments.get(m).group.remove(card);
                             Wiz.atb(new UnlimboAction(card));
-                            ((onRemoveOrbEnchantment) card).EnchantedOnRemoveOrb(m,orb);
-                            addToBot(new AbstractGameAction() {
-                                @Override
-                                public void update() {
-                                    ActivateEnchantments(card,m);
-                                    isDone = true;
-                                }
-                            });
                             isDone = true;
                         }
                     });

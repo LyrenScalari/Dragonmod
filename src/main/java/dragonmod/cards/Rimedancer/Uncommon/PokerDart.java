@@ -1,11 +1,11 @@
 package dragonmod.cards.Rimedancer.Uncommon;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import dragonmod.actions.IcicleRandomDamageAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.util.Wiz;
 
@@ -33,9 +33,9 @@ public class PokerDart extends AbstractRimedancerCard {
                 rightcards.add(c);
             }
         }
-        Wiz.atb(new DamageRandomEnemyAction(new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+        Wiz.atb(new IcicleRandomDamageAction(new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
         for (int i = 0; i < leftcards.size(); i++){
-            Wiz.atb(new DamageRandomEnemyAction(new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+            Wiz.atb(new IcicleRandomDamageAction(new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
         }
         Wiz.block(p, block + (block* rightcards.size()));
     }

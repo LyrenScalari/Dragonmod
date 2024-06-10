@@ -40,7 +40,7 @@ public class Frostslash extends AbstractRimedancerCard {
             Wiz.atb(new ThrowIcicleAction(tothrow,m.hb, Color.CYAN));
         } else  Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HEAVY);
-        if (tothrow != null){
+        if (tothrow2 != null){
             Wiz.atb(new ThrowIcicleAction(tothrow2,m.hb, Color.CYAN));
         } else  Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
 

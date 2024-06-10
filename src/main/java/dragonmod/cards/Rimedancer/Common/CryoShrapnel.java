@@ -57,7 +57,7 @@ public class CryoShrapnel extends AbstractRimedancerCard {
             Wiz.atb(new FlourishAction());
         }
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
-            Wiz.applyToEnemy(m,new MarkPower(mo,p,magicNumber));
+            Wiz.applyToEnemy(mo,new MarkPower(mo,p,magicNumber));
         }
     }
 }

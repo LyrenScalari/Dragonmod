@@ -41,7 +41,7 @@ public class Crackle extends AbstractRimedancerCard {
                 tilt += 1;
             }
         }
-        if (tilt >= 3){
+        if (tilt >= 2){
             Wiz.atb(new GainBlockAction(p,block));
         }
     }

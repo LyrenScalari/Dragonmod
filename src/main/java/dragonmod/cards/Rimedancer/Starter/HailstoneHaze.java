@@ -13,9 +13,7 @@ public class HailstoneHaze extends AbstractRimedancerCard {
     public HailstoneHaze(){
         super(ID,0,CardType.SKILL,CardRarity.BASIC,CardTarget.SELF);
     }
-
-
-    // Actions the card should do.
+    //TO-DO IMPLIMENT UPGRADE YOU DUNCE
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.atb(new ChannelAction(new Icicle()));
