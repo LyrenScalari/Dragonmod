@@ -1,5 +1,6 @@
 package dragonmod.cards.Rimedancer.Uncommon;
 
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -35,6 +36,7 @@ public class WraithsLegerdemain extends AbstractRimedancerCard {
                 tilt += 1;
             }
         }
+        Wiz.atb(new DrawCardAction(magicNumber));
         if (tilt >= 3){
             Wiz.applyToSelf(new EnergizedPower(p,SecondMagicNumber));
             Wiz.applyToSelf(new DrawCardNextTurnPower(p, 1));

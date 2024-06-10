@@ -21,15 +21,16 @@ public class SleevedAce extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.atb(new FlourishAction());
-        if (DragonMod.getLeftCard(this) != null){
+        AbstractCard targetcard = DragonMod.getLeftCard(this);
+        if (targetcard != null){
             Wiz.atb(new AbstractGameAction() {
                 @Override
                 public void update() {
                     isDone = true;
-                    AbstractCard target = DragonMod.getLeftCard(SleevedAce.this);
-                    target.freeToPlayOnce = true;
-                    Wiz.Player().hand.removeCard(target);
-                    EnchantmentsManager.addCard(target,true,Wiz.Player());
+                    targetcard.freeToPlayOnce = true;
+                    targetcard.tags.add(EnchantmentsManager.Sleeved);
+                    Wiz.Player().hand.removeCard(targetcard);
+                    EnchantmentsManager.addCard(targetcard,true,Wiz.Player());
                 }
             });
         }

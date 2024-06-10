@@ -23,7 +23,7 @@ public class ArcaneCurtainPower extends BasePower {
         if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {// 27
             this.flash();// 28
 
-            for(int i = 0; i < this.amount; ++i) {// 29
+            for(int i = 0; i < this.amount; ++i) {
                 Wiz.atb(new FlourishAction());
                 Wiz.atb(new AbstractGameAction() {
                     @Override
@@ -32,6 +32,7 @@ public class ArcaneCurtainPower extends BasePower {
                         AbstractCard target = Wiz.Player().drawPile.getTopCard();
                         target.freeToPlayOnce = true;
                         Wiz.Player().drawPile.removeCard(target);
+                        target.tags.add(EnchantmentsManager.Sleeved);
                         EnchantmentsManager.addCard(target,true,Wiz.Player());
                     }
                 });

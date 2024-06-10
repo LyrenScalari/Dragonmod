@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.LockOnPower;
 import dragonmod.DragonMod;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.cards.Rimedancer.Uncommon.SleevedAce;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 
@@ -23,27 +22,29 @@ public class Squall extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.applyToEnemy(m,new LockOnPower(m,magicNumber));
-        if (DragonMod.getLeftCard(this) != null){
+        AbstractCard left = DragonMod.getLeftCard(this);
+        AbstractCard right = DragonMod.getRightCard(this);
+        if (left != null){
             Wiz.atb(new AbstractGameAction() {
                 @Override
                 public void update() {
                     isDone = true;
-                    AbstractCard target = DragonMod.getLeftCard(Squall.this);
-                    target.freeToPlayOnce = true;
-                    Wiz.Player().hand.removeCard(target);
-                    EnchantmentsManager.addCard(target,true,Wiz.Player());
+                    left.freeToPlayOnce = true;
+                    Wiz.Player().hand.removeCard(left);
+                    left.tags.add(EnchantmentsManager.Sleeved);
+                    EnchantmentsManager.addCard(left,true,Wiz.Player());
                 }
             });
         }
-        if (DragonMod.getRightCard(this) != null){
+        if (right != null){
             Wiz.atb(new AbstractGameAction() {
                 @Override
                 public void update() {
                     isDone = true;
-                    AbstractCard target = DragonMod.getRightCard(Squall.this);
-                    target.freeToPlayOnce = true;
-                    Wiz.Player().hand.removeCard(target);
-                    EnchantmentsManager.addCard(target,true,Wiz.Player());
+                    right.freeToPlayOnce = true;
+                    Wiz.Player().hand.removeCard(right);
+                    right.tags.add(EnchantmentsManager.Sleeved);
+                    EnchantmentsManager.addCard(right,true,Wiz.Player());
                 }
             });
         }

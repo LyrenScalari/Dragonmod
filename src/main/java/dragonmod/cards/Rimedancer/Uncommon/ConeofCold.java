@@ -58,6 +58,7 @@ public class ConeofCold extends AbstractRimedancerCard {
                     } else {
                         target = Wiz.Player().discardPile.getTopCard();
                     }
+                    target.tags.add(EnchantmentsManager.Sleeved);
                     Wiz.Player().hand.removeCard(target);
                     EnchantmentsManager.addCard(target,true,Wiz.Player());
                 }

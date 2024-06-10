@@ -75,6 +75,7 @@ public class GlacialAdvance extends AbstractRimedancerCard implements onRemoveOr
     @Override
     public boolean EnchantedOnRemoveOrb(AbstractCreature owner, AbstractOrb removedorb) {
         Icicle tothrow = null;
+        if (energyCosts.get(TypeEnergyHelper.Mana.Charge) > 0){
             for (AbstractOrb o : Wiz.Player().orbs) {
                 if (o instanceof Icicle) {
                     tothrow = (Icicle) o;
@@ -90,6 +91,7 @@ public class GlacialAdvance extends AbstractRimedancerCard implements onRemoveOr
                 Wiz.atb(new IcicleFanAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")), 1.0f, hbs, Color.CYAN, false));
             }
             Wiz.atb(new DamageAllEnemiesAction(Wiz.Player(), magicNumber, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+        }
         return false;
     }
 }

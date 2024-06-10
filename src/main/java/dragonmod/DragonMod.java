@@ -46,7 +46,6 @@ import dragonmod.cards.Draconic.Hubris;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.cards.Warden.AbstractWardenCard;
-import dragonmod.characters.TheJusticar;
 import dragonmod.characters.TheRimedancer;
 import dragonmod.orbs.CrystalOrbSlot;
 import dragonmod.orbs.Icicle;
@@ -545,8 +544,8 @@ public class DragonMod implements
 
     @Override
     public void receiveEditCharacters() {
-        BaseMod.addCharacter(new TheJusticar("the Justicar", THE_JUSTICAR),
-                JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_JUSTICAR);
+        /*BaseMod.addCharacter(new TheJusticar("the Justicar", THE_JUSTICAR),
+                JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_JUSTICAR);*/
         BaseMod.addCharacter(new TheRimedancer("the Rimedancer", THE_RIMEDANCER),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_RIMEDANCER);
         /*BaseMod.addCharacter(new TheWarden("the Warden", THE_WARDEN),

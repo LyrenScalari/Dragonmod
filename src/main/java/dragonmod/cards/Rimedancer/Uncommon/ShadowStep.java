@@ -41,13 +41,13 @@ public class ShadowStep extends AbstractRimedancerCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-       Wiz.block(p,block);
         int tilt = 0;
         for (AbstractCard c : Wiz.Player().hand.group){
             if (Wiz.Player().hand.group.indexOf(c) > Wiz.Player().hand.group.indexOf(this)){
                 tilt += 1;
             }
         }
+        Wiz.block(p,block+(tilt*2));
         if (tilt >= magicNumber){
             Wiz.atb(new SelectCardsAction(Wiz.Player().drawPile.group,magicNumber,cardStrings.EXTENDED_DESCRIPTION[0],card ->{
                 Wiz.Player().drawPile.removeCard(card.get(0));

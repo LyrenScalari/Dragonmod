@@ -21,11 +21,10 @@ public class Feint  extends AbstractRimedancerCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
         Wiz.applyToEnemy(m,new LockOnPower(m,magicNumber));
-        Wiz.atb(new ExploitAction(()->new AbstractGameAction() {
+        Wiz.att(new ExploitAction(()->new AbstractGameAction() {
             @Override
             public void update() {
                 isDone = true;
-                Wiz.atb(new FlourishAction());
                 Wiz.atb(new FlourishAction());
             }
         },1,m));

@@ -589,7 +589,7 @@ public class EnchantmentsManager {
             ((AbstractDragonCard)enchantment).energyCosts.put(TypeEnergyHelper.Mana.Charge,((AbstractDragonCard) enchantment).energyCosts.get(TypeEnergyHelper.Mana.Charge)-1);
         }
         if (((AbstractDragonCard) enchantment).energyCosts.get(TypeEnergyHelper.Mana.Charge) == 0){
-            Wiz.att(new AbstractGameAction() {
+            Wiz.atb(new AbstractGameAction() {
                 @Override
                 public void update() {
                     ((AbstractDragonCard)enchantment).energyCosts.put(TypeEnergyHelper.Mana.Charge,

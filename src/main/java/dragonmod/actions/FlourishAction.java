@@ -7,8 +7,7 @@ import dragonmod.util.EnchantmentsField;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 
-import static dragonmod.util.EnchantmentsManager.Cantrip;
-import static dragonmod.util.EnchantmentsManager.EmptyBagOfTricks;
+import static dragonmod.util.EnchantmentsManager.*;
 
 public class FlourishAction extends AbstractGameAction {
     public FlourishAction() {
@@ -58,19 +57,8 @@ public class FlourishAction extends AbstractGameAction {
                     Wiz.att(new AbstractGameAction() {
                         @Override
                         public void update() {
-                            Wiz.Player().exhaustPile.removeCard(c);
-                            EnchantmentsManager.addCard(c,true,Wiz.Player());
-                        }
-                    });
-                }
-            }
-            for (AbstractCard c : Wiz.Player().hand.group){
-                if (c.hasTag(Cantrip)){
-                    Wiz.att(new AbstractGameAction() {
-                        @Override
-                        public void update() {
                             isDone = true;
-                            Wiz.Player().hand.removeCard(c);
+                            Wiz.Player().exhaustPile.removeCard(c);
                             EnchantmentsManager.addCard(c,true,Wiz.Player());
                         }
                     });

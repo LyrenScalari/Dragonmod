@@ -45,8 +45,10 @@ public class LeadAstray extends AbstractRimedancerCard {
                     }
                 } else {
                     Wiz.Player().hand.removeCard(leftcards.get(leftcards.size()-1));
+                    leftcards.get(leftcards.size()-1).tags.add(EnchantmentsManager.Sleeved);
                     EnchantmentsManager.addCard(leftcards.get(leftcards.size()-1),true,Wiz.Player());
                     Wiz.Player().hand.removeCard(leftcards.get(leftcards.size()-2));
+                    leftcards.get(leftcards.size()-2).tags.add(EnchantmentsManager.Sleeved);
                     EnchantmentsManager.addCard(leftcards.get(leftcards.size()-2),true,Wiz.Player());
                 }
             }

@@ -243,7 +243,7 @@
   },
   "${modID}:Feint": {
     "NAME": "Feint",
-    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [${modID}:LockonIcon] . NL ${modID}:Exploit any: ${modID}:Flourish twice."
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [${modID}:LockonIcon] . NL ${modID}:Exploit any: ${modID}:Flourish."
   },
   "${modID}:LeadthePrey": {
     "NAME": "Frosty Gaze",
@@ -350,8 +350,8 @@
   },
   "${modID}:ConeofCold": {
     "NAME": "Cone of Cold",
-    "DESCRIPTION": "Deal !D! damage to all enemies Twice. NL ${modID}:Sheathe a random card in your discard pile",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage to all enemies Twice. NL ${modID}:Sheathe the top card of your discard pile"
+    "DESCRIPTION": "Deal !D! damage to all enemies twice. NL ${modID}:Sheathe a random card in your discard pile",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage to all enemies twice. NL ${modID}:Sheathe the top card of your discard pile"
   },
   "${modID}:GatheringStorm": {
     "NAME": "Gathering Storm",

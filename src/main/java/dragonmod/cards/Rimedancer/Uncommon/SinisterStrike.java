@@ -31,6 +31,7 @@ public class SinisterStrike extends AbstractRimedancerCard {
                 isDone = true;
                 AbstractCard target = Wiz.Player().drawPile.getTopCard();
                 Wiz.Player().drawPile.removeCard(target);
+                target.tags.add(EnchantmentsManager.Sleeved);
                 EnchantmentsManager.addCard(target,true,Wiz.Player());
             }
         });

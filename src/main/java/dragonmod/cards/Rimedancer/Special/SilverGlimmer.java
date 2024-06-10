@@ -1,9 +1,9 @@
 package dragonmod.cards.Rimedancer.Special;
 
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
+import dragonmod.actions.FireAction;
 import dragonmod.cards.Draconic.AbstractDraconicCard;
 import dragonmod.orbs.Icicle;
 import dragonmod.util.EnchantmentsManager;
@@ -18,7 +18,7 @@ public class SilverGlimmer extends AbstractDraconicCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        Wiz.atb(new ChannelAction(new Icicle()));
+        Wiz.atb(new FireAction(Icicle.class));
         Wiz.applyToEnemy(m,new WeakPower(m,magicNumber,false));
     }
 }
