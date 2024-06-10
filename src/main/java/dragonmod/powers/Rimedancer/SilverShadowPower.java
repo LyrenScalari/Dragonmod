@@ -13,7 +13,7 @@ import dragonmod.powers.BasePower;
 import dragonmod.util.Wiz;
 
 public class SilverShadowPower extends BasePower implements CloneablePowerInterface {
-    public static final String POWER_ID = DragonMod.makeID("SilverShadowPower");
+    public static final String POWER_ID = DragonMod.makeID("SilverShadow");
     @Override
     public AbstractPower makeCopy() {
         return new SilverShadowPower(owner,amount);

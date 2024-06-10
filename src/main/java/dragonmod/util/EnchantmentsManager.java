@@ -18,16 +18,17 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.ExhaustPileViewScreen;
 import com.megacrit.cardcrawl.ui.panels.ExhaustPanel;
 import com.megacrit.cardcrawl.vfx.BobEffect;
+import com.megacrit.cardcrawl.vfx.ExhaustBlurEffect;
+import com.megacrit.cardcrawl.vfx.ExhaustEmberEffect;
 import dragonmod.cards.AbstractDragonCard;
-import dragonmod.interfaces.TurnStartEnchantment;
-import dragonmod.interfaces.onAttackedEnchantment;
-import dragonmod.interfaces.onExhaustedEnchantment;
-import dragonmod.interfaces.onRemoveOrbEnchantment;
+import dragonmod.interfaces.*;
 import dragonmod.patches.CardCounterPatch;
+import dragonmod.ui.DivineEyeParticle;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
@@ -35,14 +36,16 @@ import java.util.ArrayList;
 import static dragonmod.DragonMod.makeID;
 
 public class EnchantmentsManager {
-    public static final float Y_OFFSET = 1000f * Settings.scale;
-    public static final float X_OFFSET = 100f * Settings.scale;
+    public static float Y_OFFSET = 125f;
+    public static float X_OFFSET = 75f;
     private static final BobEffect bob = new BobEffect(3.0f * Settings.scale, 3.0f);
     public static CardGroup BanishedCards;
     @SpireEnum
     public static AbstractCard.CardTags Cantrip;
     @SpireEnum
     public static AbstractCard.CardTags Sleeved;
+    @SpireEnum
+    public static AbstractCard.CardTags Verse;
     public static AbstractCard hovered;
     public static void render(SpriteBatch sb) {
         if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null) {
@@ -72,6 +75,8 @@ public class EnchantmentsManager {
     }
 
     public static void update() {
+        Y_OFFSET = Y_OFFSET * Settings.scale;
+        X_OFFSET = X_OFFSET * Settings.scale;
         bob.update();
         int i = 0;
         int j = 0;
@@ -83,7 +88,7 @@ public class EnchantmentsManager {
             card.update();
             card.hb.update();
             if (card.hb.hovered && hovered == null) {
-                card.targetDrawScale = 0.75f;
+                card.targetDrawScale = 0.5f;
                 hovered = card;
             } else {
                 card.targetDrawScale = 0.2f;
@@ -115,7 +120,7 @@ public class EnchantmentsManager {
                         i++;
                     }
                     if (m.isDeadOrEscaped()) {
-                       EmptyEnchantments(m);
+                        EmptyEnchantments(m);
                     }
                 }
             }
@@ -123,6 +128,28 @@ public class EnchantmentsManager {
     }
 
     public static void startOfTurnPlayer() {
+        if (VerseCount() > 0){
+            Wiz.att(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    isDone = true;
+                    for (int i = 0; i < AbstractDungeon.miscRng.random(20, 30); ++i) {
+                        AbstractDungeon.effectsQueue.add(new DivineEyeParticle());
+                    }
+                }
+            });
+            for (AbstractPower p : AbstractDungeon.player.powers){
+                if (p instanceof OnChant){
+                    Wiz.atb(new AbstractGameAction() {
+                        @Override
+                        public void update() {
+                            isDone = true;
+                            ((OnChant) p).triggerOnChant();
+                        }
+                    });
+                }
+            }
+        }
         for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
             if (card instanceof TurnStartEnchantment) {
                 Wiz.Player().limbo.group.add(card);
@@ -153,6 +180,26 @@ public class EnchantmentsManager {
             }
         }
         return empty;
+    }
+    public static int VerseCount() {
+        int count = 0;
+        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
+            if (card.hasTag(Verse)){
+                count++;
+            }
+        }
+        return count;
+    }
+    public static void ChantNext() {
+        for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
+            if (card.hasTag(EnchantmentsManager.Verse) && card instanceof TurnStartEnchantment){
+                ((TurnStartEnchantment) card).EnchantedTurnStart(Wiz.Player());
+                break;
+            }
+        }
+    }
+    public static int getDevotion() {
+        return EnchantmentsManager.VerseCount() + Wiz.Player().hand.size();
     }
     public static AbstractCard getSleevedCard() {
         AbstractCard Sleeved;
@@ -193,23 +240,21 @@ public class EnchantmentsManager {
     public static void RemoveOrbPlayer(AbstractOrb orb) {
         if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null && !Wiz.Player().isDeadOrEscaped()) {
             for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
-                if (card instanceof onRemoveOrbEnchantment) {
+                if (card instanceof onRemoveOrbEnchantment && ((AbstractDragonCard)card).energyCosts.get(TypeEnergyHelper.Mana.Charge) > 0) {
                     Wiz.Player().limbo.group.add(card);
                     Wiz.atb(new AbstractGameAction() {
                         @Override
                         public void update() {
                             EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(card);
                             Wiz.atb(new UnlimboAction(card));
-                            boolean triggered = ((onRemoveOrbEnchantment) card).EnchantedOnRemoveOrb(Wiz.Player(),orb);
-                            if (triggered){
-                                addToBot(new AbstractGameAction() {
-                                    @Override
-                                    public void update() {
-                                        ActivateEnchantments(card,Wiz.Player());
-                                        isDone = true;
-                                    }
-                                });
-                            }
+                            ((onRemoveOrbEnchantment) card).EnchantedOnRemoveOrb(Wiz.Player(),orb);
+                            addToBot(new AbstractGameAction() {
+                                @Override
+                                public void update() {
+                                    ActivateEnchantments(card,Wiz.Player());
+                                    isDone = true;
+                                }
+                            });
                             isDone = true;
                         }
                     });
@@ -220,23 +265,21 @@ public class EnchantmentsManager {
     public static void RemoveOrbMonster(AbstractOrb orb, AbstractMonster m) {
         if (EnchantmentsField.Enchantments.get(m) != null && !m.isDeadOrEscaped()) {
             for (AbstractCard card : EnchantmentsField.Enchantments.get(m).group) {
-                if (card instanceof onRemoveOrbEnchantment) {
+                if (card instanceof onRemoveOrbEnchantment && ((AbstractDragonCard)card).energyCosts.get(TypeEnergyHelper.Mana.Charge) > 0) {
                     Wiz.Player().limbo.group.add(card);
                     Wiz.atb(new AbstractGameAction() {
                         @Override
                         public void update() {
                             EnchantmentsField.Enchantments.get(m).group.remove(card);
                             Wiz.atb(new UnlimboAction(card));
-                            boolean triggered = ((onRemoveOrbEnchantment) card).EnchantedOnRemoveOrb(m,orb);
-                            if (triggered){
-                                addToBot(new AbstractGameAction() {
-                                    @Override
-                                    public void update() {
-                                        ActivateEnchantments(card,m);
-                                        isDone = true;
-                                    }
-                                });
-                            }
+                            ((onRemoveOrbEnchantment) card).EnchantedOnRemoveOrb(m,orb);
+                            addToBot(new AbstractGameAction() {
+                                @Override
+                                public void update() {
+                                    ActivateEnchantments(card,m);
+                                    isDone = true;
+                                }
+                            });
                             isDone = true;
                         }
                     });
@@ -352,7 +395,7 @@ public class EnchantmentsManager {
         public static void Insert(AbstractCreature __instance, DamageInfo info, int damageAmount, @ByRef boolean[] hadBlock) {
             if (!AbstractDungeon.getCurrRoom().isBattleOver && info.type == DamageInfo.DamageType.NORMAL) {
                 for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(__instance).group) {
-                    if (enchantment instanceof onAttackedEnchantment) {
+                    if (enchantment instanceof onAttackedEnchantment && ((AbstractDragonCard)enchantment).energyCosts.get(TypeEnergyHelper.Mana.Charge) > 0) {
                         Wiz.Player().limbo.group.add(enchantment);
                         Wiz.atb(new AbstractGameAction() {
                             @Override
@@ -386,7 +429,7 @@ public class EnchantmentsManager {
         )
         public static void Insert(CardGroup __instance, AbstractCard c) {
             for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
-                if (enchantment instanceof onExhaustedEnchantment) {
+                if (enchantment instanceof onExhaustedEnchantment && ((AbstractDragonCard)c).energyCosts.get(TypeEnergyHelper.Mana.Charge) > 0) {
                     Wiz.Player().limbo.group.add(enchantment);
                     Wiz.atb(new AbstractGameAction() {
                         @Override
@@ -467,7 +510,7 @@ public class EnchantmentsManager {
         public static void Insert(AbstractMonster __instance, DamageInfo info, int damageAmount, @ByRef boolean[] hadBlock) {
             if (EnchantmentsField.Enchantments.get(__instance) != null && !AbstractDungeon.getCurrRoom().isBattleOver && info.type == DamageInfo.DamageType.NORMAL) {
                 for (AbstractCard enchantment : EnchantmentsField.Enchantments.get(__instance).group) {
-                    if (enchantment instanceof onAttackedEnchantment) {
+                    if (enchantment instanceof onAttackedEnchantment && ((AbstractDragonCard)enchantment).energyCosts.get(TypeEnergyHelper.Mana.Charge) > 0) {
                         Wiz.Player().limbo.group.add(enchantment);
                         Wiz.atb(new AbstractGameAction() {
                             @Override
@@ -551,9 +594,29 @@ public class EnchantmentsManager {
                 public void update() {
                     ((AbstractDragonCard)enchantment).energyCosts.put(TypeEnergyHelper.Mana.Charge,
                             ((AbstractDragonCard) enchantment).energyCosts.get(TypeEnergyHelper.Mana.BaseCharge));
+                    if (enchantment.hasTag(Verse)){
+                        for (AbstractPower p : AbstractDungeon.player.powers){
+                            if (p instanceof OnCoda){
+                                Wiz.atb(new AbstractGameAction() {
+                                    @Override
+                                    public void update() {
+                                        isDone = true;
+                                        ((OnCoda) p).triggerOnCoda();
+                                    }
+                                });
+                            }
+                        }
+                    }
                     if (enchantment.type != AbstractCard.CardType.POWER) {
                         if (enchantment.exhaust) {
                             AbstractDungeon.player.exhaustPile.moveToExhaustPile(enchantment);
+                        } else if (enchantment.purgeOnUse){
+                            for(int i = 0; i < 90; ++i) {
+                                AbstractDungeon.effectsQueue.add(new ExhaustBlurEffect(enchantment.current_x, enchantment.current_y));// 25
+                            }
+                            for(int i = 0; i < 50; ++i) {
+                                AbstractDungeon.effectsQueue.add(new ExhaustEmberEffect(enchantment.current_x, enchantment.current_y));// 28
+                            }
                         } else {
                             AbstractDungeon.player.discardPile.moveToDiscardPile(enchantment);
                         }

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -24,8 +23,8 @@ import dragonmod.actions.IcicleFanAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.interfaces.onRemoveOrbEnchantment;
 import dragonmod.orbs.Icicle;
-import dragonmod.util.EnchantmentsManager;
 import dragonmod.ui.TextureLoader;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
@@ -51,8 +50,8 @@ public class GlacialAdvance extends AbstractRimedancerCard implements onRemoveOr
     }
     public GlacialAdvance(){
         super(ID,1,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.SELF);
-        energyCosts.put(TypeEnergyHelper.Mana.Charge,3);
-        energyCosts.put(TypeEnergyHelper.Mana.BaseCharge,3);
+        energyCosts.put(TypeEnergyHelper.Mana.Charge,2);
+        energyCosts.put(TypeEnergyHelper.Mana.BaseCharge,2);
         CardModifierManager.addModifier(this,new SCVTemporalCardMod());
         tags.add(DragonMod.Enchantment);
         DamageModifierManager.addModifier(this, new RangedDamage(true));
@@ -76,23 +75,21 @@ public class GlacialAdvance extends AbstractRimedancerCard implements onRemoveOr
     @Override
     public boolean EnchantedOnRemoveOrb(AbstractCreature owner, AbstractOrb removedorb) {
         Icicle tothrow = null;
-        for (AbstractOrb o : Wiz.Player().orbs) {
-            if (o instanceof Icicle) {
-                tothrow = (Icicle) o;
+            for (AbstractOrb o : Wiz.Player().orbs) {
+                if (o instanceof Icicle) {
+                    tothrow = (Icicle) o;
+                }
             }
-        }
-        ArrayList<Hitbox> hbs = new ArrayList<>();
-        for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-            hbs.add(mo.hb);
-        }
-        if (tothrow != null){
-            Wiz.atb(new IcicleFanAction(tothrow, hbs, Color.CYAN));
-        } else {
-            Wiz.atb(new IcicleFanAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,hbs,Color.CYAN,false));
-        }
-        Wiz.atb(new DamageAllEnemiesAction(Wiz.Player(), magicNumber, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-        Wiz.atb(new DrawCardAction(1));
-
+            ArrayList<Hitbox> hbs = new ArrayList<>();
+            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                hbs.add(mo.hb);
+            }
+            if (tothrow != null) {
+                Wiz.atb(new IcicleFanAction(tothrow, hbs, Color.CYAN));
+            } else {
+                Wiz.atb(new IcicleFanAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")), 1.0f, hbs, Color.CYAN, false));
+            }
+            Wiz.atb(new DamageAllEnemiesAction(Wiz.Player(), magicNumber, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.BLUNT_LIGHT));
         return false;
     }
 }

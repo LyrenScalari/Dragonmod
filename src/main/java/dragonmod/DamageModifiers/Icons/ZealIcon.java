@@ -15,7 +15,7 @@ public class ZealIcon extends AbstractCustomIcon {
     private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Zeal");
 
     public ZealIcon() {
-        super(ID, TextureLoader.getTexture(DragonMod.uiPath(("Zeal.png"))));
+        super(ID, TextureLoader.getTexture(DragonMod.powerPath(("large/HolyPower.png"))));
     }
 
     public ArrayList<TooltipInfo> getCustomTooltips() {

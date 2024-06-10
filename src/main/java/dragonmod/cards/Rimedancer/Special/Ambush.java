@@ -5,14 +5,14 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
-import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
+import dragonmod.cards.Draconic.AbstractDraconicCard;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 
-public class Ambush extends AbstractRimedancerCard {
+public class Ambush extends AbstractDraconicCard {
     public static final String ID = Ambush.class.getSimpleName();
     public Ambush(){
-        super(ID,1,CardType.ATTACK,CardRarity.SPECIAL,CardTarget.ENEMY,true);
+        super(ID,1,CardType.ATTACK,CardRarity.SPECIAL,CardTarget.ENEMY);
         setDamage(6,2);
         setMagic(2);
         tags.add(EnchantmentsManager.Cantrip);

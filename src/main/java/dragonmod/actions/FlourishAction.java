@@ -2,6 +2,7 @@ package dragonmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import dragonmod.powers.Rimedancer.powercards.ThousandsKnives;
 import dragonmod.util.EnchantmentsField;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
@@ -24,6 +25,9 @@ public class FlourishAction extends AbstractGameAction {
             target.lighten(true);
             target.resetAttributes();
             Wiz.Player().hand.addToHand(target);
+            if (Wiz.Player().hasPower(ThousandsKnives.POWER_ID)){
+                Wiz.Player().getPower(ThousandsKnives.POWER_ID).onSpecificTrigger();
+            }
         } else {
             for (AbstractCard c : Wiz.Player().drawPile.group){
                 if (c.hasTag(Cantrip)){

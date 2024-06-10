@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import dragonmod.util.AbstractNotOrb;
-import dragonmod.util.HymnManager;
 
 public class SealParticleEffect extends AbstractGameEffect {
     private float x;
@@ -89,9 +88,6 @@ public class SealParticleEffect extends AbstractGameEffect {
         if (this.duration < 0.0F) {
 
             duration = startingDuration;
-        }
-        if (!HymnManager.ActiveVerses.contains(Parent)){
-            isDone = true;
         }
     }
 

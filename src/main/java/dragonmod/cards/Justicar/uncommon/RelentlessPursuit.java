@@ -28,7 +28,7 @@ public class RelentlessPursuit extends AbstractJusticarCard implements TurnStart
     public static final String ID = RelentlessPursuit.class.getSimpleName();
     public RelentlessPursuit(){
         super(ID,2,CardType.ATTACK,CardRarity.UNCOMMON,CardTarget.ENEMY);
-        setCustomVar("WOG",7,3);
+        setCustomVar("WOG",8,3);
         setVarCalculation("WOG", (m, base) -> {
             if (AbstractDungeon.player != null){
                 int tmp = this.baseDamage;

@@ -1,30 +1,51 @@
 package dragonmod.cards.Justicar.common;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import basemod.helpers.CardModifierManager;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
-import dragonmod.orbs.Verses.Hallowed;
-import dragonmod.util.HymnManager;
+import dragonmod.interfaces.TurnStartEnchantment;
+import dragonmod.powers.Dragonkin.ConfessionPower;
+import dragonmod.util.EnchantmentsManager;
+import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
-public class Sanctuary extends AbstractJusticarCard {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Sanctuary extends AbstractJusticarCard implements TurnStartEnchantment {
 
     public static final String ID = Sanctuary.class.getSimpleName();
     public Sanctuary(){
         super(ID,1,CardType.SKILL,CardRarity.COMMON,CardTarget.SELF);
         setMagic(3,2);
-        setMagic2(3);
-        tags.add(HymnManager.Verse);
+        energyCosts.put(TypeEnergyHelper.Mana.Charge,3);
+        energyCosts.put(TypeEnergyHelper.Mana.BaseCharge,3);
+        tags.add(EnchantmentsManager.Verse);
+        CardModifierManager.addModifier(this,new SCVTemporalCardMod());
+    }
+    @Override
+    public List<String> getCardDescriptors() {
+        ArrayList<String> retVal = new ArrayList<>();
+        retVal.add(verseString.TEXT[0]);
+        return retVal;
+    }
+
+    @Override
+    public List<TooltipInfo> getCustomTooltipsTop() {
+        ArrayList<TooltipInfo> retVal = new ArrayList<>();
+        retVal.add(new TooltipInfo(verseString.TEXT[0],verseString.TEXT[1]));
+        return retVal;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        Wiz.atb(new AbstractGameAction() {
-            @Override
-            public void update() {
-                HymnManager.addVerse(new Hallowed(magicNumber),Sanctuary.this);
-                isDone = true;
-            }
-        });
+    }
+
+    @Override
+    public void EnchantedTurnStart(AbstractCreature owner) {
+        Wiz.applyToSelf(new ConfessionPower(Wiz.Player(),magicNumber));
     }
 }

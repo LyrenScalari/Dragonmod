@@ -35,6 +35,7 @@ public class DartingBlow extends AbstractDraconicCard implements TurnStartEnchan
     public List<TooltipInfo> getCustomTooltips() {
         List<TooltipInfo> retVal = new ArrayList<>();
         retVal.add(new TooltipInfo(EnchantmentTooltip.TEXT[0], EnchantmentTooltip.TEXT[1]));
+        retVal.addAll(super.getCustomTooltips());
         return retVal;
     }
 

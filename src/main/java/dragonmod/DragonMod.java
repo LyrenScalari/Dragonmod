@@ -41,7 +41,6 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import dragonmod.DamageModifiers.Icons.*;
 import dragonmod.actions.GainCrystalOrbSlotAction;
-import dragonmod.actions.GainHailOrbSlotAction;
 import dragonmod.cards.Draconic.AbstractDraconicCard;
 import dragonmod.cards.Draconic.Hubris;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
@@ -49,9 +48,7 @@ import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.cards.Warden.AbstractWardenCard;
 import dragonmod.characters.TheJusticar;
 import dragonmod.characters.TheRimedancer;
-import dragonmod.characters.TheWarden;
 import dragonmod.orbs.CrystalOrbSlot;
-import dragonmod.orbs.HailOrbSlot;
 import dragonmod.orbs.Icicle;
 import dragonmod.patches.CustomOrbSlotManager;
 import dragonmod.potions.Dragonkin.DraughtofFervor;
@@ -188,9 +185,8 @@ public class DragonMod implements
     public static final String DRACONIC_ENERGY_ORB_P= characterPath("Draconic/cardback/energy_orb_p.png");
     public static final String DRACONIC_SMALL_ORB = characterPath("Draconic/cardback/small_orb.png");
     //Vars
-    public static Matcher[] ExtraIceMatchers =  new Matcher[]{new Matcher.NewExprMatcher(Subzero.class),new Matcher.NewExprMatcher(GainCrystalOrbSlotAction.class),new Matcher.NewExprMatcher(GainHailOrbSlotAction.class)};
+    public static Matcher[] ExtraIceMatchers =  new Matcher[]{new Matcher.NewExprMatcher(Subzero.class),new Matcher.NewExprMatcher(GainCrystalOrbSlotAction.class)};
     public static Matcher[] ExtraBoltMatchers =  new Matcher[]{new Matcher.NewExprMatcher(Subzero.class)};
-    public static Matcher[] ExtraFireMatchers =  new Matcher[]{new Matcher.NewExprMatcher(GainHailOrbSlotAction.class)};
     public static int StatusesCycledThisCombat = 0;
     public static int StatusesCycledThisTurn = 0;
     public static int CardsCycledThisCombat = 0;
@@ -335,7 +331,6 @@ public class DragonMod implements
         //The information used is taken from your pom.xml file.
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, settingsPanel);
         CustomIntent.add(new BleedingOutIntent());
-        HymnManager.VersePile = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         BanishedCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     }
     private static BitmapFont prepFont(FreeTypeFontGenerator g, float size, boolean isLinearFiltering) {
@@ -482,6 +477,7 @@ public class DragonMod implements
     public void receiveEditCards() {
         //Basegame Icons
         CustomIconHelper.addCustomIcon(StrengthIcon.get());
+        CustomIconHelper.addCustomIcon(DexterityIcon.get());
         CustomIconHelper.addCustomIcon(BlockIcon.get());
         CustomIconHelper.addCustomIcon(WeakIcon.get());
         CustomIconHelper.addCustomIcon(VulnerableIcon.get());
@@ -496,14 +492,14 @@ public class DragonMod implements
         CustomIconHelper.addCustomIcon(CourageIcon.get());
         //Justicar Icons
         CustomIconHelper.addCustomIcon(FireIcon.get());
-        CustomIconHelper.addCustomIcon(LightIcon.get());
+        CustomIconHelper.addCustomIcon(DivineArmor.get());
         CustomIconHelper.addCustomIcon(SacrificeIcon.get());
         CustomIconHelper.addCustomIcon(ExaltIcon.get());
         CustomIconHelper.addCustomIcon(StigmataIcon.get());
         CustomIconHelper.addCustomIcon(ConfessionIcon.get());
         CustomIconHelper.addCustomIcon(ScorchIcon.get());
         CustomIconHelper.addCustomIcon(ZealIcon.get());
-        CustomIconHelper.addCustomIcon(SanctifyIcon.get());
+        CustomIconHelper.addCustomIcon(DevotionIcon.get());
 
         //Rimedancer Icons
         CustomIconHelper.addCustomIcon(RangedIcon.get());
@@ -529,8 +525,20 @@ public class DragonMod implements
         BaseMod.addDynamicVariable(new SecondDamage());
         logger.info("Adding cards");
         new AutoAdd(modID).packageFilter(AbstractJusticarCard.class).setDefaultSeen(true).cards();
+        // Total 38
+        // C 16 - done
+        // U 9 - +16
+        // R 4 - +6
         new AutoAdd(modID).packageFilter(AbstractRimedancerCard.class).setDefaultSeen(true).cards();
+        // Total 65 ready for testing
+        // C 21 - need to determine booster commons
+        // U 29 - done
+        // R 7 - done
         new AutoAdd(modID).packageFilter(AbstractWardenCard.class).setDefaultSeen(true).cards();
+        // Total 24, ignore until first testing draft for above charaters is done.
+        // C 9 - +7
+        // U 4 - +21
+        // R 2 - +8
         new AutoAdd(modID).packageFilter(AbstractDraconicCard.class).setDefaultSeen(true).cards();
         BaseMod.removeCard(Hubris.ID, AbstractCard.CardColor.CURSE);
     }
@@ -539,11 +547,12 @@ public class DragonMod implements
     public void receiveEditCharacters() {
         BaseMod.addCharacter(new TheJusticar("the Justicar", THE_JUSTICAR),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_JUSTICAR);
-        BaseMod.addCharacter(new TheWarden("the Warden", THE_WARDEN),
-               JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_WARDEN);
         BaseMod.addCharacter(new TheRimedancer("the Rimedancer", THE_RIMEDANCER),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_RIMEDANCER);
+        /*BaseMod.addCharacter(new TheWarden("the Warden", THE_WARDEN),
+               JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_WARDEN);*/
         receiveEditPotions();
+
     }
     public void receiveEditPotions() {
         logger.info("Beginning to edit potions");
@@ -601,12 +610,11 @@ public class DragonMod implements
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
         SpecialSlots.put(CustomOrbSlotManager.SlotFields.SlotTypes.Crystal,new CrystalOrbSlot());
-        SpecialSlots.put(CustomOrbSlotManager.SlotFields.SlotTypes.Hail,new HailOrbSlot());
         StatusesCycledThisCombat = 0;
         CardsCycledThisCombat = 0;
         BurnsCycledThisCombat = 0;
-        HymnManager.onBattleStart();
         StigmataManager.onBattleStart();
+        BlossomManager.onBattleStart();
         Icicle.target = null;
         EnchantmentsManager.InitCantrips();
     }
@@ -620,9 +628,6 @@ public class DragonMod implements
             StigmataManager.spendStigmata(StigmataManager.getStigmataTotal()/2);
         }
         DecayStagger = true;
-        for (AbstractNotOrb seal : HymnManager.ActiveVerses){
-            seal.onEndOfTurn();
-        }
         EnchantmentsManager.startOfTurnMonster(abstractMonster);
         if (abstractMonster.hasPower(BleedPower.POWER_ID) && abstractMonster.currentHealth <= abstractMonster.getPower(BleedPower.POWER_ID).amount){
             return false;
@@ -640,14 +645,10 @@ public class DragonMod implements
     }
     @Override
     public void receiveStartGame() {
-        HymnManager.versePileButton = new HymnManager.VersePileButton();
     }
 
     @Override
     public void receivePostDungeonUpdate() {
-        if (HymnManager.versePileButton != null){
-            HymnManager.versePileButton.update();
-        }
     }
 
     @Override
@@ -702,16 +703,5 @@ public class DragonMod implements
     public void receiveOnPlayerTurnStartPostDraw() {
         damagetaken = false;
         DecayStagger = false;
-        if(!HymnManager.ActiveVerses.isEmpty()){
-            for (AbstractNotOrb Verse : HymnManager.ActiveVerses){
-                Wiz.atb(new AbstractGameAction() {
-                    @Override
-                    public void update() {
-                        isDone = true;
-                        Verse.onStartOfTurn();
-                    }
-                });
-            }
-        }
     }
 }

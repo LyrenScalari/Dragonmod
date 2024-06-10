@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.powers.VulnerablePower;
 import dragonmod.actions.ExploitAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.powers.Rimedancer.BleedPower;
-import dragonmod.powers.Rimedancer.PrecisionPower;
+import dragonmod.powers.Rimedancer.powercards.PrecisionPower;
 import dragonmod.util.Wiz;
 
 public class RazorShiv extends AbstractRimedancerCard {

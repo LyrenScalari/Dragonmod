@@ -4,12 +4,14 @@ import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.powers.LockOnPower;
 import dragonmod.CardMods.SCVShatterMod;
 import dragonmod.DamageModifiers.RangedDamage;
 import dragonmod.actions.ShatterAction;
@@ -29,6 +31,7 @@ public class DeadlyShot extends AbstractRimedancerCard {
         super(ID, 1, CardType.ATTACK, CardRarity.RARE, CardTarget.ALL_ENEMY);
         setDamage(10);
         setCostUpgrade(0);
+        setMagic(2,1);
         DamageModifierManager.addModifier(this,new RangedDamage(true));
         energyCosts.put(TypeEnergyHelper.Mana.Shatter,1);
         CardModifierManager.addModifier(this,new SCVShatterMod());
@@ -59,10 +62,19 @@ public class DeadlyShot extends AbstractRimedancerCard {
         for (AbstractOrb o : Wiz.Player().orbs) {
             if (o instanceof Icicle) {
                 tothrow = (Icicle) o;
+                Icicle finalTothrow = tothrow;
+                Wiz.atb(new AbstractGameAction() {
+                    @Override
+                    public void update() {
+                        baseDamage += finalTothrow.passiveAmount;
+                        isDone = true;
+                    }
+                });
             }
         }
         Wiz.atb(new ShatterAction());
         Wiz.atb(new ThrowIcicleAction(tothrow,m.hb, Color.CYAN));
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
+        Wiz.applyToEnemy(m,new LockOnPower(m,magicNumber));
     }
 }

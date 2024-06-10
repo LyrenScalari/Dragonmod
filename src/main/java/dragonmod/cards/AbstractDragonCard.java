@@ -20,7 +20,7 @@ import dragonmod.DamageModifiers.Icons.ExaltIcon;
 import dragonmod.DamageModifiers.Icons.ShatterIcon;
 import dragonmod.DragonMod;
 import dragonmod.orbs.Icicle;
-import dragonmod.powers.Dragonkin.DivineConvictionpower;
+import dragonmod.powers.Dragonkin.ZealPower;
 import dragonmod.ui.CardArtRoller;
 import dragonmod.util.CardStats;
 import dragonmod.util.TypeEnergyHelper;
@@ -77,7 +77,7 @@ public abstract class AbstractDragonCard extends BaseCard {
             if (energyCosts.get(TypeEnergyHelper.Mana.Exalt) != null) {
                 Color textColor = Color.WHITE.cpy();
                 if (AbstractDungeon.player != null) {
-                    if (!AbstractDungeon.player.hasPower(DivineConvictionpower.POWER_ID) || (AbstractDungeon.player.getPower(DivineConvictionpower.POWER_ID).amount < energyCosts.get(TypeEnergyHelper.Mana.Exalt))) {
+                    if (!AbstractDungeon.player.hasPower(ZealPower.POWER_ID) || (AbstractDungeon.player.getPower(ZealPower.POWER_ID).amount < energyCosts.get(TypeEnergyHelper.Mana.Exalt))) {
                         textColor = Color.RED.cpy();
                     }
                 }

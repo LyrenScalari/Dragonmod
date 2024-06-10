@@ -189,7 +189,10 @@ public class Wiz {
     public static void applyToEnemy(AbstractMonster m, AbstractPower po) {
         atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
     }
-
+    public static void applyToEnemyTemp(AbstractMonster m,AbstractPower po) {
+        atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
+        atb(new ApplyPowerAction(m, AbstractDungeon.player, new LosePowerPower(m, po, po.amount)));
+    }
     public static void applyToEnemyTop(AbstractMonster m, AbstractPower po) {
         att(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
     }

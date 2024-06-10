@@ -97,18 +97,11 @@
       "When an Orb is removed from this slot gain #b1 Temporary [dragonmod:FocusIcon] then this slot is removed."
     ]
   },
-  "${modID}:HailSlot": {
-    "NAME": "Hail Orb Slot",
-    "DESCRIPTION": [
-      "At the start of your turn, an orb channeled into this orb slot deals damage equal to its passive amount to a random enemy twice. when an Orb is removed from this slot this slot is removed.",
-      "At the start of your turn, deal #b"," damage random enemy twice. NL When an Orb is removed from this slot it is removed."
-    ]
-  },
   "${modID}:Sleet": {
-    "NAME": "Sleet",
+    "NAME": "Hail",
     "DESCRIPTION": [
-      "#yPassive : at the end of your turn apply #b"," Chill to a random enemy",
-      " NL #yEvoke : apply #b"," Chill to ALL enemies."
+      "#yPassive : at the end of your turn deal #b"," damage random enemy twice.",
+      " NL #yEvoke : Gain a #yCrystal orb slot."
     ]
   },
   "${modID}:Icicle": {

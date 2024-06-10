@@ -6,15 +6,15 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.FlickCoinEffect;
 import dragonmod.actions.GainCrystalOrbSlotAction;
-import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
+import dragonmod.cards.Draconic.AbstractDraconicCard;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 
 
-public class FrostyCaltrops extends AbstractRimedancerCard {
+public class FrostyCaltrops extends AbstractDraconicCard {
     public static final String ID = FrostyCaltrops.class.getSimpleName();
     public FrostyCaltrops(){
-        super(ID,1,CardType.ATTACK,CardRarity.SPECIAL,CardTarget.ENEMY,true);
+        super(ID,1,CardType.ATTACK,CardRarity.SPECIAL,CardTarget.ENEMY);
         setDamage(8,4);
         tags.add(EnchantmentsManager.Cantrip);
     }

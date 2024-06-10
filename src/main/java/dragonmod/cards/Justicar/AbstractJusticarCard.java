@@ -2,6 +2,8 @@ package dragonmod.cards.Justicar;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import dragonmod.cards.AbstractDragonCard;
 import dragonmod.characters.TheJusticar;
 
@@ -25,6 +27,7 @@ public abstract class AbstractJusticarCard extends AbstractDragonCard {
         super(id, cost, type, CardColor.COLORLESS, rarity, target);
 
     }
+    public static UIStrings verseString = CardCrawlGame.languagePack.getUIString("dragonmod:Verse");
     public int realBaseDamage;
     public int realBaseMagic;
     private boolean needsArtRefresh = false;

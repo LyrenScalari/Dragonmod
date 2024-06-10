@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
@@ -16,7 +18,7 @@ import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 import com.megacrit.cardcrawl.vfx.combat.IceShatterEffect;
 import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 import dragonmod.DragonMod;
-import dragonmod.powers.Rimedancer.Chillpower;
+import dragonmod.actions.GainCrystalOrbSlotAction;
 import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
@@ -26,7 +28,7 @@ public class Sleet extends CustomOrb {
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(ORB_ID);
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
     private static final int PASSIVE_AMOUNT = 2;
-    private static final int EVOKE_AMOUNT = 3;
+    private static final int EVOKE_AMOUNT = 1;
     // Animation Rendering Numbers - You can leave these at default, or play around with them and see what they change.
     private float vfxTimer = 1.0f;
     private float vfxIntervalMin = 0.1f;
@@ -40,22 +42,30 @@ public class Sleet extends CustomOrb {
         updateDescription();
         angle = MathUtils.random(360.0f); // More Animation-related Numbers
         channelAnimTimer = 0.5f;
+        basePassiveAmount = PASSIVE_AMOUNT;
+        baseEvokeAmount = EVOKE_AMOUNT;
+    }
+    public Sleet(int power) {
+        super(ORB_ID, orbString.NAME, power, power, DESCRIPTIONS[1], DESCRIPTIONS[3], DragonMod.orbPath("Sleet.png"));
+        img = TextureLoader.getTexture(DragonMod.orbPath("Sleet.png"));
+        updateDescription();
+        angle = MathUtils.random(360f); // More Animation-related Numbers
+        channelAnimTimer = 0.5f;
+        basePassiveAmount = PASSIVE_AMOUNT;
+        baseEvokeAmount = EVOKE_AMOUNT;
     }
     @Override
     public void onEvoke(){
         Wiz.atb(new VFXAction(new IceShatterEffect(hb.cX,hb.cY)));
         Wiz.atb(new VFXAction(new OrbFlareEffect(this, OrbFlareEffect.OrbFlareColor.FROST), 0.1f));
-        Wiz.atb(new VFXAction(new BlizzardEffect(evokeAmount,false)));
         CardCrawlGame.sound.play("ORB_FROST_EVOKE", 0.1F);
-        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters){
-            Wiz.applyToEnemy(m,new Chillpower(m,AbstractDungeon.player,evokeAmount));
-        }
+        Wiz.atb(new GainCrystalOrbSlotAction(1));
     }
 
     @Override
     public void updateDescription() { // Set the on-hover description of the orb
         applyFocus(); // Apply Focus (Look at the next method)
-        description = DESCRIPTIONS[0] + passiveAmount + DESCRIPTIONS[1] + DESCRIPTIONS[2] + evokeAmount + DESCRIPTIONS[3];
+        description = DESCRIPTIONS[0] + passiveAmount + DESCRIPTIONS[1] + DESCRIPTIONS[2];
     }
     @Override
     public AbstractOrb makeCopy() {
@@ -64,10 +74,14 @@ public class Sleet extends CustomOrb {
 
     @Override
     public void onEndOfTurn() {
-        Wiz.atb(new VFXAction(new IceShatterEffect(hb.cX,hb.cY)));
+        Wiz.vfx(new BlizzardEffect(passiveAmount,false));
+        Wiz.vfx(new IceShatterEffect(hb.cX,hb.cY));
         AbstractMonster m = AbstractDungeon.getRandomMonster();
-        Wiz.atb(new VFXAction(new IceShatterEffect(m.hb.cX,m.hb.cY)));
-        Wiz.applyToEnemy(m,new Chillpower(m,AbstractDungeon.player,passiveAmount));
+        Wiz.vfx(new IceShatterEffect(m.hb.cX,m.hb.cY));
+        Wiz.dmg(m,new DamageInfo(Wiz.Player(),applyLockOn(m,passiveAmount), DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.NONE);
+        m = AbstractDungeon.getRandomMonster();
+        Wiz.vfx(new IceShatterEffect(m.hb.cX,m.hb.cY));
+        Wiz.dmg(m,new DamageInfo(Wiz.Player(),applyLockOn(m,passiveAmount), DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.NONE);
     }
     @Override
     public void playChannelSFX() {
@@ -90,5 +104,19 @@ public class Sleet extends CustomOrb {
         sb.draw(img, this.cX - 48.0F + this.bobEffect.y / 4.0F, this.cY - 48.0F - this.bobEffect.y / 4.0F, 48.0F, 48.0F, 96.0F, 96.0F, this.scale, this.scale, 0.0F, 0, 0, 96, 96, this.hFlip1, false);
         renderText(sb);
         hb.render(sb);
+    }
+    public int getBasePassiveAmount() {
+        return basePassiveAmount;
+    }
+    public int getBaseEvokeAmount() {
+        return baseEvokeAmount;
+    }
+    public void setBasePassiveAmount(int bonus) {
+        basePassiveAmount += bonus;
+        updateDescription();
+    }
+    public void setBaseEvokeAmount(int bonus) {
+        baseEvokeAmount += bonus;
+        updateDescription();
     }
 }

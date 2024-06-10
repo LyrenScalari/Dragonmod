@@ -1,8 +1,12 @@
 package dragonmod.cards.Rimedancer.Uncommon;
 
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import dragonmod.CardMods.RetainCardMod;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
+import dragonmod.powers.Rimedancer.Chillpower;
+import dragonmod.util.Wiz;
 
 public class Slipstream extends AbstractRimedancerCard {
 
@@ -14,5 +18,10 @@ public class Slipstream extends AbstractRimedancerCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.block(p,block);
+        if (m != null && m.getIntentBaseDmg() >= 0){
+            CardModifierManager.addModifier(Wiz.Player().hand.getBottomCard(),new RetainCardMod(1));
+            Wiz.applyToEnemy(m,new Chillpower(m,p,magicNumber));
+        }
     }
 }

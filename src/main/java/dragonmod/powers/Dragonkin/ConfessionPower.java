@@ -2,7 +2,6 @@ package dragonmod.powers.Dragonkin;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -32,9 +31,13 @@ public class ConfessionPower extends BasePower implements CloneablePowerInterfac
     public int onAttacked(DamageInfo info, int damageAmount) {
         CardCrawlGame.sound.play("POWER_MANTRA", 0.05F);
         if (AbstractDungeon.actionManager.turnHasEnded){
-            addToTop(new ReducePowerAction(owner,owner,this,amount/2));
+            Wiz.att(new ReducePowerAction(owner,owner,this,amount/2));
         }
-        Wiz.att(new DamageAllEnemiesAction(owner, DamageInfo.createDamageMatrix(amount, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.FIRE, true));
+        if (info.owner != Wiz.Player()) {
+            Wiz.dmgtop(info.owner,new DamageInfo(Wiz.Player(),amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+        } else {
+            Wiz.dmgtop(AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true), new DamageInfo(Wiz.Player(),amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+        }
         Wiz.att(new AbstractGameAction() {
             @Override
             public void update() {

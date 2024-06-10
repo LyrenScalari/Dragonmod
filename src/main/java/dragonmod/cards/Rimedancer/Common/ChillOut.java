@@ -38,9 +38,9 @@ public class ChillOut extends AbstractRimedancerCard {
             @Override
             public void update() {
                 isDone = true;
-                AbstractCard glimpse = p.hand.getTopCard();
+                AbstractCard glimpse = p.hand.getBottomCard();
                 p.hand.removeCard(glimpse);
-                p.hand.addToBottom(glimpse);
+                p.hand.addToTop(glimpse);
             }
         });
         int tilt = 0;

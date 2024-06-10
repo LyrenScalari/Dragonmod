@@ -14,7 +14,7 @@ import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.cards.Justicar.special.consecration;
 import dragonmod.util.EnchantmentsManager;
-import dragonmod.powers.Dragonkin.DivineConvictionpower;
+import dragonmod.powers.Dragonkin.ZealPower;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
@@ -30,7 +30,7 @@ public class DivineShield extends AbstractJusticarCard {
         setVarCalculation("H", (m, base) -> {
             AbstractPower p = null;
             if (AbstractDungeon.player != null){
-                p = AbstractDungeon.player.getPower(DivineConvictionpower.POWER_ID);
+                p = AbstractDungeon.player.getPower(ZealPower.POWER_ID);
             }
             if(p != null){
                 return base + p.amount;

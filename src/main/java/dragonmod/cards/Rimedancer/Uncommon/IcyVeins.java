@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.FocusPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.powers.Rimedancer.IcyVeinsPower;
+import dragonmod.powers.Rimedancer.powercards.IcyVeinsPower;
 import dragonmod.util.Wiz;
 
 public class IcyVeins extends AbstractRimedancerCard {
@@ -13,6 +13,7 @@ public class IcyVeins extends AbstractRimedancerCard {
     public IcyVeins(){
         super(ID,2,CardType.POWER,CardRarity.UNCOMMON,CardTarget.SELF);
         setMagic(2);
+        setSelfRetain(false,true);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

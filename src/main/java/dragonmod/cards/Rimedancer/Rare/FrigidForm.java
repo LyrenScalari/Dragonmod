@@ -18,6 +18,6 @@ public class FrigidForm extends AbstractRimedancerCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new IncreaseMaxOrbAction(SecondMagicNumber));
-        Wiz.applyToSelf(new dragonmod.powers.Rimedancer.FrigidForm(magicNumber));
+        Wiz.applyToSelf(new dragonmod.powers.Rimedancer.powercards.FrigidForm(magicNumber));
     }
 }

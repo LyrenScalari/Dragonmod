@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import dragonmod.powers.Dragonkin.DivineConvictionpower;
+import dragonmod.powers.Dragonkin.ZealPower;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.interfaces.onExaltPower;
 
@@ -23,9 +23,9 @@ public class ExaltAction extends AbstractGameAction {
     @Override
     public void update() {
         if (this.duration == this.startDuration) {
-            if (AbstractDungeon.player.hasPower(DivineConvictionpower.POWER_ID)) {
-                if (ExaltCost.get(TypeEnergyHelper.Mana.Exalt) <= AbstractDungeon.player.getPower(DivineConvictionpower.POWER_ID).amount) {
-                    AbstractPower reduceMe = AbstractDungeon.player.getPower(DivineConvictionpower.POWER_ID);
+            if (AbstractDungeon.player.hasPower(ZealPower.POWER_ID)) {
+                if (ExaltCost.get(TypeEnergyHelper.Mana.Exalt) <= AbstractDungeon.player.getPower(ZealPower.POWER_ID).amount) {
+                    AbstractPower reduceMe = AbstractDungeon.player.getPower(ZealPower.POWER_ID);
                     if (reduceMe != null) {
                         for (AbstractPower p : AbstractDungeon.player.powers){
                             if (p instanceof onExaltPower){

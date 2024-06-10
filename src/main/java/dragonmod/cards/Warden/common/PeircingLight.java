@@ -34,7 +34,7 @@ public class PeircingLight extends AbstractWardenCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL));
-        if (p.stance.ID.equals(DawnStance.STANCE_ID)){
+        if (!p.stance.ID.equals(NeutralStance.STANCE_ID)){
             Wiz.applyToSelf(new EmeraldBlossomPower(magicNumber));
             Wiz.atb(new NotStanceCheckAction(NeutralStance.STANCE_ID, new VFXAction(new EmptyStanceEffect(p.hb.cX, p.hb.cY), 0.1F)));
             Wiz.atb(new ChangeStanceAction(new NeutralStance()));

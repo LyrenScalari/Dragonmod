@@ -141,10 +141,28 @@
       " Bleed."
     ]
   },
+  "${modID}:ArcaneCurtain": {
+    "NAME": "Arcane Curtain",
+    "DESCRIPTIONS": ["At the start of your turn #yFlourish then #ySheathe the top #b","At the start of your turn #yFlourish then #ySheathe the top card ",
+      " cards"," of your draw pile it costs 0 until played."
+    ]
+  },
+  "${modID}:ThousandsKnives": {
+    "NAME": "Thousand Knives",
+    "DESCRIPTIONS": ["At the start of your turn and whenever you #yFlourish Add"," a Shiv",
+      " #b"," Shivs"," to your hand"
+    ]
+  },
   "${modID}:Bleed": {
     "NAME": "Bleed",
     "DESCRIPTIONS": ["Next turn lose #b",
       " HP."
+    ]
+  },
+  "${modID}:Flatfooted": {
+    "NAME": "Flatfooted",
+    "DESCRIPTIONS": ["Whenever this creature gains block it takes #b",
+      " damage."
     ]
   },
   "${modID}:SilverShadow": {
@@ -210,8 +228,8 @@
   },
   "${modID}:Banish": {
     "NAME": "Banish",
-    "DESCRIPTIONS": ["When this obtains at least #b",
-      " [${modID}:BanishIcon] it takes [${modID}:LightIcon] damage equal to its [${modID}:BanishIcon] ."
+    "DESCRIPTIONS": ["When you obtain #b",
+      " more [${modID}:BanishIcon] shuffle a #yBanishing #yVerse into your draw pile."
     ]
   },
   "${modID}:EmeraldBlossom": {

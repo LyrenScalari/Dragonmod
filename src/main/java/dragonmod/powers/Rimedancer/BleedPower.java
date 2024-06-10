@@ -30,7 +30,7 @@ public class BleedPower extends BasePower implements CloneablePowerInterface {
         updateDescription();
     }
 
-    public void atEndOfRound() {
+    public void atStartOfTurn() {
         flash();
         Wiz.atb(new LoseHPAction(owner,owner,amount));
         addToBot(new RemoveSpecificPowerAction(owner, owner, this.ID));

@@ -7,7 +7,7 @@ import dragonmod.cards.Warden.AbstractWardenCard;
 public class RoaringWind extends AbstractWardenCard {
     public static final String ID = RoaringWind.class.getSimpleName();
     public RoaringWind(){
-        super(ID,1,CardType.POWER,CardRarity.UNCOMMON,CardTarget.ENEMY);
+        super(ID,1,CardType.POWER,CardRarity.UNCOMMON,CardTarget.SELF);
         setMagic(2,1);
     }
     @Override

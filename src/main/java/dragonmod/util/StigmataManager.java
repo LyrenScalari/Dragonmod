@@ -7,9 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -27,6 +25,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import dragonmod.interfaces.*;
+import dragonmod.powers.Dragonkin.SacrificePower;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ import static dragonmod.characters.TheJusticar.Enums.THE_JUSTICAR;
 public class StigmataManager {
     public static StigmataUI stigmataUI;
     public static boolean renderstigmataui = false;
-
+    public static int Overheal = 0;
     public StigmataManager() {
     }
     public static void onBattleStart() {
@@ -54,25 +53,41 @@ public class StigmataManager {
         StigmataField.Stigmata.set(Wiz.Player(), getStigmataTotal() - amount);
     }
     public static void cureHealing(int heal) {
+        Overheal = 0;
         int cureHeal = Math.min(getStigmataTotal(), heal);
         int prevHp = Wiz.Player().currentHealth;
         int projectedhp = Math.min(prevHp + cureHeal,Wiz.Player().maxHealth);
-        int blockAmount = heal - (projectedhp - prevHp);
-        int finalHeal = cureHeal - blockAmount;
-        if (blockAmount > 0) {
-            Wiz.atb(new GainBlockAction(Wiz.Player(), blockAmount));
+        int overheal = heal - (projectedhp - prevHp);
+        if (overheal > 0) {
+            Overheal = overheal;
             for (AbstractRelic r : AbstractDungeon.player.relics){
-                if (r instanceof OnCure){
-                    ((OnCure)r).OnCureBlock(blockAmount);
+                if (r instanceof OnOverheal){
+                    ((OnOverheal)r).onOverheal(Overheal);
+                }
+            }
+            for (AbstractCard e : EnchantmentsField.Enchantments.get(Wiz.Player()).group){
+                if (e instanceof OnOverheal){
+                    ((OnOverheal) e).onOverheal(Overheal);
+                }
+            }
+            for (AbstractPower p : Wiz.Player().powers){
+                if (p instanceof OnOverheal){
+                    ((OnOverheal) p).onOverheal(Overheal);
+                }
+            }
+            for (AbstractCard c : Wiz.Player().hand.group){
+                if (c instanceof OnOverheal){
+                    ((OnOverheal) c).onOverheal(Overheal);
                 }
             }
         }
-        if (finalHeal > 0) {
-            spendStigmata(finalHeal);
-            Wiz.Player().heal(finalHeal);
+        if (cureHeal > 0) {
+            spendStigmata(cureHeal);
+            Wiz.Player().heal(cureHeal);
+            Wiz.applyToSelf(new SacrificePower(AbstractDungeon.player, AbstractDungeon.player, heal));
             for (AbstractRelic r : AbstractDungeon.player.relics){
                 if (r instanceof OnCure){
-                    ((OnCure)r).OnCureHeal(finalHeal);
+                    ((OnCure)r).OnCureHeal(cureHeal);
                 }
             }
         }
@@ -84,13 +99,13 @@ public class StigmataManager {
         if (CardCrawlGame.dungeon != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
             if (renderstigmataui) {
                 if (stigmataUI == null) {
-                    stigmataUI = new StigmataUI(ImageMaster.loadImage("dragonmod/ui/Stressvfx.png"));
+                    stigmataUI = new StigmataUI(ImageMaster.loadImage("dragonmod/ui/StigmataUI/Stressvfx.png"));
                 }
                 return true;
             } else if (StigmataField.Stigmata.get(AbstractDungeon.player) > 0 || AbstractDungeon.player.chosenClass == THE_JUSTICAR) {
                 renderstigmataui = true;
                 if (stigmataUI == null) {
-                    stigmataUI = new StigmataUI(ImageMaster.loadImage("dragonmod/ui/Stressvfx.png"));
+                    stigmataUI = new StigmataUI(ImageMaster.loadImage("dragonmod/ui/StigmataUI/Stressvfx.png"));
                 }
                 return true;
             }
@@ -179,20 +194,6 @@ public class StigmataManager {
                         }
                     }
                 }
-                if ((info.owner == AbstractDungeon.player || !AbstractDungeon.actionManager.turnHasEnded) ) {
-                    if (!HymnManager.ActiveVerses.isEmpty()) {
-                        for (AbstractNotOrb Verse : HymnManager.ActiveVerses){
-                            int finalDamageAmount = damageAmount;
-                            Wiz.atb(new AbstractGameAction() {
-                                @Override
-                                public void update() {
-                                    isDone = true;
-                                    ((ReciveModifyDamageEffect)Verse).onReciveDamage(finalDamageAmount, info);
-                                }
-                            });
-                        }
-                    }
-                }
             }
         }
     }
@@ -258,8 +259,8 @@ public class StigmataManager {
         public StigmataUI(Texture image){
             super(image, baseX, baseY , hb_w, hb_h);
             this.image = image;
-            Gem = ImageMaster.loadImage("dragonmod/ui/Stigmata.png");
-            hb = new Hitbox(baseX + hb_w/2,baseY/2,hb_w,hb_h);
+            Gem = ImageMaster.loadImage("dragonmod/ui/StigmataUI/Stigmata.png");
+            hb = new Hitbox(baseX + hb_w,baseY/2,hb_w,hb_h);
             this.fbo = new FrameBuffer(Pixmap.Format.RGBA8888, IMG_DIM, IMG_DIM, false, false);
             this.setClickable(false);
         }

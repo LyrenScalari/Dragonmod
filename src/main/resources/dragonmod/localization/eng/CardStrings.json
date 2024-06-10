@@ -17,22 +17,22 @@
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] ."
   },
-  "${modID}:BlazingStrike": {
-    "NAME": "Blazing Slash",
-    "DESCRIPTION": "Deal !D! damage. NL Discard your leftmost card."
-  },
   "${modID}:Sunbeam": {
     "NAME": "Sunbeam",
     "DESCRIPTION": "Deal !D! damage. NL Gain !M! [${modID}:ConfessionIcon] ."
   },
   "${modID}:Cauterize": {
-    "NAME": "Cauterize",
-    "DESCRIPTION": "${modID}:Cure !${modID}:H!. NL Take !M! damage."
+    "NAME": "Bonfire",
+    "DESCRIPTION": "Gain !B! Block. NL Discard the card left of this. NL ${modID}:Coda !M! : ${modID}:Cure !${modID}:H! ."
   },
 
   "${modID}:InnerFire": {
     "NAME": "Inner Fire",
     "DESCRIPTION": "Gain !${modID}:M2! [${modID}:PowerfulIcon] . NL Take !M! damage."
+  },
+  "${modID}:BlazingStrike": {
+    "NAME": "Blazing Slash",
+    "DESCRIPTION": "Deal !D! damage. NL Discard the card left of this."
   },
   "${modID}:Chiwen": {
     "NAME": "Turbulent Blaze",
@@ -40,23 +40,24 @@
   },
   "${modID}:PrayerofVigor": {
     "NAME": "Prayer of Vigor",
-    "DESCRIPTION": "${modID}:Coda !M!: ${modID}:Cure !${modID}:H!."
+    "DESCRIPTION": "${modID}:Overheal: Gain that much temporary [${modID}:StrengthIcon] . NL ${modID}:Coda !M!: ${modID}:Cure !${modID}:H! ."
   },
   "${modID}:PrayerofWrath": {
     "NAME": "Prayer of Wrath",
-    "DESCRIPTION": "${modID}:Coda !M!. NL On *Chant : Gain !M! Vigor."
+    "DESCRIPTION": "On ${modID}:Chant: Apply !M! [${modID}:ScorchIcon] to a random enemy. NL ${modID}:Coda 3 : Deal !D! damage to a random enemy."
   },
   "${modID}:HolySlash": {
     "NAME": "Holy Slash",
-    "DESCRIPTION": "Deal !D! damage twice. NL Gain !M! [${modID}:ConfessionIcon] ."
+    "DESCRIPTION": "Deal !D! [#fcad03]+[] [#fcad03]2x[] [${modID}:ZealIcon] damage twice. NL Gain !M! [${modID}:ConfessionIcon] ."
   },
   "${modID}:Dawnlight": {
     "NAME": "Dawnlight",
-    "DESCRIPTION": "Deal damage to all enemies equal to !D! times your ${modID}:Devotion."
+    "DESCRIPTION": "Deal !${modID}:DevaD! [#fcad03]x[] [${modID}:DevotionIcon] damage to all enemies."
   },
-  "${modID}:TotheFront": {
-    "NAME": "To the Front",
-    "DESCRIPTION": "${modID}:Beckon !M! cards."
+  "${modID}:HolyFlash": {
+    "NAME": "Divine Flare",
+    "DESCRIPTION": "Deal !D! [#fcad03](8+[] [#fcad03]2x[] [${modID}:ZealIcon] [#fcad03])[] damage. NL Draw {!M!|1= a card|2>=!M! cards}{@@} [#fcad03](1+[] [#fcad03]0.25x[] [${modID}:ZealIcon]  [#fcad03])[]",
+    "UPGRADE_DESCRIPTION": "Deal !D! [#fcad03](10+[] [#fcad03]3x[] [${modID}:ZealIcon] [#fcad03])[] damage. NL Draw {!M!|1= a card|2>=!M! cards}{@@} [#fcad03](1+[] [#fcad03]0.5x[] [${modID}:ZealIcon]  [#fcad03])[]"
   },
   "${modID}:Charr": {
     "NAME": "Charr",
@@ -64,20 +65,16 @@
   },
   "${modID}:GuardianStrike": {
     "NAME": "Guardian Strike",
-    "DESCRIPTION": "Deal !D! damage. NL Choose 1 of 3 *Inactive *Verses to ${modID}:Chant.",
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Chant your next ${modID}:Verse.",
     "EXTENDED_DESCRIPTION": ["to #yChant"]
-  },
-  "${modID}:InfuseCourage": {
-    "NAME": "Infuse Courage",
-    "DESCRIPTION": "${modID}:Cure !${modID}:H!. NL Gain !M! [${modID}:CourageIcon] ."
   },
   "${modID}:PulsingLight": {
     "NAME": "Pulsing Light",
-    "DESCRIPTION": "${modID}:Cure !${modID}:H! twice."
+    "DESCRIPTION": "${modID}:Cure !${modID}:H! . NL ${modID}:Overhealing is applied as [#fcad03]4[] [#fcad03]+50%[] [#fcad03]Overhealing[] [${modID}:DivineArmorIcon]"
   },
   "${modID}:Sanctuary": {
     "NAME": "Sanctuary",
-    "DESCRIPTION": "${modID}:Coda !${modID}:M2!: Gain !M! [${modID}:ConfessionIcon] ."
+    "DESCRIPTION": "${modID}:Coda 3. NL On ${modID}:Chant: Gain !M! [${modID}:ConfessionIcon] ."
   },
   "${modID}:BattleShout": {
     "NAME": "Battle Shout",
@@ -85,7 +82,7 @@
   },
   "${modID}:ShieldsUp": {
     "NAME": "Shield of Faith",
-    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Gain !M! [${modID}:CourageIcon] ."
+    "DESCRIPTION": "Gain !B! [${modID}:DivineArmorIcon] . NL Gain !M! [${modID}:CourageIcon] ."
   },
   "${modID}:SurgingStrike": {
     "NAME": "Bracing Strike",
@@ -98,14 +95,6 @@
   "${modID}:Fantatism": {
     "NAME": "Fanaticism",
     "DESCRIPTION": "Take !${modID}:M2! damage. NL Gain {!M!|1=[E]|2=[E] [E]|3=[E] [E] [E]|4=[E] [E] [E ][E]|5= !M! [E]}. NL Draw {!M!|<2=a card|>1=!M! cards} {@@}. NL Suffer 1 [${modID}:VulnerableIcon]"
-  },
-  "${modID}:Clarity": {
-    "NAME": "Clarity",
-    "DESCRIPTION": "${modID}:Exalt : Draw !M! Cards and Gain [E] [E] ."
-  },
-  "${modID}:LightsReach": {
-    "NAME": "Judgement of Justice",
-    "DESCRIPTION": "Deal !D! damage to attacking enemies. NL ALL other charaters gain !B! [${modID}:BlockIcon] ."
   },
 
   "${modID}:ShoulderCheck": {
@@ -123,13 +112,12 @@
   },
   "${modID}:RelentlessPursuit": {
     "NAME": "Relentless Pursuit",
-    "DESCRIPTION": "Deal {!${modID}:WOG!|>8=!${modID}:WOG! damage. (Equals half your [${modID}:BlockIcon] + 8.)|<9=N + 8 damage. (N equals half your [${modID}:BlockIcon] )} {@@}. NL [${modID}:BlockIcon] gained this turn damages target enemy.",
-    "UPGRADE_DESCRIPTION": "Deal {!${modID}:WOG!|>11=!${modID}:WOG! damage. (Equals half your [${modID}:BlockIcon] + 11.)|<12=N + 11 damage. (N equals half your [${modID}:BlockIcon] )} {@@}. NL [${modID}:BlockIcon] gained this turn damages target enemy."
-  },
+    "DESCRIPTION": "Deal !${modID}:WOG! [#fcad03]+[] [#fcad03]50%[] [${modID}:BlockIcon] [#fcad03] damage. NL [${modID}:BlockIcon] gained this turn damages target enemy."
+    },
   "${modID}:MarchofOtherworldlyLight": {
     "NAME": "Purge the Wicked",
-    "DESCRIPTION": "Deal {!${modID}:DevaD!|>8=!${modID}:DevaD! damage. (Equals ${modID}:Devotion + 8.)|<9=N + 8 damage} {@@}. NL Gain {!${modID}:Deva!|>0=!${modID}:DevaM! [${modID}:ConfessionIcon] . NL (Equals ${modID}:Devotion + 4.)|<1=N + !M! [${modID}:ConfessionIcon] . NL (N equals your ${modID}:Devotion )} ."
-  },
+    "DESCRIPTION": "Deal !${modID}:DevaD! [#fcad03](8+[] [${modID}:DevotionIcon] [#fcad03])[] damage. NL Gain !${modID}:DevaM! [#fcad03](4+[] [${modID}:DevotionIcon] [#fcad03])[] [${modID}:ConfessionIcon] ."
+    },
   "${modID}:RepairArmor": {
     "NAME": "Repair Armor",
     "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Remove your [${modID}:FrailIcon] . NL Gain !M! [${modID}:ReinforceIcon] ."
@@ -144,25 +132,25 @@
   },
   "${modID}:BeaconofLight": {
     "NAME": "Beacon of Light",
-    "DESCRIPTION": "Creates an additional *Verse when played. NL ${modID}:Coda !M!. NL On *Chant : ${modID}:Cure !${modID}:H! ."
+    "DESCRIPTION": "Create a set aside copy of this. NL ${modID}:Coda !M!. NL On ${modID}:Chant : ${modID}:Cure !${modID}:H! ."
   },
 
   "${modID}:sinnerslament": {
     "NAME": "Sinners Lament",
-    "DESCRIPTION": "${modID}:Coda !M!: Lose !${modID}:M2! HP. NL On *Chant: ALL enemies lose HP equal to twice your ${modID}:Devotion."
+    "DESCRIPTION": "${modID}:Coda 6: Lose !M! HP. NL On ${modID}:Chant: ALL enemies lose HP equal to twice your [${modID}:DevotionIcon] ."
   },
   "${modID}:YieldmyFlesh": {
     "NAME": "Yield my Flesh",
-    "DESCRIPTION": "*Chant your next Verse whenever you lose HP during your turn. NL On ${modID}:Coda: ${modID}:Cure !${modID}:H! ."
+    "DESCRIPTION": "${modID}:Chant your next Verse whenever you lose HP during your turn. NL On ${modID}:Coda: ${modID}:Cure !${modID}:H! ."
   },
   "${modID}:WrathofGod": {
     "NAME": "Wrath of God",
-    "DESCRIPTION": "Deal {!${modID}:WOG!|>8=!${modID}:WOG! damage to ALL enemies. (Equals your [${modID}:BlockIcon] + 8.)|<9=N + 8 damage to ALL enemies. (N equals your [${modID}:BlockIcon] )} {@@}. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Deal {!${modID}:WOG!|>10=!${modID}:WOG! damage to ALL enemies. (Equals your [${modID}:BlockIcon] + 10.)|<11=N + 10 damage to ALL enemies. (N equals your [${modID}:BlockIcon] )} {@@}. NL Exhaust."
+    "DESCRIPTION": "Deal !${modID}:WOG! [#fcad03](8[] [#fcad03]+[] [${modID}:BlockIcon] [#fcad03])[] damage to ALL enemies.",
+    "UPGRADE_DESCRIPTION":"Deal !${modID}:WOG! [#fcad03](8[] [#fcad03]+[] [#fcad03]150%[] [${modID}:BlockIcon] [#fcad03])[] damage to ALL enemies."
   },
   "${modID}:SeraphForm": {
     "NAME": "Seraph Form",
-    "DESCRIPTION": "The first time you heal each turn, draw a card and deal damage equal to your ${modID}:Devotion to ALL enemies."
+    "DESCRIPTION": "The first time you heal each turn, draw a card and deal damage equal to your [${modID}:DevotionIcon] to ALL enemies."
   },
 
   "${modID}:consecration": {
@@ -239,11 +227,11 @@
   },
   "${modID}:CryoShrapnel": {
     "NAME": "Cryo Shrapnel",
-    "DESCRIPTION": "${modID}:Fire your ${modID}:Icicles at ALL enemies."
+    "DESCRIPTION": "Channel !M! ${modID}:Hail."
   },
   "${modID}:LeadAstray": {
     "NAME": "Lead Astray",
-    "DESCRIPTION": "Apply !M! [${modID}:WeakIcon] . NL Gain !B! [${modID}:BlockIcon] . NL ${modID}:Exploit any 2: Apply !${modID}:M2! [dragonmod:ChillIcon]"
+    "DESCRIPTION": "Apply !M! [${modID}:WeakIcon] . NL Gain !B! [${modID}:BlockIcon] . NL ${modID}:Exploit any 2: ${modID}:Sheathe up to !M! cards left of this."
   },
   "${modID}:IcicleSpear": {
     "NAME": "Icicle Spear",
@@ -285,6 +273,10 @@
     "NAME": "Crackle",
     "DESCRIPTION": "${modID}:Fire an ${modID}:Icicle. NL ${modID}:Tilt 2: Gain !B! [${modID}:BlockIcon] ."
   },
+  "${modID}:SnowFort": {
+  "NAME": "Snow Fort",
+  "DESCRIPTION": "Gain !B! ."
+  },
 
   "${modID}:Rimeshank": {
     "NAME": "Rimeshank",
@@ -293,7 +285,12 @@
   },
   "${modID}:SleevedAce": {
     "NAME": "Sleeved Ace",
-    "DESCRIPTION": "${modID}:Flourish. NL Choose 1 of !M! cards in your hand, it costs 0 until played and ${modID}:Sheathe it."
+    "DESCRIPTION": "${modID}:Flourish. NL ${modID}:Sheathe the card left of this, it costs 0 until played."
+  },
+  "${modID}:HowlingBlast": {
+    "NAME": "Howling Blast",
+    "DESCRIPTION": "Deal !D! [#2a89f5](11[] [#2a89f5]+[] [#2a89f5]target[] [${modID}:ChillIcon] [#2a89f5])[] damage. NL Apply !M! [#2a89f5](4[] [#2a89f5]+[] [#2a89f5]target[] [${modID}:ChillIcon] [#2a89f5])[] [dragonmod:BleedIcon] to ALL enemies.",
+    "UPGRADE_DESCRIPTION":"Deal !D! [#2a89f5](11[] [#2a89f5]+2x[] [#2a89f5]target[] [${modID}:ChillIcon] [#2a89f5])[] damage. NL Apply !M! [#2a89f5](4[] [#2a89f5]+2x[] [#2a89f5]target[] [${modID}:ChillIcon] [#2a89f5])[] [dragonmod:BleedIcon] to ALL enemies."
   },
   "${modID}:ExposeWeakpoint": {
     "NAME": "Expose Weakpoint",
@@ -302,8 +299,8 @@
 
   "${modID}:Cryolattice": {
     "NAME": "Cryolattice",
-    "DESCRIPTION": "Once per turn after you Remove an ${modID}:Icicle, gain a ${modID}:Crystal Orb Slot.",
-    "UPGRADE_DESCRIPTION": "Once per turn after you Remove an ${modID}:Icicle, gain !M! ${modID}:Crystal Orb Slots."
+    "DESCRIPTION": "Ethereal. NL Once per turn after you Remove an ${modID}:Icicle, gain a ${modID}:Crystal Orb Slot.",
+    "UPGRADE_DESCRIPTION": "Once per turn after you Remove an ${modID}:Icicle, gain a ${modID}:Crystal Orb Slot."
   },
   "${modID}:ExhaleofHoarfrost": {
     "NAME": "Exhale of Hoarfrost",
@@ -311,15 +308,20 @@
   },
   "${modID}:IcyVeins": {
     "NAME": "Icy Veins",
-    "DESCRIPTION": "Gain !M! [dragonmod:StrengthIcon] and [dragonmod:FocusIcon] . NL After you remove an Orb gain !M! [${modID}:BlockIcon] ."
+    "DESCRIPTION": "Gain !M! [dragonmod:StrengthIcon] and [dragonmod:FocusIcon] . NL After you remove an Orb gain !M! [${modID}:BlockIcon] .",
+    "UPGRADE_DESCRIPTION": "Retain. NL Gain !M! [dragonmod:StrengthIcon] and [dragonmod:FocusIcon] . NL After you remove an Orb gain !M! [${modID}:BlockIcon] ."
+  },
+  "${modID}:PokerDart": {
+    "NAME": "Poker Dart",
+    "DESCRIPTION": "Deal !D! damage to a random enemy, repeat for each card left of this. NL Gain !B! [${modID}:BlockIcon] increased by !B! for each card right of this."
   },
   "${modID}:AuroraVeil": {
     "NAME": "Aurora Veil",
-    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Apply !M! [${modID}:WeakIcon] to ALL enemies."
+    "DESCRIPTION": "Gain !B! . NL Apply !M! [${modID}:WeakIcon] to ALL enemies."
   },
   "${modID}:Slipstream": {
     "NAME": "Slipstream",
-    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL If the enemy intends to attack, draw a card and apply !M! [dragonmod:ChillIcon] ."
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL If the enemy intends to attack, Retain your leftmost card this turn and apply !M! [dragonmod:ChillIcon] ."
   },
   "${modID}:DeathlyDispute": {
     "NAME": "Deathly Dispute",
@@ -348,12 +350,13 @@
   },
   "${modID}:ConeofCold": {
     "NAME": "Cone of Cold",
-    "DESCRIPTION": "Deal !D! damage to all enemies Twice. NL ${modID}:Sheathe a random card in your discard pile"
+    "DESCRIPTION": "Deal !D! damage to all enemies Twice. NL ${modID}:Sheathe a random card in your discard pile",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage to all enemies Twice. NL ${modID}:Sheathe the top card of your discard pile"
   },
   "${modID}:GatheringStorm": {
     "NAME": "Gathering Storm",
-    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Gain !${modID}:M2! [dragonmod:SubzeroIcon] . NL Gain a ${modID}:Hail Orb slot",
-    "UPGRADE_DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Gain !${modID}:M2! [dragonmod:SubzeroIcon] . NL Gain !M! ${modID}:Hail Orb slots."
+    "DESCRIPTION": "Gain !B! . NL Gain !${modID}:M2! [dragonmod:SubzeroIcon] .",
+    "UPGRADE_DESCRIPTION": "Gain !B!  . NL Gain !${modID}:M2! [dragonmod:SubzeroIcon] ."
   },
   "${modID}:FractalShell": {
     "NAME": "Fractal Arrow",
@@ -369,8 +372,8 @@
   },
   "${modID}:StreetRink": {
     "NAME": "Street Rink",
-    "DESCRIPTION": "Gain a ${modID}:Hail Orb slot. NL Apply !M! [${modID}:VulnerableIcon] .",
-    "UPGRADE_DESCRIPTION": "Gain a ${modID}:Hail Orb slot. NL Apply !M! [${modID}:VulnerableIcon] to ALL enemies."
+    "DESCRIPTION": "Apply !M! [${modID}:VulnerableIcon] . NL ${modID}:Exploit [dragonmod:ChillIcon] : Gain !B! [${modID}:BlockIcon] [#2a89f5](4[] [#2a89f5]+[] [#2a89f5]target[] [${modID}:ChillIcon] [#2a89f5])[] and Halve their [${modID}:ChillIcon] .",
+    "UPGRADE_DESCRIPTION": "Apply !M! [${modID}:VulnerableIcon] to ALL enemies. NL ${modID}:Exploit [dragonmod:ChillIcon] : Gain !B! [${modID}:BlockIcon] [#2a89f5](4[] [#2a89f5]+[] [#2a89f5]target[] [${modID}:ChillIcon] [#2a89f5])[] and Halve their [${modID}:ChillIcon] ."
   },
   "${modID}:PillarofFrost": {
     "NAME": "Pillar of Frost",
@@ -378,16 +381,35 @@
   },
   "${modID}:GlacialAdvance": {
   "NAME": "Glacial Advance",
-  "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL After you remove an Orb, Deal !M! [${modID}:RangedIcon] damage to ALL enemies and draw a card."
+  "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL After you remove an Orb, Deal !M! [${modID}:RangedIcon] damage to ALL enemies."
 },
   "${modID}:IceBarrier": {
     "NAME": "Ice Barrier",
-    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Gain !M! [${modID}:ReinforceIcon] . NL ${modID}:Exploit [dragonmod:ChillIcon] : Grant that much additional [${modID}:BlockIcon] "
+    "DESCRIPTION": "Gain !M! [${modID}:ReinforceIcon] . NL Whenever you are attacked this turn, apply !M! [dragonmod:ChillIcon] and [${modID}:SlowIcon] back."
+  },
+  "${modID}:WraithsLegerdemain": {
+    "NAME": "Wraith's Legerdemain",
+    "DESCRIPTION": "Draw {!M!|1=a card|1>=!M! cards} . NL ${modID}:Tilt 3 : Next turn, Gain {!${modID}:M2!|1=[E]|2=[E] [E]|3=[E] [E] [E]|4>=!${modID}:M2! [E]}{@@} and draw an additional card."
+  },
+  "${modID}:ShadowStep": {
+    "NAME": "Shadow Step",
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] [#2a89f5](6[] [#2a89f5]+[] [#2a89f5]2x [#2a89f5]Cards[] [#2a89f5]right[] [#2a89f5]of[] [#2a89f5]this)[] NL ${modID}:Tilt !M! : Choose a card in your draw pile to put on top.",
+    "UPGRADE_DESCRIPTION": "Gain !B! [${modID}:BlockIcon] [#2a89f5](9[] [#2a89f5]+[] [#2a89f5]2x [#2a89f5]Cards[] [#2a89f5]right[] [#2a89f5]of[] [#2a89f5]this)[] NL ${modID}:Tilt !M! : Choose a card in your draw pile to put on top.",
+    "EXTENDED_DESCRIPTION": ["Put on top of your draw pile"]
+  },
+  "${modID}:CordonofMirages": {
+    "NAME": "Trickster's Ruse",
+    "DESCRIPTION": "Add !M! *Dazed to your hand. NL ${modID}:Glimpse !M!. NL Draw a card."
+  },
+  "${modID}:MagiciansHaze": {
+    "NAME": "Magicians Haze",
+    "DESCRIPTION": "Remove all your orbs, channel that many ${modID}:Icicles plus !M! . NL ${modID}:Tilt !${modID}:M2! : Discard your hand draw that many cards plus !M! ."
   },
   "${modID}:FrozenRose": {
     "NAME": "Frozen Rose",
     "DESCRIPTION": "Gain !B! . NL When Attacked, deal !M! damage to ALL enemies."
   },
+
 
   "${modID}:DiamondDust": {
     "NAME": "Diamond Dust",
@@ -395,7 +417,11 @@
   },
   "${modID}:DeadlyShot": {
     "NAME": "Deadly Throw",
-    "DESCRIPTION": "Deal !D! damage. NL Permanently increase this cards damage by the power of the removed ${modID}:Icicle."
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [dragonmod:LockonIcon] . NL increase this cards damage by the power of the removed ${modID}:Icicle for the rest of combat."
+  },
+  "${modID}:MyriadImages": {
+    "NAME": "Myriad Images",
+    "DESCRIPTION": "${modID}:Tilt !${modID}:M2! : Deal !D! damage to ALL enemies. NL ALL enemies lose !M! [${modID}:StrengthIcon] this turn."
   },
   "${modID}:FrigidForm": {
     "NAME": "Frigid Form",
@@ -405,11 +431,29 @@
     "NAME": "Hailstorm",
     "DESCRIPTION": "Channel X ${modID}:Icicles. NL Next Turn, Orb Passive effects activate X additional times. NL Exhaust."
   },
+  "${modID}:ArcaneCurtain": {
+    "NAME": "Arcane Curtain",
+    "DESCRIPTION": "{@@}At the start of your turn {!M!|@=${modID}:Flourish then ${modID}:Sheathe the top card of your draw pile it costs 0 until played.|2=${modID}:Flourish twice then ${modID}:Sheathe the !M! top cards of your draw pile they cost 0 until played.|3=${modID}:Flourish !M! times then ${modID}:Sheathe the !M! top cards of your draw pile they cost 0 until played.}",
+    "UPGRADE_DESCRIPTION": "{@@}Innate. NL At the start of your turn {!M!|@=${modID}:Flourish then ${modID}:Sheathe the top card of your draw pile it costs 0 until played.|2=${modID}:Flourish twice then ${modID}:Sheathe the !M! top cards of your draw pile they cost 0 until played.|3=${modID}:Flourish !M! times then ${modID}:Sheathe the !M! top cards of your draw pile they cost 0 until played.}"
+  },
   "${modID}:WinterWoe": {
     "NAME": "Winter Woe",
     "DESCRIPTION": "Double your [dragonmod:SubzeroIcon] . NL Channel an ${modID}:Icicle. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Triple your [dragonmod:SubzeroIcon] . NL Channel an ${modID}:Icicle. NL Exhaust."
   },
+  "${modID}:Scintilla": {
+    "NAME": "Scintilla",
+    "DESCRIPTION": "When attacked, reduce the damage by half then deal that much + !M! damage back and apply [dragonmod:BleedIcon] equal to the damage dealt."
+  },
+  "${modID}:TempoTheft": {
+    "NAME": "Tempo Theft",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !${modID}:M2! [dragonmod:SlowIcon] and enemy takes !${modID}:M2! damage whenever they gain [dragonmod:BlockIcon] . NL ${modID}:Exploit any 3: Gain !${modID}:M2! [dragonmod:DexterityIcon] and Next turn, Draw !M! cards."
+  },
+  "${modID}:ThousandKnives": {
+    "NAME": "Thousand Knives",
+    "DESCRIPTION": "At the start of your turn and whenever you ${modID}:Flourish add !M! *Shivs to your hand."
+  },
+
   "${modID}:WardenStrike": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! damage."
@@ -421,15 +465,15 @@
 
   "${modID}:WillowSplitter": {
     "NAME": "Willow Splitter",
-    "DESCRIPTION": "Deal !D! damage twice."
+    "DESCRIPTION": "Deal !D! damage twice. NL Gain 1 [${modID}:EmeraldBlossomIcon] ."
   },
   "${modID}:RisingCresent": {
     "NAME": "Rising Cresent",
-    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [${modID}:WeakIcon]"
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [${modID}:WeakIcon] . NL Gain 1 [${modID}:EmeraldBlossomIcon] ."
   },
   "${modID}:SupernatrualWind": {
     "NAME": "Supernatural Wind",
-    "DESCRIPTION": "Deal !D! damage !M! times."
+    "DESCRIPTION": "Deal !D! damage !M! times. NL Gain 1 [${modID}:EmeraldBlossomIcon] ."
   },
 
   "${modID}:ShroudedSky": {
@@ -452,11 +496,15 @@
   },
   "${modID}:MountainMists": {
     "NAME": "Mountain Mists",
-    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL When Attacked, Apply !M! [${modID}:HexIcon] to the attacker."
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL When Attacked, Apply !M! [${modID}:PoisonIcon] to the attacker."
   },
   "${modID}:PeircingLight": {
     "NAME": "Piercing Light",
-    "DESCRIPTION": "Deal !D! damage. NL If in ${modID}:Dawn, ${modID}:Recenter and gain !M! [${modID}:EmeraldBlossomIcon] . NL Otherwise enter ${modID}:Dawn."
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Recenter and gain !M! [${modID}:EmeraldBlossomIcon] - Enter ${modID}:Dawn."
+  },
+  "${modID}:MoonRiver": {
+    "NAME": "Moon River",
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] . NL Gain !M! [${modID}:BanishIcon] . NL ${modID}:Recenter - Enter ${modID}:Dusk."
   },
   "${modID}:NightmareShroud": {
     "NAME": "Nightmare Shroud",
@@ -550,7 +598,11 @@
     "NAME": "Darting Blow",
     "DESCRIPTION": "Innate. NL Gain !M! Vigor. NL At the start of your turn gain !M! Vigor."
   },
-
+  "${modID}:BanishingVerse": {
+    "NAME": "Banishing Verse",
+    "DESCRIPTION": "Deal !D! [#d4af37](3[] [#d4af37]+0.5x[] [${modID}:BanishIcon] [#d4af37])[] damage. NL Exhaust",
+    "UPGRADE_DESCRIPTION":"Deal !D! [#d4af37](5[] [#d4af37]+1.25x[] [${modID}:BanishIcon] [#d4af37])[] damage. NL Exhaust"
+  },
   "${modID}:Hubris": {
     "NAME": "Hubris",
     "DESCRIPTION": "Unplayable. Retain. NL While in hand, if you take unblocked attack damage gain !M! Weak and Frail then Discard this card.",

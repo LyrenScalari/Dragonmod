@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.PetalEffect;
@@ -21,8 +20,7 @@ import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
 import com.megacrit.cardcrawl.vfx.stance.WrathParticleEffect;
 import dragonmod.DragonMod;
 import dragonmod.actions.ThrowShurikenAction;
-import dragonmod.powers.Warden.AmberBlossomPower;
-import dragonmod.powers.Warden.AmethystBlossomPower;
+import dragonmod.util.BlossomManager;
 import dragonmod.util.Wiz;
 
 public class DawnStance extends AbstractStance {
@@ -57,15 +55,11 @@ public class DawnStance extends AbstractStance {
     }
     public void onExitStance() {
         MaxPow = 4;
-        Wiz.applyToSelf(new AmethystBlossomPower(Wiz.Player(),Wiz.Player(),1));
+        BlossomManager.addAmethystBlossom(1);
         this.stopIdleSfx();
     }
     public void onPlayCard(AbstractCard card) {
-        AbstractPower AmberBlossom = Wiz.Player().getPower(AmberBlossomPower.POWER_ID);
-        int totalpow;
-        if (AmberBlossom != null){
-            totalpow = MaxPow+AmberBlossom.amount;
-        } else totalpow = MaxPow;
+        int totalpow = MaxPow+ BlossomManager.getAmberBlossom();
         if (card.type == AbstractCard.CardType.ATTACK){
             if (totalpow > 0 && !(Wiz.Player().hand.isEmpty())) {
                 Wiz.atb(new AbstractGameAction() {
@@ -93,12 +87,7 @@ public class DawnStance extends AbstractStance {
 
     @Override
     public void updateDescription() {
-        AbstractPower AmberBlossom = Wiz.Player().getPower(AmberBlossomPower.POWER_ID);
-        int totalpow;
-        if (AmberBlossom != null){
-            totalpow = MaxPow+AmberBlossom.amount;
-        } else totalpow = MaxPow;
-
+        int totalpow = MaxPow + BlossomManager.getAmberBlossom();
         StringBuilder builder = new StringBuilder();
         builder.append(stanceString.DESCRIPTION[0]);
 

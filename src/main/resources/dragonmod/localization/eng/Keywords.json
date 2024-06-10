@@ -9,14 +9,6 @@
     "DESCRIPTION": "When a Creature with [dragonmod:ScorchIcon] is attacked it takes damage equal to a quarter of their [dragonmod:ScorchIcon] and is reduced that much."
   },
   {
-    "PROPER_NAME": "Sanctify",
-    "NAMES": [
-      "Sanctify",
-      "sanctify"
-    ],
-    "DESCRIPTION": "Creatures with [dragonmod:SanctifyIcon] take 25% less damage from attacks, Attackers Spend Stigmata to heal. Cure in excess of your Max HP or Stigmata becomes [dragonmod:BlockIcon.] ."
-  },
-  {
     "PROPER_NAME": "Beckon",
     "NAMES": [
       "Beckon",
@@ -25,14 +17,12 @@
     "DESCRIPTION": "Put X random cards from your draw pile into your hand, discard them after you play a card."
   },
   {
-    "PROPER_NAME": "Holy Power",
+    "PROPER_NAME": "Zeal",
     "NAMES": [
-      "Holy Power",
-      "Holy_Power",
-      "holy power",
-      "holy_power"
+      "Zeal",
+      "zeal"
     ],
-    "DESCRIPTION": "Increases damage dealt & Healing from #yCure."
+    "DESCRIPTION": "Increases Healing from #yCure."
   },
   {
     "PROPER_NAME": "Exalt",
@@ -45,12 +35,20 @@
     "DESCRIPTION": "Spend X [#94bdff]Holy[] [#94bdff]Power[] for an effect"
   },
   {
+    "PROPER_NAME": "Verse",
+    "NAMES": [
+      "Verse",
+      "verse"
+    ],
+    "DESCRIPTION": "When played verse cards are set aside attached to you until their #yCoda activates."
+  },
+  {
     "PROPER_NAME": "Coda",
     "NAMES": [
       "Coda",
       "coda"
     ],
-    "DESCRIPTION": "After you Chant X times, activate the following effect. At the start of each turn, and when you take damage, #yChant ALL your Verses."
+    "DESCRIPTION": "In X turns activate the following effect."
   },
   {
     "PROPER_NAME": "Chant",
@@ -58,7 +56,7 @@
       "Chant",
       "chant"
     ],
-    "DESCRIPTION": "Reduce the delay of a Verse by 1. At the start of each turn, and when you take damage, #yChant ALL your Verses."
+    "DESCRIPTION": "An effect when this verse's delay is reduced."
   },
   {
     "PROPER_NAME": "Confession",
@@ -66,7 +64,7 @@
       "Confession",
       "confession"
     ],
-    "DESCRIPTION": "Whenever you take damage or lose HP deal damage to ALL enemies equal to your #yConfesison. NL If isn't your turn, reduce Confession by half."
+    "DESCRIPTION": "Whenever you take damage or lose HP deal damage to the attacker or a random enemy equal to your #yConfesison. NL If isn't your turn, reduce Confession by half."
   },
   {
     "PROPER_NAME": "Sacrifice",
@@ -90,7 +88,7 @@
       "Cure",
       "cure"
     ],
-    "DESCRIPTION": "Spend [dragonmod:StigmataIcon] to heal. Cure in excess of your Max HP or [dragonmod:StigmataIcon] becomes [dragonmod:BlockIcon] ."
+    "DESCRIPTION": "Recover recently lost HP.  NL Every #b5 HP recovered this way increase damage dealt & Healing from #yCure by #b1 for the rest of combat."
   },
   {
     "PROPER_NAME": "Devotion",
@@ -98,9 +96,18 @@
       "Devotion",
       "devotion"
     ],
-    "DESCRIPTION": "The number of cards in your hand and #yHymn pile, excluding this one."
+    "DESCRIPTION": "The number of cards in your hand and verses set aside."
   },
-
+  {
+    "PROPER_NAME": "Overheal",
+    "NAMES": [
+      "Overheal",
+      "Overhealing",
+      "overheal",
+      "overhealing"
+    ],
+    "DESCRIPTION": "#yCure Healing that cannot be applied is transferred to #yOverheal."
+  },
 
   {
     "PROPER_NAME": "Dragon Affinity",
@@ -159,7 +166,7 @@
       "Chill",
       "chill"
     ],
-    "DESCRIPTION": "#yChilled creatures give #yBlock equal to their chill and lose #b1 chill when they take unblocked attack damage or are damaged by an #yIcicles."
+    "DESCRIPTION": "Whenever a #yChilled creature takes unblocked Attack or Icicle damage, you gain [dragonmod:BlockIcon] and [dragonmod:ChillIcon] is reduced by #b1."
   },
   {
     "PROPER_NAME": "Icicle",
@@ -172,12 +179,12 @@
     "DESCRIPTION": "#yOrb : Deals damage to the last enemy you attacked. After being #yEvoked, if your next orb is an #yIcicle #yEvoke it."
   },
   {
-    "PROPER_NAME": "Crystal",
+    "PROPER_NAME": "Snow",
     "NAMES": [
-      "Crystal",
-      "crystal"
+      "Snow",
+      "snow"
     ],
-    "DESCRIPTION": "When an Orb is Removed from a crystal orb slot, gain #b1 Temporary Focus and lose that orb slot."
+    "DESCRIPTION": "#yOrb : Not effected by [dragonmod:FocusIcon] . NL Grants block and reduces block gained each turn, removes itself when gain equals zero. NL #yEvoke grants [dragonmod:SubzeroIcon] ."
   },
   {
     "PROPER_NAME": "Hail",
@@ -185,7 +192,15 @@
       "Hail",
       "hail"
     ],
-    "DESCRIPTION": "An orb channeled into a Hail orb slot in addition to its other effects deals damage to a random enemy twice. NL when an Orb is Removed from a hail orb slot lose that orb slot."
+    "DESCRIPTION": "#yOrb : Damages two random enemies each turn. #yEvoke : Gain a #yCrystal orb slot"
+  },
+  {
+    "PROPER_NAME": "Crystal",
+    "NAMES": [
+      "Crystal",
+      "crystal"
+    ],
+    "DESCRIPTION": "When an Orb is Removed from a crystal orb slot, gain #b1 Temporary Focus and lose that orb slot."
   },
   {
     "PROPER_NAME": "Exploit",
@@ -217,7 +232,7 @@
       "Subzero",
       "subzero"
     ],
-    "DESCRIPTION": "[dragonmod:SubzeroIcon] Increases the base damage of #yIcicles you channel by half your [dragonmod:SubzeroIcon]."
+    "DESCRIPTION": "[dragonmod:SubzeroIcon] Increases the base damage of #yIcicle or #yHail orbs you channel by half your [dragonmod:SubzeroIcon]."
   },
   {
     "PROPER_NAME": "[dragonmod:SlowIcon] Lethargy",
@@ -228,6 +243,7 @@
     "DESCRIPTION": "Applying [dragonmod:SlowIcon] instead raises it's duration to that amount. NL [dragonmod:SlowIcon] increases incoming damage from cards and orbs by 10% for each card played this turn, [dragonmod:SlowIcon] is reduced by #b1 each turn."
 
   },
+
   {
     "PROPER_NAME": "Shroud",
     "NAMES": [
@@ -333,6 +349,15 @@
       "Recenter",
       "recenter"
     ],
-    "DESCRIPTION": "If you are in a Stance, exit it and draw a card."
+    "DESCRIPTION": "If you are in a Stance, exit it and draw a card. NL Otherwise do the following."
+  },
+
+  {
+    "PROPER_NAME": "Enchantment",
+    "NAMES": [
+      "Enchantment",
+      "enchantment"
+    ],
+    "DESCRIPTION": "#yEnchantment cards attach to the creature targeted for as long as it has #yCharges when played. Whenever the lingering effect of an #yenchantment activates, it loses a charge."
   }
 ]

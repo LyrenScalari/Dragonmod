@@ -10,9 +10,9 @@ import dragonmod.util.Wiz;
 public class Sunbeam extends AbstractJusticarCard {
     public static final String ID = Sunbeam.class.getSimpleName();
     public Sunbeam(){
-        super(ID,2,CardType.ATTACK,CardRarity.BASIC,CardTarget.ENEMY);
-        setDamage(7,10);
-        setMagic(3,2);
+        super(ID,1,CardType.ATTACK,CardRarity.BASIC,CardTarget.ENEMY);
+        setDamage(7,3);
+        setMagic(7,3);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

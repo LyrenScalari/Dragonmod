@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import dragonmod.actions.ExploitAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.powers.Rimedancer.PrecisionPower;
+import dragonmod.powers.Rimedancer.powercards.PrecisionPower;
 import dragonmod.powers.Rimedancer.Subzero;
 import dragonmod.util.Wiz;
 

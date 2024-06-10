@@ -8,15 +8,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.StanceStrings;
-import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.DivinityParticleEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
 import dragonmod.DragonMod;
-import dragonmod.powers.Warden.AmberBlossomPower;
-import dragonmod.powers.Warden.AmethystBlossomPower;
+import dragonmod.util.BlossomManager;
 import dragonmod.util.Wiz;
 
 public class DuskStance extends AbstractStance {
@@ -30,11 +28,7 @@ public class DuskStance extends AbstractStance {
     }
     @Override
     public void updateDescription() {
-        AbstractPower AmethystBlossom = Wiz.Player().getPower(AmethystBlossomPower.POWER_ID);
-        int totalpow;
-        if (AmethystBlossom != null){
-            totalpow = MaxPow+AmethystBlossom.amount;
-        } else totalpow = MaxPow;
+        int totalpow = MaxPow + BlossomManager.getAmethystBlossom();
 
         StringBuilder builder = new StringBuilder();
         builder.append(stanceString.DESCRIPTION[0]);
@@ -64,15 +58,11 @@ public class DuskStance extends AbstractStance {
     }
     public void onExitStance() {
         MaxPow = 2;
-        Wiz.applyToSelf(new AmberBlossomPower(Wiz.Player(),Wiz.Player(),1));
+        BlossomManager.addAmberBlossom(1);
         this.stopIdleSfx();
     }
     public void atStartOfTurn() {
-        AbstractPower AmethystBlossom = Wiz.Player().getPower(AmethystBlossomPower.POWER_ID);
-        int totalpow;
-        if (AmethystBlossom != null){
-            totalpow = MaxPow+AmethystBlossom.amount;
-        } else totalpow = MaxPow;
+        int totalpow = MaxPow + BlossomManager.getAmethystBlossom();
         if (totalpow > 0){
             Wiz.atb(new DrawCardAction(totalpow));
             MaxPow -= 1;

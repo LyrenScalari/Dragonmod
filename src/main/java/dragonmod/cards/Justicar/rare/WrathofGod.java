@@ -18,7 +18,7 @@ public class WrathofGod extends AbstractJusticarCard {
     public static final String ID = WrathofGod.class.getSimpleName();
     public WrathofGod(){
         super(ID,1,CardType.ATTACK,CardRarity.RARE,CardTarget.ALL_ENEMY);
-        setCustomVar("WOG",8,2);
+        setCustomVar("WOG",8);
         setVarCalculation("WOG", (m, base) -> {
             if (AbstractDungeon.player != null){
                 int tmp = this.baseDamage;
@@ -28,12 +28,13 @@ public class WrathofGod extends AbstractJusticarCard {
                 else
                     super.applyPowers();
                 this.baseDamage = tmp;
-                return damage + AbstractDungeon.player.currentBlock;
+                if (upgraded){
+                    return (int) (damage + (AbstractDungeon.player.currentBlock*1.5));
+                }else return damage + AbstractDungeon.player.currentBlock;
             } else {
                 return base;
             }
         });
-        setExhaust(true);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -51,7 +52,7 @@ public class WrathofGod extends AbstractJusticarCard {
             if (!mo.isDeadOrEscaped()){
                 Wiz.vfx(new HaloEffect(mo, Color.GOLD,Color.GOLDENROD,""));
                 Wiz.vfx(new LightningEffect(mo.hb.cX,mo.hb.cY));
-                Wiz.dmg(mo,new DamageInfo(p,customVar("WOG")+magicNumber, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.FIRE);
+                Wiz.dmg(mo,new DamageInfo(p,customVar("WOG"), DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.FIRE);
             }
         }
     }

@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 
 public class RetainCardMod extends AbstractCardModifier {
     private int duration;
-    private boolean wasExhaust = false;
     public String id;
     private UIStrings uiStrings =  CardCrawlGame.languagePack.getUIString("theDragonkin:CardmodStrings");
     public RetainCardMod (int length) {
@@ -45,6 +44,6 @@ public class RetainCardMod extends AbstractCardModifier {
     }
     @Override
     public AbstractCardModifier makeCopy() {
-        return new EtherealCardMod(duration);
+        return new RetainCardMod(duration);
     }
 }

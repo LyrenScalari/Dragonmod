@@ -7,13 +7,12 @@ import com.evacipated.cardcrawl.mod.stslib.blockmods.AbstractBlockModifier;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import dragonmod.util.Wiz;
 
 import static dragonmod.DragonMod.DIVINE_ARMOR_ICON;
 
 public class DivineBlock extends AbstractBlockModifier {
     boolean inherent;
-    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:DivineBlock");
+    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:DivineArmor");
     public DivineBlock(boolean inherent) {
         this.inherent = inherent;
     }
@@ -45,14 +44,13 @@ public class DivineBlock extends AbstractBlockModifier {
     }
 
     public Priority priority() {
-        return Priority.BOTTOM;
+        return Priority.TOP;
     }
 
     public Texture customBlockImage() {
         return DIVINE_ARMOR_ICON;
     }
-
-    public void atStartOfTurnPreBlockLoss() {
-        Wiz.block(owner,getCurrentAmount()*2);
+    public int amountLostAtStartOfTurn() {
+        return 0;
     }
 }

@@ -3,7 +3,7 @@ package dragonmod.powers.Dragonkin;
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -11,10 +11,11 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import dragonmod.DragonMod;
 import dragonmod.actions.CureAction;
 import dragonmod.interfaces.OnCoda;
+import dragonmod.interfaces.TurnStartEnchantment;
 import dragonmod.powers.BasePower;
 import dragonmod.ui.TextureLoader;
-import dragonmod.util.AbstractSeal;
-import dragonmod.util.HymnManager;
+import dragonmod.util.EnchantmentsField;
+import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
 
 public class YieldMyFleshPower extends BasePower implements CloneablePowerInterface, OnCoda {
@@ -34,14 +35,11 @@ public class YieldMyFleshPower extends BasePower implements CloneablePowerInterf
     public void wasHPLost(DamageInfo info, int damageAmount) {
         if (damageAmount > 0 && !AbstractDungeon.actionManager.turnHasEnded) {
             this.flash();
-            if(!HymnManager.ActiveVerses.isEmpty()){
-                Wiz.atb(new AbstractGameAction() {
-                    @Override
-                    public void update() {
-                        isDone = true;
-                        ((AbstractSeal)HymnManager.ActiveVerses.get(0)).Chant();
-                    }
-                });
+            for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
+                if (card.hasTag(EnchantmentsManager.Verse) && card instanceof TurnStartEnchantment){
+                    ((TurnStartEnchantment) card).EnchantedTurnStart(Wiz.Player());
+                    break;
+                }
             }
         }
     }

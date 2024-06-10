@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import dragonmod.DragonMod;
 import dragonmod.interfaces.OnChannelOrbPower;
 import dragonmod.orbs.Icicle;
+import dragonmod.orbs.Sleet;
 import dragonmod.powers.BasePower;
 import dragonmod.util.Wiz;
 
@@ -22,7 +23,7 @@ public class Subzero extends BasePower implements CloneablePowerInterface, OnCha
 
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + Math.ceil(amount/2f) + DESCRIPTIONS[1];
+        description = DESCRIPTIONS[0] + (int)Math.ceil(amount/2f) + DESCRIPTIONS[1];
     }
     @Override
     public AbstractPower makeCopy() {
@@ -34,6 +35,11 @@ public class Subzero extends BasePower implements CloneablePowerInterface, OnCha
         if (Orb instanceof Icicle){
             ((Icicle) Orb).setBasePassiveAmount((int) Math.ceil(amount/2f));
             ((Icicle) Orb).setBaseEvokeAmount((int) Math.ceil(amount/2f));
+            Wiz.atb(new ReducePowerAction(owner,owner,this,1));
+        }
+        if (Orb instanceof Sleet){
+            ((Sleet) Orb).setBasePassiveAmount((int) Math.ceil(amount/2f));
+            ((Sleet) Orb).setBaseEvokeAmount((int) Math.ceil(amount/2f));
             Wiz.atb(new ReducePowerAction(owner,owner,this,1));
         }
     }

@@ -10,6 +10,7 @@ import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
+import dragonmod.powers.Rimedancer.Subzero;
 import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
@@ -18,6 +19,7 @@ public class Frostslash extends AbstractRimedancerCard {
     public Frostslash(){
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
         setDamage(7,2);
+        setMagic(3,1);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -43,5 +45,6 @@ public class Frostslash extends AbstractRimedancerCard {
         } else  Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
 
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+        Wiz.applyToSelf(new Subzero(magicNumber));
     }
 }
