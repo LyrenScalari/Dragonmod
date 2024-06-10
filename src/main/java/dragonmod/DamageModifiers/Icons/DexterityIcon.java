@@ -20,7 +20,7 @@ public class DexterityIcon extends AbstractCustomIcon {
     @Override
     public List<TooltipInfo> getCustomTooltips() {
         List<TooltipInfo> retVal = new ArrayList<>();
-        retVal.add(new TooltipInfo("[dragonmod:BlockIcon] " + TipHelper.capitalize(GameDictionary.DEXTERITY.NAMES[0]), GameDictionary.keywords.get(GameDictionary.DEXTERITY.NAMES[0])));
+        retVal.add(new TooltipInfo("[dragonmod:DexterityIcon] " + TipHelper.capitalize(GameDictionary.DEXTERITY.NAMES[0]), GameDictionary.keywords.get(GameDictionary.DEXTERITY.NAMES[0])));
         return retVal;
     }
     public static DexterityIcon get()

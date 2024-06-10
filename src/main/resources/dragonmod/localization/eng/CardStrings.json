@@ -451,7 +451,7 @@
   },
   "${modID}:ThousandKnives": {
     "NAME": "Thousand Knives",
-    "DESCRIPTION": "At the start of your turn and whenever you ${modID}:Flourish add !M! *Shivs to your hand."
+    "DESCRIPTION": "At the start of your turn and whenever you ${modID}:Flourish add {!M!|1=a *Shiv|1>=!M! *Shivs} to your hand."
   },
 
   "${modID}:WardenStrike": {
