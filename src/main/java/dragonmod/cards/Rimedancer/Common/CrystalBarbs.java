@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import dragonmod.DragonMod;
-import dragonmod.actions.FlourishAction;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
@@ -18,10 +17,9 @@ import dragonmod.util.Wiz;
 public class CrystalBarbs extends AbstractRimedancerCard {
     public static final String ID = CrystalBarbs.class.getSimpleName();
     public CrystalBarbs(){
-        super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
-        setDamage(7);
-        setCostUpgrade(0);
-        setMagic(2);
+        super(ID,2,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
+        setDamage(10);
+        setMagic(1,1);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -41,6 +39,5 @@ public class CrystalBarbs extends AbstractRimedancerCard {
         for (int i = 0; i < magicNumber; i++){
                 Wiz.atb(new ChannelAction(new Icicle()));
         }
-        Wiz.atb(new FlourishAction());
     }
 }

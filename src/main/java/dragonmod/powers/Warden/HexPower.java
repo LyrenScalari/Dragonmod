@@ -7,9 +7,8 @@ import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.PoisonPower;
+import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import dragonmod.DamageModifiers.DarkDamage;
 import dragonmod.DragonMod;
@@ -28,7 +27,11 @@ public class HexPower extends BaseTwoAmountPower implements CloneablePowerInterf
     }
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + damagecount + DESCRIPTIONS[1] + damagecount + DESCRIPTIONS[2] + amount2 + DESCRIPTIONS[3];
+        int damageval = damagecount;
+        if (owner.hasPower(WeakPower.POWER_ID)){
+            damageval = (int) (damagecount * 1.5);
+        }
+        description = DESCRIPTIONS[0] + damageval + DESCRIPTIONS[1] + damagecount + DESCRIPTIONS[2] + amount2 + DESCRIPTIONS[3];
     }
     public void stackPower(int stackAmount) {
         amount += stackAmount;
@@ -42,10 +45,13 @@ public class HexPower extends BaseTwoAmountPower implements CloneablePowerInterf
     public void atStartOfTurn() {
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             this.flashWithoutSound();
+            int damageval = damagecount;
             DamageModContainer DarkDamage = new DamageModContainer(this,new DarkDamage(true));
-            Wiz.dmg(owner, BindingHelper.makeInfo(DarkDamage,owner,damagecount, DamageInfo.DamageType.THORNS));
-            Wiz.applyToEnemy((AbstractMonster) owner,new PoisonPower(owner,owner,damagecount));
-            Wiz.atb(new ReducePowerAction(owner,owner,this,damagecount));
+            if (owner.hasPower(WeakPower.POWER_ID)){
+                damageval = (int) (damagecount * 1.5);
+            }
+            Wiz.dmg(owner, BindingHelper.makeInfo(DarkDamage,owner,damageval, DamageInfo.DamageType.THORNS));
+            Wiz.atb(new ReducePowerAction(owner,owner,this,damageval));
             amount2 -= 1;
         }
     }

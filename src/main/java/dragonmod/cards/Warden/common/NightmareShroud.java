@@ -5,7 +5,6 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.PoisonPower;
 import dragonmod.actions.ExploitAction;
 import dragonmod.cards.Warden.AbstractWardenCard;
 import dragonmod.powers.Warden.HexPower;
@@ -37,6 +36,6 @@ public class NightmareShroud extends AbstractWardenCard {
                 isDone = true;
                 Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL));
             }
-        }, PoisonPower.POWER_ID,m));
+        }, HexPower.POWER_ID,m));
     }
 }

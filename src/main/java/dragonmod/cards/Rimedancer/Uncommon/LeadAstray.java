@@ -19,8 +19,7 @@ public class LeadAstray extends AbstractRimedancerCard {
     public LeadAstray(){
         super(ID,1,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.ENEMY);
         setMagic(2);
-        setBlock(7);
-        setMagic2(2,2);
+        setBlock(7,3);
     }
     // Actions the card should do.
     @Override

@@ -1,8 +1,6 @@
 package dragonmod.powers.general;
 
 import basemod.interfaces.CloneablePowerInterface;
-import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnLoseBlockPower;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -12,7 +10,7 @@ import dragonmod.DragonMod;
 import dragonmod.powers.BasePower;
 import dragonmod.util.Wiz;
 
-public class ReinforcePower extends BasePower implements CloneablePowerInterface, OnLoseBlockPower {
+public class ReinforcePower extends BasePower implements CloneablePowerInterface {
     public AbstractCreature source;
     public static final String POWER_ID = DragonMod.makeID("Reinforce");
     public ReinforcePower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
@@ -34,20 +32,24 @@ public class ReinforcePower extends BasePower implements CloneablePowerInterface
             this.addToBot(new ReducePowerAction(this.owner, this.owner, this, 1));// 39
         }
     }
+    public int onAttacked(DamageInfo info, int damageAmount) {
+        if (info.type == DamageInfo.DamageType.NORMAL){
+            if (owner.currentBlock < damageAmount){
+                int unblockeddmg = owner.currentBlock - damageAmount;
+                if (unblockeddmg >= amount/2){
+                    Wiz.atb(new ReducePowerAction(owner,owner,this,amount));
+                    return damageAmount-(amount/2);
+                } else {
+                    Wiz.atb(new ReducePowerAction(owner,owner,this,unblockeddmg*2));
+                    return damageAmount-(unblockeddmg);
+                }
+            }
+        }
+        return damageAmount;
+    }
     public void stackPower(int stackAmount) {
         if (stackAmount > amount){
             amount = stackAmount;
         }
-    }
-    @Override
-    public int onLoseBlock(DamageInfo damageInfo, int i) {
-        if (damageInfo.type == DamageInfo.DamageType.NORMAL) {
-            if (i <= owner.currentBlock) {
-                Wiz.dmg(damageInfo.owner, new DamageInfo(owner, i, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-            } else {
-                Wiz.dmg(damageInfo.owner, new DamageInfo(owner, owner.currentBlock, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-            }
-        }
-        return i;
     }
 }

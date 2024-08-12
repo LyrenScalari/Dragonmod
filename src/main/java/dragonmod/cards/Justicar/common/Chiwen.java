@@ -22,10 +22,10 @@ public class Chiwen extends AbstractJusticarCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.atb(new DamageAllEnemiesAction(p,baseDamage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.FIRE));
         AbstractDungeon.effectsQueue.add(new InflameEffect(p));
-        Wiz.applyToSelf(new Scorchpower(p,p,magicNumber));
+        Wiz.dmg(p,new DamageInfo(p,magicNumber, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
             AbstractDungeon.effectsQueue.add(new InflameEffect(mo));
-            Wiz.dmg(p,new DamageInfo(p,magicNumber, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.FIRE);
+            Wiz.applyToEnemy(m,new Scorchpower(m,p,magicNumber));
         }
     }
 }

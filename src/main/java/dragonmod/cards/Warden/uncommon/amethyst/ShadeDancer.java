@@ -8,11 +8,11 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.PoisonPower;
 import dragonmod.DragonMod;
 import dragonmod.actions.ExploitAction;
 import dragonmod.cards.Warden.AbstractReflexiveCard;
 import dragonmod.powers.Warden.EmeraldBlossomPower;
+import dragonmod.powers.Warden.HexPower;
 import dragonmod.util.Wiz;
 @NoCompendium
 @NoPools
@@ -35,7 +35,7 @@ public class ShadeDancer extends AbstractReflexiveCard {
                 Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL));
                 Wiz.applyToSelf(new EmeraldBlossomPower(1));
             }
-        }, PoisonPower.POWER_ID,m));
+        }, HexPower.POWER_ID,m));
 
     }
 }

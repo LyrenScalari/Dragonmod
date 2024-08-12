@@ -14,7 +14,7 @@ import dragonmod.DragonMod;
 import dragonmod.actions.CureAction;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.interfaces.TurnStartEnchantment;
-import dragonmod.powers.Dragonkin.ZealPower;
+import dragonmod.powers.Dragonkin.InspirationPower;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
@@ -32,7 +32,7 @@ public class Cauterize extends AbstractJusticarCard implements TurnStartEnchantm
         setVarCalculation("H", (m, base) -> {
             AbstractPower p = null;
             if (AbstractDungeon.player != null){
-                p = AbstractDungeon.player.getPower(ZealPower.POWER_ID);
+                p = AbstractDungeon.player.getPower(InspirationPower.POWER_ID);
             }
             if(p != null){
                 return base + p.amount;

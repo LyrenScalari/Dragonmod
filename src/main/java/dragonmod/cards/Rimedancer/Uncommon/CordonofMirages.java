@@ -32,5 +32,8 @@ public class CordonofMirages extends AbstractRimedancerCard {
             }
         });
         Wiz.atb(new FlourishAction());
+        if (upgraded){
+            Wiz.atb(new FlourishAction());
+        }
     }
 }

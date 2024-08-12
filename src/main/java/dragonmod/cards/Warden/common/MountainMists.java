@@ -9,10 +9,10 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.PoisonPower;
 import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.cards.Warden.AbstractWardenCard;
 import dragonmod.interfaces.onAttackedEnchantment;
+import dragonmod.powers.Warden.HexPower;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
@@ -60,7 +60,7 @@ public class MountainMists extends AbstractWardenCard implements onAttackedEncha
     @Override
     public int EnchantedOnAttacked(AbstractCreature owner, int dmgamt, DamageInfo info) {
         if (owner != info.owner) {
-            Wiz.applyToEnemy((AbstractMonster) info.owner, new PoisonPower(info.owner,Wiz.Player(),magicNumber));
+            Wiz.applyToEnemy((AbstractMonster) info.owner, new HexPower(info.owner,Wiz.Player(),magicNumber));
         }
         return dmgamt;
     }

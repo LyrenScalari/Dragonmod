@@ -16,6 +16,8 @@ import java.util.List;
 public abstract class AbstractDraconicCard extends AbstractDragonCard implements SpawnModificationCard {
     public static final UIStrings DragonAffinityTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:DragonAffinityCard");
     public static final UIStrings DragonAffinitySpecial = CardCrawlGame.languagePack.getUIString("dragonmod:DragonAffinitySpecial");
+
+    public static final UIStrings CantripTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Cantrip");
     public AbstractDraconicCard(final String id,
                                 final int cost,
                                 final AbstractCard.CardType type,

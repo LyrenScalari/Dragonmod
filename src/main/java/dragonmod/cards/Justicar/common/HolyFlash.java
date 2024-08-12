@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
-import dragonmod.powers.Dragonkin.ZealPower;
+import dragonmod.powers.Dragonkin.InspirationPower;
 import dragonmod.util.Wiz;
 
 public class HolyFlash extends AbstractJusticarCard {
@@ -17,7 +17,7 @@ public class HolyFlash extends AbstractJusticarCard {
     }
     public void calculateCardDamage(AbstractMonster mo) {
         int realBaseDamage = this.baseDamage;
-        AbstractPower Zeal = Wiz.Player().getPower(ZealPower.POWER_ID);
+        AbstractPower Zeal = Wiz.Player().getPower(InspirationPower.POWER_ID);
         int ZealBonus;
         if (upgraded) {
             ZealBonus= 2;
@@ -35,7 +35,7 @@ public class HolyFlash extends AbstractJusticarCard {
 
     public void applyPowers() {
         int realBaseDamage = this.baseDamage;
-        AbstractPower Zeal = Wiz.Player().getPower(ZealPower.POWER_ID);
+        AbstractPower Zeal = Wiz.Player().getPower(InspirationPower.POWER_ID);
         int ZealBonus;
         if (upgraded) {
             ZealBonus= 2;

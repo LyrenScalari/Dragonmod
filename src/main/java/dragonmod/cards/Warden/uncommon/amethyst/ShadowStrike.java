@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.PoisonPower;
 import dragonmod.DragonMod;
 import dragonmod.actions.ExploitAction;
 import dragonmod.cards.Warden.AbstractReflexiveCard;
@@ -35,7 +34,7 @@ public class ShadowStrike extends AbstractReflexiveCard {
                 isDone = true;
                 Wiz.atb(new DrawCardAction(2));
             }
-        }, PoisonPower.POWER_ID,m));
+        }, HexPower.POWER_ID,m));
     }
     public AbstractCard getAmberCard(){
         return new DreamLance();

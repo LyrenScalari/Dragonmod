@@ -28,6 +28,7 @@ public abstract class AbstractJusticarCard extends AbstractDragonCard {
 
     }
     public static UIStrings verseString = CardCrawlGame.languagePack.getUIString("dragonmod:Verse");
+    public static UIStrings inspirationString = CardCrawlGame.languagePack.getUIString("dragonmod:Inspiration");
     public int realBaseDamage;
     public int realBaseMagic;
     private boolean needsArtRefresh = false;

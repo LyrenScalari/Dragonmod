@@ -30,7 +30,13 @@
   "${modID}:Reinforce": {
     "TEXT": [
       "[dragonmod:ReinforceIcon] Reinforce",
-      "Gaining [dragonmod:ReinforceIcon] instead raises it to that amount. NL Creatures with [dragonmod:ReinforceIcon] do not lose [dragonmod:BlockIcon] at the start of their turn and return blocked attack damage."
+      "Gaining [dragonmod:ReinforceIcon] instead raises it to that amount. NL Creatures with [dragonmod:ReinforceIcon] do not lose [dragonmod:BlockIcon] at the start of their turn."
+    ]
+  },
+  "${modID}:Parry": {
+    "TEXT": [
+      "[dragonmod:ParryIcon] Parry",
+      "[dragonmod:ParryIcon] returns blocked damage, and #b2 [dragonmod:ParryIcon] can prevent #b1 unblocked damage."
     ]
   },
   "${modID}:Powerful": {
@@ -69,22 +75,16 @@
       "Recover recently lost HP. NL Every #b5 HP recovered this way increase damage dealt & Healing from #yCure by #b1."
     ]
   },
-  "${modID}:Zeal": {
+  "${modID}:Inspiration": {
     "TEXT": [
-      "[dragonmod:ZealIcon] Zeal",
-      "[dragonmod:ZealIcon] Increases Healing from #yCure."
-    ]
-  },
-  "${modID}:Sacrifice": {
-    "TEXT": [
-      "[dragonmod:SacrificeIcon] Sacrifice",
-      "When you obtain #b5 [dragonmod:SacrificeIcon] spend it and increase damage dealt & Healing from #yCure by #b1."
+      "[dragonmod:InspirationIcon] Inspiration",
+      "[dragonmod:InspirationIcon] Increases Healing from #yCure."
     ]
   },
   "${modID}:Verse": {
     "TEXT": [
       "Verse",
-      "When played verse cards are set aside attached to you until their #yCoda activates."
+      "When played verse cards are set aside attached to you until their #yCoda activates. NL Only your oldest #yVerse counts down each turn."
     ]
   },
   "${modID}:StressUITooltips": {
@@ -92,13 +92,6 @@
       "Stigmata",
       "Stigmata is gained whenever you take unblocked damage.",
       " NL Stigmata is spent to recover lost HP, Every 5 Stigmata spent Increases Damage done & Healing received by 1."
-    ]
-  },
-  "${modID}:HymnPile": {
-    "TEXT": [
-      "Hymn Pile",
-      "This contains all Verse cards played until all active verses reach their Coda.",
-      "I've yet to begin to Preach."
     ]
   },
   "${modID}:DivineArmor": {
@@ -110,7 +103,7 @@
   "${modID}:Devotion": {
     "TEXT": [
       "[dragonmod:DevotionIcon] Devotion",
-      "Your [dragonmod:DevotionIcon] is the number of cards in your hand and verses set aside."
+      "Your [dragonmod:DevotionIcon] is the number of cards in your hand and #yVerses set aside."
     ]
   },
   "${modID}:HolyDamage": {
@@ -154,7 +147,7 @@
   "${modID}:Ranged": {
     "TEXT": [
       "[dragonmod:RangedIcon] Ranged Damage",
-      "[dragonmod:RangedIcon] Damage is increased by Lock-On in addition to other effects."
+      "[dragonmod:RangedIcon] Damage is increased by [dragonmod:LockonIcon] in addition to other effects."
     ]
   },
   "${modID}:Icicle": {
@@ -163,10 +156,16 @@
       "#yOrb : Deals damage to the last enemy you attacked. After being #yEvoked, if your next orb is an #yIcicle #yEvoke it."
     ]
   },
+  "${modID}:Cantrip": {
+    "TEXT": [
+      "Cantrip",
+      "This card starts combat set aside and cannot be #rRemoved by standard means."
+    ]
+  },
   "${modID}:IceArmor": {
     "TEXT": [
       "[dragonmod:FrostIcon] Ice Armor",
-      "[dragonmod:FrostIcon] blocks damage, and applies equal #yChill back to attackers."
+      "[dragonmod:FrostIcon] blocks damage, and applies equal [dragonmod:ChillIcon] back to attackers."
     ]
   },
   "${modID}:Chill": {
@@ -209,13 +208,13 @@
   "${modID}:Dark": {
     "TEXT": [
       "[dragonmod:DarkIcon] Dark Damage",
-      "[dragonmod:DarkIcon] Damage is increased by #b50% against #yWeak targets in addition to other effects."
+      "[dragonmod:DarkIcon] Damage is increased by #b50% against [dragonmod:WeakIcon] targets in addition to other effects."
     ]
   },
   "${modID}:Hex": {
     "TEXT": [
       "[dragonmod:HexIcon] Hex",
-      "[dragonmod:HexIcon] Deals [dragonmod:DarkIcon] damage and applies [dragonmod:PoisonIcon] over #b3 turns."
+      "[dragonmod:HexIcon] Deals [dragonmod:DarkIcon] damage over #b3 turns."
     ]
   },
   "${modID}:Banish": {

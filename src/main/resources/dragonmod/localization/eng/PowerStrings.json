@@ -1,8 +1,14 @@
 {
+  "${modID}:Parry": {
+    "NAME": "Parry",
+    "DESCRIPTIONS": ["Return up to #b",
+      " blocked damage. NL Prevents up to #b", " unblocked damage."
+    ]
+  },
   "${modID}:Reinforce": {
     "NAME": "Reinforce",
     "DESCRIPTIONS": ["Block is not lost at the start of your next #b",
-      " turns. Blocked damage is dealt back to attackers."
+      " turns."
     ]
   },
   "${modID}:Powerful": {

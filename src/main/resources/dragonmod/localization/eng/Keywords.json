@@ -1,12 +1,20 @@
 [
   {
+    "PROPER_NAME": "Parry",
+    "NAMES": [
+      "Parry",
+      "parry"
+    ],
+    "DESCRIPTION": "#yParry returns blocked damage, and #b2 #yParry can prevent #b1 unblocked damage."
+  },
+  {
     "PROPER_NAME": "Scorch",
     "NAMES": [
       "Scorch",
       "scorch",
       "scorched"
     ],
-    "DESCRIPTION": "When a Creature with [dragonmod:ScorchIcon] is attacked it takes damage equal to a quarter of their [dragonmod:ScorchIcon] and is reduced that much."
+    "DESCRIPTION": "When a Creature with #yScorch is attacked it takes damage equal to a quarter of their #yScorch and is reduced that much."
   },
   {
     "PROPER_NAME": "Beckon",
@@ -17,22 +25,22 @@
     "DESCRIPTION": "Put X random cards from your draw pile into your hand, discard them after you play a card."
   },
   {
-    "PROPER_NAME": "Zeal",
+    "PROPER_NAME": "Inspiration",
     "NAMES": [
-      "Zeal",
-      "zeal"
+      "Inspiration",
+      "inspiration"
     ],
     "DESCRIPTION": "Increases Healing from #yCure."
   },
   {
-    "PROPER_NAME": "Exalt",
+    "PROPER_NAME": "Inspired",
     "NAMES": [
-      "Exalt",
-      "exalt",
-      "exalted",
-      "Exalted"
+      "Inspired",
+      "inspired",
+      "Inspire",
+      "inspire"
     ],
-    "DESCRIPTION": "Spend X [#94bdff]Holy[] [#94bdff]Power[] for an effect"
+    "DESCRIPTION": "Spend X [${modID}:InspirationIcon] for an effect"
   },
   {
     "PROPER_NAME": "Verse",
@@ -40,7 +48,7 @@
       "Verse",
       "verse"
     ],
-    "DESCRIPTION": "When played verse cards are set aside attached to you until their #yCoda activates."
+    "DESCRIPTION": "When played verse cards are set aside attached to you until their #yCoda activates. NL Only your oldest #yVerse counts down each turn."
   },
   {
     "PROPER_NAME": "Coda",
@@ -56,7 +64,7 @@
       "Chant",
       "chant"
     ],
-    "DESCRIPTION": "An effect when this verse's delay is reduced."
+    "DESCRIPTION": "An effect each turn this #yVerse is set aside."
   },
   {
     "PROPER_NAME": "Confession",
@@ -67,20 +75,12 @@
     "DESCRIPTION": "Whenever you take damage or lose HP deal damage to the attacker or a random enemy equal to your #yConfesison. NL If isn't your turn, reduce Confession by half."
   },
   {
-    "PROPER_NAME": "Sacrifice",
-    "NAMES": [
-      "Sacrifice",
-      "sacrifice"
-    ],
-    "DESCRIPTION": "When you obtain #b5 Sacrifice spend it and increase damage dealt & Healing from #yCure by #b1."
-  },
-  {
     "PROPER_NAME": "Stigmata",
     "NAMES": [
       "Stigmata",
       "stigmata"
     ],
-    "DESCRIPTION": "Gained whenever you lose HP. Reduced by Half at the end of your turn. Every 5 Stigmata spent by Cure Increases Damage done & Healing recieved by 1."
+    "DESCRIPTION": "Gained whenever you lose HP. Reduced by Half at the end of your turn. Every 5 Stigmata spent by Cure Increases Healing recieved by 1."
   },
   {
     "PROPER_NAME": "Cure",
@@ -106,7 +106,7 @@
       "overheal",
       "overhealing"
     ],
-    "DESCRIPTION": "#yCure Healing that cannot be applied is transferred to #yOverheal."
+    "DESCRIPTION": "Healing from #yCure in excess of recent wounds."
   },
 
   {
@@ -126,7 +126,7 @@
       "Cantrip",
       "cantrip"
     ],
-    "DESCRIPTION": "This card starts combat set aside."
+    "DESCRIPTION": "This card starts combat set aside and cannot be #rRemoved by standard means."
   },
   {
     "PROPER_NAME": "Flourish",
@@ -161,12 +161,12 @@
   "DESCRIPTION": "A Bonus effect if X or more cards are to the right of this."
   },
   {
-    "PROPER_NAME": "[dragonmod:ChillIcon] Chill",
+    "PROPER_NAME": "Chill",
     "NAMES": [
       "Chill",
       "chill"
     ],
-    "DESCRIPTION": "Whenever a #yChilled creature takes unblocked Attack or Icicle damage, you gain [dragonmod:BlockIcon] and [dragonmod:ChillIcon] is reduced by #b1."
+    "DESCRIPTION": "Whenever a #yChilled creature takes unblocked Attack or Icicle damage, you gain #yBlock and Chill is reduced by #b1."
   },
   {
     "PROPER_NAME": "Icicle",
@@ -219,38 +219,29 @@
     "DESCRIPTION": "Activate the passive effect of your next orb."
   },
   {
-    "PROPER_NAME": "[dragonmod:BleedIcon] Bleed",
+    "PROPER_NAME": "Bleed",
     "NAMES": [
       "Bleed",
       "bleed"
     ],
-    "DESCRIPTION": "#yBleeding creature lose HP at the start of your turn and lose all Bleed. NL #yBleeding creatures can't act if their [dragonmod:BleedIcon] will kill them."
+    "DESCRIPTION": "#yBleeding creature lose HP at the start of your turn and lose all Bleed. NL #yBleeding creatures can't act if their #yBleed will kill them."
   },
   {
-    "PROPER_NAME": "[dragonmod:SubzeroIcon] Subzero",
+    "PROPER_NAME": "Subzero",
     "NAMES": [
       "Subzero",
       "subzero"
     ],
-    "DESCRIPTION": "[dragonmod:SubzeroIcon] Increases the base damage of #yIcicle or #yHail orbs you channel by half your [dragonmod:SubzeroIcon]."
+    "DESCRIPTION": "Subzero Increases the base damage of #yIcicle or #yHail orbs you channel by half your Subzero."
   },
   {
-    "PROPER_NAME": "[dragonmod:SlowIcon] Lethargy",
+    "PROPER_NAME": "Lethargy",
     "NAMES": [
       "Lethargy",
       "lethargy"
     ],
-    "DESCRIPTION": "Applying [dragonmod:SlowIcon] instead raises it's duration to that amount. NL [dragonmod:SlowIcon] increases incoming damage from cards and orbs by 10% for each card played this turn, [dragonmod:SlowIcon] is reduced by #b1 each turn."
+    "DESCRIPTION": "Applying #yLethargy instead raises it's duration to that amount. NL #yLethargy increases incoming damage from cards and orbs by 10% for each card played this turn, #yLethargy is reduced by #b1 each turn."
 
-  },
-
-  {
-    "PROPER_NAME": "Shroud",
-    "NAMES": [
-      "Shroud",
-      "shroud"
-    ],
-    "DESCRIPTION": "#yShrouding an Orb applies additional effects to its orb slot, an orb slot may only have one additional effect at a time a Shroud is removed alongside the contained orb."
   },
 
   {
@@ -278,36 +269,36 @@
     "DESCRIPTION": "Transforms when you change stances, Amber if Dawn, Amethyst if Dusk."
   },
   {
-    "PROPER_NAME": "[dragonmod:AmberBlossomIcon] Amber Blossom",
+    "PROPER_NAME": "Amber Blossom",
     "NAMES": [
       "Amber_Blossom",
       "amber_blossom"
     ],
-    "DESCRIPTION": "[dragonmod:AmberBlossomIcon] Increases the Maximum damage of Dawn stance."
+    "DESCRIPTION": "Amber Blossom Increases the Maximum damage of Dawn stance."
   },
   {
-    "PROPER_NAME": "[dragonmod:AmethystBlossomIcon] Amethyst Blossom",
+    "PROPER_NAME": "Amethyst Blossom",
     "NAMES": [
       "Amethyst_Blossom",
       "amethyst_blossom"
     ],
-    "DESCRIPTION": "[dragonmod:AmethystBlossomIcon] Increase the cards drawn by Dusk stance."
+    "DESCRIPTION": "Amethyst Blossom Increase the cards drawn by Dusk stance."
   },
   {
-    "PROPER_NAME": "[dragonmod:EmeraldBlossomIcon] Emerald Blossom",
+    "PROPER_NAME": "Emerald Blossom",
     "NAMES": [
       "Emerald_Blossom",
       "emerald_blossom"
     ],
-    "DESCRIPTION": "When you obtain #b3 [dragonmod:EmeraldBlossomIcon] gain [E] ."
+    "DESCRIPTION": "When you obtain #b3 Emerald Blossom gain [E] ."
   },
   {
-    "PROPER_NAME": "Flash",
+    "PROPER_NAME": "Hex",
     "NAMES": [
-      "Flash",
-      "flash"
+      "Hex",
+      "hex"
     ],
-    "DESCRIPTION": "If the last card played this turn was not an Attack gain the following ability."
+    "DESCRIPTION": "Hex Deals Dark damage over #b3 turns."
   },
   {
     "PROPER_NAME": "Illude",

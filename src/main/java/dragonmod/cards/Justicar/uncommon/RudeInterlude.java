@@ -1,14 +1,14 @@
-package dragonmod.cards.Justicar.common;
+package dragonmod.cards.Justicar.uncommon;
 
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.interfaces.TurnStartEnchantment;
-import dragonmod.powers.Dragonkin.ConfessionPower;
 import dragonmod.powers.general.ParryPower;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
@@ -17,16 +17,17 @@ import dragonmod.util.Wiz;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sanctuary extends AbstractJusticarCard implements TurnStartEnchantment {
+public class RudeInterlude extends AbstractJusticarCard implements TurnStartEnchantment {
 
-    public static final String ID = Sanctuary.class.getSimpleName();
-    public Sanctuary(){
-        super(ID,1,CardType.SKILL,CardRarity.COMMON,CardTarget.SELF);
-        setMagic(3,2);
-        energyCosts.put(TypeEnergyHelper.Mana.Charge,3);
-        energyCosts.put(TypeEnergyHelper.Mana.BaseCharge,3);
-        tags.add(EnchantmentsManager.Verse);
+    public static final String ID = RudeInterlude.class.getSimpleName();
+    public RudeInterlude(){
+        super(ID,1,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.SELF);
+        energyCosts.put(TypeEnergyHelper.Mana.Charge,1);
+        energyCosts.put(TypeEnergyHelper.Mana.BaseCharge,1);
         CardModifierManager.addModifier(this,new SCVTemporalCardMod());
+        setMagic(12,2);
+        setMagic2(8,-2);
+        tags.add(EnchantmentsManager.Verse);;
     }
     @Override
     public List<String> getCardDescriptors() {
@@ -43,11 +44,18 @@ public class Sanctuary extends AbstractJusticarCard implements TurnStartEnchantm
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.applyToSelf(new ParryPower(p,p,magicNumber));
     }
 
     @Override
     public void EnchantedTurnStart(AbstractCreature owner) {
-        Wiz.applyToSelf(new ConfessionPower(Wiz.Player(),magicNumber));
-        Wiz.applyToSelf(new ParryPower(Wiz.Player(),Wiz.Player(),magicNumber));
+        if (energyCosts.get(TypeEnergyHelper.Mana.Charge) <= 1){
+            Wiz.atb(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    isDone = true;
+                }
+            });
+        }
     }
 }

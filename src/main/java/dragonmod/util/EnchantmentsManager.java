@@ -128,6 +128,7 @@ public class EnchantmentsManager {
     }
 
     public static void startOfTurnPlayer() {
+        boolean chant = false;
         if (VerseCount() > 0){
             Wiz.att(new AbstractGameAction() {
                 @Override
@@ -151,6 +152,28 @@ public class EnchantmentsManager {
             }
         }
         for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
+            if (card.hasTag(Verse)){
+                Wiz.Player().limbo.group.add(card);
+                Wiz.atb(new AbstractGameAction() {
+                    @Override
+                    public void update() {
+                        EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(card);
+                        Wiz.atb(new UnlimboAction(card));
+                        ((TurnStartEnchantment) card).EnchantedTurnStart(Wiz.Player());
+                        isDone = true;
+                    }
+                });
+                if (!chant){
+                    chant = true;
+                    Wiz.atb(new AbstractGameAction() {
+                        @Override
+                        public void update() {
+                            ActivateEnchantments(card,Wiz.Player());
+                            isDone = true;
+                        }
+                    });
+                }
+            }
             if (card instanceof TurnStartEnchantment) {
                 Wiz.Player().limbo.group.add(card);
                 Wiz.atb(new AbstractGameAction() {

@@ -16,8 +16,7 @@ public class WisteriaCutter extends AbstractRimedancerCard {
     public WisteriaCutter(){
         super(ID,2,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
         setDamage(12,4);
-        setMagic(2,1);
-        setMagic2(2);
+        setMagic(1);
     }
     public void triggerOnGlowCheck() {
         this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();

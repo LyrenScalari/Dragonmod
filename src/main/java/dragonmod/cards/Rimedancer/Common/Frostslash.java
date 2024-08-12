@@ -18,7 +18,7 @@ public class Frostslash extends AbstractRimedancerCard {
     public static final String ID = Frostslash.class.getSimpleName();
     public Frostslash(){
         super(ID,1,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
-        setDamage(7,2);
+        setDamage(6,2);
         setMagic(3,1);
     }
     @Override

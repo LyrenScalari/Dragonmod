@@ -9,13 +9,13 @@ import dragonmod.ui.TextureLoader;
 
 import java.util.ArrayList;
 
-public class ZealIcon extends AbstractCustomIcon {
-    public static final String ID = DragonMod.makeID("Zeal");
-    private static ZealIcon singleton;
-    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Zeal");
+public class InspirationIcon extends AbstractCustomIcon {
+    public static final String ID = DragonMod.makeID("Inspiration");
+    private static InspirationIcon singleton;
+    private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Inspiration");
 
-    public ZealIcon() {
-        super(ID, TextureLoader.getTexture(DragonMod.powerPath(("large/HolyPower.png"))));
+    public InspirationIcon() {
+        super(ID, TextureLoader.getTexture(DragonMod.powerPath(("large/Inspiration.png"))));
     }
 
     public ArrayList<TooltipInfo> getCustomTooltips() {
@@ -24,9 +24,9 @@ public class ZealIcon extends AbstractCustomIcon {
         return tips;
     }
 
-    public static ZealIcon get() {
+    public static InspirationIcon get() {
         if (singleton == null) {
-            singleton = new ZealIcon();
+            singleton = new InspirationIcon();
         }
         return singleton;
     }

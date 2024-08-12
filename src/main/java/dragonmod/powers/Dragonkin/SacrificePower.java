@@ -35,13 +35,13 @@ public class SacrificePower extends BaseTwoAmountPower implements CloneablePower
     public void reducethis (){
         if (this.amount >= amount2){
             int stacksToRemove = amount - (amount%amount2);
-            addToBot(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,  new ZealPower(AbstractDungeon.player, AbstractDungeon.player, stacksToRemove/amount2)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,  new InspirationPower(AbstractDungeon.player, AbstractDungeon.player, stacksToRemove/amount2)));
             addToBot(new ReducePowerAction(owner, owner, this, stacksToRemove));
         }
     }
 
     @Override
     public AbstractPower makeCopy() {
-        return new ZealPower(owner, source, amount);
+        return new SacrificePower(owner, source, amount);
     }
 }

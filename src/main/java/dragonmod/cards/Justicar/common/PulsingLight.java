@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.actions.CureAction;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
-import dragonmod.powers.Dragonkin.ZealPower;
+import dragonmod.powers.Dragonkin.InspirationPower;
 import dragonmod.util.StigmataManager;
 import dragonmod.util.Wiz;
 
@@ -25,7 +25,7 @@ public class PulsingLight extends AbstractJusticarCard {
         setVarCalculation("H", (m, base) -> {
             AbstractPower p = null;
             if (AbstractDungeon.player != null){
-                p = AbstractDungeon.player.getPower(ZealPower.POWER_ID);
+                p = AbstractDungeon.player.getPower(InspirationPower.POWER_ID);
             }
             if(p != null){
                 return base + p.amount;

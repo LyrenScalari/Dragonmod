@@ -16,7 +16,7 @@ import dragonmod.util.Wiz;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO -- Implement on use card enchantment hook.
 public class Excaliburn extends AbstractJusticarCard {
     private static final UIStrings EnchantmentTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Enchantment");
     public static final String ID = Excaliburn.class.getSimpleName();

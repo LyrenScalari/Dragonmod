@@ -4,7 +4,6 @@ import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
@@ -12,7 +11,7 @@ import dragonmod.CardMods.SCVShatterMod;
 import dragonmod.actions.FlourishAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
-import dragonmod.powers.Rimedancer.MarkPower;
+import dragonmod.powers.general.ParryPower;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
@@ -25,8 +24,8 @@ public class CryoShrapnel extends AbstractRimedancerCard {
     private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:ShatterTooltip");
     public CryoShrapnel() {
         super(ID, 1, CardType.SKILL, CardRarity.COMMON, CardTarget.ALL);
-        setMagic(2,1);
-        setCostUpgrade(0);
+        setMagic(2);
+        setMagic2(4,2);
         energyCosts.put(TypeEnergyHelper.Mana.Shatter,1);
         CardModifierManager.addModifier(this,new SCVShatterMod());
     }
@@ -56,8 +55,6 @@ public class CryoShrapnel extends AbstractRimedancerCard {
         for (int i = 0; i < magicNumber; i++){
             Wiz.atb(new FlourishAction());
         }
-        for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
-            Wiz.applyToEnemy(mo,new MarkPower(mo,p,magicNumber));
-        }
+        Wiz.applyToSelf(new ParryPower(p,p,SecondMagicNumber));
     }
 }

@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
-import dragonmod.powers.Dragonkin.ZealPower;
+import dragonmod.powers.Dragonkin.InspirationPower;
 import dragonmod.powers.Warden.BanishPower;
 import dragonmod.util.TargetedPetalEffect;
 import dragonmod.util.Wiz;
@@ -21,7 +21,7 @@ public class BanishingVerse extends AbstractDraconicCard {
     }
     public void calculateCardDamage(AbstractMonster mo) {
         int realBaseDamage = this.baseDamage;
-        AbstractPower Zeal = Wiz.Player().getPower(ZealPower.POWER_ID);
+        AbstractPower Zeal = Wiz.Player().getPower(InspirationPower.POWER_ID);
         float ZealBonus;
         if (upgraded) {
             ZealBonus= 0.5F;

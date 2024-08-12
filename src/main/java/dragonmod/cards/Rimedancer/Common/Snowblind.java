@@ -13,7 +13,7 @@ public class Snowblind extends AbstractRimedancerCard {
     public static final String ID = Snowblind.class.getSimpleName();
     public Snowblind(){
         super(ID,1,CardType.SKILL,CardRarity.COMMON,CardTarget.ENEMY);
-        setMagic(2);
+        setMagic(2,1);
     }
 
 

@@ -3,7 +3,7 @@
     "NAME": "Sunstone Axe",
     "FLAVOR": "Eschew the Mace and take up the Axe, disgraced Warrior of Light, defector of the corrupt order.",
     "DESCRIPTIONS": [
-      "At the start of turn if a #yVerse is set aside and Whenever you heal in combat, Gain #b1 [dragonmod:SacrificeIcon] and deal #b5 damage to a random enemy."
+      "At the start of turn if a #yVerse is set aside and Whenever you heal in combat, Gain #b1 [dragonmod:InspirationIcon] and deal #b5 damage to a random enemy."
     ]
   },
   "${modID}:AshenCharm": {

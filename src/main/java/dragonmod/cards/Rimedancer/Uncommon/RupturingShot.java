@@ -17,7 +17,7 @@ import dragonmod.actions.ShatterAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
 import dragonmod.powers.Rimedancer.BleedPower;
-import dragonmod.powers.Rimedancer.Subzero;
+import dragonmod.powers.general.ParryPower;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
@@ -29,9 +29,9 @@ public class RupturingShot extends AbstractRimedancerCard {
     private static final UIStrings holyTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:ShatterTooltip");
     public RupturingShot() {
         super(ID, 1, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ENEMY);
-        setDamage(8, 4);
-        setMagic(8,4);
-        setMagic2(4,2);
+        setDamage(8, 2);
+        setMagic(6,2);
+        setMagic2(6,2);
         DamageModifierManager.addModifier(this,new RangedDamage(true));
         energyCosts.put(TypeEnergyHelper.Mana.Shatter,2);
         CardModifierManager.addModifier(this,new SCVShatterMod());
@@ -70,6 +70,6 @@ public class RupturingShot extends AbstractRimedancerCard {
         }
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
         Wiz.applyToEnemy(m,new BleedPower(m,magicNumber));
-        Wiz.applyToSelf(new Subzero(SecondMagicNumber));
+        Wiz.applyToSelf(new ParryPower(p,p,SecondMagicNumber));
     }
 }

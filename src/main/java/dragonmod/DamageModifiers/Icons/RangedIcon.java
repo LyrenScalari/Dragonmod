@@ -3,6 +3,8 @@ package dragonmod.DamageModifiers.Icons;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.icons.AbstractCustomIcon;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.helpers.GameDictionary;
+import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import dragonmod.DragonMod;
 import dragonmod.ui.TextureLoader;
@@ -28,6 +30,7 @@ public class RangedIcon extends AbstractCustomIcon {
     public List<TooltipInfo> getCustomTooltips() {
         ArrayList<TooltipInfo> tips = new ArrayList<>();
         tips.add(new TooltipInfo(DivineBlockTooltip.TEXT[0], DivineBlockTooltip.TEXT[1]));
+        tips.add(new TooltipInfo("[dragonmod:LockonIcon] " + TipHelper.capitalize(GameDictionary.LOCK_ON.NAMES[0]), GameDictionary.keywords.get(GameDictionary.LOCK_ON.NAMES[0])));
         return tips;
     }
 }

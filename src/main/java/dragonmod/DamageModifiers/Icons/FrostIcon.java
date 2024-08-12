@@ -15,6 +15,7 @@ public class FrostIcon extends AbstractCustomIcon {
     public static final String ID = DragonMod.makeID("Frost");
     private static FrostIcon singleton;
     private static final UIStrings IceArmorTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:IceArmor");
+    private static final UIStrings ChillTooltip = CardCrawlGame.languagePack.getUIString("dragonmod:Chill");
     public FrostIcon() {
         super(ID, TextureLoader.getTexture(DragonMod.uiPath("IceArmor.png")));
     }
@@ -28,6 +29,7 @@ public class FrostIcon extends AbstractCustomIcon {
     public List<TooltipInfo> getCustomTooltips() {
         ArrayList<TooltipInfo> tips = new ArrayList<>();
         tips.add(new TooltipInfo(IceArmorTooltip.TEXT[0],IceArmorTooltip.TEXT[1]));
+        tips.add(new TooltipInfo(ChillTooltip.TEXT[0], ChillTooltip.TEXT[1]));
         return tips;
     }
 }

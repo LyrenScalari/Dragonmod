@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import dragonmod.actions.SmiteAction;
-import dragonmod.powers.Dragonkin.SacrificePower;
+import dragonmod.powers.Dragonkin.InspirationPower;
 import dragonmod.relics.BaseRelic;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.Wiz;
@@ -22,17 +22,15 @@ public class GarnetScales extends BaseRelic {
     public static final String NAME = "GarnetScales";
     private static RelicStrings relicStrings = CardCrawlGame.languagePack.getRelicStrings(ID);
     private static UIStrings verse = CardCrawlGame.languagePack.getUIString("dragonmod:Verse");
-    private static UIStrings sacrifice = CardCrawlGame.languagePack.getUIString("dragonmod:Sacrifice");
-    private static UIStrings cure = CardCrawlGame.languagePack.getUIString("dragonmod:Cure");
+    private static UIStrings Inspiration = CardCrawlGame.languagePack.getUIString("dragonmod:Inspiration");
     public GarnetScales() {
         super(ID, NAME, RelicTier.STARTER, LandingSound.CLINK);
         description = relicStrings.DESCRIPTIONS[0];
         counter = 5;
         tips.clear();
         tips.add(new PowerTip(name, description));
-        tips.add(new PowerTip(sacrifice.TEXT[0],sacrifice.TEXT[1]));
-        tips.add(new PowerTip(cure.TEXT[0],cure.TEXT[1]));
         tips.add(new PowerTip(verse.TEXT[0],verse.TEXT[1]));
+        tips.add(new PowerTip(Inspiration.TEXT[0], Inspiration.TEXT[1]));
     }
 
     // Description
@@ -45,7 +43,7 @@ public class GarnetScales extends BaseRelic {
     public void atTurnStartPostDraw() {
         if (EnchantmentsManager.VerseCount() > 0){
             Wiz.atb(new RelicAboveCreatureAction(AbstractDungeon.player,this));
-            Wiz.applyToSelf(new SacrificePower(Wiz.Player(),Wiz.Player(),1));
+            Wiz.applyToSelf(new InspirationPower(Wiz.Player(),Wiz.Player(),1));
             AbstractMonster target = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
             Wiz.atb(new SmiteAction(target,new DamageInfo(AbstractDungeon.player,counter, DamageInfo.DamageType.THORNS)));
         }
@@ -55,7 +53,7 @@ public class GarnetScales extends BaseRelic {
     public int onPlayerHeal(int healAmount) {
         if (AbstractDungeon.currMapNode != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && healAmount > 0) {
             Wiz.atb(new RelicAboveCreatureAction(AbstractDungeon.player,this));
-            Wiz.applyToSelf(new SacrificePower(Wiz.Player(),Wiz.Player(),1));
+            Wiz.applyToSelf(new InspirationPower(Wiz.Player(),Wiz.Player(),1));
             AbstractMonster target = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
             Wiz.atb(new SmiteAction(target,new DamageInfo(AbstractDungeon.player,counter, DamageInfo.DamageType.THORNS)));
         }

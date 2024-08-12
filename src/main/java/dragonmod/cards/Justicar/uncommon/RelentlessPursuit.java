@@ -38,6 +38,9 @@ public class RelentlessPursuit extends AbstractJusticarCard implements TurnStart
                 else
                     super.applyPowers();
                 this.baseDamage = tmp;
+                if (upgraded){
+                    return (int) (damage + (AbstractDungeon.player.currentBlock/1.33f));
+                }
                 return damage + (AbstractDungeon.player.currentBlock/2);
             } else {
                 return base;

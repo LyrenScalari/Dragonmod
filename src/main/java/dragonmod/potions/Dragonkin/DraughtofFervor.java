@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import dragonmod.DragonMod;
-import dragonmod.powers.Dragonkin.ZealPower;
+import dragonmod.powers.Dragonkin.InspirationPower;
 
 public class DraughtofFervor extends AbstractPotion {
 
@@ -43,7 +43,7 @@ public class DraughtofFervor extends AbstractPotion {
         target = AbstractDungeon.player;
         // If you are in combat, gain strength and the "lose strength at the end of your turn" power, equal to the potency of this potion.
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
-            addToBot(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,new ZealPower(AbstractDungeon.player,AbstractDungeon.player,potency)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,new InspirationPower(AbstractDungeon.player,AbstractDungeon.player,potency)));
         }
     }
 

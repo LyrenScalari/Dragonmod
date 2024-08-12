@@ -46,6 +46,7 @@ import dragonmod.cards.Draconic.Hubris;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.cards.Warden.AbstractWardenCard;
+import dragonmod.characters.TheJusticar;
 import dragonmod.characters.TheRimedancer;
 import dragonmod.orbs.CrystalOrbSlot;
 import dragonmod.orbs.Icicle;
@@ -486,6 +487,7 @@ public class DragonMod implements
         CustomIconHelper.addCustomIcon(PoisonIcon.get());
         //Generic Dragon Icons
         CustomIconHelper.addCustomIcon(ChargeCounter.get());
+        CustomIconHelper.addCustomIcon(ParryIcon.get());
         CustomIconHelper.addCustomIcon(ReinforceIcon.get());
         CustomIconHelper.addCustomIcon(PowerfulIcon.get());
         CustomIconHelper.addCustomIcon(CourageIcon.get());
@@ -497,7 +499,7 @@ public class DragonMod implements
         CustomIconHelper.addCustomIcon(StigmataIcon.get());
         CustomIconHelper.addCustomIcon(ConfessionIcon.get());
         CustomIconHelper.addCustomIcon(ScorchIcon.get());
-        CustomIconHelper.addCustomIcon(ZealIcon.get());
+        CustomIconHelper.addCustomIcon(InspirationIcon.get());
         CustomIconHelper.addCustomIcon(DevotionIcon.get());
 
         //Rimedancer Icons
@@ -512,9 +514,9 @@ public class DragonMod implements
         //Warden Icons
         CustomIconHelper.addCustomIcon(LightIcon.get());
         CustomIconHelper.addCustomIcon(BanishIcon.get());
-        CustomIconHelper.addCustomIcon(BanishIcon2.get());
         CustomIconHelper.addCustomIcon(DarkIcon.get());
         CustomIconHelper.addCustomIcon(HexIcon.get());
+        CustomIconHelper.addCustomIcon(HexIcon2.get());
         CustomIconHelper.addCustomIcon(AmberBlossomIcon.get());
         CustomIconHelper.addCustomIcon(AmethystBlossomIcon.get());
         CustomIconHelper.addCustomIcon(EmeraldBlossomIcon.get());
@@ -524,9 +526,9 @@ public class DragonMod implements
         BaseMod.addDynamicVariable(new SecondDamage());
         logger.info("Adding cards");
         new AutoAdd(modID).packageFilter(AbstractJusticarCard.class).setDefaultSeen(true).cards();
-        // Total 38
+        // Total 40
         // C 16 - done
-        // U 9 - +16
+        // U 10 - +15
         // R 4 - +6
         new AutoAdd(modID).packageFilter(AbstractRimedancerCard.class).setDefaultSeen(true).cards();
         // Total 65 ready for testing
@@ -544,8 +546,8 @@ public class DragonMod implements
 
     @Override
     public void receiveEditCharacters() {
-        /*BaseMod.addCharacter(new TheJusticar("the Justicar", THE_JUSTICAR),
-                JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_JUSTICAR);*/
+        BaseMod.addCharacter(new TheJusticar("the Justicar", THE_JUSTICAR),
+                JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_JUSTICAR);
         BaseMod.addCharacter(new TheRimedancer("the Rimedancer", THE_RIMEDANCER),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_RIMEDANCER);
         /*BaseMod.addCharacter(new TheWarden("the Warden", THE_WARDEN),

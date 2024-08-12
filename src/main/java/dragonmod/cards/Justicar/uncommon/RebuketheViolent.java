@@ -9,12 +9,12 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.PoisonPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.DragonMod;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.interfaces.onAttackedEnchantment;
+import dragonmod.powers.general.ParryPower;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
@@ -69,7 +69,7 @@ public class RebuketheViolent extends AbstractJusticarCard implements onAttacked
     public int EnchantedOnAttacked(AbstractCreature owner, int dmgamt, DamageInfo info) {
         if (owner != info.owner){
             Wiz.applyToEnemy((AbstractMonster) info.owner,new WeakPower(info.owner,magicNumber,true));
-            Wiz.applyToEnemy((AbstractMonster) info.owner,new PoisonPower(info.owner,owner,dmgamt/2));
+            Wiz.applyToSelf(new ParryPower(Wiz.Player(),Wiz.Player(),dmgamt/2));
         }
         return dmgamt;
     }

@@ -12,10 +12,8 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.CardMods.AddIconToDescriptionMod;
 import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.DamageModifiers.BlockModifiers.IceArmor;
-import dragonmod.DamageModifiers.Icons.FrostIcon;
 import dragonmod.DragonMod;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.interfaces.onAttackedEnchantment;
@@ -54,7 +52,6 @@ public class FrozenRose extends AbstractRimedancerCard implements onAttackedEnch
         tags.add(DragonMod.Enchantment);
         cardsToPreview = new Shiv();
         BlockModifierManager.addModifier(this,new IceArmor(true));
-        CardModifierManager.addModifier(this,new AddIconToDescriptionMod(AddIconToDescriptionMod.BLOCK, FrostIcon.get()));
     }
 
 

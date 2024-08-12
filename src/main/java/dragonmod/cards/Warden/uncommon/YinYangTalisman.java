@@ -13,7 +13,7 @@ public class YinYangTalisman extends AbstractWardenCard {
     public YinYangTalisman(){
         super(ID,2,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.SELF);
         setBlock(12,3);
-        setMagic(1,1);
+        setMagic(2,1);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
