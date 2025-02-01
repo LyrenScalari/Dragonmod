@@ -3,7 +3,7 @@
     "NAME": "Sunstone Axe",
     "FLAVOR": "Eschew the Mace and take up the Axe, disgraced Warrior of Light, defector of the corrupt order.",
     "DESCRIPTIONS": [
-      "At the start of turn if a #yVerse is set aside and Whenever you heal in combat, Gain #b1 [dragonmod:InspirationIcon] and deal #b5 damage to a random enemy."
+      "At the start of combat, take 5 damage and gain 10 [dragonmod:DivineArmorIcon] . NL Whenever you gain [${modID}:DivineArmorIcon] or [${modID}:BlockIcon] the first time each turn, Gain #b1 [dragonmod:InspirationIcon] and deal #b5 damage to a random enemy."
     ]
   },
   "${modID}:AshenCharm": {
@@ -60,14 +60,14 @@
     "FLAVOR": "Obsidian power, mastery of the flame that ruled the primordial world",
     "DESCRIPTIONS": [
       "Replaces ",
-      ". NL After you discard a #yStatus or [#fe513a]Primal[] card Gain #b4 #yBlock and #yVigor"
+      ". NL At the start of combat, Gain #b10 [dragonmod:ScorchIcon] and #b5 [dragonmod:PowerfulIcon] NL Whenever you gain [${modID}:DivineArmorIcon] or [${modID}:BlockIcon] the first time each turn, ALL enemies gain #b3 [dragonmod:ScorchIcon]"
     ]
   },
   "${modID}:CitrineScales": {
     "NAME": "Citrine Scales",
     "FLAVOR": "Crystallized light, a divine gift of prosperity.",
     "DESCRIPTIONS": [
-      "Whenever you play an #yExalted card, next turn gain [E]"
+      "Whenever you play an #yInspired card, next turn gain [E]"
     ]
   },
   "${modID}:PlaceholderRelic2": {

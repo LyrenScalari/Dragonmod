@@ -2,6 +2,7 @@ package dragonmod.cards.Justicar.common;
 
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
+import com.evacipated.cardcrawl.mod.stslib.blockmods.BlockModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -10,31 +11,29 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import dragonmod.CardMods.SCVTemporalCardMod;
-import dragonmod.actions.CureAction;
+import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
-import dragonmod.interfaces.OnOverheal;
 import dragonmod.interfaces.TurnStartEnchantment;
 import dragonmod.powers.Dragonkin.InspirationPower;
 import dragonmod.util.EnchantmentsManager;
-import dragonmod.util.StigmataManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrayerofVigor extends AbstractJusticarCard implements TurnStartEnchantment, OnOverheal {
+public class PrayerofVigor extends AbstractJusticarCard implements TurnStartEnchantment {
 
     public static final String ID = PrayerofVigor.class.getSimpleName();
     public PrayerofVigor(){
         super(ID,1,CardType.SKILL,CardRarity.COMMON,CardTarget.SELF);
         energyCosts.put(TypeEnergyHelper.Mana.Charge,3);
         energyCosts.put(TypeEnergyHelper.Mana.BaseCharge,3);
+        BlockModifierManager.addModifier(this,new DivineBlock(true));
         CardModifierManager.addModifier(this,new SCVTemporalCardMod());
-        setMagic(3,-1);
-        setCustomVar("H",10,4);
+        setCustomVar("Inspire",2);
         tags.add(EnchantmentsManager.Verse);
-        setVarCalculation("H", (m, base) -> {
+        setVarCalculation("Inspire", (m, base) -> {
             AbstractPower p = null;
             if (AbstractDungeon.player != null){
                 p = AbstractDungeon.player.getPower(InspirationPower.POWER_ID);
@@ -59,20 +58,21 @@ public class PrayerofVigor extends AbstractJusticarCard implements TurnStartEnch
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.applyToSelfTemp(new StrengthPower(Wiz.Player(),customVar("Inspire")));
+        Wiz.atb(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                EnchantmentsManager.addCard(PrayerofVigor.this,true,p);
+            }
+        });
     }
 
     @Override
     public void EnchantedTurnStart(AbstractCreature owner) {
         if (energyCosts.get(TypeEnergyHelper.Mana.Charge) <= 1){
-            Wiz.atb(new CureAction(customVar( "H")));
-            Wiz.atb(new AbstractGameAction() {
-                @Override
-                public void update() {
-                    isDone = true;
-                    onOverheal(StigmataManager.Overheal);
-                }
-            });
-        }
+            Wiz.block(Wiz.Player(), block);
+        } else Wiz.applyToSelfTemp(new StrengthPower(Wiz.Player(),customVar("Inspire")));
     }
 
     @Override
@@ -80,12 +80,5 @@ public class PrayerofVigor extends AbstractJusticarCard implements TurnStartEnch
         energyCosts.put(TypeEnergyHelper.Mana.Charge,2);
         energyCosts.put(TypeEnergyHelper.Mana.BaseCharge,2);
         super.upgrade();
-    }
-
-    @Override
-    public void onOverheal(int amount) {
-        if (amount > 0){
-            Wiz.applyToSelfTemp(new StrengthPower(Wiz.Player(),amount));
-        }
     }
 }

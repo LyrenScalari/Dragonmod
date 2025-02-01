@@ -30,8 +30,6 @@ import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
-import static dragonmod.characters.TheJusticar.Enums.THE_JUSTICAR;
-
 public class StigmataManager {
     public static StigmataUI stigmataUI;
     public static boolean renderstigmataui = false;
@@ -102,7 +100,7 @@ public class StigmataManager {
                     stigmataUI = new StigmataUI(ImageMaster.loadImage("dragonmod/ui/StigmataUI/Stressvfx.png"));
                 }
                 return true;
-            } else if (StigmataField.Stigmata.get(AbstractDungeon.player) > 0 || AbstractDungeon.player.chosenClass == THE_JUSTICAR) {
+            } else if (StigmataField.Stigmata.get(AbstractDungeon.player) > 0) {
                 renderstigmataui = true;
                 if (stigmataUI == null) {
                     stigmataUI = new StigmataUI(ImageMaster.loadImage("dragonmod/ui/StigmataUI/Stressvfx.png"));
@@ -132,9 +130,7 @@ public class StigmataManager {
             localvars = {"damageAmount"}
     )
     public static void StigmataPostFix(AbstractPlayer __instance, DamageInfo info, int damageAmount) {
-        if (renderstigmataui) {
-            gainStigmata(damageAmount);
-        }
+        gainStigmata(damageAmount);
         for (AbstractCard field : EnchantmentsField.Enchantments.get(__instance).group) {
             if (field instanceof onLoseHPEnchantment) {
                 ((onLoseHPEnchantment) field).EnchantmentOnAttacked(__instance);
@@ -219,7 +215,7 @@ public class StigmataManager {
     public static class RenderPatch{
         public static void Prefix(EnergyPanel __instance, SpriteBatch sb){
             if(getStigmataRender()){
-                renderStressCounter(sb, __instance.current_x);
+                //renderStressCounter(sb, __instance.current_x);
             }
         }
     }
@@ -229,7 +225,7 @@ public class StigmataManager {
         public static void Prefix(EnergyPanel __instance){
             // Only update when rendering elements counter
             if (getStigmataRender()) {
-                updateStigmataCounter();
+                //updateStigmataCounter();
             }
         }
     }

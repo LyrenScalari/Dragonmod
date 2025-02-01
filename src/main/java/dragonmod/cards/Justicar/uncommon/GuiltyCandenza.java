@@ -58,6 +58,13 @@ public class GuiltyCandenza extends AbstractJusticarCard implements TurnStartEnc
                 Wiz.applyToSelf(new ConfessionPower(p,magicNumber));
             }
         }));
+        Wiz.atb(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                EnchantmentsManager.addCard(GuiltyCandenza.this,true,p);
+            }
+        });
     }
 
     @Override

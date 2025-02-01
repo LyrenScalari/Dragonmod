@@ -22,8 +22,9 @@
     "DESCRIPTION": "Deal !D! damage. NL Gain !M! [${modID}:ConfessionIcon] ."
   },
   "${modID}:Cauterize": {
-    "NAME": "Aria of Vitality",
-    "DESCRIPTION": "Gain !B! Block. NL Discard the card left of this. NL ${modID}:Coda !M! : ${modID}:Cure !${modID}:H! ."
+    "NAME": "Unyielding Conviction",
+    "DESCRIPTION": "Gain !B! [#fcad03](7+[] [${modID}:InspirationIcon] [#fcad03])[] [${modID}:DivineArmorIcon] . NL Discard the card left of this.",
+    "UPGRADE_DESCRIPTION":"Gain !B! [#fcad03](9+[] [${modID}:InspirationIcon] [#fcad03])[] [${modID}:DivineArmorIcon] . NL Discard the card left of this."
   },
 
   "${modID}:InnerFire": {
@@ -40,7 +41,7 @@
   },
   "${modID}:PrayerofVigor": {
     "NAME": "Prayer of Vigor",
-    "DESCRIPTION": "${modID}:Overheal: Gain that much temporary [${modID}:StrengthIcon] . NL ${modID}:Coda !M!: ${modID}:Cure !${modID}:H! ."
+    "DESCRIPTION": "While set aside you have !${modID}:Inspire! [#fcad03](2+[] [${modID}:InspirationIcon] [#fcad03])[] temporary [${modID}:StrengthIcon] . NL ${modID}:Coda !M!: Gain !B! [${modID}:DivineArmorIcon] ."
   },
   "${modID}:PrayerofWrath": {
     "NAME": "Prayer of Wrath",
@@ -81,7 +82,7 @@
   },
   "${modID}:PulsingLight": {
     "NAME": "Pulsing Light",
-    "DESCRIPTION": "${modID}:Cure !${modID}:H! . NL On ${modID}:Overheal : Gain !B! [#fcad03](4[] [#fcad03]+0.5x[] [#fcad03]Overhealing)[] [${modID}:DivineArmorIcon]"
+    "DESCRIPTION": "Gain !B! [${modID}:DivineArmorIcon] . NL Next turn, [${modID}:InspirationIcon] also grants [${modID}:DivineArmorIcon] ."
   },
   "${modID}:Sanctuary": {
     "NAME": "Sanctuary",
@@ -115,6 +116,12 @@
   "${modID}:Excaliburn": {
     "NAME": "Excaliburn",
     "DESCRIPTION": "Whenever you play an attack, Deal !${modID}:M2! damage and apply !M! [${modID}:ScorchIcon] to a random enemy. NL Take !M! Damage ."
+  },
+  "${modID}:Fire": {
+    "NAME": "Fire",
+    "DESCRIPTION": "Apply !${modID}:BRN! [#fcad03](5+[] [${modID}:InspirationIcon] [#fcad03])[] [${modID}:ScorchIcon] . NL ${modID}:Inspired 2: Also Deal !D! damage. NL ${modID}:Inspired 5: Deals !M! additional damage and applies !${modID}:M2! additional [${modID}:ScorchIcon] .",
+    "UPGRADE_DESCRIPTION": "Apply !BRN! [#fcad03](7+[] [${modID}:InspirationIcon] [#fcad03])[] [${modID}:ScorchIcon] . NL ${modID}:Inspired 2: Also Deal !D! damage. NL ${modID}:Inspired 5: Deals !M! additional damage and applies !${modID}:M2! additional [${modID}:ScorchIcon] .",
+    "EXTENDED_DESCRIPTION": ["Fira","Firaga"]
   },
 
   "${modID}:BriarsofSorrow": {
@@ -157,7 +164,7 @@
   },
   "${modID}:YieldmyFlesh": {
     "NAME": "Yield my Flesh",
-    "DESCRIPTION": "${modID}:Chant your next Verse whenever you lose HP during your turn. NL On ${modID}:Coda: ${modID}:Cure !${modID}:H! ."
+    "DESCRIPTION": "${modID}:Chant your next Verse whenever you lose HP during your turn. NL On ${modID}:Coda: Gain !M! [${modID}:DivineArmorIcon] ."
   },
   "${modID}:WrathofGod": {
     "NAME": "Wrath of God",
@@ -228,7 +235,7 @@
   },
   "${modID}:ChillOut": {
     "NAME": "Chill Out",
-    "DESCRIPTION": "${modID}:Flourish then ${modID}:Glimpse. NL ${modID}:Tilt !M!: Draw a card."
+    "DESCRIPTION": "${modID}:Flourish. NL Gain !B! [${modID}:BlockIcon] ."
   },
   "${modID}:MarkAssessment": {
     "NAME": "Mark Assessment",
@@ -244,7 +251,7 @@
   },
   "${modID}:CryoShrapnel": {
     "NAME": "Cryo Shrapnel",
-    "DESCRIPTION": "${modID}:Flourish !M! times. NL Gain !M! [dragonmod:ParryIcon] ."
+    "DESCRIPTION": "${modID}:Flourish !M! times. NL Gain !${modID}:M2! [dragonmod:ParryIcon] ."
   },
   "${modID}:LeadAstray": {
     "NAME": "Lead Astray",
@@ -256,7 +263,7 @@
   },
   "${modID}:WisteriaCutter": {
     "NAME": "Wisteria Slash",
-    "DESCRIPTION": "Deal !D! damage. NL Channel an ${modID}:Icicle. NL  ${modID}:Tilt 3: Gain [E] [E]"
+    "DESCRIPTION": "Deal !D! damage. NL Channel an ${modID}:Icicle. NL If you have !M! or more cards in hand Gain [E] [E]"
   },
   "${modID}:Feint": {
     "NAME": "Feint",
@@ -272,7 +279,8 @@
   },
   "${modID}:CrystalBarbs": {
     "NAME": "Crystal Barbs",
-    "DESCRIPTION": "Deal !D! damage. NL Channel !M! ${modID}:Icicles."
+    "DESCRIPTION": "Deal !D! damage. NL Channel !M! ${modID}:Icicle.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Channel !M! ${modID}:Icicles."
   },
   "${modID}:MarkingShiv": {
     "NAME": "Marking Chakram",
@@ -285,10 +293,6 @@
   "${modID}:FreezeOver": {
     "NAME": "Freeze Over",
     "DESCRIPTION": "Draw !M! cards and Retain them this turn. NL You cannot play them this turn."
-  },
-  "${modID}:Crackle": {
-    "NAME": "Crackle",
-    "DESCRIPTION": "${modID}:Fire an ${modID}:Icicle. NL ${modID}:Tilt 2: Gain !B! [${modID}:BlockIcon] ."
   },
   "${modID}:SnowFort": {
   "NAME": "Snow Fort",
@@ -332,6 +336,10 @@
     "NAME": "Poker Dart",
     "DESCRIPTION": "Deal !D! damage to a random enemy, repeat for each card left of this. NL Gain !B! [${modID}:BlockIcon] increased by !B! for each card right of this."
   },
+  "${modID}:Crackle": {
+    "NAME": "Crackle",
+    "DESCRIPTION": "${modID}:Fire an ${modID}:Icicle. NL Apply !M! [dragonmod:ChillIcon] ."
+  },
   "${modID}:AuroraVeil": {
     "NAME": "Aurora Veil",
     "DESCRIPTION": "Gain !B! [${modID}:FrostIcon] . NL Apply !M! [${modID}:WeakIcon] to ALL enemies."
@@ -342,11 +350,11 @@
   },
   "${modID}:DeathlyDispute": {
     "NAME": "Deathly Dispute",
-    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Glimpse !M! cards. NL ${modID}:Exploit any !M!: Gain !${modID}:M2! Gold and Exhaust."
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! [${modID}:LockonIcon] . NL ${modID}:Exploit any 3: Gain !M! [dragonmod:StrengthIcon] and Exhaust."
   },
   "${modID}:SilverShadow": {
     "NAME": "Silver Shadow",
-    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Tilt 3: Whenever you are attacked this turn, apply !M! [${modID}:LockonIcon] back.",
+    "DESCRIPTION": "Deal !D! damage. NL Whenever you are attacked this turn, apply !M! [${modID}:LockonIcon] back.",
     "EXTENDED_DESCRIPTION": ["Dodgy Fog"]
   },
   "${modID}:SparklingShiv": {
@@ -406,22 +414,23 @@
   },
   "${modID}:WraithsLegerdemain": {
     "NAME": "Wraith's Legerdemain",
-    "DESCRIPTION": "Draw {!M!|1=a card|1>=!M! cards} . NL ${modID}:Tilt 3 : Next turn, Gain {!${modID}:M2!|1=[E]|2=[E] [E]|3=[E] [E] [E]|4>=!${modID}:M2! [E]}{@@} and draw an additional card."
+    "DESCRIPTION": "Draw {!M!|1=a card|1>=!M! cards} . NL Next turn, Gain {!${modID}:M2!|1=[E]|2=[E] [E]|3=[E] [E] [E]|4>=!${modID}:M2! [E]}{@@} and draw !${modID}:M2! additional {!M!|1= card|1>=!M! cards}{@@} ."
   },
   "${modID}:ShadowStep": {
     "NAME": "Shadow Step",
-    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] [#2a89f5](6[] [#2a89f5]+[] [#2a89f5]2x [#2a89f5]Cards[] [#2a89f5]right[] [#2a89f5]of[] [#2a89f5]this)[] NL ${modID}:Tilt !M! : Choose a card in your draw pile to put on top.",
-    "UPGRADE_DESCRIPTION": "Gain !B! [${modID}:BlockIcon] [#2a89f5](9[] [#2a89f5]+[] [#2a89f5]2x [#2a89f5]Cards[] [#2a89f5]right[] [#2a89f5]of[] [#2a89f5]this)[] NL ${modID}:Tilt !M! : Choose a card in your draw pile to put on top.",
+    "DESCRIPTION": "Gain !B! [${modID}:BlockIcon] [#2a89f5](6[] [#2a89f5]+[] [#2a89f5]2x [#2a89f5]Cards[] [#2a89f5]right[] [#2a89f5]of[] [#2a89f5]this)[].",
+    "UPGRADE_DESCRIPTION": "Gain !B! [${modID}:BlockIcon] [#2a89f5](9[] [#2a89f5]+[] [#2a89f5]2x [#2a89f5]Cards[] [#2a89f5]right[] [#2a89f5]of[] [#2a89f5]this)[].",
     "EXTENDED_DESCRIPTION": ["Put on top of your draw pile"]
   },
   "${modID}:CordonofMirages": {
-    "NAME": "Trickster's Ruse",
-    "DESCRIPTION": "Add !M! *Dazed to your hand. NL ${modID}:Glimpse !M!. NL ${modID}:Flourish.",
-    "UPGRADE_DESCRIPTION": "Add !M! *Dazed to your hand. NL ${modID}:Glimpse !M!. NL ${modID}:Flourish twice."
+    "NAME": "Mask Change",
+    "DESCRIPTION": "Swap your hand with ALL your ${modID}:Sheathed cards. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Retain. NL Swap your hand with ALL your ${modID}:Sheathed cards. NL Exhaust."
   },
   "${modID}:MagiciansHaze": {
     "NAME": "Magicians Haze",
-    "DESCRIPTION": "Remove all your orbs, channel that many ${modID}:Icicles plus !M! . NL ${modID}:Tilt !${modID}:M2! : Discard your hand draw that many cards plus !M! ."
+    "DESCRIPTION": "Remove all your orbs, channel that many ${modID}:Icicles plus !M! . NL Exhaust",
+    "UPGRADE_DESCRIPTION": "Remove all your orbs, channel that many ${modID}:Icicles plus !M! ."
   },
   "${modID}:FrozenRose": {
     "NAME": "Frozen Rose",
@@ -443,7 +452,7 @@
   },
   "${modID}:MyriadImages": {
     "NAME": "Myriad Images",
-    "DESCRIPTION": "${modID}:Tilt !${modID}:M2! : Deal !D! damage to ALL enemies. NL ALL enemies lose !M! [${modID}:StrengthIcon] this turn."
+    "DESCRIPTION": "${modID}:Gamble !${modID}:M2! : Deal !D! damage to ALL enemies. NL ALL enemies lose !M! [${modID}:StrengthIcon] this turn."
   },
   "${modID}:FrigidForm": {
     "NAME": "Frigid Form",

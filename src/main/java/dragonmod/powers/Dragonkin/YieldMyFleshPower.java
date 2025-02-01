@@ -3,13 +3,15 @@ package dragonmod.powers.Dragonkin;
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.GainCustomBlockAction;
+import com.evacipated.cardcrawl.mod.stslib.blockmods.BlockModContainer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.DragonMod;
-import dragonmod.actions.CureAction;
 import dragonmod.interfaces.OnCoda;
 import dragonmod.interfaces.TurnStartEnchantment;
 import dragonmod.powers.BasePower;
@@ -49,11 +51,11 @@ public class YieldMyFleshPower extends BasePower implements CloneablePowerInterf
     }
     @Override
     public AbstractPower makeCopy() {
-        return new Scorchpower(owner, source, amount);
+        return new YieldMyFleshPower(amount);
     }
 
     @Override
     public void triggerOnCoda() {
-        Wiz.atb(new CureAction(amount));
+        Wiz.atb(new GainCustomBlockAction(new BlockModContainer(this,new DivineBlock(true)),Wiz.Player(),amount));
     }
 }

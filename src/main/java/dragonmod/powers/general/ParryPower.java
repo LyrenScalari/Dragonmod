@@ -20,7 +20,7 @@ public class ParryPower extends BasePower implements CloneablePowerInterface, On
     }
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1]+ this.amount/2 + DESCRIPTIONS[2];
+        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
     @Override
     public AbstractPower makeCopy() {

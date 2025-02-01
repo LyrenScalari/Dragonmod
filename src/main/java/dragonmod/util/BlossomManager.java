@@ -67,7 +67,7 @@ public class BlossomManager {
                     blossomUI = new BlossomUI(ImageMaster.loadImage("dragonmod/ui/BlossomUI/Blossomvfx.png"));
                 }
                 return true;
-            } else if (StigmataManager.StigmataField.Stigmata.get(AbstractDungeon.player) > 0 || AbstractDungeon.player.chosenClass == TheWarden.Enums.THE_WARDEN) {
+            } else if ((BlossomField.AmberBlossom.get(AbstractDungeon.player) > 0 || BlossomField.AmethystBlossom.get(AbstractDungeon.player) > 0 || BlossomField.EmeraldBlossom.get(AbstractDungeon.player) > 0) || AbstractDungeon.player.chosenClass == TheWarden.Enums.THE_WARDEN) {
                 renderblossomui = true;
                 if (blossomUI == null) {
                     blossomUI = new BlossomUI(ImageMaster.loadImage("dragonmod/ui/BlossomUI/Blossomvfx.png"));

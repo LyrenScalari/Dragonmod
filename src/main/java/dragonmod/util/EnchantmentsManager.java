@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.UnlimboAction;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -174,7 +175,7 @@ public class EnchantmentsManager {
                     });
                 }
             }
-            if (card instanceof TurnStartEnchantment) {
+            if (card instanceof TurnStartEnchantment && !card.hasTag(Verse)) {
                 Wiz.Player().limbo.group.add(card);
                 Wiz.atb(new AbstractGameAction() {
                     @Override
@@ -425,6 +426,37 @@ public class EnchantmentsManager {
                     }
                 }
             }
+        }
+    }
+    @SpireInsertPatch(
+            locator = UseLocator.class,
+            localvars = {"targetCard"}
+    )
+    public static void UseCardPlayer(UseCardAction __instance, AbstractCard targetCard) {
+        if (EnchantmentsField.Enchantments.get(Wiz.Player()) != null && !Wiz.Player().isDeadOrEscaped()) {
+            for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
+                if (card instanceof TriggerOnUseCard && ((AbstractDragonCard)card).energyCosts.get(TypeEnergyHelper.Mana.Charge) > 0) {
+                    Wiz.Player().limbo.group.add(card);
+                    Wiz.atb(new AbstractGameAction() {
+                        @Override
+                        public void update() {
+                            EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(card);
+                            Wiz.atb(new UnlimboAction(card));
+                            ((TriggerOnUseCard) card).onUseCard(targetCard,__instance);
+                            isDone = true;
+                        }
+                    });
+                }
+            }
+        }
+    }
+    private static class UseLocator extends SpireInsertLocator {
+        private UseLocator() {
+        }
+
+        public int[] Locate(CtBehavior ctBehavior) throws Exception {
+            Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractDungeon.class, "getMonsters");
+            return LineFinder.findInOrder(ctBehavior, new ArrayList(), finalMatcher);
         }
     }
     @SpirePatch(

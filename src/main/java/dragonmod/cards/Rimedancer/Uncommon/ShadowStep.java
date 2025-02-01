@@ -1,6 +1,5 @@
 package dragonmod.cards.Rimedancer.Uncommon;
 
-import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -13,18 +12,6 @@ public class ShadowStep extends AbstractRimedancerCard {
         super(ID,1,CardType.SKILL,CardRarity.UNCOMMON,CardTarget.NONE);
         setBlock(6,3);
         setMagic(5,-1);
-    }
-    public void triggerOnGlowCheck() {
-        this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        int tilt = 0;
-        for (AbstractCard c : Wiz.Player().hand.group){
-            if (Wiz.Player().hand.group.indexOf(c) > Wiz.Player().hand.group.indexOf(this)){
-                tilt += 1;
-            }
-        }
-        if (tilt >= magicNumber){
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        }
     }
     public void applyPowers() {
         int realBaseBlock = baseBlock;
@@ -48,12 +35,5 @@ public class ShadowStep extends AbstractRimedancerCard {
             }
         }
         Wiz.block(p,block+(tilt*2));
-        if (tilt >= magicNumber){
-            Wiz.atb(new SelectCardsAction(Wiz.Player().drawPile.group,magicNumber,cardStrings.EXTENDED_DESCRIPTION[0],card ->{
-                Wiz.Player().drawPile.removeCard(card.get(0));
-                Wiz.Player().drawPile.addToTop(card.get(0));
-            }
-            ));
-        }
     }
 }

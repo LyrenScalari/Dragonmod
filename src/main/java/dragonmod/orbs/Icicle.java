@@ -24,11 +24,11 @@ import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.powers.Rimedancer.Chillpower;
-import dragonmod.interfaces.OnUseCardOrb;
+import dragonmod.interfaces.TriggerOnUseCard;
 import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
-public class Icicle extends CustomOrb implements OnUseCardOrb {
+public class Icicle extends CustomOrb implements TriggerOnUseCard {
     public static final String ORB_ID = DragonMod.makeID("Icicle");
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(ORB_ID);
     public static final String[] DESCRIPTIONS = orbString.DESCRIPTION;
@@ -202,7 +202,7 @@ public class Icicle extends CustomOrb implements OnUseCardOrb {
     }
 
     @Override
-    public void onUseCardOrb(AbstractCard card, UseCardAction action) {
+    public void onUseCard(AbstractCard card, UseCardAction action) {
         if (card.type == AbstractCard.CardType.ATTACK && action.target instanceof AbstractMonster){
             target = (AbstractMonster)action.target;
             updateDescription();

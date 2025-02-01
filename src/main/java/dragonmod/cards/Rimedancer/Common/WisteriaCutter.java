@@ -15,18 +15,16 @@ public class WisteriaCutter extends AbstractRimedancerCard {
     public static final String ID = WisteriaCutter.class.getSimpleName();
     public WisteriaCutter(){
         super(ID,2,CardType.ATTACK,CardRarity.COMMON,CardTarget.ENEMY);
-        setDamage(12,4);
-        setMagic(1);
+        setDamage(12,3);
+        setMagic(7,-1);
     }
     public void triggerOnGlowCheck() {
         this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        int tilt = 0;
+        int handcount = 0;
         for (AbstractCard c : Wiz.Player().hand.group){
-            if (Wiz.Player().hand.group.indexOf(c) > Wiz.Player().hand.group.indexOf(this)){
-                tilt += 1;
-            }
+            handcount++;
         }
-        if (tilt >= 3){
+        if (handcount >= magicNumber){
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         }
     }
@@ -36,14 +34,19 @@ public class WisteriaCutter extends AbstractRimedancerCard {
         for (int i = 0; i < magicNumber; i++){
             Wiz.atb(new ChannelAction(new Icicle()));
         }
-        int tilt = 0;
+        int handcount = 0;
         for (AbstractCard c : Wiz.Player().hand.group){
-            if (Wiz.Player().hand.group.indexOf(c) > Wiz.Player().hand.group.indexOf(WisteriaCutter.this)){
-                tilt += 1;
+            handcount++;
+        }
+        int finalHandcount = handcount;
+        Wiz.atb(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                if (finalHandcount > (magicNumber-1)){
+                    Wiz.att(new GainEnergyAction(2));
+                }
             }
-        }
-        if (tilt >= 3){
-            Wiz.atb(new GainEnergyAction(2));
-        }
+        });
     }
 }

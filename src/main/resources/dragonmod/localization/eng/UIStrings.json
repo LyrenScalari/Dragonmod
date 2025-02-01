@@ -36,7 +36,7 @@
   "${modID}:Parry": {
     "TEXT": [
       "[dragonmod:ParryIcon] Parry",
-      "[dragonmod:ParryIcon] returns blocked damage, and #b2 [dragonmod:ParryIcon] can prevent #b1 unblocked damage."
+      "[dragonmod:ParryIcon] returns blocked damage spending an equal amount of [dragonmod:ParryIcon] to do so."
     ]
   },
   "${modID}:Powerful": {
@@ -78,7 +78,7 @@
   "${modID}:Inspiration": {
     "TEXT": [
       "[dragonmod:InspirationIcon] Inspiration",
-      "[dragonmod:InspirationIcon] Increases Healing from #yCure."
+      "[${modID}:InspirationIcon] Restores HP at the start of your turn based on HP lost the turn before up to your [${modID}:InspirationIcon] ."
     ]
   },
   "${modID}:Verse": {
@@ -160,6 +160,12 @@
     "TEXT": [
       "Cantrip",
       "This card starts combat set aside and cannot be #rRemoved by standard means."
+    ]
+  },
+  "${modID}:Lucky": {
+    "TEXT": [
+      "Lucky",
+      "At the start of combat if you have a #yLucky card in your deck and After you play a #yLucky card roll you Roll a D10."
     ]
   },
   "${modID}:IceArmor": {

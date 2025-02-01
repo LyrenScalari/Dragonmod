@@ -45,6 +45,13 @@ public class RudeInterlude extends AbstractJusticarCard implements TurnStartEnch
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.applyToSelf(new ParryPower(p,p,magicNumber));
+        Wiz.atb(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                EnchantmentsManager.addCard(RudeInterlude.this,true,p);
+            }
+        });
     }
 
     @Override

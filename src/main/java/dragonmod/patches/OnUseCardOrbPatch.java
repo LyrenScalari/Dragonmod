@@ -1,11 +1,11 @@
-package dragonmod.patches.Orbs;
+package dragonmod.patches;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import dragonmod.interfaces.OnUseCardOrb;
+import dragonmod.interfaces.TriggerOnUseCard;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ public class OnUseCardOrbPatch {
 
         for (AbstractOrb abstractOrb : AbstractDungeon.player.orbs) {
             AbstractOrb Orb = abstractOrb;
-            if (Orb instanceof OnUseCardOrb) {
-                ((OnUseCardOrb) Orb).onUseCardOrb(targetCard, __instance);
+            if (Orb instanceof TriggerOnUseCard) {
+                ((TriggerOnUseCard) Orb).onUseCard(targetCard, __instance);
             }
         }
 

@@ -5,7 +5,7 @@
       "Parry",
       "parry"
     ],
-    "DESCRIPTION": "#yParry returns blocked damage, and #b2 #yParry can prevent #b1 unblocked damage."
+    "DESCRIPTION": "#yParry returns blocked damage, spending an equal amount of #yParry to do so."
   },
   {
     "PROPER_NAME": "Scorch",
@@ -30,7 +30,7 @@
       "Inspiration",
       "inspiration"
     ],
-    "DESCRIPTION": "Increases Healing from #yCure."
+    "DESCRIPTION": "Restores HP at the start of your turn based on HP lost the turn before up to your [${modID}:InspirationIcon] ."
   },
   {
     "PROPER_NAME": "Inspired",
@@ -83,30 +83,12 @@
     "DESCRIPTION": "Gained whenever you lose HP. Reduced by Half at the end of your turn. Every 5 Stigmata spent by Cure Increases Healing recieved by 1."
   },
   {
-    "PROPER_NAME": "Cure",
-    "NAMES": [
-      "Cure",
-      "cure"
-    ],
-    "DESCRIPTION": "Recover recently lost HP.  NL Every #b5 HP recovered this way increase damage dealt & Healing from #yCure by #b1 for the rest of combat."
-  },
-  {
     "PROPER_NAME": "Devotion",
     "NAMES": [
       "Devotion",
       "devotion"
     ],
     "DESCRIPTION": "The number of cards in your hand and verses set aside."
-  },
-  {
-    "PROPER_NAME": "Overheal",
-    "NAMES": [
-      "Overheal",
-      "Overhealing",
-      "overheal",
-      "overhealing"
-    ],
-    "DESCRIPTION": "Healing from #yCure in excess of recent wounds."
   },
 
   {
@@ -140,25 +122,11 @@
     "PROPER_NAME": "Sheathe",
     "NAMES": [
       "Sheathe",
-      "sheathe"
+      "Sheathed",
+      "sheathe",
+      "sheathed"
     ],
     "DESCRIPTION": "Set a card aside, retrieve it later when you #yFlourish."
-  },
-  {
-    "PROPER_NAME": "Glimpse",
-    "NAMES": [
-      "Glimpse",
-      "glimpse"
-    ],
-    "DESCRIPTION": "Move the leftmost card in your hand to the right most position."
-  },
-  {
-  "PROPER_NAME": "Tilt",
-  "NAMES": [
-    "Tilt",
-    "tilt"
-  ],
-  "DESCRIPTION": "A Bonus effect if X or more cards are to the right of this."
   },
   {
     "PROPER_NAME": "Chill",

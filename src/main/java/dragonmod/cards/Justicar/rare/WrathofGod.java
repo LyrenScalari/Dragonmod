@@ -1,16 +1,14 @@
 package dragonmod.cards.Justicar.rare;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
+import dragonmod.actions.SmiteAction;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
 import dragonmod.ui.DivineEyeParticle;
-import dragonmod.ui.HaloEffect;
 import dragonmod.util.Wiz;
 
 public class WrathofGod extends AbstractJusticarCard {
@@ -50,9 +48,7 @@ public class WrathofGod extends AbstractJusticarCard {
         });
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
             if (!mo.isDeadOrEscaped()){
-                Wiz.vfx(new HaloEffect(mo, Color.GOLD,Color.GOLDENROD,""));
-                Wiz.vfx(new LightningEffect(mo.hb.cX,mo.hb.cY));
-                Wiz.dmg(mo,new DamageInfo(p,customVar("WOG"), DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.FIRE);
+                Wiz.atb(new SmiteAction(mo,new DamageInfo(p,customVar("WOG"), DamageInfo.DamageType.NORMAL)));
             }
         }
     }

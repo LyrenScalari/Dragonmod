@@ -1,6 +1,5 @@
 package dragonmod;
 
-import actlikeit.RazIntent.CustomIntent;
 import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
@@ -60,12 +59,10 @@ import dragonmod.powers.general.ReinforcePower;
 import dragonmod.relics.Dragon.BottledVoice;
 import dragonmod.relics.Dragon.RoyalSignet;
 import dragonmod.relics.Dragonkin.*;
-import dragonmod.relics.Dragonkin.starter.AshenCharm;
 import dragonmod.relics.Dragonkin.starter.GarnetScales;
 import dragonmod.relics.Drifter.BronzePocketWatch;
 import dragonmod.relics.Drifter.DraconicTimeCrystal;
 import dragonmod.relics.Rimedancer.CryoniteShard;
-import dragonmod.ui.BleedingOutIntent;
 import dragonmod.ui.KeywordInfo;
 import dragonmod.ui.TextureLoader;
 import dragonmod.util.*;
@@ -216,7 +213,7 @@ public class DragonMod implements
     @SpireEnum
     public static AbstractCard.CardTags Banish;
     @SpireEnum
-    public static AbstractMonster.Intent BLEEDING_OUT;
+    public static AbstractCard.CardTags Lucky;
     @SpireEnum(name = "Draconic")
     public static AbstractCard.CardColor Draconic;
     @SpireEnum(name = "Draconic") @SuppressWarnings("unused")
@@ -330,7 +327,6 @@ public class DragonMod implements
         //Set up the mod information displayed in the in-game mods menu.
         //The information used is taken from your pom.xml file.
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, settingsPanel);
-        CustomIntent.add(new BleedingOutIntent());
         BanishedCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     }
     private static BitmapFont prepFont(FreeTypeFontGenerator g, float size, boolean isLinearFiltering) {
@@ -376,12 +372,7 @@ public class DragonMod implements
 
     @Override
     public void receiveEditStrings() {
-        /*
-            First, load the default localization.
-            Then, if the current language is different, attempt to load localization for that language.
-            This results in the default localization being used for anything that might be missing.
-            The same process is used to load keywords slightly below.
-        */
+        //Basegame Icons
         loadLocalization(defaultLanguage); //no exception catching for default localization; you better have at least one that works.
         if (!defaultLanguage.equals(getLangString())) {
             try {
@@ -475,7 +466,6 @@ public class DragonMod implements
 
     @Override
     public void receiveEditCards() {
-        //Basegame Icons
         CustomIconHelper.addCustomIcon(StrengthIcon.get());
         CustomIconHelper.addCustomIcon(DexterityIcon.get());
         CustomIconHelper.addCustomIcon(BlockIcon.get());
@@ -520,21 +510,22 @@ public class DragonMod implements
         CustomIconHelper.addCustomIcon(AmberBlossomIcon.get());
         CustomIconHelper.addCustomIcon(AmethystBlossomIcon.get());
         CustomIconHelper.addCustomIcon(EmeraldBlossomIcon.get());
-
         logger.info("Add variables");
         BaseMod.addDynamicVariable(new DefaultSecondMagicNumber());
         BaseMod.addDynamicVariable(new SecondDamage());
         logger.info("Adding cards");
         new AutoAdd(modID).packageFilter(AbstractJusticarCard.class).setDefaultSeen(true).cards();
         // Total 40
-        // C 16 - done
+        // C 16 - +5
         // U 10 - +15
         // R 4 - +6
         new AutoAdd(modID).packageFilter(AbstractRimedancerCard.class).setDefaultSeen(true).cards();
         // Total 65 ready for testing
-        // C 21 - need to determine booster commons
-        // U 29 - done
-        // R 7 - done
+        // S 4
+        // C 20
+        // U 31 - +4
+        // R 10 - +8
+        // figure out new concept for Chill Out, Wisteria Cutter, Myiad Images, Crackle,Silver Shadow, Trickster's Ruse
         new AutoAdd(modID).packageFilter(AbstractWardenCard.class).setDefaultSeen(true).cards();
         // Total 24, ignore until first testing draft for above charaters is done.
         // C 9 - +7
@@ -546,7 +537,7 @@ public class DragonMod implements
 
     @Override
     public void receiveEditCharacters() {
-        BaseMod.addCharacter(new TheJusticar("the Justicar", THE_JUSTICAR),
+       BaseMod.addCharacter(new TheJusticar("the Justicar", THE_JUSTICAR),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_JUSTICAR);
         BaseMod.addCharacter(new TheRimedancer("the Rimedancer", THE_RIMEDANCER),
                 JUSTICAR_RED_BUTTON, JUSTICAR_RED_PORTRAIT, THE_RIMEDANCER);
@@ -572,7 +563,6 @@ public class DragonMod implements
 
         // Justicar Relics.
         BaseMod.addRelicToCustomPool(new GarnetScales(), Justicar_Red_COLOR);
-        BaseMod.addRelicToCustomPool(new AshenCharm(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new ObsidianScales(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new CitrineScales(), Justicar_Red_COLOR);
         //To Do : Make new common relic for Justicar
@@ -582,7 +572,6 @@ public class DragonMod implements
         BaseMod.addRelicToCustomPool(new Sulfurian(), Justicar_Red_COLOR);
         BaseMod.addRelicToCustomPool(new TilerasShield(), Justicar_Red_COLOR);
         UnlockTracker.markRelicAsSeen(GarnetScales.ID);
-        UnlockTracker.markRelicAsSeen(AshenCharm.ID);
         UnlockTracker.markRelicAsSeen(ObsidianScales.ID);
         UnlockTracker.markRelicAsSeen(CitrineScales.ID);
         UnlockTracker.markRelicAsSeen(EmberCore.ID);
@@ -625,9 +614,6 @@ public class DragonMod implements
         StatusesCycledThisTurn = 0;
         CardsCycledThisTurn = 0;
         BurnsCycledThisTurn = 0;
-        if (StigmataManager.getStigmataTotal() > 0 && !DecayStagger) {
-            StigmataManager.spendStigmata(StigmataManager.getStigmataTotal()/2);
-        }
         DecayStagger = true;
         EnchantmentsManager.startOfTurnMonster(abstractMonster);
         if (abstractMonster.hasPower(BleedPower.POWER_ID) && abstractMonster.currentHealth <= abstractMonster.getPower(BleedPower.POWER_ID).amount){
@@ -669,25 +655,13 @@ public class DragonMod implements
         }
         return AbstractGameAction.AttackEffect.SLASH_HORIZONTAL;
     }
-    public static ArrayList<AbstractCard> getNeighbors(AbstractCard c) {
-        ArrayList<AbstractCard> neighbors = new ArrayList<>();
-        if (Wiz.hand().contains(c)) {
-            int index = Wiz.hand().group.indexOf(c);
-            if (index > 0) {
-                neighbors.add(Wiz.hand().group.get(index -1));
-            }
-            if (index < Wiz.hand().size() - 1) {
-                neighbors.add(Wiz.hand().group.get(index + 1));
-            }
-        }
-        return neighbors;
-    }
     public static AbstractCard getLeftCard(AbstractCard c) {
         if (Wiz.hand().contains(c)) {
             int index = Wiz.hand().group.indexOf(c);
             if (index > 0) {
                 return Wiz.hand().group.get(index -1);
             }
+            return null;
         }
         return null;
     }

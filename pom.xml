@@ -81,13 +81,6 @@
             <scope>system</scope>
             <systemPath>${stsPath}/mods/TheProfessor.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>actlikeit</groupId>
-            <artifactId>actlikeit</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${workshopFolder}1934902042/actlikeit.jar</systemPath>
-        </dependency>
     </dependencies>
 
 

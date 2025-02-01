@@ -2,11 +2,13 @@ package dragonmod.cards.Justicar.common;
 
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.cards.Justicar.AbstractJusticarCard;
+import dragonmod.cards.Justicar.uncommon.Excaliburn;
 import dragonmod.interfaces.TurnStartEnchantment;
 import dragonmod.powers.Dragonkin.ConfessionPower;
 import dragonmod.powers.general.ParryPower;
@@ -43,6 +45,13 @@ public class Sanctuary extends AbstractJusticarCard implements TurnStartEnchantm
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.atb(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                EnchantmentsManager.addCard(Sanctuary.this,true,p);
+            }
+        });
     }
 
     @Override

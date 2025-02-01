@@ -50,7 +50,9 @@ public class Wiz {
     public static CardGroup discardPile() {
         return AbstractDungeon.player.discardPile;
     }
-
+    public static AbstractMonster getRandomEnemy() {
+        return AbstractDungeon.getMonsters().getRandomMonster((AbstractMonster)null, true, AbstractDungeon.cardRandomRng);// 361
+    }
     public static CardGroup deck() {
         return AbstractDungeon.player.masterDeck;
     }

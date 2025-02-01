@@ -26,58 +26,46 @@ public class MyriadImages extends AbstractRimedancerCard {
         super(ID,0,CardType.ATTACK,CardRarity.RARE,CardTarget.ALL_ENEMY);
         setDamage(50,10);
         setMagic(9);
-        setMagic2(9,-1);
+        setMagic2(10,-1);
     }
     public void triggerOnGlowCheck() {
         this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        int tilt = 0;
+        int handcount = 0;
         for (AbstractCard c : Wiz.Player().hand.group){
-            if (Wiz.Player().hand.group.indexOf(c) > Wiz.Player().hand.group.indexOf(this)){
-                tilt += 1;
-            }
+            handcount++;
         }
-        if (tilt >= magicNumber){
+        if (handcount >= 8){
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         }
     }
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         boolean canUse = super.canUse(p, m);
-        int tilt = 0;
+        int handcount = 0;
         for (AbstractCard c : Wiz.Player().hand.group){
-            if (Wiz.Player().hand.group.indexOf(c) > Wiz.Player().hand.group.indexOf(this)){
-                tilt += 1;
-            }
+            handcount++;
         }
         if (!canUse) {
             return false;
-        } else return (tilt >= magicNumber);
+        } else return handcount >= magicNumber;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int tilt = 0;
-        for (AbstractCard c : Wiz.Player().hand.group){
-            if (Wiz.Player().hand.group.indexOf(c) > Wiz.Player().hand.group.indexOf(this)){
-                tilt += 1;
+        Icicle tothrow = null;
+        for (AbstractOrb o : Wiz.Player().orbs) {
+            if (o instanceof Icicle) {
+                tothrow = (Icicle) o;
             }
         }
-        if (tilt >= SecondMagicNumber){
-            Icicle tothrow = null;
-            for (AbstractOrb o : Wiz.Player().orbs) {
-                if (o instanceof Icicle) {
-                    tothrow = (Icicle) o;
-                }
-            }
-            ArrayList<Hitbox> hbs = new ArrayList<>();
-            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
-                hbs.add(mo.hb);
-            }
-            Wiz.vfx(new WhirlwindEffect());
-            Wiz.vfx(new BlizzardEffect(baseDamage,false));
-            Wiz.atb(new IcicleFanAction(tothrow, hbs, Color.CYAN));
-            Wiz.atb(new DamageAllEnemiesAction(p,baseDamage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
-                Wiz.applyToEnemyTemp(mo,new StrengthPower(mo,-magicNumber));
-            }
+        ArrayList<Hitbox> hbs = new ArrayList<>();
+        for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
+            hbs.add(mo.hb);
+        }
+        Wiz.vfx(new WhirlwindEffect());
+        Wiz.vfx(new BlizzardEffect(baseDamage,false));
+        Wiz.atb(new IcicleFanAction(tothrow, hbs, Color.CYAN));
+        Wiz.atb(new DamageAllEnemiesAction(p,baseDamage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
+            Wiz.applyToEnemyTemp(mo,new StrengthPower(mo,-magicNumber));
         }
     }
 }

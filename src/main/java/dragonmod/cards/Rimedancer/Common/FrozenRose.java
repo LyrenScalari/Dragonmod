@@ -1,4 +1,4 @@
-package dragonmod.cards.Rimedancer.Uncommon;
+package dragonmod.cards.Rimedancer.Common;
 
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;

@@ -1,7 +1,9 @@
 package dragonmod.powers.Dragonkin;
 
 import basemod.interfaces.CloneablePowerInterface;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -9,8 +11,10 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import dragonmod.actions.SmiteAction;
 import dragonmod.powers.BasePower;
 import dragonmod.ui.DivineEyeParticle;
+import dragonmod.ui.HaloEffect;
 import dragonmod.util.Wiz;
 
 import static dragonmod.DragonMod.makeID;
@@ -34,9 +38,9 @@ public class ConfessionPower extends BasePower implements CloneablePowerInterfac
             Wiz.att(new ReducePowerAction(owner,owner,this,amount/2));
         }
         if (info.owner != Wiz.Player()) {
-            Wiz.dmgtop(info.owner,new DamageInfo(Wiz.Player(),amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+            Wiz.att(new SmiteAction(info.owner,new DamageInfo(Wiz.Player(),amount, DamageInfo.DamageType.THORNS)));
         } else {
-            Wiz.dmgtop(AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true), new DamageInfo(Wiz.Player(),amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+            Wiz.att(new SmiteAction(AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true),new DamageInfo(Wiz.Player(),amount, DamageInfo.DamageType.THORNS)));
         }
         Wiz.att(new AbstractGameAction() {
             @Override
@@ -48,6 +52,7 @@ public class ConfessionPower extends BasePower implements CloneablePowerInterfac
                 isDone = true;
             }
         });
+        Wiz.att(new VFXAction(new HaloEffect(Wiz.Player(), Color.GOLD,Color.GOLDENROD,"")));
         return damageAmount;
     }
     

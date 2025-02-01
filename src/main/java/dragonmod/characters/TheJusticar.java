@@ -103,7 +103,7 @@ public class TheJusticar extends CustomPlayer {
                 JUSTICAR_SHOULDER_2, // campfire pose
                 JUSTICAR_SHOULDER_1, // another campfire pose
                 JUSTICAR_CORPSE, // dead corpse
-                getLoadout(), 20.0F, -10.0F, 217.0F, 270.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
+                getLoadout(), 20.0F, -10.0F, 217.0F, 440.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
 
         // =============== /TEXTURES, ENERGY, LOADOUT/ =================
 

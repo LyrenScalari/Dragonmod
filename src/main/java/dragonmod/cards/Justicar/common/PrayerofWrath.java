@@ -46,6 +46,13 @@ public class PrayerofWrath extends AbstractJusticarCard implements TurnStartEnch
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.atb(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                EnchantmentsManager.addCard(PrayerofWrath.this,true,p);
+            }
+        });
     }
 
     @Override

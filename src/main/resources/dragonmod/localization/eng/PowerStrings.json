@@ -2,7 +2,7 @@
   "${modID}:Parry": {
     "NAME": "Parry",
     "DESCRIPTIONS": ["Return up to #b",
-      " blocked damage. NL Prevents up to #b", " unblocked damage."
+      " blocked damage.",
     ]
   },
   "${modID}:Reinforce": {
@@ -39,17 +39,17 @@
       " damage to ALL enemies. Halved if it activates outside of your turn."
     ]
   },
-  "${modID}:HolyPower": {
-    "NAME": "Holy Power",
-    "DESCRIPTIONS": ["Increases damage dealt and healing from #yCure by #b"]
+  "${modID}:Inspiration": {
+    "NAME": "Inspiration",
+    "DESCRIPTIONS": ["Restores #b"," HP at the start of your turn based on HP lost the turn before up to your [${modID}:InspirationIcon] ."]
   },
   "${modID}:Sacrifice": {
     "NAME": "Sacrifice",
     "DESCRIPTIONS": ["When you obtain #b"," spend it and Gain #b1 #yHoly #yPower"]
   },
-  "${modID}:Sanctify": {
-    "NAME": "Sanctify",
-    "DESCRIPTIONS": ["This creature takes #b25% less damage, when hit attackers are #yCured by #b"," and [dragonmod:SanctifyIcon] is reduced by #b1."]
+  "${modID}:YieldMyFlesh": {
+    "NAME": "Yield My Flesh",
+    "DESCRIPTIONS": ["#yChant your next Verse whenever you lose HP during your turn. NL On #yCoda: Gain #b"," [${modID}:DivineArmorIcon]."]
   },
   "${modID}:Pursuit": {
     "NAME": "Pursuit",
@@ -121,6 +121,16 @@
     "NAME": "Chill",
     "DESCRIPTIONS": ["After taking unblocked attack damage or damage from an Icicle, gain #b",
       " block,", " and reduce this by #b1"
+    ]
+  },
+  "${modID}:Dice": {
+    "NAME": "Dice",
+    "DESCRIPTIONS": ["You have #b"," pips showing"
+    ]
+  },
+  "${modID}:Rig": {
+    "NAME": "Rig",
+    "DESCRIPTIONS": ["Increase your next die roll by #b"
     ]
   },
   "${modID}:Intensity": {
