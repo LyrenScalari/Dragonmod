@@ -14,6 +14,7 @@ import dragonmod.CardMods.SCVShatterMod;
 import dragonmod.DamageModifiers.RangedDamage;
 import dragonmod.actions.IcicleFanAction;
 import dragonmod.actions.ShatterAction;
+import dragonmod.actions.ThrowShurikenAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
 import dragonmod.powers.Rimedancer.BleedPower;
@@ -68,6 +69,8 @@ public class RupturingShot extends AbstractRimedancerCard {
         for (int i = 0; i < energyCosts.get(TypeEnergyHelper.Mana.Shatter); i++){
             Wiz.atb(new ShatterAction());
         }
+        Wiz.att(new ThrowShurikenAction("iceshuriken", 1, m.hb, Color.GRAY.cpy(), false));
+        Wiz.att(new ThrowShurikenAction("iceshuriken", 1, m.hb, Color.GRAY.cpy(), false));
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
         Wiz.applyToEnemy(m,new BleedPower(m,magicNumber));
         Wiz.applyToSelf(new ParryPower(p,p,SecondMagicNumber));

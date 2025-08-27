@@ -4,7 +4,7 @@ import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -16,6 +16,7 @@ import dragonmod.actions.ShatterAction;
 import dragonmod.actions.ThrowIcicleAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
+import dragonmod.powers.Rimedancer.IceSpikesPower;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
@@ -28,6 +29,7 @@ public class CrystalChakram extends AbstractRimedancerCard {
     public CrystalChakram(){
         super(ID,0,CardType.ATTACK,CardRarity.BASIC,CardTarget.ENEMY);
         setDamage(4,2);
+        setMagic(4,2);
         energyCosts.put(TypeEnergyHelper.Mana.Shatter,1);
         CardModifierManager.addModifier(this,new SCVShatterMod());
     }
@@ -62,6 +64,6 @@ public class CrystalChakram extends AbstractRimedancerCard {
         Wiz.atb(new ShatterAction());
         Wiz.atb(new ThrowIcicleAction(tothrow,m.hb,Color.CYAN));
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-        Wiz.atb(new DrawCardAction(1));
+        Wiz.atb(new ApplyPowerAction(p,p,new IceSpikesPower(p,p,magicNumber)));
     }
 }

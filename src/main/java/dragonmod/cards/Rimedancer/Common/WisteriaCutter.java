@@ -1,5 +1,6 @@
 package dragonmod.cards.Rimedancer.Common;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -7,8 +8,11 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import dragonmod.DragonMod;
+import dragonmod.actions.ThrowObjectAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
 public class WisteriaCutter extends AbstractRimedancerCard {
@@ -30,10 +34,10 @@ public class WisteriaCutter extends AbstractRimedancerCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.atb(new ThrowObjectAction(TextureLoader.getTexture(DragonMod.itemPath("kunai.png")),1,m.hb, Color.CYAN.cpy(),false));
+        Wiz.atb(new ThrowObjectAction(TextureLoader.getTexture(DragonMod.itemPath("kunai.png")),1,m.hb,Color.CYAN.cpy(),false));
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-        for (int i = 0; i < magicNumber; i++){
-            Wiz.atb(new ChannelAction(new Icicle()));
-        }
+        Wiz.atb(new ChannelAction(new Icicle()));
         int handcount = 0;
         for (AbstractCard c : Wiz.Player().hand.group){
             handcount++;

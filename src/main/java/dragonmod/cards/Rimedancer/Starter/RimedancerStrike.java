@@ -5,12 +5,12 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import dragonmod.DragonMod;
-import dragonmod.actions.ThrowIcicleAction;
+import dragonmod.actions.ThrowObjectAction;
+import dragonmod.actions.ThrowShurikenAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.orbs.Icicle;
 import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
@@ -25,18 +25,13 @@ public class RimedancerStrike extends AbstractRimedancerCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        Icicle tothrow = null;
-        for (AbstractOrb o : Wiz.Player().orbs) {
-            if (o instanceof Icicle) {
-                tothrow = (Icicle) o;
-                break;
-            }
-        }
-        if (tothrow != null){
-            Wiz.atb(new ThrowIcicleAction(tothrow, m.hb, Color.CYAN));
-        } else {
-            Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
-        }
+        int rand = AbstractDungeon.miscRng.random(0,2);
+        if (rand == 1){
+            Wiz.att(new ThrowShurikenAction("shuriken", 1, m.hb, Color.GRAY.cpy(), false));
+        } else if (rand == 2){
+            Wiz.atb(new ThrowObjectAction(TextureLoader.getTexture(DragonMod.itemPath("kunai.png")),1,m.hb,Color.WHITE.cpy(),false));
+        } else Wiz.att(new ThrowShurikenAction("iceshuriken", 1,m.hb, Color.GRAY.cpy(), false));
+
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
     }
 }

@@ -99,13 +99,6 @@
       "At the end of combat, Heal HP equal to half of your #yStagger."
     ]
   },
-  "${modID}:SerpentIdol": {
-    "NAME": "Serpent Idol",
-    "FLAVOR": "A finely crafted idol of a Sky Dragon.",
-    "DESCRIPTIONS": [
-      "Start each combat with #b2 #yMastery."
-    ]
-  },
   "${modID}:CryoniteShard": {
     "NAME": "Cryonite Shard",
     "FLAVOR": "A glorified prison shank made from an icy blue metal that is perpetually cold to the touch.",

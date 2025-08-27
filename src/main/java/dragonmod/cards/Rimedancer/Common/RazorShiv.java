@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.powers.LockOnPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import dragonmod.actions.ExploitAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.powers.Rimedancer.BleedPower;
+import dragonmod.powers.Rimedancer.IceSpikesPower;
 import dragonmod.powers.Rimedancer.powercards.PrecisionPower;
 import dragonmod.util.Wiz;
 
@@ -27,7 +27,7 @@ public class RazorShiv extends AbstractRimedancerCard {
             @Override
             public void update() {
                 isDone = true;
-                Wiz.applyToEnemy(m,new BleedPower(m,magicNumber));
+                Wiz.applyToSelf(new IceSpikesPower(p,p,magicNumber));
                 Wiz.applyToSelf(new VulnerablePower(p,2,false));
             }
         },LockOnPower.POWER_ID,m));

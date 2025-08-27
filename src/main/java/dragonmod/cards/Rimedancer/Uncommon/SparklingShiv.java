@@ -1,11 +1,13 @@
 package dragonmod.cards.Rimedancer.Uncommon;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import dragonmod.actions.ExploitAction;
+import dragonmod.actions.ThrowShurikenAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.powers.Rimedancer.powercards.PrecisionPower;
 import dragonmod.powers.Rimedancer.Subzero;
@@ -23,6 +25,7 @@ public class SparklingShiv extends AbstractRimedancerCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.att(new ThrowShurikenAction("iceshuriken", 1, m.hb, Color.GRAY.cpy(), false));
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
         Wiz.atb(new ExploitAction(()->new AbstractGameAction() {
             @Override

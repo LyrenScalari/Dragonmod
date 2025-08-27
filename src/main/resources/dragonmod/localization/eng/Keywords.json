@@ -17,14 +17,6 @@
     "DESCRIPTION": "When a Creature with #yScorch is attacked it takes damage equal to a quarter of their #yScorch and is reduced that much."
   },
   {
-    "PROPER_NAME": "Beckon",
-    "NAMES": [
-      "Beckon",
-      "beckon"
-    ],
-    "DESCRIPTION": "Put X random cards from your draw pile into your hand, discard them after you play a card."
-  },
-  {
     "PROPER_NAME": "Inspiration",
     "NAMES": [
       "Inspiration",
@@ -73,14 +65,6 @@
       "confession"
     ],
     "DESCRIPTION": "Whenever you take damage or lose HP deal damage to the attacker or a random enemy equal to your #yConfesison. NL If isn't your turn, reduce Confession by half."
-  },
-  {
-    "PROPER_NAME": "Stigmata",
-    "NAMES": [
-      "Stigmata",
-      "stigmata"
-    ],
-    "DESCRIPTION": "Gained whenever you lose HP. Reduced by Half at the end of your turn. Every 5 Stigmata spent by Cure Increases Healing recieved by 1."
   },
   {
     "PROPER_NAME": "Devotion",
@@ -144,7 +128,7 @@
       "Icicles",
       "icicles"
     ],
-    "DESCRIPTION": "#yOrb : Deals damage to the last enemy you attacked. After being #yEvoked, if your next orb is an #yIcicle #yEvoke it."
+    "DESCRIPTION": "#yOrb : Deals damage to the last enemy you targeted. After being #yEvoked, if your next orb is an #yIcicle #yEvoke it."
   },
   {
     "PROPER_NAME": "Snow",
@@ -211,106 +195,6 @@
     "DESCRIPTION": "Applying #yLethargy instead raises it's duration to that amount. NL #yLethargy increases incoming damage from cards and orbs by 10% for each card played this turn, #yLethargy is reduced by #b1 each turn."
 
   },
-
-  {
-    "PROPER_NAME": "Dawn",
-    "NAMES": [
-      "Dawn",
-      "dawn"
-    ],
-    "DESCRIPTION": "#yStance. Whenever you play an attack, deal damage equal to the number of cards in your hand to a random enemy, up to 4, then reduce the maximum damage by 1. On Exit: gain 1 [dragonmod:AmethystBlossomIcon] ."
-  },
-  {
-    "PROPER_NAME": "Dusk",
-    "NAMES": [
-      "Dusk",
-      "dusk"
-    ],
-    "DESCRIPTION": "#yStance. At the start of your turn, draw 2 extra cards, then reduce this amount by 1.  On Exit: gain 1 [dragonmod:AmberBlossomIcon] ."
-  },
-  {
-    "PROPER_NAME": "Reflexive",
-    "NAMES": [
-      "Reflexive",
-      "reflexive"
-    ],
-    "DESCRIPTION": "Transforms when you change stances, Amber if Dawn, Amethyst if Dusk."
-  },
-  {
-    "PROPER_NAME": "Amber Blossom",
-    "NAMES": [
-      "Amber_Blossom",
-      "amber_blossom"
-    ],
-    "DESCRIPTION": "Amber Blossom Increases the Maximum damage of Dawn stance."
-  },
-  {
-    "PROPER_NAME": "Amethyst Blossom",
-    "NAMES": [
-      "Amethyst_Blossom",
-      "amethyst_blossom"
-    ],
-    "DESCRIPTION": "Amethyst Blossom Increase the cards drawn by Dusk stance."
-  },
-  {
-    "PROPER_NAME": "Emerald Blossom",
-    "NAMES": [
-      "Emerald_Blossom",
-      "emerald_blossom"
-    ],
-    "DESCRIPTION": "When you obtain #b3 Emerald Blossom gain [E] ."
-  },
-  {
-    "PROPER_NAME": "Hex",
-    "NAMES": [
-      "Hex",
-      "hex"
-    ],
-    "DESCRIPTION": "Hex Deals Dark damage over #b3 turns."
-  },
-  {
-    "PROPER_NAME": "Illude",
-    "NAMES": [
-      "Illude",
-      "illude"
-    ],
-    "DESCRIPTION": "Create and Exhaust a copy of a card."
-  },
-  {
-    "PROPER_NAME": "Banish",
-    "NAMES": [
-      "Banish",
-      "banish"
-    ],
-    "DESCRIPTION": "Removed until the end of combat. Does #rNot go to the exhaust pile but can be viewed there."
-  },
-  {
-    "PROPER_NAME": "Conjure",
-    "NAMES": [
-      "Conjure",
-      "conjure"
-    ],
-    "DESCRIPTION": "#yConjuring a card shuffles it from the #yExhaust pile into your draw pile it gains #yExhaust and #yBanishes when it enters the #yExhaust pile."
-  },
-  {
-    "PROPER_NAME": "Vanish",
-    "NAMES": [
-      "Vanish",
-      "vanish",
-      "Vanishes",
-      "vanishes"
-    ],
-    "DESCRIPTION": "#yVanish effects occur when a card is removed from play."
-  },
-  {
-    "PROPER_NAME": "Recenter",
-    "NAMES": [
-      "Recenter",
-      "recenter"
-    ],
-    "DESCRIPTION": "If you are in a Stance, exit it and draw a card. NL Otherwise do the following."
-  },
-
   {
     "PROPER_NAME": "Enchantment",
     "NAMES": [

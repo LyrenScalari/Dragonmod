@@ -1,5 +1,6 @@
 package dragonmod.cards.Draconic;
 
+import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,7 +11,7 @@ import dragonmod.powers.Dragonkin.InspirationPower;
 import dragonmod.powers.Warden.BanishPower;
 import dragonmod.util.TargetedPetalEffect;
 import dragonmod.util.Wiz;
-
+@NoCompendium
 public class BanishingVerse extends AbstractDraconicCard {
     public static final String ID = BanishingVerse.class.getSimpleName();
     public BanishingVerse(){

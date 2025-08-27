@@ -203,7 +203,7 @@ public class Icicle extends CustomOrb implements TriggerOnUseCard {
 
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
-        if (card.type == AbstractCard.CardType.ATTACK && action.target instanceof AbstractMonster){
+        if (action.target instanceof AbstractMonster){
             target = (AbstractMonster)action.target;
             updateDescription();
         } else {

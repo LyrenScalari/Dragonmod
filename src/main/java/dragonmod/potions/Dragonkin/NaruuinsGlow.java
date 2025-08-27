@@ -1,5 +1,7 @@
 package dragonmod.potions.Dragonkin;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.common.GainCustomBlockAction;
+import com.evacipated.cardcrawl.mod.stslib.blockmods.BlockModContainer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -7,8 +9,8 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import dragonmod.DamageModifiers.BlockModifiers.DivineBlock;
 import dragonmod.DragonMod;
-import dragonmod.actions.CureAction;
 import dragonmod.util.Wiz;
 
 public class NaruuinsGlow extends AbstractPotion {
@@ -43,7 +45,7 @@ public class NaruuinsGlow extends AbstractPotion {
         target = AbstractDungeon.player;
         // If you are in combat, gain strength and the "lose strength at the end of your turn" power, equal to the potency of this potion.
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
-            Wiz.atb(new CureAction(potency));
+            Wiz.atb(new GainCustomBlockAction(new BlockModContainer(this,new DivineBlock(true)),Wiz.Player(),potency));
         }
     }
 
@@ -55,7 +57,7 @@ public class NaruuinsGlow extends AbstractPotion {
     // This is your potency.
     @Override
     public int getPotency(final int potency) {
-        return 23;
+        return 20;
     }
 
     public void upgradePotion()

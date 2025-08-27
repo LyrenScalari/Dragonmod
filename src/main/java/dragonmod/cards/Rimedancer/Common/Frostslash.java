@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
+import dragonmod.actions.ThrowObjectAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
 import dragonmod.powers.Rimedancer.Subzero;
@@ -38,11 +39,11 @@ public class Frostslash extends AbstractRimedancerCard {
         }
         if (tothrow != null){
             Wiz.atb(new ThrowIcicleAction(tothrow,m.hb, Color.CYAN));
-        } else  Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
+        } else  Wiz.atb(new ThrowObjectAction(TextureLoader.getTexture(DragonMod.itemPath("kunai.png")),1,m.hb,Color.WHITE.cpy(),false));
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HEAVY);
         if (tothrow2 != null){
             Wiz.atb(new ThrowIcicleAction(tothrow2,m.hb, Color.CYAN));
-        } else  Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
+        } else  Wiz.atb(new ThrowObjectAction(TextureLoader.getTexture(DragonMod.itemPath("kunai.png")),1,m.hb,Color.WHITE.cpy(),false));
 
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
         Wiz.applyToSelf(new Subzero(magicNumber));

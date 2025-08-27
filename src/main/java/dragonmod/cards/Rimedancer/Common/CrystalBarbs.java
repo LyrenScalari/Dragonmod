@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import dragonmod.DragonMod;
 import dragonmod.actions.ThrowIcicleAction;
+import dragonmod.actions.ThrowObjectAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
 import dragonmod.ui.IcicleSprayEffect;
@@ -32,9 +33,8 @@ public class CrystalBarbs extends AbstractRimedancerCard {
         Wiz.vfx(new IcicleSprayEffect(false));
         if (tothrow != null){
             Wiz.atb(new ThrowIcicleAction(tothrow, m.hb, Color.CYAN));
-        } else {
-            Wiz.atb(new ThrowIcicleAction(TextureLoader.getTexture(DragonMod.orbPath("Icicle.png")),1.0f,m.hb,Color.CYAN));
         }
+        Wiz.atb(new ThrowObjectAction(TextureLoader.getTexture(DragonMod.itemPath("kunai.png")),1,m.hb,Color.WHITE.cpy(),false));
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL));
         for (int i = 0; i < magicNumber; i++){
                 Wiz.atb(new ChannelAction(new Icicle()));

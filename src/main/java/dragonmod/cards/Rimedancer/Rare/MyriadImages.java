@@ -13,9 +13,12 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.vfx.combat.BlizzardEffect;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
+import dragonmod.DragonMod;
 import dragonmod.actions.IcicleFanAction;
+import dragonmod.actions.ShurikenVolleyAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.Wiz;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ public class MyriadImages extends AbstractRimedancerCard {
     public MyriadImages(){
         super(ID,0,CardType.ATTACK,CardRarity.RARE,CardTarget.ALL_ENEMY);
         setDamage(50,10);
-        setMagic(9);
+        setMagic(8);
         setMagic2(10,-1);
     }
     public void triggerOnGlowCheck() {
@@ -34,7 +37,7 @@ public class MyriadImages extends AbstractRimedancerCard {
         for (AbstractCard c : Wiz.Player().hand.group){
             handcount++;
         }
-        if (handcount >= 8){
+        if ((handcount-1) >= 7){
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         }
     }
@@ -46,7 +49,7 @@ public class MyriadImages extends AbstractRimedancerCard {
         }
         if (!canUse) {
             return false;
-        } else return handcount >= magicNumber;
+        } else return (handcount-1) >= 7;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -63,6 +66,7 @@ public class MyriadImages extends AbstractRimedancerCard {
         Wiz.vfx(new WhirlwindEffect());
         Wiz.vfx(new BlizzardEffect(baseDamage,false));
         Wiz.atb(new IcicleFanAction(tothrow, hbs, Color.CYAN));
+        Wiz.atb(new ShurikenVolleyAction(TextureLoader.getTexture(DragonMod.itemPath("iceshuriken.png")),1,hbs,Color.WHITE.cpy(),true));
         Wiz.atb(new DamageAllEnemiesAction(p,baseDamage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters){
             Wiz.applyToEnemyTemp(mo,new StrengthPower(mo,-magicNumber));

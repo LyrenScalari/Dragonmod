@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import dragonmod.actions.IcicleRandomDamageAction;
+import dragonmod.actions.pokerdartaction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.util.Wiz;
 
@@ -17,12 +17,13 @@ public class PokerDart extends AbstractRimedancerCard {
     public PokerDart(){
         super(ID,2,CardType.ATTACK,CardRarity.UNCOMMON,CardTarget.ALL_ENEMY);
         setCostUpgrade(1);
+        setMagic(1);
         setDamage(3);
         setBlock(3);
     }
-    // Actions the card should do.
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
+    public void applyPowers() {
+        int realBaseBlock = baseBlock;
+        int realBaseMagic = baseMagicNumber;
         ArrayList<AbstractCard> leftcards = new ArrayList<>();
         ArrayList<AbstractCard> rightcards = new ArrayList<>();
         for (AbstractCard c : Wiz.Player().hand.group){
@@ -33,10 +34,28 @@ public class PokerDart extends AbstractRimedancerCard {
                 rightcards.add(c);
             }
         }
-        Wiz.atb(new IcicleRandomDamageAction(new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-        for (int i = 0; i < leftcards.size(); i++){
-            Wiz.atb(new IcicleRandomDamageAction(new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+        baseMagicNumber += rightcards.size();
+        magicNumber = baseMagicNumber;
+        baseBlock += leftcards.size()*3;
+        block = baseBlock;
+        super.applyPowers();
+        this.baseBlock = realBaseBlock;
+        this.isBlockModified = this.block != this.baseBlock;
+        baseMagicNumber = realBaseMagic;
+        isMagicNumberModified = magicNumber != baseMagicNumber;
+    }
+    // Actions the card should do.
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        ArrayList<AbstractCard> leftcards = new ArrayList<>();
+        for (AbstractCard c : Wiz.Player().hand.group){
+            if (Wiz.Player().hand.group.indexOf(c) < Wiz.Player().hand.group.indexOf(this)){
+                leftcards.add(c);
+            }
         }
-        Wiz.block(p, block + (block* rightcards.size()));
+        for (int i = 0; i < magicNumber; i++){
+            Wiz.atb(new pokerdartaction(new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+        }
+        Wiz.block(p, block+ (leftcards.size()*3));
     }
 }

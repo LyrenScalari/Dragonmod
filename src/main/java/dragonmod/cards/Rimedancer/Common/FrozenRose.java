@@ -2,6 +2,7 @@ package dragonmod.cards.Rimedancer.Common;
 
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.blockmods.BlockModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -10,13 +11,17 @@ import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import dragonmod.CardMods.SCVTemporalCardMod;
 import dragonmod.DamageModifiers.BlockModifiers.IceArmor;
 import dragonmod.DragonMod;
+import dragonmod.actions.ShurikenVolleyAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.interfaces.onAttackedEnchantment;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.EnchantmentsManager;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
@@ -71,6 +76,11 @@ public class FrozenRose extends AbstractRimedancerCard implements onAttackedEnch
     @Override
     public int EnchantedOnAttacked(AbstractCreature owner, int dmgamt, DamageInfo info) {
         if (owner != info.owner){
+            ArrayList<Hitbox> hbs = new ArrayList<>();
+            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                hbs.add(mo.hb);
+            }
+            Wiz.atb(new ShurikenVolleyAction(TextureLoader.getTexture(DragonMod.itemPath("kunai.png")),1,hbs, Color.SKY,true));
             Wiz.atb(new DamageAllEnemiesAction(Wiz.Player(),magicNumber, DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         }
         return dmgamt;

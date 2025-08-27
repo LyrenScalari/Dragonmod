@@ -8,7 +8,6 @@ import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
 import dragonmod.actions.ExploitAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
-import dragonmod.powers.Rimedancer.Flatfooted;
 import dragonmod.powers.Rimedancer.SlowPower;
 import dragonmod.util.Wiz;
 
@@ -24,7 +23,6 @@ public class TempoTheft extends AbstractRimedancerCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         Wiz.dmg(m,new DamageInfo(p,damage, DamageInfo.DamageType.NORMAL));
         Wiz.applyToEnemy(m,new SlowPower(m,SecondMagicNumber));
-        Wiz.applyToEnemy(m,new Flatfooted(m,SecondMagicNumber));
         Wiz.atb(new ExploitAction(()->new AbstractGameAction() {
             @Override
             public void update() {

@@ -5,6 +5,7 @@ import basemod.helpers.VfxBuilder;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
@@ -22,10 +23,13 @@ public class VFXContainer {
     }
 
     public static AbstractGameEffect throwEffect(Texture tex, float scale, Hitbox target, Color color, boolean bounceOff, boolean sfx) {
-        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.25f)
+        Vector2 vector = new Vector2(target.cX-Wiz.Player().hb.cX,target.cY-Wiz.Player().hb.cY);
+        float angle =0;
+        float targetAngle = vector.angle();
+        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.5f)
                 .moveX(Wiz.Player().hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
                 .moveY(Wiz.Player().hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
-                .rotate(MathUtils.random(100f, 300f) * (MathUtils.randomBoolean() ? -1 : 1))
+                .setAngle(targetAngle)
                 .setScale(scale)
                 .emitEvery((x,y) -> new ThrowSparkleEffect(color.cpy(), x, y), 0.01f);
         if (sfx) {
@@ -37,10 +41,10 @@ public class VFXContainer {
         return builder.build();
     }
     public static AbstractGameEffect throwShurikenEffect(Texture tex, float scale, Hitbox target, Color color, boolean bounceOff, boolean sfx) {
-        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.25f)
+        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.5f)
                 .moveX(Wiz.Player().hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
                 .moveY(Wiz.Player().hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
-                .rotateTo(0,360,VfxBuilder.Interpolations.POW2OUT)
+                .rotate(250f)
                 .setScale(scale)
                 .emitEvery((x,y) -> new ThrowSparkleEffect(color.cpy(), x, y), 0.01f);
         if (sfx) {
@@ -66,7 +70,7 @@ public class VFXContainer {
         return builder.build();
     }
     public static AbstractGameEffect throwEffectNoAngle(Texture tex, float scale, Hitbox target, Color color, boolean bounceOff, boolean sfx) {
-        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.25f)
+        VfxBuilder builder = new VfxBuilder(tex, Wiz.Player().hb.cX, Wiz.Player().hb.cY, 0.5f)
                 .moveX(Wiz.Player().hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
                 .moveY(Wiz.Player().hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
                 .rotate(0)
@@ -84,11 +88,13 @@ public class VFXContainer {
         Texture tex = ReflectionHacks.getPrivate(orb,AbstractOrb.class,"img");
         float scale = ReflectionHacks.getPrivate(orb,AbstractOrb.class,"scale");
         VfxBuilder builder;
+        Vector2 vector = new Vector2(target.cX-Wiz.Player().hb.cX,target.cY-Wiz.Player().hb.cY);
+        float targetAngle = vector.angle();
         if (orb instanceof Icicle){
             builder = new VfxBuilder(tex, orb.hb.cX, orb.hb.cY, 0.25f)
                     .moveX(orb.hb.cX, target.cX, VfxBuilder.Interpolations.POW2OUT)
                     .moveY(orb.hb.cY, target.cY, VfxBuilder.Interpolations.POW2OUT)
-                    .rotate(0)
+                    .setAngle(targetAngle)
                     .setScale(scale)
                     .emitEvery((x,y) -> new ThrowSparkleEffect(color.cpy(), x, y), 0.01f);
         } else {

@@ -141,8 +141,8 @@
   },
   "${modID}:IceSpikes": {
     "NAME": "Ice Spikes",
-    "DESCRIPTIONS": ["When you block attack damage deal up to #b",
-      " damage back and reduce this that much."
+    "DESCRIPTIONS": ["When attacked deal #b",
+      " damage back."
     ]
   },
   "${modID}:Precision": {

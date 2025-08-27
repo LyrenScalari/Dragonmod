@@ -2,6 +2,7 @@ package dragonmod.cards.Rimedancer.Common;
 
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -10,9 +11,12 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import dragonmod.CardMods.SCVShatterMod;
+import dragonmod.DragonMod;
+import dragonmod.actions.ThrowObjectAction;
 import dragonmod.cards.Rimedancer.AbstractRimedancerCard;
 import dragonmod.orbs.Icicle;
 import dragonmod.powers.Rimedancer.BleedPower;
+import dragonmod.ui.TextureLoader;
 import dragonmod.util.TypeEnergyHelper;
 import dragonmod.util.Wiz;
 
@@ -53,6 +57,7 @@ public class LinkBreak extends AbstractRimedancerCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        Wiz.atb(new ThrowObjectAction(TextureLoader.getTexture(DragonMod.itemPath("kunai.png")),1,m.hb, Color.WHITE.cpy(),false));
         Wiz.dmg(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL));
         Wiz.applyToEnemy(m,new VulnerablePower(m,magicNumber,false));
         Wiz.applyToEnemy(m,new BleedPower(m,SecondMagicNumber));

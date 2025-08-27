@@ -25,24 +25,30 @@ public class CordonofMirages extends AbstractRimedancerCard {
             public void update() {
                 isDone = true;
                 CardGroup pool = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+                CardGroup pool2 = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
                 for (AbstractCard card : EnchantmentsField.Enchantments.get(Wiz.Player()).group) {
                     if (card.hasTag(Cantrip) || card.hasTag(EnchantmentsManager.Sleeved)){
                         pool.addToBottom(card);
                     }
                 }
+                for (AbstractCard card :  Wiz.Player().hand.group) {
+                    pool2.addToBottom(card);
+                }
                 for (AbstractCard card : pool.group) {
                     EnchantmentsField.Enchantments.get(Wiz.Player()).group.remove(card);
                 }
-                for (AbstractCard card :  Wiz.Player().hand.group) {
+                for (AbstractCard card : pool2.group) {
                     Wiz.Player().hand.removeCard(card);
-                    card.tags.add(EnchantmentsManager.Sleeved);
-                    EnchantmentsManager.addCard(card,true,Wiz.Player());
                 }
                 for (AbstractCard card : pool.group) {
                     card.unfadeOut();
                     card.lighten(true);
                     card.resetAttributes();
                     Wiz.Player().hand.addToHand(card);
+                }
+                for (AbstractCard card : pool2.group) {
+                    card.tags.add(EnchantmentsManager.Sleeved);
+                    EnchantmentsManager.addCard(card,true,Wiz.Player());
                 }
             }
         });

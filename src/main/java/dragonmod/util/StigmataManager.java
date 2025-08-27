@@ -21,11 +21,11 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import dragonmod.interfaces.*;
-import dragonmod.powers.Dragonkin.SacrificePower;
+import dragonmod.interfaces.ReciveDamageEffect;
+import dragonmod.interfaces.ReciveDamageinHandCard;
+import dragonmod.interfaces.ReciveModifyDamageEffect;
+import dragonmod.interfaces.onLoseHPEnchantment;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
@@ -33,7 +33,6 @@ import java.util.ArrayList;
 public class StigmataManager {
     public static StigmataUI stigmataUI;
     public static boolean renderstigmataui = false;
-    public static int Overheal = 0;
     public StigmataManager() {
     }
     public static void onBattleStart() {
@@ -50,64 +49,10 @@ public class StigmataManager {
     public static void spendStigmata(int amount) {
         StigmataField.Stigmata.set(Wiz.Player(), getStigmataTotal() - amount);
     }
-    public static void cureHealing(int heal) {
-        Overheal = 0;
-        int cureHeal = Math.min(getStigmataTotal(), heal);
-        int prevHp = Wiz.Player().currentHealth;
-        int projectedhp = Math.min(prevHp + cureHeal,Wiz.Player().maxHealth);
-        int overheal = heal - (projectedhp - prevHp);
-        if (overheal > 0) {
-            Overheal = overheal;
-            for (AbstractRelic r : AbstractDungeon.player.relics){
-                if (r instanceof OnOverheal){
-                    ((OnOverheal)r).onOverheal(Overheal);
-                }
-            }
-            for (AbstractCard e : EnchantmentsField.Enchantments.get(Wiz.Player()).group){
-                if (e instanceof OnOverheal){
-                    ((OnOverheal) e).onOverheal(Overheal);
-                }
-            }
-            for (AbstractPower p : Wiz.Player().powers){
-                if (p instanceof OnOverheal){
-                    ((OnOverheal) p).onOverheal(Overheal);
-                }
-            }
-            for (AbstractCard c : Wiz.Player().hand.group){
-                if (c instanceof OnOverheal){
-                    ((OnOverheal) c).onOverheal(Overheal);
-                }
-            }
-        }
-        if (cureHeal > 0) {
-            spendStigmata(cureHeal);
-            Wiz.Player().heal(cureHeal);
-            Wiz.applyToSelf(new SacrificePower(AbstractDungeon.player, AbstractDungeon.player, heal));
-            for (AbstractRelic r : AbstractDungeon.player.relics){
-                if (r instanceof OnCure){
-                    ((OnCure)r).OnCureHeal(cureHeal);
-                }
-            }
-        }
-    }
 
     // Render timing and rules
 
     public static boolean getStigmataRender() {
-        if (CardCrawlGame.dungeon != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
-            if (renderstigmataui) {
-                if (stigmataUI == null) {
-                    stigmataUI = new StigmataUI(ImageMaster.loadImage("dragonmod/ui/StigmataUI/Stressvfx.png"));
-                }
-                return true;
-            } else if (StigmataField.Stigmata.get(AbstractDungeon.player) > 0) {
-                renderstigmataui = true;
-                if (stigmataUI == null) {
-                    stigmataUI = new StigmataUI(ImageMaster.loadImage("dragonmod/ui/StigmataUI/Stressvfx.png"));
-                }
-                return true;
-            }
-        }
         return false;
     }
 
